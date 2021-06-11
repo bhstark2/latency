@@ -7,8 +7,11 @@
 		*	Latency is additive along a path – contributions from multiple sources
 	*	Latency as a property of a network condition
 		*	Idle latency vs Working latency
-	*	Link technologies in place along the path (media access, scheduling, etc.)
+	*	Link technologies in place along the path
 		*	WiFi, DOCSIS, DSL, PON, LTE/5G, Ethernet
+			* 	 media access, scheduling, etc.
+		*	Core network links
+			*	Propagation velocity, path distance, path stretch
 	*	Buffering delays
 		*	Impact that senders & network protocols have on path latency
 			*	Congestion Control (Classic TCP, BBR, TCP Prague, Delay-Based, Real-Time, LEDBAT)
@@ -17,8 +20,6 @@
 			* FIFOs (buffer sizing)
 			* AQMs: CoDel, PIE, DOCSIS-PIE, Cobalt, etc.
 			* Flow queuing: fq\_codel, fq\_pie, CAKE
-	*	Geographic Component
-		*	Propagation velocity, path distance, path stretch
 	*	Current and Future Technologies to improve latency performance
 		*	Migration to the network edge (CDNs, MEC)
 		*	Traditional Quality of Service differentiation
@@ -40,7 +41,7 @@
 		*	Awareness/manipulation of conditions (i.e., monitoring cross-traffic, introducing cross-traffic, etc.) 
 			*	Idle latency
 			*	Working latency
-			*	Latency Under Load
+				*	Latency Under Load
 *	How do latency and latency variation impact user experience? (incl. mention of latency mitigation techniques)
 	*	VoIP, video conferencing
 	*	Multiplayer online gaming
