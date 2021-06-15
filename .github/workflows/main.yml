@@ -1,0 +1,37 @@
+# This is the workflow to run pandoc on all pushes and PRs
+
+name: Generate Latency Report
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events
+on: 
+  pull_request:
+    paths: 
+    - '**'
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  convert_via_pandoc:
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          mkdir output  # create output dir
+      #PDF output 
+      - uses: docker://pandoc/latex
+        with:
+          args: --defaults=artifacts/defaults.yaml --citeproc --bibliography=artifacts/references.yaml --resource-path=.:artifacts --output=output/report.pdf ${{ env.FILELIST }}
+      - uses: docker://pandoc/latex
+        with:
+          args: --defaults=artifacts/defaults.yaml --citeproc --bibliography=artifacts/references.yaml --resource-path=.:artifacts --output=output/pandemic_perf.html ${{ env.FILELIST }}
+      # WORD
+      - uses: docker://pandoc/latex
+        with:
+          args: --defaults=artifacts/defaults.yaml --reference-doc=artifacts/bitag_template.docx --citeproc --bibliography=references.yaml --resource-path=.:artifacts --output=output/report_word.docx ${{ env.FILELIST }}
+      - uses: actions/upload-artifact@main
+        with:
+          name: output
+          path: output
