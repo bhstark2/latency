@@ -1,0 +1,18 @@
+---
+header-includes: |
+    \usepackage{fancyhdr}
+    \pagestyle{fancy}
+    \fancyhf{}
+    \fancyhead[CO,CE]{--CONFIDENTIAL DRAFT--}
+    \fancyfoot[CO,CE]{Subject to BITAG/IPR/Confidentiality Policies}
+    \fancyfoot[LE,RO]{\thepage}
+
+geometry: margin=1in
+logo: artifacts/logo.png
+titlegraphic: artifacts/logo.png
+toc-title: Table of Contents
+fontsize: 10pt
+# fontfamily: Cambria
+
+
+---
