@@ -23,10 +23,10 @@ jobs:
       #PDF output 
       - uses: docker://pandoc/latex
         with:
-          args: --defaults=artifacts/defaults.yaml --citeproc --bibliography=artifacts/references.yaml --resource-path=.:artifacts --output=output/report.pdf ${{ env.FILELIST }}
+          args: --defaults=artifacts/defaults.yaml --citeproc --bibliography=references.yaml --resource-path=.:artifacts --output=output/report.pdf ${{ env.FILELIST }}
       - uses: docker://pandoc/latex
         with:
-          args: --defaults=artifacts/defaults.yaml --citeproc --bibliography=artifacts/references.yaml --resource-path=.:artifacts --output=output/pandemic_perf.html ${{ env.FILELIST }}
+          args: --defaults=artifacts/defaults.yaml --citeproc --bibliography=references.yaml --resource-path=.:artifacts --output=output/pandemic_perf.html ${{ env.FILELIST }}
       # WORD
       - uses: docker://pandoc/latex
         with:
