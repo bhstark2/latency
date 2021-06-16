@@ -1,14 +1,14 @@
 from: markdown+emoji
 
 input-files:
-- artifacts/preamble.md
-- artifacts/about_bitag.md
+- components/preamble.md
+- components/about_bitag.md
 - report.md
 # or you may use input-file: with a single value
 #input-file: pandemic_performance/bitag2_pandemic_performance_report.md
 
 #template: templates/bitag_latex.tex
-template: artifacts/default.tex
+template: components/default.tex
 
 
 # note that structured variables may be specified:
@@ -33,12 +33,12 @@ metadata:
 
   
 metadata-files:
-- artifacts/boilerplate.yaml
+- components/boilerplate.yaml
 # or you may use metadata-file: with a single value
 
 # Note that these take files, not their contents:
-# include-before-body: artifacts/preamble.md
-# include-after-body: artifacts/contributors.md
+# include-before-body: components/preamble.md
+# include-after-body: components/contributors.md
 # include-in-header: []
 # resource-path: ["."]
 
@@ -46,7 +46,7 @@ metadata-files:
 # the .lua extension, and json filters otherwise.  But
 # the filter type can also be specified explicitly, as shown:
 filters:
-  - artifacts/filters/pagebreak.lua
+  - components/filters/pagebreak.lua
 #  - pandoc-citeproc # depracted use --cite-proc
 
 # file-scope: false

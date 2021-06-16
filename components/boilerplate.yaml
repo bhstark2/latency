@@ -8,8 +8,8 @@ header-includes: |
     \fancyfoot[LE,RO]{\thepage}
 
 geometry: margin=1in
-logo: artifacts/logo.png
-titlegraphic: artifacts/logo.png
+logo: components/logo.png
+titlegraphic: components/logo.png
 toc-title: Table of Contents
 fontsize: 10pt
 # fontfamily: Cambria

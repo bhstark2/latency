@@ -23,14 +23,14 @@ jobs:
       #PDF output 
       - uses: docker://pandoc/latex
         with:
-          args: --defaults=artifacts/defaults.yaml --citeproc --bibliography=references.yaml --resource-path=.:artifacts --output=output/report.pdf ${{ env.FILELIST }}
+          args: --defaults=components/defaults.yaml --citeproc --bibliography=references.yaml --resource-path=.:components --output=output/report.pdf ${{ env.FILELIST }}
       - uses: docker://pandoc/latex
         with:
-          args: --defaults=artifacts/defaults.yaml --citeproc --bibliography=references.yaml --resource-path=.:artifacts --output=output/pandemic_perf.html ${{ env.FILELIST }}
+          args: --defaults=components/defaults.yaml --citeproc --bibliography=references.yaml --resource-path=.:components --output=output/pandemic_perf.html ${{ env.FILELIST }}
       # WORD
       - uses: docker://pandoc/latex
         with:
-          args: --defaults=artifacts/defaults.yaml --reference-doc=artifacts/bitag_template.docx --citeproc --bibliography=references.yaml --resource-path=.:artifacts --output=output/report_word.docx ${{ env.FILELIST }}
+          args: --defaults=components/defaults.yaml --reference-doc=components/bitag_template.docx --citeproc --bibliography=references.yaml --resource-path=.:components --output=output/report_word.docx ${{ env.FILELIST }}
       - uses: actions/upload-artifact@main
         with:
           name: output
