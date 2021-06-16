@@ -14,7 +14,8 @@ example of reference [@aca1]
 
 Example footnote marker [^1]
 
-Example footnote text [^1]: Put text for footnote here
+Example footnote text 
+[^1]: Put text for footnote here
 
 
 ## Heading Level 2
