@@ -42,6 +42,9 @@
 				* Latency Under Load
 * How do latency and latency variation impact user experience? (incl. mention of latency mitigation techniques)
 	* VoIP, video conferencing
+	 	* Impact to the call not feeling interactive 
+	 	* User "talking over" other users 
+	 	* Jitter buffers and how jitter increases micrphone to speaker latency 
 	* Multiplayer online gaming
 	* Cloud gaming
 	* Web browsing
