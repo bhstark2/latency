@@ -1,4 +1,7 @@
 
+* Introducton - Why latency matters 
+	* User experience and lag in web browsing, web conferncing, and gaming 
+	* How latency impacts UX 
 * Definition of Latency
 	* Latency as a property of a network path
 		* Points A & B, and the network path that connects them
