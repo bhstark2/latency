@@ -1,7 +1,13 @@
 
-* Introducton - Why latency matters 
-	* User experience and lag in web browsing, web conferncing, and gaming 
-	* How latency impacts UX 
+* Introduction
+	* Effect on Applications
+    * User experience and lag in web browsing, web conferncing, and gaming 
+	  * How latency impacts UX 
+	* Mention simple test for buffer bloat / lag
+	* Trends of User Experience and Network Performance
+	* Why latency matters
+	* Common misconceptions 
+
 * Definition of Latency
 	* Latency as a property of a network path
 		* Points A & B, and the network path that connects them
@@ -22,6 +28,7 @@
 			* AQMs: CoDel, PIE, DOCSIS-PIE, Cobalt, etc.
 			* Flow queuing: fq\_codel, fq\_pie, CAKE
 	* Current and Future Technologies to improve latency performance
+		* Recommendations for networks and applications	
 		* Migration to the network edge (CDNs, MEC)
 		* Traditional Quality of Service differentiation
 		* Explicit Congestion Notification
@@ -44,7 +51,11 @@
 			* Working latency
 				* Latency Under Load
 * How do latency and latency variation impact user experience? (incl. mention of latency mitigation techniques)
+	* Mean Opinion Score 
 	* VoIP, video conferencing
+	 	* Impact to the call not feeling interactive 
+	 	* User "talking over" other users 
+	 	* Jitter buffers and how jitter increases micrphone to speaker latency 
 	* Multiplayer online gaming
 	* Cloud gaming
 	* Web browsing
