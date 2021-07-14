@@ -1,8 +1,8 @@
 
 * Introduction
 	* Effect on Applications
-    * User experience and lag in web browsing, web conferncing, and gaming 
-	  * How latency impacts UX 
+		* User experience and lag in web browsing, web conferncing, and gaming 
+		* How latency impacts UX 
 	* Mention simple test for buffer bloat / lag
 	* Trends of User Experience and Network Performance
 	* Why latency matters
