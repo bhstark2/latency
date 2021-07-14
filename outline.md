@@ -1,9 +1,13 @@
+
 * Introduction
 	* Effect on Applications
+    * User experience and lag in web browsing, web conferncing, and gaming 
+	  * How latency impacts UX 
 	* Mention simple test for buffer bloat / lag
 	* Trends of User Experience and Network Performance
 	* Why latency matters
 	* Common misconceptions 
+
 * Definition of Latency
 	* Latency as a property of a network path
 		* Points A & B, and the network path that connects them
