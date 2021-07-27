@@ -27,10 +27,10 @@
 		* PLT (Barbara)
 		* Satellite (DaveT)
 			* media access, scheduling, etc.
-		* Core network links
+		* Core network links (author?)
 			* Propagation velocity, path distance, path stretch
 	* Buffering delays (3pgs)
-		* Impact that senders & network protocols have on path latency
+		* Impact that senders & network protocols have on path latency (author?)
 			* Congestion Control (Classic TCP, BBR, TCP Prague, Delay-Based, Real-Time, LEDBAT)
 			* Other “bursty” applications
 		* Queuing implementations (Dave Taht, Greg)
@@ -45,22 +45,22 @@
 	* VPNs and Proxied Paths (1pg) (Barbara)
 		* iCloud/Safari Private Relay, etc.
 
-* Current and Future Technologies to improve latency performance (3pgs)
-	* Recommendations for networks and applications	
-	* Migration to the network edge (CDNs, MEC)
-	* Local caching (DNS, etc.)
-	* Traditional Quality of Service differentiation
-	* Explicit Congestion Notification
-	* QB/NQB distinction & Low-Latency, Low-Loss, Scalable throughput architecture
+* Current and Future Technologies to improve latency performance (3pgs) 
+	* Recommendations for networks and applications	(author?)
+	* Migration to the network edge (CDNs, MEC) (author?)
+	* Local caching (DNS, etc.) (author?)
+	* Traditional Quality of Service differentiation (Greg)
+	* Explicit Congestion Notification (Greg)
+	* QB/NQB distinction & Low-Latency, Low-Loss, Scalable throughput architecture (Greg)
 	
 * Metrics and methods for characterizing latency performance (5pgs)
-	* Latency for a path in a live network is variable – a statistical distribution
+	* Latency for a path in a live network is variable – a statistical distribution (Greg)
 		* Descriptive statistics: Average latency, min/mean/max/std
 		* Order statistics (P0,P99,P99.9)
 		* Packet Delay Variation vs. Inter-Packet Delay Variation vs. “Jitter”
 		* CDFs
 		* "Responsiveness" RPM (round-trips per minute)
-	* Measuring latency 
+	* Measuring latency (author?)
 		* Protocols: ICMP (PING), UDP (STAMP, TWAMP, SamKnows, etc), TCP, HTTP/2 Echo
 		* Awareness/manipulation of conditions (i.e., monitoring cross-traffic, introducing cross-traffic, etc.) 
 			* Idle latency
