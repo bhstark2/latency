@@ -1,5 +1,5 @@
 
-* Introduction
+* Introduction (3pgs)
 	* Effect on Applications
 		* User experience and lag in web browsing, web conferncing, and gaming 
 		* How latency impacts UX 
@@ -8,18 +8,18 @@
 	* Why latency matters
 	* Common misconceptions 
 
-* Definition of Latency
-	* Latency as a property of a network path
+* Definition of Latency (10pgs)
+	* Latency as a property of a network path (0.5pgs)
 		* Points A & B, and the network path that connects them
 		* Latency is additive along a path – contributions from multiple sources
-	* Latency as a property of a network condition
+	* Latency as a property of a network condition (0.5pgs)
 		* Idle latency vs Working latency
-	* Link technologies in place along the path
+	* Link technologies in place along the path (2pgs)
 		* WiFi, DOCSIS, DSL, PON, LTE/5G, Ethernet
 			* media access, scheduling, etc.
 		* Core network links
 			* Propagation velocity, path distance, path stretch
-	* Buffering delays
+	* Buffering delays (3pgs)
 		* Impact that senders & network protocols have on path latency
 			* Congestion Control (Classic TCP, BBR, TCP Prague, Delay-Based, Real-Time, LEDBAT)
 			* Other “bursty” applications
@@ -27,18 +27,18 @@
 			* FIFOs (buffer sizing)
 			* AQMs: CoDel, PIE, DOCSIS-PIE, Cobalt, etc.
 			* Flow queuing: fq\_codel, fq\_pie, CAKE
-	* Current and Future Technologies to improve latency performance
+	* Current and Future Technologies to improve latency performance (3pgs)
 		* Recommendations for networks and applications	
 		* Migration to the network edge (CDNs, MEC)
 		* Traditional Quality of Service differentiation
 		* Explicit Congestion Notification
 		* QB/NQB distinction & Low-Latency, Low-Loss, Scalable throughput architecture
-	* Latency contributions from endpoints (client & server)
+	* Latency contributions from endpoints (client & server) (1pg)
 		* Socket buffering & Offloads
 		* Head of line blocking & retransmissions
 		* Server resource contention
 		* VMs/Containers 
-* Metrics and methods for characterizing latency performance
+* Metrics and methods for characterizing latency performance (5pgs)
 	* Latency for a path in a live network is variable – a statistical distribution
 		* Descriptive statistics: Average latency, min/mean/max/std
 		* Order statistics (P0,P99,P99.9)
@@ -50,7 +50,7 @@
 			* Idle latency
 			* Working latency
 				* Latency Under Load
-* How do latency and latency variation impact user experience? (incl. mention of latency mitigation techniques)
+* How do latency and latency variation impact user experience? (incl. mention of latency mitigation techniques) (5pgs)
 	* Mean Opinion Score 
 	* VoIP, video conferencing
 	 	* Impact to the call not feeling interactive 
