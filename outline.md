@@ -53,9 +53,13 @@
 * How do latency and latency variation impact user experience? (incl. mention of latency mitigation techniques) (5pgs)
 	* Mean Opinion Score 
 	* VoIP, video conferencing
-	 	* Impact to the call not feeling interactive 
-	 	* User "talking over" other users 
-	 	* Jitter buffers and how jitter increases micrphone to speaker latency 
+		* Impact to the call not feeling interactive 
+		* User "talking over" other users 
+		* Jitter buffers and how jitter increases microphone to speaker latency 
 	* Multiplayer online gaming
+		* Lag compensation techniques
+		* Jitter buffers
 	* Cloud gaming
+		* Controller-to-photon latency 
 	* Web browsing
+		* Page Load Time & other metrics
