@@ -27,7 +27,7 @@
 		* PLT (Barbara)
 		* Satellite (DaveT)
 			* media access, scheduling, etc.
-		* Core network links (author?)
+		* Core network links (Shamim)
 			* Propagation velocity, path distance, path stretch
 	* Buffering delays (3pgs)
 		* Impact that senders & network protocols have on path latency (author?)
@@ -47,7 +47,7 @@
 
 * Current and Future Technologies to improve latency performance (3pgs) 
 	* Recommendations for networks and applications	(author?)
-	* Migration to the network edge (CDNs, MEC) (author?)
+	* Migration to the network edge (CDNs, MEC) (Shamim)
 	* Local caching (DNS, etc.) (author?)
 	* Traditional Quality of Service differentiation (Greg)
 	* Explicit Congestion Notification (Greg)
