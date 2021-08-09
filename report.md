@@ -29,16 +29,34 @@ Placeholder text: When people think of Internet performance it is typically sole
 # Sources/Contributors to Latency (8pgs)
 
 ## Link technologies in place along the path (3pgs)
-* Ethernet, (Greg)
-* WiFi, (DaveT)
-* DOCSIS,  (Greg, Jason)
-* DSL, (Barbara)
-* PON, (Barbara)
-* LTE/5G, (Barbara)
-* PLT (Barbara)
-* Satellite (DaveT)
+
+### Ethernet, (Greg)
+
+### WiFi, (DaveT)
+
+### Powerline Carrier (PLC) (Barbara)
+
+### DOCSIS,  (Greg, Jason)
+ 
+### Digital Subscriber Line (DSL) and G.fast
+
+ADSL, ADSL2+, VDSL, VDSL2, and G.fast are standards defined by ITU-T. DSL technologies run over twisted-pair copper wires. The older Asymmetric Digital Subscriber Line (ADSL) technology was generally used on loop lengths of 1 mile or less. The newer ADSL2+, Very high-speed DSL (VDSL) and VDSL2 technologies are generally used on shorter loops in a fiber to the node (FTTN) configuration (with copper to a node and fiber from the node to the central office). Since copper is a very efficient transmission medium, the time for a signal to travel these distances is very small and does not contribute significantly to latency. Encoding and decoding DSL signals does add some small latency. But this delay is also very small.
+
+Some ADSL2+ and VDSL deployments used a technique known as interleaving to be more resilient against noise on the line. Noise can result in lost bits of data. With interleaving, it is sometimes possible for the ADSL2+ or VDSL receiver to recover these lost bits. If lost bits are not recovered, the loss can result in either missing information (e.g., clipped sound in an audio transmission) or cause the data to be retransmitted (which causes delay). But interleaving adds delay to accomplish this resiliency. Common interleaving delays range from 2 - 10 ms, when it is enabled.
+
+G.fast is another copper-based technology (over twisted pair or coax) that can be used on very short loops (up to around 500 ft). Interleaving is not used with G.fast and the loop length and encoding mechanisms add small latency.
+
+When interleaving is not used, latency of these technologies tends to be measured in nanoseconds.
+
+### PON, (Barbara)
+
+
+### LTE/5G, (Barbara)
+
+### Satellite (DaveT)
 	* media access, scheduling, etc.
-* Core network links (Shamim)
+	
+### Core network links (Shamim)
 	* Propagation velocity, path distance, path stretch
 
 ## Buffering delays (3pgs)
