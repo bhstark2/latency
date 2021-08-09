@@ -17,13 +17,21 @@ Placeholder text: When people think of Internet performance it is typically sole
 * Common misconceptions 
 
 
-# Definition of Latency (1pg) (DavidReed, Jason)
-* Latency as a property of a network path (0.5pgs)
-	* Points A & B, and the network path that connects them
-	* Latency is additive along a path – contributions from multiple sources
-* Latency as a property of a network condition (0.5pgs)
-	* Idle latency vs Working latency
-* Impact that data rate has on latency
+# Definition of Latency 
+
+A good starting point is to first understand idle latency, which reflects the underlying and inherent latency of an end-to-end path, because working latency simply builds on top of that. The latency between a laptop and the next hop of a packet on the LAN will typically be quite short. As you add successive network hops from the laptop to the home gateway, then the ISP network, and all the way to the destination server, the latency will increase as each new link in the chain is added. But the number of links in and of itself does not necessarily mean greater latency per se.
+
+This is because some links can be quite short, such as a fiber link between a data center switch and a destination server, while other links can be long, such as an east-west fiber link across the U.S. And physical media such as fiber is limited by the physics of the speed of light. This means that, generally speaking, latency increased as distance increases: the time to send a packet across town will be less that the time to send a packet across the country. 
+
+Latency also varies by different types of physical media or type of network (e.g., type of ISP access network technology). For example, looking at the physical media, a wired gigabit fiber connection will typically latency that a copper-based Fast Ethernet connection. In addition, the latency properties of ISP access network technologies will also cause latency to vary – such as the difference between FTTH, DSL, HFC, Wi-Fi, 5G, geostationary satellite, low Earth orbit (LEO) satellite, etc. As a result, idle latency tests of an end-to-end path will simply reflect (1) distance and (2) underlying network technologies. This is the baseline latency that is the starting point for understanding real world end user performance.
+
+However, latency also varies, and significantly so, based on underlying network conditions. That means that latency may increase as traffic volume increases or as the capacity of a connection fills up. It can also mean that latency varies as a result of a mix of different kinds of traffic on the network (e.g., bulk downloads and online game play). When adding in real traffic of any type and volume, we can then see how the network reacts under real-world conditions and understand the so-called working latency of the path.
+
+Finally, since latency is a measure of delay, it is a measure of time. Network latency is typically described in milliseconds of time, though it can often grow to several seconds of time. While idle latency seeks to measure the baseline latency performance of a given end-to-end path, working latency measures the latency performance under real-world conditions when a user’s connection is utilized to a normal extent. 
+
+(missing: Impact that data rate has on latency?)
+![image](https://user-images.githubusercontent.com/8984861/128738550-b73732e2-a856-4a14-ae25-0ed223f72884.png)
+
 
 
 # Sources/Contributors to Latency (8pgs)
