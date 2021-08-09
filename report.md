@@ -103,7 +103,36 @@ Placeholder text: When people think of Internet performance it is typically sole
 * Controller-to-photon latency 
 
 ## Web browsing (Peter)
-* Page Load Time & other metrics
+
+Here is some information relevant to (perceived) latency of web browsing.
+
+A few years ago, Google started a project called Web Vitals, which
+defines a number of measures:
+
+https://web.dev/learn-web-vitals/
+
+On the Firefox team we tend to rely most heavily on a measure called
+First Contentful Paint, which in our experience is slightly more
+representative of perceived latency than Largest Contentful Paint:
+
+https://web.dev/fcp/
+
+https://developer.mozilla.org/en-US/docs/Glossary/First_contentful_paint
+
+FCP is sometimes also called First Visual Change:
+
+https://www.sitespeed.io/documentation/sitespeed.io/metrics/#visual-metrics
+
+There are many, many factors involved in latency and responsiveness. To
+give you a flavor, here is a recent blog post from the Firefox team:
+
+https://blog.mozilla.org/performance/2021/07/13/bringing-you-a-snappier-firefox/
+
+Naturally these things vary across browsers, so if we write a few
+paragraphs about these topics we'll want to make sure they apply across
+the board.
+
+
 
 ## Future applications
 ### Autonomous cars (Barbara)
