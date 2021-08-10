@@ -36,8 +36,9 @@ Network engineers refer to how a buffer performs as “queue behavior”. The pr
 
 This paper will further explore all of these topics, from a deeper dive into latency measurement to the newest forms of AQM and where that AQM is best deployed. 
 
-
-# Definition of Latency (David to review this text)
+# Definitions 
+## Speed or Throughput (Stuart)
+## Latency (David to review this text)
 
 A good starting point is to first understand idle latency, which reflects the underlying and inherent latency of an end-to-end path, because working latency simply builds on top of that. The latency between a laptop and the next hop of a packet on the LAN will typically be quite short. As you add successive network hops from the laptop to the home gateway, then the ISP network, and all the way to the destination server, the latency will increase as each new link in the chain is added. But the number of links in and of itself does not necessarily mean greater latency per se.
 
@@ -220,7 +221,14 @@ An example of this phenomenom can be seen in a PC Gamer article at https://www.p
 ### Remote Surgery (Dave Taht)
 
 
-# Conclusions & Recommendations
+# Conclusions (or observations?)
+
+# Recommendations
+
+* Recommendations for networks and applications	(author?)
+* OS developers
+* CPE manufacturers 
+* etc
 
 
 \pagebreak
