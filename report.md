@@ -30,8 +30,10 @@ Placeholder text: When people think of Internet performance it is typically sole
 
 ## Link technologies in place along the path (3pgs)
 * Ethernet, (Greg)
+	* a baseline for comparison.  serialization delays. shallow buffered vs deep buffered (arista) switches
 * WiFi, (DaveT)
 * DOCSIS,  (Greg, Jason)
+	* expected latency due to DS serialization/framing, US MAC Req-Grant, discontinuous link (pkt aggregation).  Support for buffer control, AQM, LLD.
 * DSL, (Barbara)
 * PON, (Barbara)
 * LTE/5G, (Barbara)
@@ -47,9 +49,12 @@ Placeholder text: When people think of Internet performance it is typically sole
 * Other “bursty” applications
 
 ### Queuing implementations (Dave Taht, Greg)
-* FIFOs (buffer sizing)
+* FIFOs
+	* baseline case, most widely deployed in network gear, discuss buffer sizing, relation to congestion control, buffer bloat
 * AQMs: CoDel, PIE, DOCSIS-PIE, Cobalt, etc.
+	* very brief explanation of what AQM is, mention of algorithms commonly in use in networks today, impact on latency/loss tradeoff
 * Flow queuing: fq\_codel, fq\_pie, CAKE
+	* very brief explanation of FQ,where is it deployed, expected result
 
 ## Latency contributions from endpoints (client & server) (1pg) (Dave Taht, +coauthor)
 * Socket buffering & Offloads
@@ -66,18 +71,31 @@ Placeholder text: When people think of Internet performance it is typically sole
 * Migration to the network edge (CDNs, MEC) (Shamim)
 * Local caching (DNS, etc.) (author?)
 * Traditional Quality of Service differentiation (Greg)
+	* identification of traffic importance and/or QoS sensitivity, SLAs, prioritization, policing, access control, admission control, end-to-end issues at layer 8+ for Internet traffic
 * Explicit Congestion Notification (Greg)
+	* what is it? recent data on deployment, segue to L4S
 * QB/NQB distinction & Low-Latency, Low-Loss, Scalable throughput architecture (Greg)
-
+	* brief overview & pointers 
 
 # Metrics and methods for characterizing latency performance (5pgs)
 
 ## Latency for a path in a live network is variable – a statistical distribution (Greg)
 * Descriptive statistics: Average latency, min/mean/max/std
+	* in measurements, "latency" almost always equates to average latency
+	* average latency is a pretty poor metric for judging QoE 
+	* of the other "easy" statistics that commonly get reported (min, max, std), min is reasonably useful, max and std are pretty worthless
 * Order statistics (P0,P99,P99.9)
+	* P99 packet latency (or possibly P99.9) much more useful to predict QoE
+	* P0 (min latency) is helpful too 
 * Packet Delay Variation vs. Inter-Packet Delay Variation vs. “Jitter”
+	* There are at least 9 different definitions of "jitter" in common use in the industry, each produces a markedly different value (even two orders of magnitude different!) given a sequence of packet latency observations
+	* issues with IPDV and out-of-band measurement
 * CDFs
+	* examples of CCDF on log scale	
 * "Responsiveness" RPM (round-trips per minute)
+	* discuss pros/cons of this metric, 
+	* pros: bigger is better, units are understandable by lay-people
+	* cons: implies a sequence of events in series, it's based on average latency
 
 ## Measuring latency (author?)
 * Protocols: ICMP (PING), UDP (STAMP, TWAMP, SamKnows, etc), TCP, HTTP/2 Echo
@@ -108,6 +126,8 @@ Placeholder text: When people think of Internet performance it is typically sole
 ## Future applications
 ### Autonomous cars (Barbara)
 ### Cloud VR (Greg)
+* Motion-to-photon latency and sickness
+* components of the end-to-end latency chain
 ### Remote Surgery (Dave Taht)
 
 
