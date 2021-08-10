@@ -98,7 +98,12 @@ Brief discussion of speed of light in glass.
 	* media access, scheduling, etc.
 	
 ### Core network links (Shamim)
-	* Propagation velocity, path distance, path stretch
+A. Topology: middle mile, edge, backbone and submarine links
+B. Speed of light 
+C. Routing 
+D. Geolocation data anomalies and edge miss mappings
+E. eDNS client subnet
+F. Direct peering vs. Transit 
 
 ## Buffering delays (3pgs)
 ### Impact that senders & network protocols have on path latency (author?)
