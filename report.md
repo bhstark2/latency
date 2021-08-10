@@ -37,7 +37,7 @@ Network engineers refer to how a buffer performs as “queue behavior”. The pr
 This paper will further explore all of these topics, from a deeper dive into latency measurement to the newest forms of AQM and where that AQM is best deployed. 
 
 
-# Definition of Latency 
+# Definition of Latency (David to review this text)
 
 A good starting point is to first understand idle latency, which reflects the underlying and inherent latency of an end-to-end path, because working latency simply builds on top of that. The latency between a laptop and the next hop of a packet on the LAN will typically be quite short. As you add successive network hops from the laptop to the home gateway, then the ISP network, and all the way to the destination server, the latency will increase as each new link in the chain is added. But the number of links in and of itself does not necessarily mean greater latency per se.
 
@@ -106,7 +106,7 @@ E. eDNS client subnet
 F. Direct peering vs. Transit 
 
 ## Buffering delays (3pgs)
-### Impact that senders & network protocols have on path latency (author?)
+### Impact that senders & network protocols have on path latency (Koen)
 * Congestion Control (Classic TCP, BBR, TCP Prague, Delay-Based, Real-Time, LEDBAT)
 * Other “bursty” applications
 
@@ -121,12 +121,11 @@ F. Direct peering vs. Transit
 * Server resource contention
 * VMs/Containers 
 
-## VPNs and Proxied Paths (1pg) (Barbara)
+## VPNs and Proxied Paths (1pg) (Barbara, Sam)
 * iCloud/Safari Private Relay, etc.
 
 
-# Current and Future Technologies to improve latency performance (3pgs) 
-* Recommendations for networks and applications	(author?)
+# Current and Future Technologies to improve latency performance (3pgs) (Shamim)
 * Migration to the network edge (CDNs, MEC) (Shamim)
 A. Edge cache vs. Edge compute
 B. Video vs. Real time traffic handling
@@ -143,7 +142,7 @@ G. On device compute evolution that nullifies or complements the MEC requirement
 * QB/NQB distinction & Low-Latency, Low-Loss, Scalable throughput architecture (Greg)
 
 
-# Metrics and methods for characterizing latency performance (5pgs)
+# Metrics and methods for characterizing latency performance (5pgs) 
 
 ## Latency for a path in a live network is variable – a statistical distribution (Greg)
 * Descriptive statistics: Average latency, min/mean/max/std
@@ -152,7 +151,7 @@ G. On device compute evolution that nullifies or complements the MEC requirement
 * CDFs
 * "Responsiveness" RPM (round-trips per minute)
 
-## Measuring latency (author?)
+## Measuring latency (Sam)
 * Protocols: ICMP (PING), UDP (STAMP, TWAMP, SamKnows, etc), TCP, HTTP/2 Echo
 * Awareness/manipulation of conditions (i.e., monitoring cross-traffic, introducing cross-traffic, etc.) 
 	* Idle latency
