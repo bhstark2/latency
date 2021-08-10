@@ -57,16 +57,47 @@ Finally, since latency is a measure of delay, it is a measure of time. Network l
 # Sources/Contributors to Latency (8pgs)
 
 ## Link technologies in place along the path (3pgs)
-* Ethernet, (Greg)
-* WiFi, (DaveT)
-* DOCSIS,  (Greg, Jason)
-* DSL, (Barbara)
-* PON, (Barbara)
-* LTE/5G, (Barbara)
-* PLT (Barbara)
-* Satellite (DaveT)
+
+*Should this section be "Physical-layer Technologies in Place along the Path"? Would it be useful to remind readers of the layered stack: physical, link, IP, application and step up the stack? I re-ordered the bullets in this section a little to group all the LAN technologies towards the beginning, then access, but with Ethernet staying first. They were mostly already ordered that way.*
+
+Physical-layer technologies in the path can contribute to latency due to speed at which signals are transmitted on the physical medium, the distance the signals travel (length of the physical medium), the time it takes for equipment to encode and decode the physical and link-layer technologies, and whether the physical-layer technology uses time-based interleaving to better detect and correct lost bits on noisy loops. The more shielded a physical medium is against noise, the less the physical-layer encoding needs to account for the impacts of potential noise.
+
+### Ethernet, (Greg)
+
+### WiFi, (DaveT)
+
+### Powerline Carrier (PLC) (Barbara)
+
+Several physical-layer technologies have been defined for use on powerlines. While powerline has been explored for broadband access, it is not widely used as an acces technology in the United States. The dominant PLC technologies for use in a LAN are HomePlug and G.hn (standardized by ITU-T). Latency due to speed of transmission and distance are negligible on the short LAN loops where PLC is used.
+
+HomePlug products are still being deployed in LANs, but the HomePlug Alliance (which provided advocacy and certification) is no longer active. There is no interoperability among the various HomePlug silicon solutions and no detailed specification of the technology. Measurable latency has been noted in some HomePlug networks, which suggests some HomePlug  products may make use of time-based interleaving.
+
+G.hn does not use time-based interleaving. In addition to operating on LAN powerlines, G.hn is also often used on coax and twisted pair and is being deployed in some Multi Dwelling Unit (MDU) environments to provide broadband access to individual units.
+
+### DOCSIS,  (Greg, Jason)
+ 
+### Digital Subscriber Line (DSL) and G.fast
+
+ADSL, ADSL2+, VDSL, VDSL2, and G.fast are "last mile" broadband access technology standards defined by ITU-T. All of these are primarily defined to run over twisted-pair copper wires, although G.fast can also run over coax (which is useful in some multi-dwelling unit deployments). The older Asymmetric Digital Subscriber Line (ADSL) technology was generally used on loop lengths of 1 mile or less. The newer ADSL2+, Very high-speed DSL (VDSL) and VDSL2 technologies are generally used on shorter loops in a fiber to the node (FTTN) configuration (with copper to a node and fiber from the node to the central office). Since copper is a very efficient transmission medium, the time for a signal to travel these distances is very small and does not contribute significantly to latency. Encoding and decoding DSL signals does add some small latency. But this delay is also very small.
+
+Some ADSL2+ and VDSL deployments used a time-based interleaving technique to be more resilient against noise on the line. Noise can result in lost bits of data. With interleaving, it is often possible for the ADSL2+ or VDSL receiver to recover these lost bits. If lost bits are not recovered, the loss can result in either missing information (e.g., clipped sound in an audio transmission) or cause the data to be retransmitted (which causes delay). But time-based interleaving adds delay to accomplish this resiliency. Common interleaving delays range from 2 - 10 ms, when it is enabled.
+
+G.fast is another copper-based technology (over twisted pair or coax) that can be used on very short loops (up to around 500 ft). Interleaving is not used with G.fast and the loop length and encoding mechanisms add very small latency.
+
+When interleaving is not used, latency of these technologies tends to be measured in nanoseconds. 
+
+*I need to see if I can bet more precise latency calculations/numbers and references for this section.*
+
+### PON, (Barbara)
+
+Brief discussion of speed of light in glass. 
+
+### LTE/5G, (Barbara)
+
+### Satellite (DaveT)
 	* media access, scheduling, etc.
-* Core network links (Shamim)
+	
+### Core network links (Shamim)
 	* Propagation velocity, path distance, path stretch
 
 ## Buffering delays (3pgs)
