@@ -128,6 +128,15 @@ F. Direct peering vs. Transit
 # Current and Future Technologies to improve latency performance (3pgs) 
 * Recommendations for networks and applications	(author?)
 * Migration to the network edge (CDNs, MEC) (Shamim)
+A. Edge cache vs. Edge compute
+B. Video vs. Real time traffic handling
+C. Near real time inference and actions
+D. Down Link vs. Uplink bandwidth requirement 
+E. Multipath from user via both Wired broadband and 5G to compute/content Edge
+E. Geographic challenges and need for carrier neutral MEC
+F. On premise edge compute for campus and arena 
+G. On device compute evolution that nullifies or complements the MEC requirement 
+
 * Local caching (DNS, etc.) (author?)
 * Traditional Quality of Service differentiation (Greg)
 * Explicit Congestion Notification (Greg)
