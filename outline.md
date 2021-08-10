@@ -67,11 +67,51 @@
 			* Working latency
 				* Latency Under Load
 * How do latency and latency variation impact user experience? (incl. mention of latency mitigation techniques) (5pgs)
-	* Mean Opinion Score 
+    * Mean Opinion Score
+        * problem with measuring just recorded media quality not overall
+          UX or QoE 
 	* VoIP, video conferencing (Cullen, Dave Taht)
-		* Impact to the call not feeling interactive 
-		* User "talking over" other users 
-		* Jitter buffers and how jitter increases microphone to speaker latency 
+        * contributing source so speaker to microphone / glass to glass
+        latency
+            * capture buffers, encoding, network, media servers,
+              retransmission, error correction, jitter buffers, play-out
+              buffers 
+	    * Impact of latency
+              * call not feeling interactive 
+		      * users "talking over" other users
+              * perception of other not understanding or not being as
+                smart due to lag in others peoples responses 
+		* Jitter buffers and how jitter increases microphone to speaker
+        latency
+              * what jitter is ( can this be explained before this
+              section ??? )
+              * how VoIP applications deal with jitter
+              * why packets with high jitter, not the average jitter,
+                determines the impact to latency
+              * example that 50 ms latency with a 90% jitter of 40
+                ms is much worse than 70 ms latency and 5 ms of jitter
+                even though the average latency is less for the first
+                case
+        * Packet loss patterns and impact on latency
+              * Dealing with packet loss by redundant encoding and FEC
+              * length of burst packet lost and impact on latency
+              * packet concealment for short losses 
+        * Retransmissions request and impact on latency
+              * how VoIP retransmissions works 
+                  * jitter impact on how soon to request the retransmission
+                  * multiple RTT impact on latency
+                  * why this is used for video reference frames
+                  * lipsync and impact on audio
+        * Key points
+              * interactive voice and video QoE is strongly dependent on
+               low glass to glass latency
+              * jitter adds to glass to glass latency
+              * packet loss adds to glass to glass latency
+              * packet loss patterns, particularly burst loss, impacts
+                glass to glass latency
+              * for voice calls with a good QoE, the packet loss
+                patterns, latency, and jitter are nearly always more
+                important than how much bandwidth is available
 	* Multiplayer online gaming (Alex)
 		* Lag compensation techniques
 		* Jitter buffers
