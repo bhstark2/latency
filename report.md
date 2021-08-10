@@ -84,6 +84,7 @@ Placeholder text: When people think of Internet performance it is typically sole
 	* in measurements, "latency" almost always equates to average latency
 	* average latency is a pretty poor metric for judging QoE 
 	* of the other "easy" statistics that commonly get reported (min, max, std), min is reasonably useful, max and std are pretty worthless
+	* packet latency distribution is usually not a Gaussian (normal) distribution
 * Order statistics (P0,P99,P99.9)
 	* P99 packet latency (or possibly P99.9) much more useful to predict QoE
 	* P0 (min latency) is helpful too 
