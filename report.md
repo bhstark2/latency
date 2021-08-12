@@ -51,9 +51,6 @@ However, latency also varies, and significantly so, based on underlying network 
 Finally, since latency is a measure of delay, it is a measure of time. Network latency is typically described in milliseconds of time, though it can often grow to several seconds of time. While idle latency seeks to measure the baseline latency performance of a given end-to-end path, working latency measures the latency performance under real-world conditions when a user’s connection is utilized to a normal extent. 
 
 (missing: Impact that data rate has on latency?)
-![image](https://user-images.githubusercontent.com/8984861/128738550-b73732e2-a856-4a14-ae25-0ed223f72884.png)
-
-
 
 # Sources/Contributors to Latency (8pgs)
 
