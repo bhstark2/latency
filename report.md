@@ -235,6 +235,9 @@ An example of this phenomenom can be seen in a PC Gamer article at https://www.p
 * Page Load Time & other metrics
 
 ## Future applications
+As noted above, consistently reducing working latency will improve all existing user applications. But looking to the future, it seems likely that the emergence of very low latency services may enable entirely new classes of applications to be created. One way to think about this is to consider that today we assume accessing resources on the Internet has some delay compared to local content or applications on a device. But what if a network-based resource was as responsive as a locally-installed resource? As well, applications that today are infeasible without highly specialized private Internet connectivity might become viable over consumer-grade best efforts Internet access. What follows are some applications that may be viable, though it is likely that unexpected and surprising new applications will be released by creative developers that we are unable to envision or list in the brief examples below. 
+
+
 ### Autonomous cars (Barbara)
 ### Cloud VR (Greg)
 * Motion-to-photon latency and sickness
