@@ -17,3 +17,16 @@ references:
       month: 9
       day: 27
     URL: https://acaconnects.org/covid-19/broadband-dashboard/
+  - id: fiberlatency
+    type: article-journal
+    publisher: Commscope
+    author:
+    - family: Coffey
+      given: Joseph
+    link-citations: true
+    title: Latency in optical fiber systems
+    accessed: 
+      year: 2021
+      month: 8
+      day: 11
+    URL: https://www.commscope.com/globalassets/digizuite/2799-latency-in-optical-fiber-systems-wp-111432-en.pdf

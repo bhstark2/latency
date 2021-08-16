@@ -58,7 +58,9 @@ Finally, since latency is a measure of delay, it is a measure of time. Network l
 
 *Should this section be "Physical-layer Technologies in Place along the Path"? Would it be useful to remind readers of the layered stack: physical, link, IP, application and step up the stack? I re-ordered the bullets in this section a little to group all the LAN technologies towards the beginning, then access, but with Ethernet staying first. They were mostly already ordered that way.*
 
-Physical-layer technologies in the path can contribute to latency due to speed at which signals are transmitted on the physical medium, the distance the signals travel (length of the physical medium), the time it takes for equipment to encode and decode the physical and link-layer technologies, and whether the physical-layer technology uses time-based interleaving to better detect and correct lost bits on noisy loops. The more shielded a physical medium is against noise, the less the physical-layer encoding needs to account for the impacts of potential noise.
+Physical-layer technologies in the path can contribute to latency due to the distance the signals travel (length of the physical medium) relative to the speed at which signals are transmitted on the physical medium (propagation delay), the time it takes for equipment to encode and decode the physical and link-layer technologies, and whether the physical-layer technology uses time-based interleaving to better detect and correct lost bits on noisy loops. The more shielded a physical medium is against noise, the less the physical-layer encoding needs to account for the impacts of potential noise.
+
+Propagation delay is determined by the characteristics of the physical medium. Fiber and copper have different characteristics, and copper media varies according to thickness (guage) and shielding used around the copper. Optical fiber has a propagation delay of about 0.67 times the speed of light in a vacuum, while unshielded twisted pair has a propagation delay of about 0.59 times the speed of light in a vacuum [@fiberlatency].
 
 ### Ethernet, (Greg)
 
@@ -82,17 +84,15 @@ G.hn does not use time-based interleaving. In addition to operating on LAN power
 
 ADSL, ADSL2+, VDSL, VDSL2, and G.fast are "last mile" broadband access technology standards defined by ITU-T. All of these are primarily defined to run over twisted-pair copper wires, although G.fast can also run over coax (which is useful in some multi-dwelling unit deployments). The older Asymmetric Digital Subscriber Line (ADSL) technology was generally used on loop lengths of 1 mile or less. The newer ADSL2+, Very high-speed DSL (VDSL) and VDSL2 technologies are generally used on shorter loops in a fiber to the node (FTTN) configuration (with copper to a node and fiber from the node to the central office). Since copper is a very efficient transmission medium, the time for a signal to travel these distances is very small and does not contribute significantly to latency. Encoding and decoding DSL signals does add some small latency. But this delay is also very small.
 
-Some ADSL2+ and VDSL deployments used a time-based interleaving technique to be more resilient against noise on the line. Noise can result in lost bits of data. With interleaving, it is often possible for the ADSL2+ or VDSL receiver to recover these lost bits. If lost bits are not recovered, the loss can result in either missing information (e.g., clipped sound in an audio transmission) or cause the data to be retransmitted (which causes delay). But time-based interleaving adds delay to accomplish this resiliency. Common interleaving delays range from 2 - 10 ms, when it is enabled.
+Some ADSL2+ and VDSL deployments used a time-based interleaving technique to be more resilient against noise on the line. Noise can result in lost bits of data. With interleaving, it is often possible for the ADSL2+ or VDSL receiver to recover these lost bits. If lost bits are not recovered, the loss can result in either missing information (e.g., clipped sound in an audio transmission) or cause the data to be retransmitted (which causes delay). But time-based interleaving adds delay to accomplish this resiliency. Common interleaving delays range from 2 - 10 ms, when it is enabled. Many deployments do not enable interleaving because of the latency it adds.
 
 G.fast is another copper-based technology (over twisted pair or coax) that can be used on very short loops (up to around 500 ft). Interleaving is not used with G.fast and the loop length and encoding mechanisms add very small latency.
 
-When interleaving is not used, latency of these technologies tends to be measured in nanoseconds. 
-
-*I need to see if I can bet more precise latency calculations/numbers and references for this section.*
+Note that a 1 mile loop of unshielded twisted pair copper would add about (1 mile / (186,000 miles/second x 0.59)) x 1x10^6 microseconds/second = 9.1 microseconds of propagation delay. Delay caused by encoding and decoding (and any time-based interleaving) would be added to this.
 
 ### PON, (Barbara)
 
-Brief discussion of speed of light in glass. 
+PON runs over optical fiber. The propagation delay in optical fiber is about 0.70 times the speed of light in a vacuum. 
 
 ### LTE/5G, (Barbara)
 
