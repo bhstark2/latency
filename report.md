@@ -225,17 +225,7 @@ Anohter way that VoIP applications can compensate for packet loss is by requesti
 
 ### Quality of Experence
 
-        * Key points
-              * interactive voice and video QoE is strongly dependent on
-               low glass to glass latency
-              * jitter adds to glass to glass latency
-              * packet loss adds to glass to glass latency
-              * packet loss patterns, particularly burst loss, impacts
-                glass to glass latency
-              * for voice calls with a good QoE, the packet loss
-                patterns, latency, and jitter are nearly always more
-                important than how much bandwidth is available
-
+For internatevoice and video conferencing and calling systems, the network latency is the major factor causing large camera to screen delay and micrphone to speaker delay. The network latency contributes to the dealy but other aspects of the network also contribute. Packet loss rates and the grouping of packet loss have a lage impact on the overall delay. The delay has a huge impact on how well people can communicate. 
 
 
 ## Multiplayer online games (Alex)
