@@ -187,11 +187,56 @@ G. On device compute evolution that nullifies or complements the MEC requirement
 
 # How do latency and latency variation impact user experience? (incl. mention of latency mitigation techniques) (5pgs)
 
-## VoIP, video conferencing (Cullen, Dave Taht)
-* Mean Opinion Score
-* Impact to the call not feeling interactive 
-* User "talking over" other users 
-* Jitter buffers and how jitter increases microphone to speaker latency 
+   * Mean Opinion Score
+        * problem with measuring just recorded media quality not overall
+        UX or QoE
+        
+## VoIP and Video Conferencing (Cullen, Dave Taht)
+
+Voice and video conferncing systems are one of the major uses of the internet. They are used for meetings between workers both inside the same company and acrosss companes, for education and teaching, and for calls and meetings between friends and familyies. In the US alone, there is over TODO minutes of meetings per month.  All of these systems are higly senstive to latency.
+
+The "micrphone to speaker" delay is measured from the time the audio is recored at the micrphone of participant in the call till the time that same sounds plays out on the speaker of the other participants. When the delay is low, the call or meeting can seem like a normal conversation. As the delay gets longer, it beccomes harder to have a conversation. Two users will both try and speak at the same time and end up talking over each other. This is because the delay meant that each user could not tell that another users was already talking so they thought it was OK if they started talking. Many people have exepereinced the effect where two people speak at the same time, then they both stop and tell the other to go, then they both go a the same time again. This does not happen on latency meetings but is common on higher latency meeting. When the latency is too high, one side will say something, then experence an awkward sileince when the other side does not repsond. When a remote person is slow to respond, humans sometime assume they are not as smart as a person that reponds quickly. This raises questions about if this has any unconcous bias impact on teachers who have students on both low latench and high lantency network connections. 
+
+Low speaker to micrphone delay for audio, and related camer to screen delay for video, are critical for a good user experece on a VoIP call of a video confence. The are several things that contribute the this latency:
+
+- capture buffer latency: the audio needs to be recorded by the hardware of the computer and passed as a chuck of inforamtion to the program
+- encodings: audio and vidoe is group and corpessed so that it can be sent over the netwrok but this requires waiting for a n aproperate amount of data to group together. This is referend to as the encoding delay.
+- network latnecy: The time for the media to be transfered over the internet 
+- media server latency: Time for cloud serviers that distribute and preoecess media to forward it and some times encode, decode and remix it.
+- jitter buffers: some media will be dlivered faster than others and the reciver has a buffer to save things that arevied early and play the at the aproperate time
+- forward error correction: time to allow for receiving extra informaiton to replace lost packets 
+- retrasnmition: time to allow to request and receive another copy of packets lost by the netowrks
+- playout buffers: queue the media to be played by the ahrdware of the computer
+
+### Jitter
+
+When voice and video media packets are sent across the network, they will not all have the same latency, some will arive faster than others. However the media needs to be played out at a constant rate that match the rate it was recorded at. VoIP applications buffer up a small amount of media to smoth over these vaariance in arival time which is refered to as jitter. If 95% of the packets take over 30 ms to arrive, it does not matter if the average latency is is 20 ms because the VoIP applicaitons will delay all the packets such that they take the same amount of time as the slower 30 ms packets to play out. The result of this is that for VoIP applications, average latency plus the amount of jitter is what derermines how much delay is caused by the network. The amount of jitter is just as iimporant as the latency to the oveall exeprence the user has.  A network with an average latency of 50 ms where  less than 10% of the packets have a jitter higher than 40 ms will usuall have more speaker to micrphone delay than a network with an avera latency of 60 ms wherre less than 10% of the packets have a jitter higher than 5 ms. 
+
+
+### Forward Error Correction
+
+Many VoIP applications use a range of techniques to receover from lost packets that invovle sending some of the packets twice, or sending extra information about groups of packets that allow an applications to reconstruct the information in a lost packet. Packets are often lost in small groups. To recover the lost packets, the inforrmation to recover them can not be lost so it need to be trasmitted far enough in from the original packets such that it is less likely to land in the same loss group. This inerenlty means that the forward error conrrect add in more delay than the the size fo commonoly abserved loss groups. Networks that loose packets in groups, tend to have longer ear to mouth delay than networks that are very random in which packets they loose and do not have correlated losses.
+
+For very short segments of lost medai, audio or video, it is often possible to "fake" the media by looking the media immediatly before and after it. This can deal with short losses but also add delay to look at the media after the parts that were lost. 
+
+### Retransmision
+
+Anohter way that VoIP applications can compensate for packet loss is by requesting the retransmision of the lost packet. The receiveer needs to wait for an amount of time equivelnt to the normal network latency plus the jitter time before the packets is requested. Then the request to retransmit the lost packet has to cross the network to the sender and the sender can resend the lost data to the receivers. This take around three times normal delay across the network. If this technue is being used, all the the packets that are not lost also need to have their time to be played out delay so they can be plary with the correct timeing for the packets that were retrasnmitted. The key thing to note here is that a 10 ms increase in network latency can cause a 30 ms increase in mouth to ear delay.
+
+### Quality of Experence
+
+        * Key points
+              * interactive voice and video QoE is strongly dependent on
+               low glass to glass latency
+              * jitter adds to glass to glass latency
+              * packet loss adds to glass to glass latency
+              * packet loss patterns, particularly burst loss, impacts
+                glass to glass latency
+              * for voice calls with a good QoE, the packet loss
+                patterns, latency, and jitter are nearly always more
+                important than how much bandwidth is available
+
+
 
 ## Multiplayer online games (Alex)
 
