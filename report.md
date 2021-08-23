@@ -178,12 +178,82 @@ G. On device compute evolution that nullifies or complements the MEC requirement
 	* cons: implies a sequence of events in series, it's based on average latency
 
 ## Measuring latency (Sam)
-* Protocols: ICMP (PING), UDP (STAMP, TWAMP, SamKnows, etc), TCP, HTTP/2 Echo
-* Awareness/manipulation of conditions (i.e., monitoring cross-traffic, introducing cross-traffic, etc.) 
-	* Idle latency
-	* Working latency
-		* Latency Under Load
 
+There are many different protocols that can be used to measure latency. For each of those protocols there are often multiple tools that provide measurement capabilities. The list below is by no means exhaustive, but covers some of the most common techniques in use today.
+
+### Protocols
+
+#### Ping (ICMP)
+
+The most well known one is the ping command. This is built into all major operating systems and was first introduced in 1983. Ping uses ICMP echo packets to measure round-trip latency and packet loss. Example output from pinging ietf.org can be found below:
+
+```
+[sam@localhost ~]$ ping ietf.org
+PING ietf.org (4.31.198.44) 56(84) bytes of data.
+64 bytes from mail.ietf.org (4.31.198.44): icmp_seq=1 ttl=53 time=167 ms
+64 bytes from mail.ietf.org (4.31.198.44): icmp_seq=2 ttl=53 time=170 ms
+64 bytes from mail.ietf.org (4.31.198.44): icmp_seq=3 ttl=53 time=165 ms
+^C
+--- ietf.org ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2002ms
+rtt min/avg/max/mdev = 165.472/167.446/169.641/1.709 ms
+```
+
+The operation of ping is quite simple. The command will send repeated 'pings' (ICMP Echo Requests) to a destination, and wait for the replies (ICMP Echo Reply). If a reply is received, it prints the time that elapsed between sending the request and receiving the reply. If a reply is not received within a reasonable timeout, then it prints that the packet was lost.
+
+Most networked devices will respond to pings (ICMP echo requests) by default. This means that no special software or configuration is required to use ping at all.
+
+The ubiquity of ping in major operating systems and its easy-to-setup nature means that its use is still very common today for ad-hoc measurement and troubleshooting.
+
+#### UDP
+
+UDP is a common choice for applications that need to measure latency. As we all know, UDP does not have any built-in reliability guarantees, and therefore no automatic retransmission of packets that are lost or corrupted. Avoiding such things is desirable in latency measurement, because to do otherwise would introduce external factors into our measurement (such as artificial delays before retransmitting a lost packet) that cannot be reliably separated from the network latency.
+
+There's a largely variety of tools that use UDP as their basis for latency measurements.
+
+The IETF has standardised multiple UDP-based latency measurement protocols over the years. OWAMP (one-way active measurement protocol) provides for one-way latency measurements between sender and receiver. This means that the latency between the sender and the receiver in the forward direction is measured and reported separately to the latency between the sender and receiver in the reverse direction. This provides valuable information that is lost in two-way (round-trip) latency measurements - it can show if latency in one direction is larger than the other. A impediment to adoption of OWAMP is the requirement that the sender and receiver's clocks are precisely synchronised. Relying on NTP alone is usually not sufficient here, as the precision is not high enough for low latency connections.
+
+TWAMP (two-way active measurement protocol) extends OWAMP to also support two-way (round-trip) latency measurements. When being used only for round-trip measurements, the requirement for the clocks on the sender and receiver to be synchronised can be removed. This is because the measurement is only conducted at the sender - the receiver effectively just has to reflect the packet back to the sender.
+
+TWAMP is often deployed inside large routers from companies like Juniper and Cisco for the purposes of service level agreement verification. It is favoured over ICMP because it supports separating out host-processing latency from network latency.
+
+STAMP (simple two-way active measurement protocol) simplifies TWAMP by removing some little-used features, whilst still maintaining backwards compatibility with the existing TWAMP protocol.
+
+SamKnows, a UK-based provider of network measurement services, have deployed a proprietary UDP-based latency measurement protocol. This supports round-trip measurements only, but is otherwise quite similar to the other UDP approaches discussed above. The SamKnows UDP latency measurement tool supports persistent operation, reporting latency and packet-loss statistics at a configurable interval, rather than measuring for a short period and then finishing. It also has built-in cross-traffic detection and latency-under-load capabilities, which are discussed further below.
+
+#### TCP and HTTP/1.1
+
+TCP can also be used to measure latency. It is a less common choice for network measurement applications.  TCP's reliability mechanisms effctively sacrifice latency for the sake of reliability. This introduces some ambiguity in the measurement results - we cannot know whether the latency being reported is due to the network path or some feature of TCP (e.g. retransmission of lost segments).
+
+However, there is a counterargument to hear here too: If many applications are based upon TCP, then using TCP based latency measurements will better correlate to end user experience. Of course, this descends into a philosophical question of what are we trying to measure - network path latency or user experience. TCP is better suited to the latter (at least for TCP based applications), but it is still just a middle ground - a real application-level user experience latency measurement would be interleaved with the application traffic itself.
+
+There are a few different ways to measure latency over TCP. A simple and common choice is to simply measure the duration of repeated TCP three-way handshakes. The connect() system call in Linux is commonly used for this. This has the advantage that it can be used to measure TCP round-trip time to any host that has a listening TCP server.
+
+Another approach, commonly used by web-based applications such as web based 'speed tests', is to make repeated HTTP HEAD requests to a web server. Web servers will often use persistent HTTP sessions (via the HTTP Keep Alive feature), which allows the application to avoid measuring the overhead of establishing the underlying TCP connection. This approach is often used by web-based applications because of the sandboxing restrictions put in place by web browsers - they are prevented from exchanging arbitrary UDP traffic and are often limited to HTTP or WebSockets.
+
+#### HTTP/2 Ping
+
+Unlike its predecessor, HTTP/2 provides built-in 'ping' support via the PING frame type. This is intended to be used for round-trip time measurements and also to keep the connection alive.
+
+Measuring latency using HTTP/2 pings (often abbreviated to h2ping) has one key advantage over techniques discussed previously. By interleaving the latency measurement with the real application traffic using the same protocol (HTTP/2), we remove the possibility of our latency measurements being treated differently from application traffic. This means that we can have a greater degree of trust that our latency measurements conducted using HTTP/2 Pings accurately represent the latency experienced for HTTP/2 based applications.
+
+Of course, with HTTP/2 being delivered over TCP, we still have the fundamental ambiguity over whether delays are in the network path or are being introduced by one of the host's TCP stacks.
+
+### Awareness of network conditions for latency measurement
+
+Network conditions can have a significant impact upon latency. A completely idle network can have a very low and consistent measured latency (using any of the tools and protocols above). Conversely, if the network is heavily in use then latency can increase significantly and become very erratic. Therefore it is important with latency measurements to understand the conditions in which you are measuring.
+
+#### Cross traffic
+
+Traffic from other users and applications that share the same internet connection is called 'cross-traffic'. Some measurement systems will measure cross-traffic levels before carrying out latency measurements, and may defer them or cancel them entirely if cross-traffic has exceeded a tolerable threshold. An example of this is the SamKnows solution, which uses a 64kbit/s threshold for cross-traffic tolerance by default. An alternative approach is to allow the measurement to proceed, but to report the cross-traffic levels alongside the measurement results, therefore allowing them to be studied or filtered later.
+
+#### Idle latency and latency under load
+
+Latency measurements that are carried out in the presence of little or no cross-traffic are said to be measuring 'idle latency'. This is useful to work out the baseline latency of a network path.
+
+It is also useful to carry out latency measurements in the presence of heavy cross-traffic. Carrying out latency measurements under such conditions is known as a 'latency under load' test. This helps to reveal how latency behaves when the network is heavily utilised, which is precisley when users are using it. Some measurement systems will generate artificial cross-traffic (perhaps in the form of a throughput test) in order to ensure the link is heavily utilised to a predictable and repeatable degree.
+
+Measurement systems that do not measure cross-traffic cannot reliably know whether they are measuring idle latency, latency under load, or something in between.
 
 # How do latency and latency variation impact user experience? (incl. mention of latency mitigation techniques) (5pgs)
 
