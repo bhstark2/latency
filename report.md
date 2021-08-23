@@ -178,11 +178,8 @@ When possible, a more complete view of the latency statistics of a path can be h
 
 ![Complementary CDF of Packet Latency](images/ccdf.png)
 
+Another metric that has been proposed recently, and that derives from latency, is "responsiveness" [https://www.ietf.org/id/draft-cpaasch-ippm-responsiveness-00.html].  This metric consists of more than just packet latency measurements, but rather is based on higher-layer protocol latency measurements including DNS, TCP handshaking and HTTP.  These measurements are averaged, and then the result is inverted and expressed in units of "Round-trips per Minute" (RPM).  This metric has some intuitive value for iterative web traffic workloads, where a user can imagine a network with low responsiveness setting an upper bound on how many web resources can be fetched in a certain amount of time.   That said, it is specific to web workloads, and appears to focus on the average result of a small number of measurements, as opposed to trying to represent information about the range of performance that the user might experience.
 
-* "Responsiveness" RPM (round-trips per minute)
-	* discuss pros/cons of this metric, 
-	* pros: bigger is better, units are understandable by lay-people
-	* cons: implies a sequence of events in series, it's based on average latency
 
 ## Measuring latency (Sam)
 
