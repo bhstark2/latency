@@ -154,7 +154,26 @@ F. Direct peering vs. Transit
 * VMs/Containers 
 
 ## VPNs and Proxied Paths (1pg) (Barbara, Sam)
-* iCloud/Safari Private Relay, etc.
+
+VPN services (Virtual Private Networks) have become very popular in recent years, with adverts for them appearing in mainstream media outlets. These services advertise on the basis of increased security and the ability to spoof your location, allowing restricted foreign services to be accessed (e.g. allowing access to BBC iPlayer from outside of the UK). We will refrain from commenting on the veracity of such claims and instead focus on their effects on latency.
+
+VPNs work by creating a tunnel between a client device (such as a laptop or phone) and a VPN server. All traffic that the client device would normally send directly to the internet is instead redirected via the VPN tunnel. Traffic then leaves the VPN server and reaches the internet. This means that that the user's source IP address appears to be that of the VPN server, which provides the stated location spoofing capabilities. All traffic through the tunnel is typically encrypted, which provides the stated security improvements.
+
+### VPNs and latency
+
+In terms of latency, there is almost always a latency penalty when utilising VPNs. The most obvious latency penalty is the increased length of the path between the user's device and the internet. Without the VPN, the user's traffic passes over the ISP's access network, to a peering location, and then reaches the wider internet. With the VPN, the user's traffic passes over the ISP's access network, to a peering location, then over one or more intermediate networks until it reaches the VPN server, and then to the internet. The location of the VPN server therefore becomes very important to latency. If the VPN server is very close to the ISP's peering location and the user's destination on the internet, then the latency penalty may be minimal. If not, then the latency penalty could be much more significant.
+
+Many VPN services allow you to choose the location of the VPN server you use (thus allowing you to appear to be in a different location). Such uses will always incur a latency penalty that is at least as great as the latency between the user and the spoofed location.
+
+VPNs can have less obvious impacts on latency too. Many ISPs have interconnection relationships with CDNs, such as Akamai, Google, Netflix, Facebook and so on. Sometimes this even involves the CDNs installing caches inside the ISP's network. CDNs use the source IP address of the user (or a portion of it) to work out where the user is and what ISP they are on, which is then used to steer the user towards a CDN server that is optimal for the user's location and ISP. When operating over a VPN, the user's true IP is hidden, so the CDN does not have the information necessary to steer the user towards the optimal CDN server. This means that a user on a VPN will likely experience increased latency to CDNs, because the optimised path to the CDN cannot be utilised.
+
+Finally, the VPN client and server itself may introduce additional latency, particularly if the VPN server is over-utilised.
+
+### iCloud Private Relay
+
+In 2021, Apple announced a new privacy feature that would be available to subscribers of its premium service. This feature, called iCloud Private Relay, is similar to the VPN services discussed above but with a few differences. The key difference is that traffic is distributed across multiple tunnels and exits onto the internet across multiple servers in a nearby location. This has the stated benefit of providing enhanced privacy, by removing the ability for someone eavesdropping at a single VPN server to have visibility of a user's complete traffic.
+
+Based upon the publicly available information, iCloud Private Relay will have a similar impact on latency to other VPNs. The selection of Cloudflare, Fastly and Akamai as partners to host the exit nodes (equivalent to VPN servers, where traffic exits to the internet) means that there will be many more VPN termination locations than most services. This will likely help reduce the latency penalty, but it certainly will not remove it, nor will it resolve the issue of CDNs being unable to steer traffic to the most optimal server for the user.
 
 
 # Current and Future Technologies to improve latency performance (3pgs) (Shamim)
