@@ -386,7 +386,36 @@ An example of this phenomenom can be seen in a PC Gamer article at https://www.p
 
 
 ## Web browsing (Peter)
-* Page Load Time & other metrics
+
+Here is some information relevant to (perceived) latency of web browsing.
+
+A few years ago, Google started a project called Web Vitals, which
+defines a number of measures:
+
+https://web.dev/learn-web-vitals/
+
+On the Firefox team we tend to rely most heavily on a measure called
+First Contentful Paint, which in our experience is slightly more
+representative of perceived latency than Largest Contentful Paint:
+
+https://web.dev/fcp/
+
+https://developer.mozilla.org/en-US/docs/Glossary/First_contentful_paint
+
+FCP is sometimes also called First Visual Change:
+
+https://www.sitespeed.io/documentation/sitespeed.io/metrics/#visual-metrics
+
+There are many, many factors involved in latency and responsiveness. To
+give you a flavor, here is a recent blog post from the Firefox team:
+
+https://blog.mozilla.org/performance/2021/07/13/bringing-you-a-snappier-firefox/
+
+Naturally these things vary across browsers, so if we write a few
+paragraphs about these topics we'll want to make sure they apply across
+the board.
+
+
 
 ## Future applications
 As noted above, consistently reducing working latency will improve all existing user applications. But looking to the future, it seems likely that the emergence of very low latency services may enable entirely new classes of applications to be created. One way to think about this is to consider that today we assume accessing resources on the Internet has some delay compared to local content or applications on a device. But what if a network-based resource was as responsive as a locally-installed resource? As well, applications that today are infeasible without highly specialized private Internet connectivity might become viable over consumer-grade best efforts Internet access. What follows are some applications that may be viable, though it is likely that unexpected and surprising new applications will be released by creative developers that we are unable to envision or list in the brief examples below. 
