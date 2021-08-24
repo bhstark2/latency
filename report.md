@@ -116,8 +116,28 @@ F. Direct peering vs. Transit
 
 ## Buffering delays (3pgs)
 ### Impact that senders & network protocols have on path latency (Koen)
+* General thoughts
+	* bottleneck rate determins burst/task delay
+	* Queue size bursts produces delay on other flows
+	* Stable/standing Queue size produces delay on all flows
+	* “bursty” applications: where to absorb the burst delay: in the network, or in the sender application/stack
 * Congestion Control (Classic TCP, BBR, TCP Prague, Delay-Based, Real-Time, LEDBAT)
-* Other “bursty” applications
+	* CC adapts sending rate to bottleneck rate
+		* common agreement of fair rate in shared bottleneck
+		* Enforced by NW or agreed among senders
+		* Input signal for congestion control (drop/delay/ACK-rate/explicit)
+		* responsiveness of adapting the rate
+		* impact of RTT on fair rate
+		* Other rates (faster or slower)
+		* handling/avoiding bursty traffic
+	* CC determins the queue size in the bottleneck...
+		* common agreement of queue target
+		* Steered by NW/AQM or Sender/CC
+		* Other sizes (longer or shorter) 
+	* rate pacing and/or window limited
+	* HW Offload impact/steering
+	* Real-Time?
+
 
 ### Queuing implementations (Dave Taht, Greg)
 * FIFOs
