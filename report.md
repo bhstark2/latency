@@ -159,23 +159,27 @@ G. On device compute evolution that nullifies or complements the MEC requirement
 # Metrics and methods for characterizing latency performance (5pgs) 
 
 ## Latency for a path in a live network is variable – a statistical distribution (Greg)
-* Descriptive statistics: Average latency, min/mean/max/std
-	* in measurements, "latency" almost always equates to average latency
-	* average latency is a pretty poor metric for judging QoE 
-	* of the other "easy" statistics that commonly get reported (min, max, std), min is reasonably useful, max and std are pretty worthless
-	* packet latency distribution is usually not a Gaussian (normal) distribution
-* Order statistics (P0,P99,P99.9)
-	* P99 packet latency (or possibly P99.9) much more useful to predict QoE
-	* P0 (min latency) is helpful too 
-* Packet Delay Variation vs. Inter-Packet Delay Variation vs. “Jitter”
-	* There are at least 9 different definitions of "jitter" in common use in the industry, each produces a markedly different value (even two orders of magnitude different!) given a sequence of packet latency observations
-	* issues with IPDV and out-of-band measurement
-* CDFs
-	* examples of CCDF on log scale	
-* "Responsiveness" RPM (round-trips per minute)
-	* discuss pros/cons of this metric, 
-	* pros: bigger is better, units are understandable by lay-people
-	* cons: implies a sequence of events in series, it's based on average latency
+
+Characterizing the latency performance of a network path from one machine to another generally involves sending one or more packets along the path, and calculating the time that it takes for those packets to arrive at their destination.  When measuring one-way latencies, this requires both endpoints to have synchronized clocks.  The sender inserts a timestamp into the packet that it transmits, and when the packet arrives at the receiver, the receiver checks its local clock and compares it to the timestamp value in the packet.  
+
+It is more common to measure the round-trip time (RTT), since this can be done even in the absence of synchronized clocks, and for most applications the round-trip time is more important anyway.  In this case the sender typically sends a packet to the receiver, the receiver sends a response packet back to the sender, and the sender then calculates the time elapsed between transmission and reception. 
+
+In both of these cases, each measurement represents a single sample of the latency along the path. However, it is typical in many real-world environments for the latency of a path to vary from one measurement to the next, sometimes considerably.  So, it is usually advisable to collect multiple measurements and then summarize the outcomes of the ensemble of measurements statistically.  It is also frequently the case that the statistics of latency will vary over time as the load on the network changes, the path itself changes, etc. 
+
+Historically, the most common descriptive statisic that is reported (and often labeled simply as "latency") is the average latency of the ensemble of measurements.  Other descriptive statistics that are sometimes reported are the standard deviation of the samples, the minimum value of the samples, and the maximum value of the samples.  The term "jitter" is often used in some way to refer to the variation of latency from sample to sample. 
+
+For many paths, the distribution of latency samples does not take the form of a traditional Gaussian (Normal) distribution, where mean and standard deviation completely describe the distribution. As a result, the two metrics of average and standard deviation are often not particularly useful to understand the latency characteristics of a path.  Rather, it is very common that the minimum latency and the average latency are fairly close to one another, and there are large "spikes" in latency due to various network phenomena. These latency spikes can be relatively rare, yet can be a significant factor in determining the quality of the path and its suitability for a particular application.  The effect that latency variation on application QoE is described further in <xref>.
+
+Since latency variation affects different applications differently, there have been multiple attempts to define metrics that can describe the variation in a way that correlates to the impact it has.  Each of these definitions are typically referred to as "jitter", even though they may vary considerably in their definition. [https://www.nctatechnicalpapers.com/Paper/2020/2020-latency-measurement] describes five different definitions of jitter that are in common use in the industry.  Calculating each of these metrics on a particular set of latency measurements can result in "jitter" values that differ by a factor of 100 or more.  So, when using jitter metrics it is important to be clear which definition is being used, and to consider whether that defintion is meaningful given the application context. 
+
+Another approach to characterizing a set of packet latency samples is to use order statistics, e.g. minimum, 25th percentile ("P25"), median (P50), P90, P99.  This approach can be particularly useful when used with isochronous applications like voice communication and multiplayer online games, since these applications commonly employ a "jitter buffer" that converts latency variation into fixed latency and residual packet loss (described further in <xref>).  So, as an example, a jitter buffer that results in 1% residual packet loss would mean that the application is operating with a fixed latency equal to the 99th percentile, and thus the measured P99 latency would be a strong indicator of the quality of the connection for this application.  Since many such applications are likely to target low values of residual loss (e.g. 0.1% to 5%), latency percentiles in the range of P95 to P99.9 may be the most useful in predicting quality of experience.
+
+When possible, a more complete view of the latency statistics of a path can be had by plotting the full statistical distribution from the measurements.  One of the most useful representations is in the form of a Complementary Cumulative Distribution graph, plotted on a log scale, with the axis labeled to represent packet latency percentiles.  An example is shown below (TODO, generate higher quality image).
+
+![Complementary CDF of Packet Latency](images/ccdf.png)
+
+Another metric that has been proposed recently, and that derives from latency, is "responsiveness" [https://www.ietf.org/id/draft-cpaasch-ippm-responsiveness-00.html].  This metric consists of more than just packet latency measurements, but rather is based on higher-layer protocol latency measurements including DNS, TCP handshaking and HTTP.  These measurements are averaged, and then the result is inverted and expressed in units of "Round-trips per Minute" (RPM).  This metric has some intuitive value for iterative web traffic workloads, where a user can imagine a network with low responsiveness setting an upper bound on how many web resources can be fetched in a certain amount of time.   That said, it is specific to web workloads, and appears to focus on the average result of a small number of measurements, as opposed to trying to represent information about the range of performance that the user might experience.
+
 
 ## Measuring latency (Sam)
 
