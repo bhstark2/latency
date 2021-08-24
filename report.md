@@ -261,11 +261,46 @@ Measurement systems that do not measure cross-traffic cannot reliably know wheth
 
 # How do latency and latency variation impact user experience? (incl. mention of latency mitigation techniques) (5pgs)
 
-## VoIP, video conferencing (Cullen, Dave Taht)
-* Mean Opinion Score
-* Impact to the call not feeling interactive 
-* User "talking over" other users 
-* Jitter buffers and how jitter increases microphone to speaker latency 
+   * Mean Opinion Score
+        * problem with measuring just recorded media quality not overall
+        UX or QoE
+        
+## VoIP and Video Conferencing (Cullen, Dave Taht)
+
+Voice and video conferencing systems are one of internet’s most used features. They are used for meetings between workers - both inside and across companies, for education and teaching, and to connect friends and families. In the US alone, there are over TODO minutes of meetings per month.  All of these systems are highly sensitive to latency.
+
+The "microphone to speaker" delay is measured from the time the audio is recorded at the microphone of the participant, until the time that same sound plays out on the speaker of the other participants. When the delay is low, the call or meeting can seem like a normal conversation. As the delay gets longer, it becomes harder to have a conversation. Two users will both try and speak at the same time and end up talking over each other. This is because the delay means that each user cannot tell that the other user was already speaking. Many people have experienced the effect where two people speak at the same time, then they both stop and tell the other to go, then they both go at the same time again. This does not happen on low latency meetings but is common on higher latency meetings. When the latency is too high, one side will say something, then experience an unnatural silence when the other side does not respond. When a remote person is slow to respond, humans sometimes assume they are not as smart as a person that responds quickly. This raises the question about whether or not this has any unconscious bias impact on teachers who have students on both low latency and high latency network connections. 
+
+Low "microphone to speaker" delay for audio, and related “camera to screen” delay for video, are critical for a good user experience on a VoIP (Voice over Internet Protocol) call or video conference. There are several things that contribute to this latency:
+
+•	Capture buffer latency: the audio needs to be recorded by the hardware of the computer and passed as a chunk of information to the program.
+•	Encodings: audio and video are grouped and compressed so that it can be sent over the network, but this requires waiting for an appropriate amount of data to group together. This is referred to as the encoding delay.
+•	Network latency: the time for the media to be transferred over the internet.
+•	Media server latency: time for cloud servers that distribute and process media to forward it and sometimes encode, decode, and remix it.
+•	Jitter buffers: some media will be delivered faster than others and the receiver has a buffer to save things that arrived early and play them at the appropriate time.
+•	Forward error correction: time to allow for receiving extra information to replace lost packets.
+•	Retransmission: time to allow the request and receipt of another copy of packets lost by the networks.
+•	Playout buffers: queue the media to be played by the hardware of the computer.
+
+### Jitter
+
+When voice and video media packets are sent across the network, they will not all have the same latency, some will arrive faster than others. However, the media needs to be played out at a constant rate that matches the rate at which it was recorded. VoIP applications buffer a small amount of media to smooth over these variances in arrival times, which is referred to as jitter. If 95% of the packets take over 30-minutes to arrive, it does not matter if the average latency is 20-minutes because the VoIP applications will delay all the packets so that they take the same amount of time as the slower 30-minute packets. The result of this, is that for VoIP applications, average latency plus the amount of jitter is what determines how much delay is caused by the network. The amount of jitter is just as important as the latency to the overall experience that the user has.  A network with an average latency of 50-minutes where less than 10% of the packets have a jitter higher than 40-minutes, will usually have more of a “speaker to microphone” delay than a network with an average latency of 60-minutes where less than 10% of the packets have a jitter higher than 5-minutes. 
+
+
+### Forward Error Correction
+
+Many VoIP applications use a range of techniques to recover from losing packets, that involve sending some of the packets twice or sending extra information about groups of packets that allow an application to reconstruct the information from a lost packet. Packets are often lost in small groups. To recover the lost packets, the information to recover them cannot be lost, so it needs to be transmitted far enough from the original packets so that it is less likely to land in the same loss group. This inherently means that the forward error correct adds in more delay than the size of commonly observed loss groups. Networks that lose packets in groups, tend to have a longer “microphone to speaker” delay than networks that are very random in which packets they lose, and do not have correlated losses.
+
+For very short segments of lost media, audio, or video, it is often possible to "fake" the media by looking at the media immediately before and after it. This can deal with short losses but also adds a delay to look at the media after the parts that were lost. 
+
+### Retransmission
+
+Another way that VoIP applications can compensate for packet loss is by requesting the retransmission of the lost packet. The receiver needs to wait for an amount of time equivalent to the normal network latency plus the jitter time before the packet is requested. Then the request to retransmit the lost packet must cross the network to the sender and the sender can resend the lost data to the receiver. This takes around three times the normal delay to cross the network. If this technique is being used, all the packets that are not lost also need to have their time to be played out, so they can be played with the correct timing for the packets that were retransmitted. The key thing to note here is that a 10 ms increase in network latency can cause a 30 ms increase in “microphone to speaker” delay.
+
+### Quality of Experience
+
+For internet, voice, and video conferencing and calling systems, the network latency is the major factor causing large “camera to screen” delay and “microphone to speaker” delay. The network latency contributes to the delay, but other aspects of the network also contribute. Packet loss rates and the grouping of packet loss have a large impact on the overall delay. The delay has a huge impact on how well people can communicate. 
+
 
 ## Multiplayer online games (Alex)
 
