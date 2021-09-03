@@ -64,7 +64,11 @@ Propagation delay is determined by the characteristics of the physical medium. F
 
 ### Ethernet, (Greg)
 
-	* a baseline for comparison.  serialization delays. shallow buffered vs deep buffered (arista) switches
+Ethernet links, whether the familiar 1 Gbps LAN cables used to connect devices in home networks and offices, or the 10G, 100G, 200G, 400G optical fiber versions used in datacenters and to connect sites over long distances, form a baseline against which most other network link technologies can be compared.  Historically, the Ethernet standard (IEEE 802) set the maximum size of a packet to be 1500 bytes (to which it adds 18+ bytes of framing).  This *Maximum Transmission Unit* size has been adopted by many other link technologies as well, and thus has become the de facto MTU for the internet.
+
+The latency introduced by an Ethernet link has two components that can be directly calculated from the frame size and the characteristics of the link (speed, distance and medium). For example, a 1518 byte frame (12144 bits) sent via a 1 Gbps interface over a 100-foot copper twisted pair (e.g. Cat6) cable will experience 12.1 microseconds (12144 bits / 1e9 bps) of *serialization delay* (the amount of time it takes to transmit all of the bits of the frame), plus 0.17 microseconds (100 ft / (0.59 * 1000 ft/microsecond)) of *propagation delay* (the time it takes for each bit to make it from the transmitter to the receiver), for a total latency of about 12.3 microseconds.
+
+In addition, an Ethernet *network* (i.e. multiple Ethernet links connected via switches) introduces delays at each switch. The delay added by each switch also has two components: *switching delay* and *buffering delay*.  The switching delay can be substantially less than a microsecond in "cut-through" switches, or can add an amount equal to the serialization delay in "store-and-forward" switches.  The buffering delay is variable, depending on instantaneous traffic load, and can range from 0 to the maximum supported by the switch.  Many switches used in datacenters are "shallow-buffered" such that the maximum buffering delay is on the order of 10s of microseconds, though deep-buffered switches exist as well, supporting maximum buffering delays in the 10s of milliseconds.           
 
 ### WiFi, (DaveT)
 
@@ -188,8 +192,15 @@ F. On premise edge compute for campus and arena
 G. On device compute evolution that nullifies or complements the MEC requirement 
 
 * Local caching (DNS, etc.) (author?)
-* Traditional Quality of Service differentiation (Greg)
-	* identification of traffic importance and/or QoS sensitivity, SLAs, prioritization, policing, access control, admission control, end-to-end issues at layer 8+ for Internet traffic
+
+## Traditional Quality of Service differentiation (Greg)
+
+One mechanism used in some networks to manage latency performance is the differentiation of traffic using traditional Quality of Service (QoS) techniques.  Most networking gear, from inexpensive home routers to access network equipment to high performance switches used in carrier networks and datacenters, supports features that can treat packets differently via some configurable criteria.  [@BITAGdifferentiation] provides a detailed treatment of this subject, but for the purposes of this paper the topic can be summarized briefly.  
+
+QoS differentiation involves identifying application traffic flows based on business or technical factors, and then treating the different traffic flows differently within a network device.  In general, differentiation only has an impact in the network devices that experience congestion.  Congestion is a normal part of the design of the internet, but not all network devices experience congestion, so proper configuration of QoS policies involves understanding network congestion points, and ensuring that the QoS policies at those congestion points provide the desired treatment.
+
+QoS differentiation is commonly used within enterprise networks and to differentiate between specialized services in carrier networks. It is generally not feasible to utilize end-to-end for internet traffic.  QoS management (both at the technical level and at the policy level) is complex.  Frequently, traffic identification involves determining the subjective latency/loss sensitivity and/or importance of a particular traffic aggregate, and the tools available within network equipment often amount to simple prioritization between service classes.  The result is that the more important and/or QoS sensitive an application is believed to be, the higher priority it is given, thus creating a zero-sum game where degradation of one category of traffic is reduced at the expense of another. This necessitates the use of access controls and policing to ensure that applications aren't able to game the system by gaining access to a higher priority level than allowed.  This is complex enough to manage across multiple applications and multiple users within an enterprise network, and it becomes infeasible to manage across the multiple networks that make up the internet.  
+
 
 ## Explicit Congestion Notification (Greg)
 
@@ -200,6 +211,7 @@ Twenty years ago, a 2-bit field in the IP header, known as the Explicit Congesti
 Alas, adoption of ECN has been relatively low.  While many endpoint protocols support it, there are not many networks that do.  A recent study by Akamai [@Akamai] concluded that globally, around 0.19% to 0.30% of clients ever saw an explicit congestion signal over the course of a day.
 
 In its current definition, explicit congestion signals are sent as judiciously as packet drops are, the result being that the network needs to tolerate a relatively high level of congestion. Five years ago, it was recognized that the definition of ECN missed an opportunity.  Since the congestion signal is no longer an impairment, the need to be judicious about its use goes away, and the network could provide much more fine-grained feedback about congestion to endpoints.  Additionally, it was observed that one of the four values that can be encoded in the ECN field had gone unused and could be used to enable the definition of a new version of ECN.  This is the subject of the next section.
+
 
 * QB/NQB distinction & Low-Latency, Low-Loss, Scalable throughput architecture (Greg)
 	* brief overview & pointers 

@@ -72,10 +72,18 @@ references:
       year: 2020
       month: 8
     URL: https://www.ietf.org/proceedings/interim-2020-maprg-01/slides/slides-interim-2020-maprg-01-sessa-latency-aqm-observations-on-the-internet-01.pdf
-
-
-
-
-
-
+  - id: BITAGdifferentiation
+    publisher: BITAG
+    author:
+    - family: Broadband Internet Technical Advisory Group - Technical Working Group
+    link-citations: true
+    title: Differentiated Treatment of Internet Traffic
+    published: 
+      year: 2015
+      month: 10
+    accessed: 
+      year: 2021
+      month: 9
+      day: 3
+    URL: https://www.bitag.org/report-differentiated-treatment-of-internet-traffic.php
 
