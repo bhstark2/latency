@@ -188,8 +188,16 @@ F. On premise edge compute for campus and arena
 G. On device compute evolution that nullifies or complements the MEC requirement 
 
 * Local caching (DNS, etc.) (author?)
-* Traditional Quality of Service differentiation (Greg)
-	* identification of traffic importance and/or QoS sensitivity, SLAs, prioritization, policing, access control, admission control, end-to-end issues at layer 8+ for Internet traffic
+
+## Traditional Quality of Service differentiation (Greg)
+
+One mechanism used in some networks to manage latency performance is the differentiation of traffic using traditional Quality of Service (QoS) techniques.  Most networking gear, from inexpensive home routers to access network equipment to high performance switches used in carrier networks and datacenters, supports features that can treat packets differently via some configurable criteria.  [@BITAGdifferentiation] provides a detailed treatment of this subject, but for the purposes of this paper the topic can be summarized briefly.  
+
+QoS differentiation involves identifying application traffic flows based on business or technical factors, and then treating the different traffic flows differently within a network device.  In general, differentiation only has an impact in the network devices that experience congestion.  Congestion is a normal part of the design of the internet, but not all network devices experience congestion, so proper configuration of QoS policies involves understanding network congestion points, and ensuring that the QoS policies at those congestion points provide the desired treatment.
+
+QoS differentiation is commonly used within enterprise networks and to differentiate between specialized services in carrier networks. It is generally not feasible to utilize end-to-end for internet traffic.  QoS management (both at the technical level and at the policy level) is complex.  Frequently, traffic identification involves determining the subjective latency/loss sensitivity and/or importance of a particular traffic aggregate, and the tools available within network equipment often amount to simple prioritization between service classes.  The result is that the more important and/or QoS sensitive an application is believed to be, the higher priority it is given, thus creating a zero-sum game where degradation of one category of traffic is reduced at the expense of another. This necessitates the use of access controls and policing to ensure that applications aren't able to game the system by gaining access to a higher priority level than allowed.  This is complex enough to manage across multiple applications and multiple users within an enterprise network, and it becomes infeasible to manage across the multiple networks that make up the internet.  
+
+
 * Explicit Congestion Notification (Greg)
 	* what is it? recent data on deployment, segue to L4S
 * QB/NQB distinction & Low-Latency, Low-Loss, Scalable throughput architecture (Greg)
