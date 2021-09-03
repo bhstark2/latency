@@ -30,3 +30,52 @@ references:
       month: 8
       day: 11
     URL: https://www.commscope.com/globalassets/digizuite/2799-latency-in-optical-fiber-systems-wp-111432-en.pdf
+  - id: RFC3168
+    publisher: "Internet Engineering Task Force"
+    author:
+    - family: Ramakrishnan
+      given: K.
+    - family: Floyd
+      given: S.
+    - family: Black
+      given: D.
+    link-citations: true
+    title: The Addition of Explicit Congestion Notification (ECN) to IP
+    published:
+      year: 2001
+      month: 9
+    URL: https://datatracker.ietf.org/doc/html/rfc3168
+  - id: L4S-initialdraft
+    publisher: "Internet Engineering Task Force"
+    author:
+    - family: Briscoe
+      given: B.
+    - family: De Schepper
+      given: K.
+    - family: Bagnulo
+      given: M.
+    link-citations: true
+    title: "Low Latency, Low Loss, Scalable Throughput (L4S) Internet Service: Architecture"
+    published:
+      year: 2016
+      month: 10
+      day: 31
+    URL: https://datatracker.ietf.org/doc/draft-briscoe-tsvwg-l4s-arch/00/
+  - id: Akamai
+    publisher: "Internet Engineering Task Force"
+    author:
+    - family: Holland
+      given: J.
+    link-citations: true
+    title: "Latency & AQM Observations on the Internet"
+    published:
+      year: 2020
+      month: 8
+    URL: https://www.ietf.org/proceedings/interim-2020-maprg-01/slides/slides-interim-2020-maprg-01-sessa-latency-aqm-observations-on-the-internet-01.pdf
+
+
+
+
+
+
+

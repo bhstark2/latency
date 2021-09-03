@@ -190,8 +190,17 @@ G. On device compute evolution that nullifies or complements the MEC requirement
 * Local caching (DNS, etc.) (author?)
 * Traditional Quality of Service differentiation (Greg)
 	* identification of traffic importance and/or QoS sensitivity, SLAs, prioritization, policing, access control, admission control, end-to-end issues at layer 8+ for Internet traffic
-* Explicit Congestion Notification (Greg)
-	* what is it? recent data on deployment, segue to L4S
+
+## Explicit Congestion Notification (Greg)
+
+Historically (and still commonly today) the internet has used packet discard (drop) as a means of signaling congestion to endpoints, and endpoints, in turn, have used the detection of packet drops as a way to sense congestion and thus modulate the rate at which they send traffic into the network.  Endpoints additionally need to recover from the loss of data by the network, either by concealing the lost data (e.g. in the case of a real-time voice call), recovering the lost data (e.g. using Application-Layer Forward Error Correction), or retransmitting the data (e.g. in the case of TCP).  Thus packet discard is both a congestion signal and an impairment for the endpoint application, and as a result the network needs to be judicious in its use.
+
+Twenty years ago, a 2-bit field in the IP header, known as the Explicit Congestion Notification field, was defined [@RFC3168] in order to allow networks to signal congestion to endpoints explicitly without the need to drop packets.  This technology eliminates the impairment aspect of the congestion signal, and thus can provide a latency benefit in that packets no longer need to be retransmitted, and thus the latency of the congestion signaling packets is reduced by one full RTT.  Further, since many applications require data to be delivered in order, ECN eliminates the "head-of-line blocking" phenomenon where later packets are delayed at the receiver awaiting the arrival of the retransmitted packet.
+
+Alas, adoption of ECN has been relatively low.  While many endpoint protocols support it, there are not many networks that do.  A recent study by Akamai [@Akamai] concluded that globally, around 0.19% to 0.30% of clients ever saw an explicit congestion signal over the course of a day.
+
+In its current definition, explicit congestion signals are sent as judiciously as packet drops are, the result being that the network needs to tolerate a relatively high level of congestion. Five years ago, it was recognized that the definition of ECN missed an opportunity.  Since the congestion signal is no longer an impairment, the need to be judicious about its use goes away, and the network could provide much more fine-grained feedback about congestion to endpoints.  Additionally, it was observed that one of the four values that can be encoded in the ECN field had gone unused and could be used to enable the definition of a new version of ECN.  This is the subject of the next section.
+
 * QB/NQB distinction & Low-Latency, Low-Loss, Scalable throughput architecture (Greg)
 	* brief overview & pointers 
 
