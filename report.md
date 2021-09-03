@@ -64,7 +64,11 @@ Propagation delay is determined by the characteristics of the physical medium. F
 
 ### Ethernet, (Greg)
 
-	* a baseline for comparison.  serialization delays. shallow buffered vs deep buffered (arista) switches
+Ethernet links, whether the familiar 1 Gbps LAN cables used to connect devices in home networks and offices, or the 10G, 100G, 200G, 400G optical fiber versions used in datacenters and to connect sites over long distances, form a baseline against which most other network link technologies can be compared.  Historically, the Ethernet standard (IEEE 802) set the maximum size of a packet to be 1500 bytes (to which it adds 18+ bytes of framing).  This *Maximum Transmission Unit* size has been adopted by many other link technologies as well, and thus has become the de facto MTU for the internet.
+
+The latency introduced by an Ethernet link has two components that can be directly calculated from the frame size and the characteristics of the link (speed, distance and medium). For example, a 1518 byte frame (12144 bits) sent via a 1 Gbps interface over a 100-foot copper twisted pair (e.g. Cat6) cable will experience 12.1 microseconds (12144 bits / 1e9 bps) of *serialization delay* (the amount of time it takes to transmit all of the bits of the frame), plus 0.17 microseconds (100 ft / (0.59 * 1000 ft/microsecond)) of *propagation delay* (the time it takes for each bit to make it from the transmitter to the receiver), for a total latency of about 12.3 microseconds.
+
+In addition, an Ethernet *network* (i.e. multiple Ethernet links connected via switches) introduces delays at each switch. The delay added by each switch also has two components: *switching delay* and *buffering delay*.  The switching delay can be substantially less than a microsecond in "cut-through" switches, or can add an amount equal to the serialization delay in "store-and-forward" switches.  The buffering delay is variable, depending on instantaneous traffic load, and can range from 0 to the maximum supported by the switch.  Many switches used in datacenters are "shallow-buffered" such that the maximum buffering delay is on the order of 10s of microseconds, though deep-buffered switches exist as well, supporting maximum buffering delays in the 10s of milliseconds.           
 
 ### WiFi, (DaveT)
 
