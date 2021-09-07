@@ -211,6 +211,16 @@ PON runs over optical fiber. The propagation delay in optical fiber is about 0.7
 
 ### LTE/5G, (Barbara)
 
+Wireless technologies defined by 3GPP have many latency components. The latency caused by the wireless physical medium (the air link between transmitting and receiving antennas) is the least of these. More significant are delays caused by signaling (messages required to set up a LTE session), by processing delays (how long it takes for LTE equipment to process signaling and messages including the time it takes to get the messages to where they need to be processed), and by contention with other traffic. A significant portion of backhaul is done using fiber, which minimizes latency over other backhaul technologies such as microwave or other wireless technologies. When fiber is used as the backhaul, its contribution to latency is largely due to propagation and serialization delay.
+
+A goal of LTE design was to have lower latency than 3G. This was primarily accomplished through improvements to the signaling architecture.
+
+5G has been (and continues to be) designed to be able to deliver lower latency than LTE. While much has been said about what may be possible with 5G (by moving intelligence closer to the edge, using network slicing, etc.), most of these possibilities have not been implemented or deployed. Some will only be used for special applications such as vehicular crash avoidance and will not be applied to general broadband Internet services.
+
+One study that compared LTE to 5G in a specific deployment showed 5G had half as much latency as LTE in that deployment. This was determined to be directly related to the number of hops (and distance) traveled by LTE packets as opposed to 5G packets [see section 4.4. of http://xyzhang.ucsd.edu/papers/DXu_SIGCOMM20_5Gmeasure.pdf].
+
+Median latency of the top three US mobile network providers in 2021 was calculated by Speedtest to be 33ms (across combined LTE and 5G networks) [https://www.speedtest.net/global-index/united-states].
+
 ### Satellite (DaveT)
 
 	* media access, scheduling, etc.
@@ -264,26 +274,25 @@ F. Direct peering vs. Transit
 
 ## VPNs and Proxied Paths (1pg) (Barbara, Sam)
 
-VPN services (Virtual Private Networks) have become very popular in recent years, with adverts for them appearing in mainstream media outlets. These services advertise on the basis of increased security and the ability to spoof your location, allowing restricted foreign services to be accessed (e.g. allowing access to BBC iPlayer from outside of the UK). We will refrain from commenting on the veracity of such claims and instead focus on their effects on latency.
+VPN services (Virtual Private Networks) have become very popular in recent years, with advertisements for them appearing in mainstream media outlets. These services mostly advertize on the basis of increased security and the ability to spoof the users location. This paper will refrain from commenting on the veracity of such claims and instead focus on their effects on latency.
 
 VPNs work by creating a tunnel between a client device (such as a laptop or phone) and a VPN server. All traffic that the client device would normally send directly to the Internet is instead redirected via the VPN tunnel. Traffic then leaves the VPN server and reaches the Internet. This means that that the user's source IP address appears to be that of the VPN server, which provides the stated location spoofing capabilities. All traffic through the tunnel is typically encrypted, which provides the stated security improvements.
 
 ### VPNs and latency
 
-In terms of latency, there is almost always a latency penalty when utilising VPNs. The most obvious latency penalty is the increased length of the path between the user's device and the Internet. Without the VPN, the user's traffic passes over the ISP's access network, to a peering location, and then reaches the wider Internet. With the VPN, the user's traffic passes over the ISP's access network, to a peering location, then over one or more intermediate networks until it reaches the VPN server, and then to the Internet. The location of the VPN server therefore becomes very important to latency. If the VPN server is very close to the ISP's peering location and the user's destination on the Internet, then the latency penalty may be minimal. If not, then the latency penalty could be much more significant.
+In terms of latency, there is almost always a latency penalty when utilizing VPNs. The most obvious latency penalty is the increased length of the path between the user's device and the internet. Without the VPN, the user's traffic passes over the ISP's access network, to a peering location, and then reaches the wider internet. With the VPN, the user's traffic passes over the ISP's access network, to a peering location, then over one or more intermediate networks until it reaches the VPN server, and then to the internet. The location of the VPN server therefore becomes very important to latency. If the VPN server is very close to the ISP's peering location and the user's destination on the internet, then the latency penalty may be minimal. If not, then the latency penalty could be much more significant.
 
-Many VPN services allow you to choose the location of the VPN server you use (thus allowing you to appear to be in a different location). Such uses will always incur a latency penalty that is at least as great as the latency between the user and the spoofed location.
+Many VPN services allow the user to choose the location of the VPN server used (thus allowing the user to appear to be in a different location). Such uses will always incur a latency penalty that is at least as great as the latency between the user and the spoofed location.
 
-VPNs can have less obvious impacts on latency too. Many ISPs have interconnection relationships with CDNs, such as Akamai, Google, Netflix, Facebook and so on. Sometimes this even involves the CDNs installing caches inside the ISP's network. CDNs use the source IP address of the user (or a portion of it) to work out where the user is and what ISP they are on, which is then used to steer the user towards a CDN server that is optimal for the user's location and ISP. When operating over a VPN, the user's true IP is hidden, so the CDN does not have the information necessary to steer the user towards the optimal CDN server. This means that a user on a VPN will likely experience increased latency to CDNs, because the optimised path to the CDN cannot be utilised.
+VPNs can have less obvious impacts on latency too. Many ISPs have interconnection relationships with CDNs, such as Akamai, Google, Netflix, Facebook and so on. Sometimes this even involves the CDNs installing caches inside the ISP's network. CDNs use the source IP address of the user (or a portion of it) to work out where the user is and what ISP they are on, which is then used to steer the user towards a CDN server that is optimal for the user's location and ISP. When operating over a VPN, the user's true IP is hidden, so the CDN does not have the information necessary to steer the user towards the optimal CDN server. This means that a user on a VPN will likely experience increased latency to CDNs, because the optimized path to the CDN cannot be utilised.
 
-Finally, the VPN client and server itself may introduce additional latency, particularly if the VPN server is over-utilised.
+Finally, the VPN client and server itself may introduce additional latency, particularly if the VPN server is over-utilized.
 
 ### iCloud Private Relay
 
 In 2021, Apple announced a new privacy feature that would be available to subscribers of its premium service. This feature, called iCloud Private Relay, is similar to the VPN services discussed above but with a few differences. The key difference is that traffic is distributed across multiple tunnels and exits onto the Internet across multiple servers in a nearby location. This has the stated benefit of providing enhanced privacy, by removing the ability for someone eavesdropping at a single VPN server to have visibility of a user's complete traffic.
 
-Based upon the publicly available information, iCloud Private Relay will have a similar impact on latency to other VPNs. The selection of Cloudflare, Fastly and Akamai as partners to host the exit nodes (equivalent to VPN servers, where traffic exits to the Internet) means that there will be many more VPN termination locations than most services. This will likely help reduce the latency penalty, but it certainly will not remove it, nor will it resolve the issue of CDNs being unable to steer traffic to the most optimal server for the user.
-
+Based upon the publicly available information, iCloud Private Relay will have a similar impact on latency to other VPNs. The selection of Cloudflare, Fastly and Akamai as partners to host the exit nodes (equivalent to VPN servers, where traffic exits to the internet) means that there will be many more VPN termination locations than most services. This will likely help reduce the latency penalty, but it certainly will not remove it. If appropriate client context is supplied when resolving DNS queries, it may resolve the issue of CDNs being unable to steer traffic to the most optimal server for the user.
 
 # Current and Future Technologies to improve latency performance (3pgs) (Shamim)
 * Migration to the network edge (CDNs, MEC) (Shamim)
@@ -551,13 +560,18 @@ the board.
 
 
 ## Future applications
-As noted above, consistently reducing working latency will improve all existing user applications. But looking to the future, it seems likely that the emergence of very low latency services may enable entirely new classes of applications to be created. One way to think about this is to consider that today we assume accessing resources on the Internet has some delay compared to local content or applications on a device. But what if a network-based resource was as responsive as a locally-installed resource? As well, applications that today are infeasible without highly specialized private Internet connectivity might become viable over consumer-grade best-effort Internet access. What follows are some applications that may be viable, though it is likely that unexpected and surprising new applications will be released by creative developers that we are unable to envision or list in the brief examples below.
 
+As noted above, consistently reducing working latency will improve all existing user applications. But looking to the future, it seems likely that the emergence of very low latency services may enable entirely new classes of applications to be created. One way to think about this is to consider that today we assume accessing resources on the Internet has some delay compared to local content or applications on a device. But what if a network-based resource was as responsive as a locally-installed resource? As well, applications that today are infeasible without highly specialized private Internet connectivity might become viable over consumer-grade best efforts Internet access. What follows are some applications that may be viable, though it is likely that unexpected and surprising new applications will be released by creative developers that we are unable to envision or list in the brief examples below. 
 
-### Autonomous cars (Barbara)
+### Connected cars (Barbara)
+	
+Major connected car applications that have low latency requirements are self-driving / autonomous cars and crash avoidence mechanisms. None of these rely on networked solutions to work at this time. Instead, they currently rely on local sensor information. For networked mechanisms to be useful for these applications, latency will need to be about 1 ms. This will only be achievable if the connectivity is directly between vehicles or if packets between a vehicle and something in its vicinity traverse just a single, nearby hop.  
+	
 ### Cloud VR (Greg)
+	
 * Motion-to-photon latency and sickness
 * components of the end-to-end latency chain
+	
 ### Remote Surgery (Dave Taht)
 
 
