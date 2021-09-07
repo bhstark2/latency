@@ -146,7 +146,10 @@ However, latency also varies, and significantly so, based on underlying network 
 
 Finally, since latency is a measure of delay, it is a measure of time. Network latency is typically described in milliseconds of time, though it can often grow to several seconds of time. While idle latency seeks to measure the baseline latency performance of a given end-to-end path, working latency measures the latency performance under real-world conditions when a user’s connection is utilized to a normal extent. 
 
-(missing: Impact that data rate has on latency?)
+## Latency and Speed
+
+Latency and speed are two different characteristics of a path between a sender and a receiver, and they are largely orthogonal, but not completely so - they do influence one another.  As we'll describe later in this paper, some existing network protocols are unable to transfer data at high speed when there is significant latency present.  So, high latency can reduce the apparent speed from the user's perspective.  Additionally, increasing the speed of the path can reduce latency in some cases.  One case where this can happen is with latency degradation due to *load* on the path.  For example, a single video stream at 5 Mbps might cause queuing delays 50% of the time on a 10 Mbps connection, but only 5% of the time on a 100 Mbps connection.  To be clear, this is a case of reducing the frequency with which a latency degradation occurs, not the severity of it. This phenomenon, queuing delay, is important and is discussed in some detail in this report.       
+
 
 # Sources/Contributors to Latency (8pgs)
 
