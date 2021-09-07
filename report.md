@@ -169,7 +169,7 @@ F. Direct peering vs. Transit
 
 ## VPNs and Proxied Paths (1pg) (Barbara, Sam)
 
-VPN services (Virtual Private Networks) have become very popular in recent years, with advertisements for them appearing in mainstream media outlets.
+VPN services (Virtual Private Networks) have become very popular in recent years, with advertisements for them appearing in mainstream media outlets. These services mostly advertize on the basis of increased security and the ability to spoof the users location. This paper will refrain from commenting on the veracity of such claims and instead focus on their effects on latency.
 
 VPNs work by creating a tunnel between a client device (such as a laptop or phone) and a VPN server. All traffic that the client device would normally send directly to the internet is instead redirected via the VPN tunnel. Traffic then leaves the VPN server and reaches the internet. This means that that the user's source IP address appears to be that of the VPN server, which provides the stated location spoofing capabilities. All traffic through the tunnel is typically encrypted, which provides the stated security improvements.
 
