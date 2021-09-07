@@ -38,6 +38,102 @@ This paper will further explore all of these topics, from a deeper dive into lat
 
 # Definitions 
 ## Speed or Throughput (Stuart)
+
+What many end users think of as the “speed” of their Internet connection
+is what Internet engineers refer to using terms like
+“bandwidth”, “capacity”, and “throughput”.
+When we describe a link capacity as
+1 kilobit per second, or
+1 megabit per second, or
+1 gigabit per second,
+that refers to the *amount* of data passing through a given point per second,
+not how *quickly* that data travels to its final destination.
+These are a measure of capacity, not speed.
+
+Notice that the term is “band-width”, not “band-speed”.
+
+Imagine filling a bucket with a hose pipe.
+If the bucket is taking too long to fill, we can get a fatter hose pipe.
+The bucket now fills quicker,
+not because the water is moving through the pipe at a faster speed,
+but because there is more water in the pipe.
+Because the pipe is wider, even if the individual water molecules are
+traveling down the pipe at the same speed, there are more of them,
+so the bucket fills faster.
+
+To use another analogy,
+increasing bandwidth is like adding more lanes to a highway —
+it makes the highway wider, so it can carry more cars,
+but it doesn’t change the speed limit.
+Counting cars-per-minute passing a certain point on a highway
+tells you about the capacity (or width) of the highway,
+but it tells you nothing about the speed of the individual cars.
+Analogies are often imperfect, and this analogy,
+comparing network traffic to road traffic, also has to be interpreted carefully.
+Unlike cars on a road, which have human drivers who slow down in heavy traffic,
+photons traveling through glass fiber
+(or electrical signals traveling through wire)
+move at a constant speed.
+Photons do not slow down because there are other photons ahead of them in the fiber.
+
+So, if photons and electrical signals travel at a constant speed and never
+slow down, how do computer networks experience congestion that slows down
+the responsiveness of the network and degrades user experience?
+
+Delays in computer networks do not occur in the cables;
+they occur in the switching equipment that connects the cables.
+When a data packet arrives in a piece of switching equipment,
+and the cable on which the packet is supposed to depart is already busy,
+the data packet has to wait its turn.
+If there are many other packets similarly waiting,
+the data packet may have to wait a significant amount of time.
+
+Another term commonly used by Internet engineers is “latency”.
+The word “latent” means “hidden”,
+and latency is the “hidden” component of delay.
+
+If we send 50 kilobytes of data using an old dial-up modem,
+we expect that to take a few seconds.
+If we send 500 kilobytes of data,
+we would expect that to take ten times longer.
+And if we send 500 megabytes,
+we would expect that to take 1000 times longer than 500 kilobytes.
+
+If we plot this data on a chart, we’d expect to see a straight line,
+where the more data is sent the longer it takes.
+But if we take that same straight line and extrapolate it back in
+the other direction, towards a hypothetical “zero sized” message,
+we find that the point where our straight line crosses the time
+axis is not zero.
+Even for a hypothetical zero-sized message,
+the time it takes to deliver it is non-zero.
+The time to deliver a message is made up of an overt component,
+related to the size of the message
+divided by the transmission rate of the medium,
+and a hidden component, which doesn’t vary with message size.
+As the transmission rates of home Internet connections
+have grown from
+kilobits per second to
+megabits per second and even
+gigabits per second
+the overt component of delay — the size-related component —
+has become negligible for all but the largest data transfers.
+But the hidden component of delay — the size-invariant latency —
+has remained mostly unchanged since the Internet’s birth in the 1980s.
+
+This is how we have arrived at an Internet today where
+the end-user experience is now determined almost entirely by the latency
+— the hidden size-invariant component of delay —
+and hardly at all by the commonly measured
+bandwidth, capacity, or throughput of the connection.
+
+If you want to drive from New York to San Francisco,
+a moving truck will not get you to San Francisco
+faster than a four-door family saloon car.
+Certainly, if you are moving house and have a lot of possessions to
+transport then the moving truck has a higher cargo *capacity* than
+the four-door family saloon car, but it won’t get you there *faster*.
+
 ## Latency (David to review this text)
 
 A good starting point is to first understand idle latency, which reflects the underlying and inherent latency of an end-to-end path, because working latency simply builds on top of that. The latency between a laptop and the next hop of a packet on the LAN will typically be quite short. As you add successive network hops from the laptop to the home gateway, then the ISP network, and all the way to the destination server, the latency will increase as each new link in the chain is added. But the number of links in and of itself does not necessarily mean greater latency per se.
