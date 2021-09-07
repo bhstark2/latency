@@ -1,7 +1,7 @@
 
 * Introduction (3pgs) (Jason)
 	* Effect on Applications
-		* User experience and lag in web browsing, web conferncing, and gaming 
+		* User experience and lag in web browsing, web conferencing, and gaming
 		* How latency impacts UX 
 	* Mention simple test for buffer bloat / lag
 	* Trends of User Experience and Network Performance
@@ -11,7 +11,7 @@
 * Definition of Latency (1pg) (DavidReed, Jason)
 	* Latency as a property of a network path (0.5pgs)
 		* Points A & B, and the network path that connects them
-		* Latency is additive along a path – contributions from multiple sources
+		* Latency is additive along a path — contributions from multiple sources
 	* Latency as a property of a network condition (0.5pgs)
 		* Idle latency vs Working latency
 	* Impact that data rate has on latency
@@ -19,7 +19,7 @@
 * Sources/Contributors to Latency (8pgs)
 	* Link technologies in place along the path (3pgs)
 		* Ethernet, (Greg)
-		* WiFi, (DaveT)
+		* Wi-Fi, (DaveT)
 		* DOCSIS,  (Greg, Jason)
 		* DSL, (Barbara)
 		* PON, (Barbara)
@@ -54,7 +54,7 @@
 	* QB/NQB distinction & Low-Latency, Low-Loss, Scalable throughput architecture (Greg)
 	
 * Metrics and methods for characterizing latency performance (5pgs)
-	* Latency for a path in a live network is variable – a statistical distribution (Greg)
+	* Latency for a path in a live network is variable — a statistical distribution (Greg)
 		* Descriptive statistics: Average latency, min/mean/max/std
 		* Order statistics (P0,P99,P99.9)
 		* Packet Delay Variation vs. Inter-Packet Delay Variation vs. “Jitter”
