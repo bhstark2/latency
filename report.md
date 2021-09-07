@@ -297,6 +297,7 @@ QoS differentiation involves identifying application traffic flows based on busi
 
 QoS differentiation is commonly used within enterprise networks and to differentiate between specialized services in carrier networks. It is generally not feasible to utilize end-to-end for Internet traffic.  QoS management (both at the technical level and at the policy level) is complex.  Frequently, traffic identification involves determining the subjective latency/loss sensitivity and/or importance of a particular traffic aggregate, and the tools available within network equipment often amount to simple prioritization between service classes.  The result is that the more important and/or QoS sensitive an application is believed to be, the higher priority it is given, thus creating a zero-sum game where degradation of one category of traffic is reduced at the expense of another. This necessitates the use of access controls and policing to ensure that applications aren't able to game the system by gaining access to a higher priority level than allowed.  This is complex enough to manage across multiple applications and multiple users within an enterprise network, and it becomes infeasible to manage across the multiple networks that make up the Internet.
 
+Along the edge of the internet, extensive options for QoS are often available, including but not limited to, rate shaping, per-device or per-application (de)prioritization, and parental controls.
 
 ## Explicit Congestion Notification (Greg)
 
