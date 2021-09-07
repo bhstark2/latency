@@ -578,8 +578,6 @@ Major connected car applications that have low latency requirements are self-dri
 * Motion-to-photon latency and sickness
 * components of the end-to-end latency chain
 	
-### Remote Surgery (Dave Taht)
-
 
 # Conclusions (or observations?)
 
