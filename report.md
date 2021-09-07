@@ -216,12 +216,20 @@ PON runs over optical fiber. The propagation delay in optical fiber is about 0.7
 	* media access, scheduling, etc.
 	
 ### Core network links (Shamim)
-A. Topology: middle mile, edge, backbone and submarine links
-B. Speed of light 
-C. Routing 
-D. Geolocation data anomalies and edge miss mappings
-E. eDNS client subnet
-F. Direct peering vs. Transit 
+Internet connectivity regardless of fix and mobile network interconnects with internet peering and exchange points with the help of telco & ISP owned fiber network that loops around central offices (CO) or headends (HE) that feed the end users connected to their respective ISPs and Mobile Network.
+The Internet edge infrastructure typically sits at or near internet peering/exchange points as a gateway to all internet application before it reaches the centralized data centers over intercity optical backbone network. 
+
+![End to End Network](images/CN_figure.png)
+
+Fiber network owned by ISPs, Telco & ILECs and associated topologies play a large role in routing internet traffic from a source to destination. The speed of light on fiber is approximately 67% of the speed of light; that equates to 1 msec of RTT every 100km. Once the user  traffic aggregates in ISPs CO & Headends it traverses ISP and Carriers' IP/Optical middle mile and core transport network. The contribution of latency is primarily due to fiber distance in a well managed IP network. 
+
+Internet routing is symmetric in nature. A request or call from a user may use one path to hit a server or end user however the response may come from totally different path that may be longer. To illustrate- if the user is sitting 100km away on a primary path from a server and the physical network topology has diverse path that is 200km then it is possible that user may experience up to 2 msec of latency due to asymmetric routing. Although fiber latency contribution in metro or regional level is less pronounced than ISPs access network it starts to play significant role if an in optimal routing on internet directs a traffic from a user from NY to SFO servers or SFO to LON servers in stead of serving locally.
+
+Geolocation data is users approximate location that helps internet routing make correct decision on onboarding to internet edge and backbone. It is not out of ordinary that a user in NY is directed to Dallas or London if the geo database used by ISPs contains wrong location about users approximate location. The efforts underway to map IP prefixes with correct geolocation information via IETF RFC 8805, HTML5 and eDNS client subnet are designed to address bad routing issue however requires concerted effort from ISPs, MNOs, Content and App providers.  
+
+With consolidation of ISP network and predictable intercity and submarine links the peering and transit network that interconnects all ISPs and Data Centers together has reached high level of maturity. The deeper edge and content delivery network with fine grain peering and capacity management has improved the predictability of internet performance at the interconnect exchange points. Modern peering and interconnect decision has seen a gradual shift from volume based internet exchange to latency based interconnect refinement. A step in positive direction!
+
+
 
 ## Buffering delays (3pgs)
 ### Impact that senders & network protocols have on path latency (Koen)
