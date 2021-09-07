@@ -311,7 +311,7 @@ Cloud gaming and edge compute on the other hand may require very low latency, pr
 
 To recap- Edge compute requires higher level of SLO from access network. Multi-path implementation on application unleashes the potential of access network connectivity options and elegantly solves capacity and performance concerns. Neutral host compute with access to more than one ISP brings a new potential to accelerate low latency services. 
 
-## Local caching (DNS, etc.) (author?)
+## Local caching (DNS, etc.) (Shamim, Cullen)
 
 ## Traditional Quality of Service differentiation (Greg)
 
