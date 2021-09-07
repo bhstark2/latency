@@ -303,17 +303,15 @@ In 2021, Apple announced a new privacy feature that would be available to subscr
 Based upon the publicly available information, iCloud Private Relay will have a similar impact on latency to other VPNs. The selection of Cloudflare, Fastly and Akamai as partners to host the exit nodes (equivalent to VPN servers, where traffic exits to the internet) means that there will be many more VPN termination locations than most services. This will likely help reduce the latency penalty, but it certainly will not remove it. If appropriate client context is supplied when resolving DNS queries, it may resolve the issue of CDNs being unable to steer traffic to the most optimal server for the user.
 
 # Current and Future Technologies to improve latency performance (3pgs) (Shamim)
-* Migration to the network edge (CDNs, MEC) (Shamim)
-A. Edge cache vs. Edge compute
-B. Video vs. Real time traffic handling
-C. Near real time inference and actions
-D. Down Link vs. Uplink bandwidth requirement 
-E. Multipath from user via both Wired broadband and 5G to compute/content Edge
-E. Geographic challenges and need for carrier neutral MEC
-F. On premise edge compute for campus and arena 
-G. On device compute evolution that nullifies or complements the MEC requirement 
 
-* Local caching (DNS, etc.) (author?)
+## Migration to the network edge (CDNs, MEC) (Shamim)
+Internet edge network is constantly evolving to suite the optimal user experience needs. For example a video streaming is throughput sensitive and maintaining optimal buffer on the end device or access point is desirable where as a real time video call may require lower throughput but extremely sensitive to higher buffer and packet loss. 
+
+Cloud gaming and edge compute on the other hand may require very low latency, predictable throughput and packet loss. Internet traffic has traditionally been highly asymmetric and served really well for download heavy content delivery however the dawn of cloud compute and storage has proven that uplink from user to cloud traffic needs immediate attention. More and more internet applications depend on internet edge for cloud user experience requiring lower latency, predictable throughput and packet loss in the uplink path. More and more applications implementing multi path using broadband and 5G network, for example to reach the local internet edge to mitigate latency, throughput and loss. Multi path implementation is an optimal use of access network resource however would require carrier neutral host for edge compute and proxy that enables users to select more than one ISP before it hits local internet edge. Consumer and small businesses can immensely benefit from neutral host network edge compute aka NEC. On the other hand internet experience is better with on premise compute for large enterprise, malls or arenas using multi-access edge compute, aka MEC. 
+
+To recap- Edge compute requires higher level of SLO from access network. Multi-path implementation on application unleashes the potential of access network connectivity options and elegantly solves capacity and performance concerns. Neutral host compute with access to more than one ISP brings a new potential to accelerate low latency services. 
+
+## Local caching (DNS, etc.) (author?)
 
 ## Traditional Quality of Service differentiation (Greg)
 
