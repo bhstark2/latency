@@ -166,7 +166,16 @@ The latency introduced by an Ethernet link has two components that can be direct
 
 In addition, an Ethernet *network* (i.e. multiple Ethernet links connected via switches) introduces delays at each switch. The delay added by each switch also has two components: *switching delay* and *buffering delay*.  The switching delay can be substantially less than a microsecond in "cut-through" switches, or can add an amount equal to the serialization delay in "store-and-forward" switches.  The buffering delay is variable, depending on instantaneous traffic load, and can range from 0 to the maximum supported by the switch.  Many switches used in datacenters are "shallow-buffered" such that the maximum buffering delay is on the order of 10s of microseconds, though deep-buffered switches exist as well, supporting maximum buffering delays in the 10s of milliseconds.           
 
-### Wi-Fi, (DaveT)
+### Wi-Fi
+
+While appearing to the network as if it was an ethernet based device, Wi-Fi is very different in that it not "switched" as is modern day ethernet. Rather, it is more like
+early versions of ethernet where only a single transmitter at a time is allowed, with more sophisiticated arbitrage of the basic transmission opportunity (TXOP) than original ethernet.
+
+Potential transmission delays in WiFi can have a range measured in seconds, while competing with a other devices and access points on the same channel, coping with transmission errors
+and subsequent retries, and transmission rates can vary also from below 1Mbit to 1Gbit as a function of these problems and of (especially) the distance to the reciever.
+
+Newer standards for Wi-Fi attempt to improve multiplexing behaviors while remaining compatible with older Wi-Fi standards, but co-existing on the same spectrum is difficult,
+and standardization more and different spectrum are aiding improvements to Wi-Fi behaviors.
 
 ### Powerline Carrier (PLC) (Barbara)
 
