@@ -45,7 +45,7 @@ references:
       year: 2001
       month: 9
     URL: https://datatracker.ietf.org/doc/html/rfc3168
-  - id: L4S-initialdraft
+  - id: L4S
     publisher: "Internet Engineering Task Force"
     author:
     - family: Briscoe
@@ -54,13 +54,15 @@ references:
       given: K.
     - family: Bagnulo
       given: M.
+    - family: White
+      given: G.
     link-citations: true
     title: "Low Latency, Low Loss, Scalable Throughput (L4S) Internet Service: Architecture"
     published:
-      year: 2016
-      month: 10
-      day: 31
-    URL: https://datatracker.ietf.org/doc/draft-briscoe-tsvwg-l4s-arch/00/
+      year: 2021
+      month: 7
+      day: 1
+    URL: https://datatracker.ietf.org/doc/draft-ietf-tsvwg-l4s-arch/
   - id: Akamai
     publisher: "Internet Engineering Task Force"
     author:
@@ -86,4 +88,18 @@ references:
       month: 9
       day: 3
     URL: https://www.bitag.org/report-differentiated-treatment-of-internet-traffic.php
+  - id: NQB
+    publisher: "Internet Engineering Task Force"
+    author:
+    - family: White
+      given: G.
+    - family: Fossati
+      given: T.
+    link-citations: true
+    title: "A Non-Queue-Building Per-Hop Behavior (NQB PHB) for Differentiated Services"
+    published:
+      year: 2021
+      month: 7
+      day: 28
+    URL: https://datatracker.ietf.org/doc/draft-ietf-tsvwg-nqb/
 
