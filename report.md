@@ -195,11 +195,26 @@ G.hn does not use time-based interleaving. In addition to operating on LAN power
 	
 The Data Over Cable Standard Interface Specifications (DOCSIS) are standards for hybrid fiber-coaxial (HFC) networks. Most DOCSIS networks today are comprised of primarily DOCSIS 3.0 and 3.1 cable modems and DOCSIS 3.1 Cable Modem Termination Systems (CMTS). 
 
-A DOCSIS link is a shared medium.  In the upstream direction, multiple cable modems request for access to the channel, and access is scheduled by the CMTS.  In the downstream direction, all transmissions are scheduled and made by the CMTS.  As described in Section 1 of [@LLD] there are five sources of latency in DOCSIS 3.1 networks (and similarly DOCSIS 3.0).  These are: switching/forwarding (typically less than 0.04 milliseconds), propagation delay (typically between 0.02 and 0.6 milliseconds), serialization/encoding (typically 0.4 - 3.5 milliseconds), media acquisition (typically 2 - 8 milliseconds), and queuing delay (typically 0 - 200 milliseconds). 
+A DOCSIS link is a shared medium.  In the upstream direction, multiple cable modems request for access to the channel, and access is scheduled by the CMTS.  In the downstream direction, all transmissions are scheduled and made by the CMTS.  As described in Section 1 of [@LLD] there are five sources of latency in DOCSIS 3.1 networks (and similarly DOCSIS 3.0).  These are:  
+
+Delay Source | Range
+-------------|------
+switching/forwarding | < 0.04 ms
+propagation | 0.02 - 0.6 ms
+serialization/encoding | 0.4 - 3.5 ms
+media acquisition | 2 - 8 ms
+queuing | 0 - 200 ms
 
 DOCSIS 3.1 equipment has multiple features to manage latency (some of which are available in DOCSIS 3.0 equipment as well), including Active Queue Management (AQM), and a new feature called *Low Latency DOCSIS* which includes support for the *Low-Latency Low-Loss Scalable Throughput* (L4S) architecture and isolation of Non-Queue-Building (NQB) traffic. AQM, L4S and NQB are discussed later in this document.  
 
-Expected latency performance of these latency management features is given in Table 1 of [@LLD].   
+The expected latency performance of these latency management features (as given in Table 1 of [@LLD] in order-of-magnitude numbers) is: 
+
+Feature | When Idle | Under Load | 99th Percentile  
+--------|-----------|------------|----------------  
+Buffer Control | ~10 ms | ~100 ms | ~100 ms
+Active Queue Management | ~10 ms | ~10 ms | ~100 ms
+Low Latency DOCSIS 3.1 | ~1 ms | ~1 ms | ~1 ms
+
  
 ### Digital Subscriber Line (DSL) and G.fast
 
