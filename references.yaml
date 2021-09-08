@@ -1,22 +1,5 @@
 ---
 references:
-  - id: aca1
-    type: article-journal
-    publisher: "America's Communications Association"
-    author:
-    - family: Lieberman
-      given: Ross
-    link-citations: true
-    title: Network Performance During the COVID-19 Crisis
-    published:
-      year: 2020
-      month: 4
-      day: 29
-    accessed: 
-      year: 2020
-      month: 9
-      day: 27
-    URL: https://acaconnects.org/covid-19/broadband-dashboard/
   - id: fiberlatency
     type: article-journal
     publisher: Commscope
