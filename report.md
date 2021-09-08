@@ -574,10 +574,8 @@ As noted above, consistently reducing working latency will improve all existing 
 Major connected car applications that have low latency requirements are self-driving / autonomous cars and crash avoidence mechanisms. None of these rely on networked solutions to work at this time. Instead, they currently rely on local sensor information. For networked mechanisms to be useful for these applications, latency will need to be about 1 ms. This will only be achievable if the connectivity is directly between vehicles or if packets between a vehicle and something in its vicinity traverse just a single, nearby hop.  
 	
 ### Cloud VR (Greg)
-	
-* Motion-to-photon latency and sickness
-* components of the end-to-end latency chain
-	
+
+Virtual reality environments require extensive compute resources in order to render high quality scenes with sufficient frame rate. These requirements have motivated the exploration of cloud-rendering solutions, where the cost of the compute resource can be shared across a number of users. A key consideration in moving the majority of the rendering functionality to the cloud is the latency between a movement of the user's head, and appropriately updated images being presented to them in their head-mounted-display.  This *motion-to-photon* latency can be no more than about 20 ms otherwise it can cause nausea, with some targeting less than 8 ms for the ideal experience [@CloudVR]. For full remote rendering, much of this latency budget is consumed by the motion-capture and image rendering processes, leaving perhaps 1-2 ms of network RTT between the head mounted display and the rendering engine. 
 
 # Conclusions/observations/findings
 
