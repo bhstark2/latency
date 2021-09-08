@@ -162,7 +162,23 @@ However, latency also varies, and significantly so, based on underlying network 
 
 Physical-layer technologies (meaning... ) in the path can contribute to latency due to the distance the signals travel (length of the physical medium) relative to the speed at which signals are transmitted on the physical medium (propagation delay), the time it takes for equipment to encode and decode the physical and link-layer technologies, and whether the physical-layer technology uses time-based interleaving to better detect and correct lost bits on noisy loops. The more shielded a physical medium is against noise, the less the physical-layer encoding needs to account for the impacts of potential noise.
 
-Propagation delay is determined by the characteristics of the physical medium. Fiber and copper have different characteristics, and copper media varies according to thickness (guage) and shielding used around the copper. Optical fiber has a propagation delay of about 0.67 times the speed of light in a vacuum, while unshielded twisted pair has a propagation delay of about 0.59 times the speed of light in a vacuum [@fiberlatency]. This means....
+Propagation delay is determined by the characteristics of the physical medium. The commonly used media of air, fiber and copper have different characteristics, and copper media varies according to thickness (gauge) and shielding used around the copper. The propagation velocities of various commonly used media are given in the table below (where C refers to the speed of light in a vacuum):
+
+Medium | Propagation Velocity | Round-Trip Delay per Mile
+-------|----------------------|--------------------------
+Air (i.e. wireless) | 0.997 * C | 10.8 µs
+Coaxial Cable | 0.86 * C | 12.5 µs
+Optical Fiber | 0.67 * C | 16.0 µs
+Unshielded Twisted Pair | 0.59 * C | 18.2 µs 
+
+[@fiberlatency] [need additional references]
+
+The majority of networks use fiber optic links for distances longer than a few miles, with microwave links being the second most common [reference?].  For long distance links, the propagation delay difference between these two can be significant (approx. 1.6 ms for fiber vs 1.1 ms for microwave, round-trip for a 100 mile link). 
+
+Access networks generally only use air, coaxial cable or unshielded twisted pair for the last few hundred feet, making the propagation delay differences between these technologies immaterial. 
+
+The more significant differences between access and home network technologies come from other factors such as physical-layer interleaving, FEC encoding and framing, media access delays, and buffering delays. 
+
 
 ### Ethernet, (Greg)
 
