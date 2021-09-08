@@ -175,7 +175,7 @@ Unshielded Twisted Pair | 18.2 µs
 
 The majority of networks use fiber optic links for distances longer than a few miles, with microwave links being the second most common [reference?].  For long distance links, the propagation delay difference between these two can be significant (approx. 1.6 ms for fiber vs 1.1 ms for microwave, round-trip for a 100 mile link). 
 
-Access networks generally only use air, coaxial cable or unshielded twisted pair for the last few hundred feet, making the propagation delay differences between these technologies immaterial. 
+Access networks generally only use their distinctive medium (air, coaxial cable or unshielded twisted pair) for the last few hundred feet, making the propagation delay differences between these technologies immaterial. 
 
 The more significant differences between access and home network technologies come from other factors such as physical-layer interleaving, FEC encoding and framing, media access delays, and buffering delays. 
 
