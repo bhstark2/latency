@@ -13,6 +13,7 @@ references:
       month: 8
       day: 11
     URL: https://www.commscope.com/globalassets/digizuite/2799-latency-in-optical-fiber-systems-wp-111432-en.pdf
+    
   - id: RFC3168
     publisher: "Internet Engineering Task Force"
     author:
@@ -24,10 +25,12 @@ references:
       given: D.
     link-citations: true
     title: The Addition of Explicit Congestion Notification (ECN) to IP
+    container-title: RFC3168
     published:
       year: 2001
       month: 9
     URL: https://datatracker.ietf.org/doc/html/rfc3168
+    
   - id: L4S
     publisher: "Internet Engineering Task Force"
     author:
@@ -46,6 +49,7 @@ references:
       month: 7
       day: 1
     URL: https://datatracker.ietf.org/doc/draft-ietf-tsvwg-l4s-arch/
+    
   - id: Akamai
     publisher: "Internet Engineering Task Force"
     author:
@@ -57,7 +61,9 @@ references:
       year: 2020
       month: 8
     URL: https://www.ietf.org/proceedings/interim-2020-maprg-01/slides/slides-interim-2020-maprg-01-sessa-latency-aqm-observations-on-the-internet-01.pdf
+    
   - id: BITAGdifferentiation
+    type: report
     publisher: BITAG
     author:
     - family: Broadband Internet Technical Advisory Group - Technical Working Group
@@ -71,6 +77,7 @@ references:
       month: 9
       day: 3
     URL: https://www.bitag.org/report-differentiated-treatment-of-internet-traffic.php
+    
   - id: NQB
     publisher: "Internet Engineering Task Force"
     author:
@@ -85,7 +92,9 @@ references:
       month: 7
       day: 28
     URL: https://datatracker.ietf.org/doc/draft-ietf-tsvwg-nqb/
+    
   - id: CloudVR
+    type: report
     publisher: "Huawei"
     author:
     - family: "Huawei iLab"
