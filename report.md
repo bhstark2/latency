@@ -162,14 +162,14 @@ However, latency also varies, and significantly so, based on underlying network 
 
 Physical-layer technologies (meaning... ) in the path can contribute to latency due to the distance the signals travel (length of the physical medium) relative to the speed at which signals are transmitted on the physical medium (propagation delay), the time it takes for equipment to encode and decode the physical and link-layer technologies, and whether the physical-layer technology uses time-based interleaving to better detect and correct lost bits on noisy loops. The more shielded a physical medium is against noise, the less the physical-layer encoding needs to account for the impacts of potential noise.
 
-Propagation delay is determined by the characteristics of the physical medium. The commonly used media of air, fiber and copper have different characteristics, and copper media varies according to thickness (gauge) and shielding used around the copper. The propagation velocities of various commonly used media are given in the table below (where C refers to the speed of light in a vacuum):
+Propagation delay is determined by the characteristics of the physical medium. The commonly used media of air, fiber and copper have different characteristics, and copper media varies according to thickness (gauge) and shielding used around the copper. The propagation delay of various commonly used media are given in the table below:
 
-Medium | Propagation Velocity | Round-Trip Delay per Mile
--------|----------------------|--------------------------
-Air (i.e. wireless) | 0.997 * C | 10.8 µs
-Coaxial Cable | 0.86 * C | 12.5 µs
-Optical Fiber | 0.67 * C | 16.0 µs
-Unshielded Twisted Pair | 0.59 * C | 18.2 µs 
+Medium  | Round-Trip Delay per Mile
+-------|--------------------------
+Air (i.e. wireless) | 10.8 µs
+Coaxial Cable | 12.5 µs
+Optical Fiber | 16.0 µs
+Unshielded Twisted Pair | 18.2 µs 
 
 [@fiberlatency] [need additional references]
 
