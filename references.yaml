@@ -102,4 +102,12 @@ references:
       month: 7
       day: 28
     URL: https://datatracker.ietf.org/doc/draft-ietf-tsvwg-nqb/
-
+  - id: CloudVR
+    publisher: "Huawei"
+    author:
+    - family: "Huawei iLab"
+    link-citations: true
+    title: "Cloud VR Network Solution White Paper"
+    published:
+      year: 2018
+    URL: https://www.huawei.com/minisite/pdf/ilab/cloud_vr_network_solution_white_paper_en.pdf
