@@ -193,7 +193,7 @@ G.hn does not use time-based interleaving. In addition to operating on LAN power
 
 ### DOCSIS  (Jason,Greg)
 	
-The Data Over Cable Standard Interface Specifications (DOCSIS) are standards for hybrid fiber-coaxial (HFC) networks. Most DOCSIS networks today are comprised of primarily DOCSIS 3.0 and 3.1 cable modems and DOCSIS 3.1 Cable Modem Termination Systems (CMTS). 
+The Data Over Cable Standard Interface Specifications (DOCSIS) are standards for hybrid fiber-coaxial (HFC) networks. Most DOCSIS networks today are comprised of primarily DOCSIS 3.0 and 3.1 cable modems and DOCSIS 3.1 Cable Modem Termination Systems (CMTS).  Most HFC networks use coaxial copper cable for the last few hundred feet, and fiber optic cable for the remainder of the distance between the CMTS and cable modems.
 
 A DOCSIS link is a shared medium.  In the upstream direction, multiple cable modems request for access to the channel, and access is scheduled by the CMTS.  In the downstream direction, all transmissions are scheduled and made by the CMTS.  As described in Section 1 of [@LLD] there are five sources of latency in DOCSIS 3.1 networks (and similarly DOCSIS 3.0).  These are:  
 
