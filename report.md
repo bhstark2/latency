@@ -144,15 +144,17 @@ the four-door family saloon car, but it won’t get you there *faster*.
 
 ## Latency (David to review this text)
 
-A good starting point is to first understand idle latency, which reflects the underlying and inherent latency of an end-to-end path, because working latency simply builds on top of that. The latency between a laptop and the next hop of a packet on the LAN will typically be quite short. As you add successive network hops from the laptop to the home gateway, then the ISP network, and all the way to the destination server, the latency will increase as each new link in the chain is added. But the number of links in and of itself does not necessarily mean greater latency per se.
+A good starting point is to first understand idle latency, which reflects the underlying and inherent latency of an end-to-end path, because working latency simply builds on top of that. The latency between a laptop and the next hop of a packet on the LAN will typically be quite short. As you add successive network hops from the laptop to the home gateway, then the ISP network, and all the way to the destination server, the latency will increase as each new link in the chain is added. But, because each link may introduce a different amount of latency, a large number of links in and of itself doesn't necessarily mean high latency.
 
-This is because some links can be quite short, such as a fiber link between a data center switch and a destination server, while other links can be long, such as an east-west fiber link across the U.S. And physical media such as fiber is limited by the physics of the speed of light. This means that, generally speaking, latency increases as distance increases: the time to send a packet across town will be less that the time to send a packet across the country. 
+This is because some links can be quite short, such as a fiber link between a switch and a server in a data center, while other links can be long, such as an east-west fiber link across the U.S. And physical media such as fiber is limited by the physics of the speed of light. This means that, generally speaking, latency increases as distance increases: the time to send a packet across town will be less than the time to send a packet across the country. 
 
 Latency also varies by different types of physical media or type of network (e.g., type of ISP access network technology). For example, looking at the physical media, a gigabit fiber connection will typically have lower latency than a copper-based 10Mb/s Ethernet connection. In addition, the latency properties of ISP access network technologies will also cause latency to vary — this subject is discussed futher in the next section.  As a result, idle latency tests of an end-to-end path will simply reflect (1) distance and (2) underlying network technologies. This is the baseline latency that is the starting point for understanding real world end-user performance.
 
 However, latency also varies, and significantly so, based on underlying network conditions. That means that latency may increase as traffic volume increases or as the capacity of a connection fills up. It can also mean that latency varies as a result of a mix of different kinds of traffic on the network (e.g., bulk downloads and online game play). When adding in real traffic of any type and volume, we can then see how the network reacts under real-world conditions and understand the so-called working latency of the path.
 
-(missing: Impact that data rate has on latency?)
+## Latency and Speed
+
+Latency and speed are two different characteristics of a path between a sender and a receiver, and they are largely orthogonal, but not completely so - they do influence one another.  As we'll describe later in this paper, some existing network protocols are unable to transfer data at high speed when there is significant latency present.  So, high latency can reduce the apparent speed from the user's perspective.  Additionally, increasing the speed of the path can reduce latency in some cases.  One case where this can happen is with latency degradation due to *load* on the path.  For example, a single video stream at 5 Mbps might cause queuing delays 50% of the time on a 10 Mbps connection, but only 5% of the time on a 100 Mbps connection.  To be clear, this is a case of reducing the frequency with which a latency degradation occurs, not the severity of it. This phenomenon, queuing delay, is important and is discussed in some detail in this report.       
 
 # Sources/Contributors to Latency (8pgs)
 
@@ -589,10 +591,8 @@ As noted above, consistently reducing working latency will improve all existing 
 Major connected car applications that have low latency requirements are self-driving / autonomous cars and crash avoidence mechanisms. None of these rely on networked solutions to work at this time. Instead, they currently rely on local sensor information. For networked mechanisms to be useful for these applications, latency will need to be about 1 ms. This will only be achievable if the connectivity is directly between vehicles or if packets between a vehicle and something in its vicinity traverse just a single, nearby hop.  
 	
 ### Cloud VR (Greg)
-	
-* Motion-to-photon latency and sickness
-* components of the end-to-end latency chain
-	
+
+Virtual reality environments require extensive compute resources in order to render high quality scenes with sufficient frame rate. These requirements have motivated the exploration of cloud-rendering solutions, where the cost of the compute resource can be shared across a number of users. A key consideration in moving the majority of the rendering functionality to the cloud is the latency between a movement of the user's head, and appropriately updated images being presented to them in their head-mounted-display.  This *motion-to-photon* latency can be no more than about 20 ms otherwise it can cause nausea, with some targeting less than 8 ms for the ideal experience [@CloudVR]. For full remote rendering, much of this latency budget is consumed by the motion-capture and image rendering processes, leaving perhaps 1-2 ms of network RTT between the head mounted display and the rendering engine. 
 
 # Conclusions/observations/findings
 
