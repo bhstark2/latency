@@ -193,15 +193,30 @@ HomePlug products are still being deployed in LANs, but the HomePlug Alliance (w
 
 G.hn does not use time-based interleaving. In addition to operating on LAN powerlines, G.hn is also often used on coax and twisted pair and is being deployed in some Multi Dwelling Unit (MDU) environments to provide broadband access to individual units.
 
-### DOCSIS,  (Greg to edit/add)
-
-	* expected latency due to DS serialization/framing, US MAC Req-Grant, discontinuous link (pkt aggregation).  Support for buffer control, AQM, LLD.
+### DOCSIS  (Jason,Greg)
 	
-The Data Over Cable Standard Interface Specifications (DOCSIS) are standards for hybrid fiber-coaxial (HFC) networks. Most DOCSIS networks are comprised of mostly DOCSIS 3.0 and 3.1 cable modems and DOCSIS 3.1 Cable Modem Termination Systems (CMTS). DOCSIS 3.0 has a “buffer control” parameter for the cable modem and CMTS to attempt to better control working latency compared to DOCSIS 1.0 and DOCSIS 2.0 [see Section 7 of https://arxiv.org/abs/2107.13968]. This is a static buffer setting, which is more complicated than using AQM, which was added as a feature of DOCSIS 3.1 and is called DOCSIS-PIE [https://datatracker.ietf.org/doc/html/rfc8034]. When implemented in the CMTS, AQM affects the downstream queue from the CMTS to the cable modem and when it is implemented in the cable modem, it affects the upstream queue from the cable modem to the CMTS.
+The Data Over Cable Standard Interface Specifications (DOCSIS) are standards for hybrid fiber-coaxial (HFC) networks. Most DOCSIS networks today are comprised of primarily DOCSIS 3.0 and 3.1 cable modems and DOCSIS 3.1 Cable Modem Termination Systems (CMTS).  Most HFC networks use coaxial copper cable for the last few hundred feet, and fiber optic cable for the remainder of the distance between the CMTS and cable modems.
 
-Moving beyond AQM, CableLabs developed a Low Latency DOCSIS specification [https://www.cablelabs.com/technologies/low-latency-docsis] to further reduce upstream latency and support the proposed new IETF Non-Queue Building (NQB) and Low Latency, Low Loss, Scalable Throughput (L4S) services  [https://datatracker.ietf.org/doc/draft-ietf-tsvwg-nqb/]. 
+A DOCSIS link is a shared medium.  In the upstream direction, multiple cable modems request for access to the channel, and access is scheduled by the CMTS.  In the downstream direction, all transmissions are scheduled and made by the CMTS.  As described in Section 1 of [@LLD] there are five sources of latency in DOCSIS 3.1 networks (and similarly DOCSIS 3.0).  These are:  
 
-(Greg: is it worth adding a link to some of the papers that project latency performance with DOCSIS LL?)
+Delay Source | Range
+-------------|------
+switching/forwarding | < 0.04 ms
+propagation | 0.02 - 0.6 ms
+serialization/encoding | 0.4 - 3.5 ms
+media acquisition | 2 - 8 ms
+queuing | 0 - 200 ms
+
+DOCSIS 3.1 equipment has multiple features to manage latency (some of which are available in DOCSIS 3.0 equipment as well), including Active Queue Management (AQM), and a new feature called *Low Latency DOCSIS* which includes support for the *Low-Latency Low-Loss Scalable Throughput* (L4S) architecture and isolation of Non-Queue-Building (NQB) traffic. AQM, L4S and NQB are discussed later in this document.  
+
+The expected latency performance of these latency management features (as given in Table 1 of [@LLD] in order-of-magnitude numbers) is: 
+
+Feature | When Idle | Under Load | 99th Percentile  
+--------|-----------|------------|----------------  
+Buffer Control | ~10 ms | ~100 ms | ~100 ms
+Active Queue Management | ~10 ms | ~10 ms | ~100 ms
+Low Latency DOCSIS 3.1 | ~1 ms | ~1 ms | ~1 ms
+
  
 ### Digital Subscriber Line (DSL) and G.fast
 
