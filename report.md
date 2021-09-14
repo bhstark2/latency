@@ -246,9 +246,9 @@ G.fast is another copper-based technology (over twisted pair or coax) that can b
 
 Note that a 1 mile loop of unshielded twisted pair copper would add about (1 mile / (186,000 miles/second x 0.59)) x 1x10^6 microseconds/second = 9.1 microseconds of propagation delay. Delay caused by encoding and decoding (and any time-based interleaving) would be added to this.
 
-### PON, (Barbara)
+### PON
 
-PON runs over optical fiber. The propagation delay in optical fiber is about 0.70 times the speed of light in a vacuum. 
+Passive Optical Networking (PON) runs over optical fiber (add FN to https://www.cisco.com/c/en/us/products/switches/what-is-passive-optical-networking.html).  The propagation delay in optical fiber is about 0.70 times the speed of light in a vacuum, which is quite small. In a PON network, optical fiber cables run from an Optical Line Terminal (OLT) in an ISP network into a neighborhood, at which point the network splits into distinct fiber optical cable connections to the Optical Network Terminals (ONTs) installed in individual homes (typically up to 32, 64, or 128 homes). The last mile link between the passive split and the homes is a shared medium.
 
 ### LTE/5G, (Barbara)
 
