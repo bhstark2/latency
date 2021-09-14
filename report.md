@@ -211,11 +211,11 @@ HomePlug products are still being deployed in LANs, but the HomePlug Alliance (w
 
 G.hn does not use time-based interleaving. In addition to operating on LAN powerlines, G.hn is also often used on coax and twisted pair and is being deployed in some Multi Dwelling Unit (MDU) environments to provide broadband access to individual units.
 
-### DOCSIS  (Jason,Greg)
+### DOCSIS
 	
-The Data Over Cable Standard Interface Specifications (DOCSIS) are standards for hybrid fiber-coaxial (HFC) networks. Most DOCSIS networks today are comprised of primarily DOCSIS 3.0 and 3.1 cable modems and DOCSIS 3.1 Cable Modem Termination Systems (CMTS).  Most HFC networks use coaxial copper cable for the last few hundred feet, and fiber optic cable for the remainder of the distance between the CMTS and cable modems.
+The Data Over Cable Standard Interface Specifications (DOCSIS) are standards for hybrid fiber-coaxial (HFC) networks (ADD FN: https://www.cablelabs.com/specifications). Most DOCSIS networks today are comprised of primarily DOCSIS 3.0 and 3.1 cable modems and DOCSIS 3.1 Cable Modem Termination Systems (CMTS).  Most HFC networks use coaxial copper cable for the last few hundred feet, and fiber optic cable for the remainder of the distance between the CMTS and cable modems, followed by fiber optic cable from the CMTS to the Internet.
 
-A DOCSIS link is a shared medium.  In the upstream direction, multiple cable modems request for access to the channel, and access is scheduled by the CMTS.  In the downstream direction, all transmissions are scheduled and made by the CMTS.  As described in Section 1 of [@LLD] there are five sources of latency in DOCSIS 3.1 networks (and similarly DOCSIS 3.0).  These are:  
+A DOCSIS link is a shared medium.  In the upstream direction, multiple cable modems request access to a particular transmission channel, and access is scheduled by the CMTS.  In the downstream direction, all transmissions are scheduled and made by the CMTS.  As described in Section 1 of [@LLD] there are five sources of latency in DOCSIS 3.1 networks (and similarly DOCSIS 3.0).  These are:  
 
 Delay Source | Range
 -------------|------
@@ -229,7 +229,7 @@ DOCSIS 3.1 equipment has multiple features to manage latency (some of which are 
 
 The expected latency performance of these latency management features (as given in Table 1 of [@LLD] in order-of-magnitude numbers) is: 
 
-Feature | When Idle | Under Load | 99th Percentile  
+Feature | When Idle | Under Load (Working Conditions) | 99th Percentile  
 --------|-----------|------------|----------------  
 Buffer Control | ~10 ms | ~100 ms | ~100 ms
 Active Queue Management | ~10 ms | ~10 ms | ~100 ms
