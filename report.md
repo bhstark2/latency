@@ -171,11 +171,9 @@ In addition, an Ethernet *network* (i.e. multiple Ethernet links connected via s
 While appearing to the network as if it was an ethernet based device, Wi-Fi is very different in that it not "switched" as is modern day ethernet. Rather, it is more like
 early versions of ethernet where only a single transmitter at a time is allowed, with more sophisiticated arbitrage of the basic transmission opportunity (TXOP) than original ethernet.
 
-Potential transmission delays in WiFi can have a range measured in seconds, while competing with a other devices and access points on the same channel, coping with transmission errors
-and subsequent retries, and transmission rates can vary also from below 1Mbit to 1Gbit as a function of these problems and of (especially) the distance to the reciever.
+Potential transmission delays in WiFi can have a range measured in seconds, while competing with other devices and access points on the same channel, coping with transmission errors and subsequent retries, and transmission rates can vary also from below 1Mbit to 1Gbit as a function of these problems and of (especially) the distance to the reciever.
 
-Newer standards for Wi-Fi attempt to improve multiplexing behaviors while remaining compatible with older Wi-Fi standards, but co-existing on the same spectrum is difficult,
-and standardization more and different spectrum are aiding improvements to Wi-Fi behaviors.
+Newer standards for Wi-Fi attempt to improve multiplexing behaviors while remaining compatible with older Wi-Fi standards, but co-existing on the same spectrum is difficult. Standardization on more and different spectrum is aiding improvements to Wi-Fi behaviors.
 
 ### Powerline Carrier (PLC) (Barbara)
 
