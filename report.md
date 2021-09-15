@@ -337,7 +337,7 @@ VPNs can have less obvious impacts on latency too. Many ISPs have interconnectio
 
 Finally, the VPN client and server itself may introduce additional latency, particularly if the VPN server is over-utilized.
 
-### iCloud Private Relay
+### iCloud Private Relay (this section to be rewritten as HTTP Relay more generally by Barbara & Shamim)
 
 In 2021, Apple announced a new privacy feature that would be available to subscribers of its premium service. This feature, called iCloud Private Relay, is similar to the VPN services discussed above but with a few differences. The key difference is that traffic is distributed across multiple tunnels and exits onto the Internet across multiple servers in a nearby location. This has the stated benefit of providing enhanced privacy, by removing the ability for someone eavesdropping at a single VPN server to have visibility of a user's complete traffic.
 
@@ -352,7 +352,7 @@ Cloud gaming and edge compute on the other hand may require very low latency, pr
 
 To recap- Edge compute requires higher level of SLO from access network. Multi-path implementation on application unleashes the potential of access network connectivity options and elegantly solves capacity and performance concerns. Neutral host compute with access to more than one ISP brings a new potential to accelerate low latency services. 
 
-## Local caching (DNS, etc.) (Shamim, Cullen)
+## Local caching (DNS, etc.) (Cullen, Shamim)
 
 ## Traditional Quality of Service differentiation (Greg)
 
