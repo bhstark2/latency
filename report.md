@@ -314,6 +314,8 @@ In general, networking equipment needs to have the ability to buffer (queue) bur
 
 
 ### Queuing implementations (Dave Taht, Greg)
+
+The details of the buffer implementation can have a significant impact on the latency introduced by a piece of networking equipment, and thus on the end-to-end latency for all flows that utilize that piece of equipment.  The impact is felt most often when the egress interface has a lower data rate than the ingress interface (or ingress interfaces in aggregate), and particularly when the egress interface is the bottleneck  for one or more flows currently sharing it.  In those situations, packets will regularly queue up in the buffer, and thus cause delays.
 * FIFOs
 	* baseline case, most widely deployed in network gear, discuss buffer sizing, relation to congestion control, buffer bloat
 * AQMs: CoDel, PIE, DOCSIS-PIE, Cobalt, etc.
