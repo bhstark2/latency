@@ -316,6 +316,16 @@ In general, networking equipment needs to have the ability to buffer (queue) bur
 ### Queuing implementations (Dave Taht, Greg)
 
 The details of the buffer implementation can have a significant impact on the latency introduced by a piece of networking equipment, and thus on the end-to-end latency for all flows that utilize that piece of equipment.  The impact is felt most often when the egress interface has a lower data rate than the ingress interface (or ingress interfaces in aggregate), and particularly when the egress interface is the bottleneck  for one or more flows currently sharing it.  In those situations, packets will regularly queue up in the buffer, and thus cause delays.
+
+#### First-In, First-Out (FIFO) Queues
+
+The simplest (and most common) buffer implementation is a single first-in, first-out (FIFO) queue.  As packets arrive, they line up in this queue in arrival order, and they then depart on the egress interface in that same order.  If traffic arrives at a rate that exceeds the egress rate, the queue depth will grow, and if the arrival rate is less than the egress rate, the queue depth will shrink.
+
+FIFO buffers typically have a set size that is determined by the manufacturer (and in some cases is configurable).  If the ingress rate of traffic exceeds the egress rate long enough, or if a sufficiently large burst of traffic arrives, the buffer will fill up completely, and the excess packets in the burst will be dropped.  This phenomenon (packet drop due to buffer exhaustion) is the predominant signal of congestion in the internet today, and is what most existing congestion controllers respond to.  
+
+Historically, all congestion controllers responded to a congestion signal by stopping transmission and waiting until half of the packets *in flight* were acknowledged before resuming transmission. As a result, in order to achieve full utilization of the bottleneck link, it was important that the buffer in that bottleneck be sized to hold at least half of those in-flight packets.  And, since a network equipment manufacturer can't know a priori how many packets that might be, it was common (in devices that were expected to be the bottleneck, like DSL modems, cable modems, and WiFi gear) to provide as much buffering as possible, resulting in significant latency and latency variation when the link was being fully utilized.  This was referred to as *bufferbloat* [@Bufferbloat].   
+
+
 * FIFOs
 	* baseline case, most widely deployed in network gear, discuss buffer sizing, relation to congestion control, buffer bloat
 * AQMs: CoDel, PIE, DOCSIS-PIE, Cobalt, etc.
