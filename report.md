@@ -283,6 +283,12 @@ With consolidation of ISP network and predictable intercity and submarine links 
 
 
 ## Buffering delays (3pgs)
+
+In general, networking equipment needs to have the ability to buffer (queue) bursts of traffic that arrive at a rate that exceeds the rate of the output (egress) interface. This buffering capability serves a number of purposes:  
+* when the egress interface is the bottleneck, it allows the existing congestion control algorithms to fully utilize that interface,  
+* it allows applications to send (relatively short) bursts of packets without having to be concerned about the egress interface rates along the path, and  
+* it handles the incast problem, where packets from multiple ingress interfaces in the device are destined to the same egress interface.
+
 ### Impact that senders & network protocols have on path latency (Koen)
 * General thoughts
 	* bottleneck rate determins burst/task delay
