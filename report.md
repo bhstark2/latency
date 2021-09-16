@@ -170,10 +170,10 @@ Physical and link-layer technologies in the path can contribute to latency due t
 
 Medium  | Round-Trip Delay per Mile
 -------|--------------------------
-Air (i.e. wireless) | 10.8 µs
-Coaxial Cable | 12.5 µs
-Optical Fiber | 16.0 µs
-Unshielded Twisted Pair | 18.2 µs 
+Air (i.e. wireless) | 0.0108 ms
+Coaxial Cable | 0.0125 ms
+Optical Fiber | 0.0160 ms
+Unshielded Twisted Pair | 0.0182 ms 
 
 [@fiberlatency] [need additional references]
 
@@ -205,9 +205,9 @@ There are also some additional nodal delays that happen at multiple or all nodes
 
 Ethernet links, whether the familiar 1 Gbps LAN cables used to connect devices in home networks and offices, or the 10G, 100G, 200G, 400G optical fiber versions used in datacenters and to connect sites over long distances, form a baseline against which most other network link technologies can be compared.  Historically, the Ethernet standard (IEEE 802) set the maximum size of a packet to be 1500 bytes (to which it adds 18+ bytes of framing).  This *Maximum Transmission Unit* size has been adopted by many other link technologies as well, and thus has become the de facto MTU for the internet.
 
-The latency introduced by an Ethernet link has two components that can be directly calculated from the frame size and the characteristics of the link (speed, distance and medium). For example, a 1518 byte frame (12144 bits) sent via a 1 Gbps interface over a 100-foot copper twisted pair (e.g. Cat6) cable will experience 12.1 microseconds (12144 bits / 1e9 bps) of *serialization delay* (the amount of time it takes to transmit all of the bits of the frame), plus 0.17 microseconds (100 ft / (0.59 * 1000 ft/microsecond)) of *propagation delay* (the time it takes for each bit to make it from the transmitter to the receiver), for a total latency of about 12.3 microseconds.
+The latency introduced by an Ethernet link has two components that can be directly calculated from the frame size and the characteristics of the link (speed, distance and medium). For example, a 1518 byte frame (12144 bits) sent via a 1 Gbps interface over a 100-foot copper twisted pair (e.g. Cat6) cable will experience 0.0121 ms (12144 bits / 1e9 bps) of *serialization delay* (the amount of time it takes to transmit all of the bits of the frame), plus 0.00017 ms (100 ft / (0.59 * 1,000,000 ft/millisecond)) of *propagation delay* (the time it takes for each bit to make it from the transmitter to the receiver), for a total latency of about 0.0123 ms.
 
-In addition, an Ethernet *network* (i.e. multiple Ethernet links connected via switches) introduces delays at each switch. The delay added by each switch also has two components: *switching delay* and *buffering delay*.  The switching delay can be substantially less than a microsecond in "cut-through" switches, or can add an amount equal to the serialization delay in "store-and-forward" switches.  The buffering delay is variable, depending on instantaneous traffic load, and can range from 0 to the maximum supported by the switch.  Many switches used in datacenters are "shallow-buffered" such that the maximum buffering delay is on the order of 10s of microseconds, though deep-buffered switches exist as well, supporting maximum buffering delays in the 10s of milliseconds.           
+In addition, an Ethernet *network* (i.e. multiple Ethernet links connected via switches) introduces delays at each switch. The delay added by each switch also has two components: *switching delay* and *buffering delay*.  The switching delay can be negligible in "cut-through" switches, or can add an amount equal to the serialization delay in "store-and-forward" switches.  The buffering delay is variable, depending on instantaneous traffic load, and can range from 0 to the maximum supported by the switch.  Many switches used in datacenters are "shallow-buffered" such that the maximum buffering delay is on the order of hundredths of milliseconds, though deep-buffered switches exist as well, supporting maximum buffering delays in the 10s of milliseconds.           
 
 ### Wi-Fi
 
@@ -261,7 +261,6 @@ Some ADSL2+ and VDSL deployments used a time-based interleaving technique to be 
 
 G.fast is another copper-based technology (over twisted pair or coax) that can be used on very short loops (up to around 500 ft). Interleaving is not used with G.fast and the loop length and encoding mechanisms add very small latency.
 
-Note that a 1 mile loop of unshielded twisted pair copper would add about (1 mile / (186,000 miles/second x 0.59)) x 1x10^6 microseconds/second = 9.1 microseconds of propagation delay. Delay caused by encoding and decoding (and any time-based interleaving) would be added to this.
 
 ### PON, (Barbara)
 
