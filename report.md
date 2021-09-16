@@ -262,9 +262,9 @@ Some ADSL2+ and VDSL deployments used a time-based interleaving technique to be 
 G.fast is another copper-based technology (over twisted pair or coax) that can be used on very short loops (up to around 500 ft). Interleaving is not used with G.fast and the loop length and encoding mechanisms add very small latency.
 
 
-### PON, (Barbara)
+### PON
 
-PON runs over optical fiber. The propagation delay in optical fiber is about 0.70 times the speed of light in a vacuum. 
+Passive Optical Networking (PON) runs over optical fiber (add FN to https://www.cisco.com/c/en/us/products/switches/what-is-passive-optical-networking.html).  The propagation delay in optical fiber is about 0.70 times the speed of light in a vacuum, which is quite small. In a PON network, optical fiber cables run from an Optical Line Terminal (OLT) in an ISP network into a neighborhood, at which point the network splits into distinct fiber optical cable connections to the Optical Network Terminals (ONTs) installed in individual homes (typically up to 32, 64, or 128 homes). The last mile link between the passive split and the homes is a shared medium.
 
 ### LTE/5G, (Barbara)
 
