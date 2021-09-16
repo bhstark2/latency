@@ -631,6 +631,24 @@ Virtual reality environments require extensive compute resources in order to ren
 To really understand end-user QoE, we need to look at working latency rather than idle latency.  
 When using jitter metrics, it is important to be clear which definition is being used, and to consider whether that defintion is meaningful given the application context.  
 
+# Appendix A: Layered Network Model
+
+The BITAG report [Differentiated Treatment of Internet Traffic](https://bitag.org/report-differentiated-treatment-of-internet-traffic.php) provided the following diagram and definitions for understanding a layered model of the Internet. This model and much of its associated description is repeated here because it useful in understanding much of the information presented in this report, as well. The original source for most of this information is [RFC1122](https://rfc-editor.org/rfc/rfc1122.txt).
+
+![5-layer model of the Internet and IP Packet Elements](images/5-layer-Internet-Model.png)
+
+**Layer 1 – Physical Layer**. The physical layer conveys the bit stream on the transmission media (fiber, copper, radio wave) at the electrical and mechanical level – converted to electrical impulses, light waves, or radio signals.
+	
+**Layer 2 – Data Link Layer**. The data link layer encompasses the technologies and protocols used to send traffic across a sub-network, or “link.”  At the lowest level, link layer protocols manage access to the physical media and encode traffic into frames such as Ethernet frames, Frame Relay frames, or ATM cells.  These protocols are sometimes designed in conjunction with a specific physical layer, such as IEEE 802.11 or DOCSIS. Link layer protocols also support classification and marking to facilitate scheduling, shaping, and other differentiation functions that may occur in the nodes that perform switching within a link.
+	
+In some network architectures, multiple protocols may operate between the physical layer and the Internet layer. Examples of this are MPLS and the use of Ethernet MAC over ATM and PPPoE over Ethernet MAC.
+	
+**Layer 3 – Internet Layer**. The Internet layer delivers packets across the end-to-end network from source endpoint to destination endpoint. The Internet Protocol (IPv4 or IPv6) at this layer supports end-to-end addressing, as well as classification and marking. Routers perform scheduling, shaping, and policing as well as routing at this layer.
+	
+**Layer 4 – Transport Layer**. At the transport layer, the Internet transport protocol (typically TCP or UDP) delivers a flow of packets across the network with characteristics determined by the protocol used. TCP provides end-to-end flow identification, packet sequencing, error recovery, and flow control for reliable data transfer. UDP provides flow identification and error correction. QUIC is a new transport protocol (https://www.rfc-editor.org/rfc/rfc9000.html) that provides applications with flow-controlled streams for structured communication, low-latency connection establishment, and network path migration.
+	
+**Layer 5 – Application Layer**. The application layer represents all the functions that are performed by the application endpoints (e.g. client and server) to manage application-to-application level communication, such as controlling the transfer of a large file. One example is the hypertext transfer protocol (HTTP), the protocol for the transmission of web pages. Other examples include the file transfer protocol (FTP), the Dynamic Host Configuration Protocol (DHCP), the Domain Name System (DNS) protocol, and the email protocols POP, IMAP and SMTP. Sometimes application protocols are defined to be transported inside the payload of other application protocols, such as HTTP.
+
 
 \pagebreak
 # Heading Level 1
