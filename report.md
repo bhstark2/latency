@@ -160,13 +160,13 @@ Latency and speed are two different characteristics of a path between a sender a
 
 # Sources/Contributors to Latency (8pgs)
 
-## Link technologies in place along the path (3pgs)
+Physical characteristics of the path taken by an Internet packet, protocols at all layers, and network element functions at all points of the Internet contribute to latency. For a brief overview of the layered network model, see [Appendix A: Layered Network Model]. The following sub-sections provide more detail on contributions to latency at the various layers of the Internet.
 
-*Should this section be "Physical-layer Technologies in Place along the Path"? Would it be useful to remind readers of the layered stack: physical, link, IP, application and step up the stack? I re-ordered the bullets in this section a little to group all the LAN technologies towards the beginning, then access, but with Ethernet staying first. They were mostly already ordered that way.*
+## Link and physical technologies in place along the path (3pgs)
 
-Physical-layer technologies (meaning... ) in the path can contribute to latency due to the distance the signals travel (length of the physical medium) relative to the speed at which signals are transmitted on the physical medium (propagation delay), the time it takes for equipment to encode and decode the physical and link-layer technologies, and whether the physical-layer technology uses time-based interleaving to better detect and correct lost bits on noisy loops. The more shielded a physical medium is against noise, the less the physical-layer encoding needs to account for the impacts of potential noise.
+Physical and link-layer technologies in the path can contribute to latency due to the distance the signals travel (length of the physical medium) relative to the speed at which signals are transmitted on the physical medium (propagation delay), the time it takes for equipment to encode and decode the physical and link-layer technologies, characteristics of how bits of information are encoded on the physical medium, and switching and queuing delays caused by nodes needing to combine and send inbound traffic on outbound links.
 
-Propagation delay is determined by the characteristics of the physical medium. The commonly used media of air, fiber and copper have different characteristics, and copper media varies according to thickness (gauge) and shielding used around the copper. The propagation delay of various commonly used media are given in the table below:
+*Propagation delay* is determined by the characteristics of the physical medium. The commonly used media of air, fiber and copper have different characteristics, and copper media varies according to thickness (gauge) and shielding used around the copper. The propagation delay of various commonly used media are given in the table below:
 
 Medium  | Round-Trip Delay per Mile
 -------|--------------------------
@@ -177,11 +177,28 @@ Unshielded Twisted Pair | 18.2 µs
 
 [@fiberlatency] [need additional references]
 
-The majority of networks use fiber optic links for distances longer than a few miles, with microwave links being the second most common [reference?].  For long distance links, the propagation delay difference between these two can be significant (approx. 1.6 ms for fiber vs 1.1 ms for microwave, round-trip for a 100 mile link). 
+The majority of terrestrial networks use fiber optic links for distances longer than a few miles, with microwave links being the second most common [reference?].  For long distance links, the propagation delay difference between these two can be significant (approx. 1.6 ms for fiber vs 1.1 ms for microwave, round-trip, for a 100 mile link). 
 
-Access networks generally only use their distinctive medium (air, coaxial cable or unshielded twisted pair) for the last few hundred feet, making the propagation delay differences between these technologies immaterial. 
+Access networks generally only use their distinctive medium (air, coaxial cable or unshielded twisted pair) for the last few hundred feet, making the propagation delay differences between these technologies immaterial.
 
-The more significant differences between access and home network technologies come from other factors such as physical-layer interleaving, FEC encoding and framing, media access delays, and buffering delays. 
+The more significant differences between access and home network technologies come from other factors such as time-based interleaving on a physical-layer technology, media acquisition delays, buffering or queueing delays for nodal behaviors proscribed by the technology, and messaging and packet handling required by a network architectures whose use is tightly coupled with the technology.
+
+  - *Time-based interleaving* is a technique used by some physical-layer encodings (especially DSL) to deal with the effects of noise bursts. While interleaving is generally enabled together with Cyclic Redundancy Check (CRC) and Forward Error Correction (FEC), it is not the same as CRC or FEC and there is no dependency between interleaving and CRC or FEC. For a good description of time-based interleaving, see [https://kitz.co.uk/adsl/interleaving.htm]. When enabled, interleaving can commonly add anywhere from 2 to 20 ms of latency. Whether or not to enable interleaving and how much delay is allowed for interleaving in a DSL deployment is determined by the ISP. Some ISPs have the ability to configure them on a per-subscriber basis.
+  - *Media acquisition delay* is the delay incurred by multiple devices scheduling traffic over a shared medium. This is seen in no-new-wire home networking (powerline, coax, phoneline) technologies, some wireless technologies, and DOCSIS.
+  - *Buffering delay* or *queuing delay* is the time packets wait in a buffer or a queue while other traffic is being transmitted. The buffering delay is variable, depending on instantaneous traffic load, and can range from 0 to the maximum configured in the node. Most physical layer technologies do not place requirements around buffering or queuing algorithms. When the technology is tightly couple with an architecture, there may be requirements on buffering and queuing imposed by the architecture.
+  - *Network architecture delays* can be incurred when signaling messages are required to be processed prior to a host being allowed to send application traffic packets or when the network requires traffic to pass through certain nodes for additional inspection and processing. These delays are not generally associated with physical or link technologies other than those defined by 3GPP, where the LTE and 5G Radio Access Network (RAN) technologies are tighlty couple to the associated 3GPP network architecture.  
+
+The following table summarizes some of these differences.
+
+Table still to be created.
+
+
+
+There are also some additional nodal delays that happen at multiple or all nodes along a packet's path and are not specific to any physical-layer technology.
+
+  - *Serialization delay* is the amount of time it takes to transmit all of the bits of a link-layer frame. This is calculated as the length of the frame (bits) divided by the speed of the outbound link (bits per second).
+  - *Switching delay* is the amount of time that an Ethernet packet spends traversing a node. Many of the physical-layer technologies use Ethernet link-layer framing. The switching delay can be substantially less than a microsecond in "cut-through" switches, or can add an amount equal to the serialization delay in "store-and-forward" switches.
+  - *Nodal processing delay* is the time it takes to process the packet header, check for bit errors, determine the destination host, etc. Providers of core networks will often minimize this by using technologies like MPLS that have very simple packet headers.
 
 
 ### Ethernet, (Greg)
