@@ -137,9 +137,9 @@ bandwidth, capacity, or throughput of the connection.
 If you want to drive from New York to San Francisco,
 a moving truck will not get you to San Francisco
 faster than a four-door family car.
-Certainly, if you are moving house and have a lot of possessions to
+Certainly, if you are moving to San Francisco and have a lot of possessions to
 transport then the moving truck has a higher cargo *capacity* than
-the four-door family saloon car, but it won’t get you there *faster*.
+the four-door family car, but it won’t get you there *faster*.
 
 ## Latency (David to review this text)
 
