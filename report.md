@@ -190,9 +190,14 @@ The more significant differences between access and home network technologies co
 
 The following table summarizes some of these differences.
 
-Physical / Link Technology | Propagation Delay (round-trip per mile) | Time-based Interleaving Delay | Media Acquisition Delay | Buffering Delay | Network Architecture Delays
-----------------|----------------|----------------|----------------|----------------|----------------
-Ethernet | 0.0182 ms (unshielded twisted pair) | NA | NA | node-specific | NA
++-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+
+|  Physical / Link  | Propagation Delay |   Interleaving    | Media Acquisition |  Buffering Delay  | Ntwk Architecture |
+|    Technology     | (round-trip/mile) |      Delay        |       Delay       |                   |       Delay       |
++===================+===================+===================+===================+===================+===================+
+| Ethernet          | 0.0182 ms         | NA                | NA                | node-specific     | NA                |
+|                   | (unshielded       |                   |                   |                   |                   | 
+|                   | twisted pair)     |                   |                   |                   |                   |  
+|-------------------+-------------------+-------------------+-------------------+-------------------+-------------------|
 
 There are also some additional nodal delays that happen at multiple or all nodes along a packet's path and are not specific to any physical-layer technology.
 
