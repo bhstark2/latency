@@ -190,19 +190,7 @@ The more significant differences between access and home network technologies co
 
 The following table summarizes some of these differences.
 
------------------------------------------------------------------------------------------------------------------------
-  Physical / Link    Propagation Delay     Interleaving      Media Acquisition    Buffering Delay    Ntwk Architecture 
-    Technology       (round-trip/mile)        Delay                Delay                                   Delay       
-------------------- ------------------- ------------------- ------------------- ------------------- -------------------
- Ethernet            0.0182 ms           NA                  NA                  node-specific       NA                
-                     (unshielded                                                                                        
-                     twisted pair)                                                                                       
-
- Wi-Fi               0.0108 ms (air)     NA                                      node-specific       NA for home
-                                                                                                     network Wi-Fi
-												     
------------------------------------------------------------------------------------------------------------------------
-
+![Physical and Link Technologies Latency Summary][images/L2-latency-summary.PNG]
 
 There are also some additional nodal delays that happen at multiple or all nodes along a packet's path and are not specific to any physical-layer technology.
 
