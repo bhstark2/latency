@@ -650,11 +650,16 @@ Virtual reality environments require extensive compute resources in order to ren
 
 # Conclusions/observations/findings
 
-* There will always be a constrained link on an Internet path, due to its packet-based design which means in part that it does not create end-to-end circuits with dedicated capacity.  
-* The fact that some packets are lost at the bottleneck is also completely normal and indeed is essential, as this is a key part of the control signal or feedback loop to a sender to moderate how fast they are sending packets.  
-
-* The location of the VPN server therefore becomes very important to latency.
-* Latency percentiles in the range of P95 to P99.9 may be the most useful in predicting quality of experience.  
+* Due to the packet-switched design of the Internet, which does not have dedicated circuits, there will always be a constrained link (aka bottleneck link) on any end-to-end Internet path. 
+* The fact that some packets are dropped at a bottleneck link is also completely normal and indeed is essential, as this is a key part of the control signal or feedback loop to a sender to moderate how fast they are sending packets.  
+* If some packets are not dropped at a bottleneck link, a queue of packets will form. When the queue becomes too large then user applications suffer delay (high latency).
+* Idle latency, while an interesting measurement, reflects the inherent attributes of access network or network media, as well as path distance.
+* Working latency is a better measurement of the end user application quality of experience (QoE) than idle latency.
+* The key network attribute for end user QoE is not solely bandwidth capacity but bandwidth and working latency performance.
+* Poor and/or highly variable working latency performance negatively affects the QoE of many applications, from web browsing to video streaming, video conferencing gaming, and more. 
+* Unlike for speed tests, working latency does not follow a normal distribution but is instead often multi-modal. As a result, the mean and median are not informative. Rather, the 98th or 99th percentile of working latency performance is more useful in predicting quality of experience. (FN to https://www.iab.org/wp-content/IAB-uploads/2021/09/single-delay-metric.pdf).
+* There are solutions available now that can improve working latency performance, such as Active Queue Management.
+* In the future, very low latency networks will emerge and this seems likely to enable the creation of new classes of applications.
 
 # Recommendations
 
