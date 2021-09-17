@@ -190,7 +190,7 @@ The more significant differences between access and home network technologies co
 
 The following table summarizes some of these differences.
 
-![Physical and Link Technologies Latency Summary][images/L2-latency-summary.PNG]
+![Physical and Link Technologies Latency Summary](images/L2-latency-summary.PNG)
 
 There are also some additional nodal delays that happen at multiple or all nodes along a packet's path and are not specific to any physical-layer technology.
 
