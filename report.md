@@ -666,7 +666,7 @@ Virtual reality environments require extensive compute resources in order to ren
 To really understand end-user QoE, we need to look at working latency rather than idle latency.  
 When using jitter metrics, it is important to be clear which definition is being used, and to consider whether that defintion is meaningful given the application context.  
 
-# Appendix A: Layered Network Model
+# Appendix A: Layered Network Model {-}
 
 The BITAG report [Differentiated Treatment of Internet Traffic](https://bitag.org/report-differentiated-treatment-of-internet-traffic.php) provided the following diagram and definitions for understanding a layered model of the Internet. This model and much of its associated description is repeated here because it useful in understanding much of the information presented in this report, as well. The original source for most of this information is [RFC1122](https://rfc-editor.org/rfc/rfc1122.txt).
 
@@ -690,9 +690,11 @@ In some network architectures, multiple protocols may operate between the physic
 
 aldkfja;dklfja;dklfja;ldkfja
 
-example of reference [@aca1]
+Example of reference to an id in the references.yaml file [@aca1]
 
 Example footnote marker [^1]
+	
+Example xref to a section in this doc (by placing the unique heading title inside square brackets): [Causes of Latency] 
 
 Example footnote text 
 
@@ -701,3 +703,5 @@ Example footnote text
 
 ## Heading Level 2
 ### Heading Level 3
+	
+# References
