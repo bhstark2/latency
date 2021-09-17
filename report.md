@@ -299,6 +299,12 @@ With consolidation of ISP network and predictable intercity and submarine links 
 
 
 ## Buffering delays (3pgs)
+
+In general, networking equipment needs to have the ability to buffer (queue) bursts of traffic that arrive at a rate that exceeds the rate of the output (egress) interface. This buffering capability serves a number of purposes:  
+* when the egress interface is the bottleneck, it allows the existing congestion control algorithms to fully utilize that interface,  
+* it allows applications to send (relatively short) bursts of packets without having to be concerned about the egress interface rates along the path, and  
+* it handles the incast problem, where packets from multiple ingress interfaces in the device are destined to the same egress interface.
+
 ### Impact that senders & network protocols have on path latency (Koen)
 * General thoughts
 	* bottleneck rate determins burst/task delay
@@ -324,12 +330,26 @@ With consolidation of ISP network and predictable intercity and submarine links 
 
 
 ### Queuing implementations (Dave Taht, Greg)
-* FIFOs
-	* baseline case, most widely deployed in network gear, discuss buffer sizing, relation to congestion control, buffer bloat
-* AQMs: CoDel, PIE, DOCSIS-PIE, Cobalt, etc.
-	* very brief explanation of what AQM is, mention of algorithms commonly in use in networks today, impact on latency/loss tradeoff
-* Flow queuing: fq\_codel, fq\_pie, CAKE
-	* very brief explanation of FQ,where is it deployed, expected result
+
+The details of the buffer implementation can have a significant impact on the latency introduced by a piece of networking equipment, and thus on the end-to-end latency for all flows that utilize that piece of equipment.  The impact is felt most often when the egress interface has a lower data rate than the ingress interface (or ingress interfaces in aggregate), and particularly when the egress interface is the bottleneck  for one or more flows currently sharing it.  In those situations, packets will regularly queue up in the buffer, and thus cause delays.
+
+#### First-In, First-Out (FIFO) Queues
+
+The simplest (and most common) buffer implementation is a single first-in, first-out (FIFO) queue.  As packets arrive, they line up in this queue in arrival order, and they then depart on the egress interface in that same order.  If traffic arrives at a rate that exceeds the egress rate, the queue depth will grow, and if the arrival rate is less than the egress rate, the queue depth will shrink.
+
+FIFO buffers typically have a set size that is determined by the manufacturer (and in some cases is configurable).  If the ingress rate of traffic exceeds the egress rate long enough, or if a sufficiently large burst of traffic arrives, the buffer will fill up completely, and the excess packets in the burst will be dropped.  This phenomenon (packet drop due to buffer exhaustion) is the predominant signal of congestion in the internet today, and is what most existing congestion controllers respond to.  
+
+Historically, all congestion controllers responded to a congestion signal by stopping transmission and waiting until half of the packets *in flight* were acknowledged before resuming transmission. As a result, in order to achieve full utilization of the bottleneck link, it was important that the buffer in that bottleneck be sized to hold at least half of those in-flight packets.  And, since a network equipment manufacturer can't know a priori how many packets that might be, it was common (in devices that were expected to be the bottleneck, like DSL modems, cable modems, and WiFi gear) to provide as much buffering as possible, resulting in significant latency and latency variation when the link was being fully utilized.  This was referred to as *bufferbloat* [@Bufferbloat]. 
+
+FIFOs that can be adjusted to a more appropriate size can improve the latency performance (in particular when the link is under load), but making the buffer too small will begin to impact the throughput of congestion controlled traffic.
+
+#### Active Queue Management
+
+Some network equipment has egress buffers that support a technology called *Active Queue Management* (AQM) that monitors the queue depth (or delay), and then sends congestion signals (either by dropping packets or implementing *Explicit Congestion Notification* as described later in this document) to try to sustain full egress link utilization while maintaining lower queuing delay than would exist in a FIFO.  There have been many different AQM algorithms developed over the years, but some the most common ones in use today are CoDel [@CoDel]  (usually as part of fq_codel, described below) and PIE [@PIE]. 
+
+#### Flow Queuing AQMs
+
+Some equipment implements multiple egress queues (often 1024) with each flow that is actively using the egress interface assigned to a separate queue, and a scheduler that ensures that each flow gets an equal fraction of the egress link bandwidth. This *flow-queuing* mechanism is generally also implemented with an AQM algorithm acting on each queue. The most common of such implementations is the fq_codel algorithm [@fq_codel].
 
 ## Latency contributions from endpoints (client & server) (1pg) (Dave Taht, +coauthor)
 * Socket buffering & Offloads

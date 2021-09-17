@@ -120,3 +120,68 @@ references:
       year: 2018
     URL: https://www.huawei.com/minisite/pdf/ilab/cloud_vr_network_solution_white_paper_en.pdf
 
+  - id: Bufferbloat
+    type: website
+    publisher: Wikipedia
+    link-citations: true
+    title: "Bufferbloat"
+    accessed: 
+      year: 2021
+      month: 9
+      day: 15
+    URL: https://en.wikipedia.org/wiki/Bufferbloat
+    
+  - id: PIE
+    publisher: "Internet Engineering Task Force"
+    author:
+    - family: White
+      given: G.
+    - family: Pan
+      given: R.
+    link-citations: true
+    title: "Active Queue Management (AQM) Based on Proportional Integral Controller Enhanced (PIE) for Data-Over-Cable Service Interface Specifications (DOCSIS) Cable Modems"
+    container-title: RFC8034
+    published:
+      year: 2017
+      month: 2
+    URL: https://datatracker.ietf.org/doc/html/rfc8034
+
+  - id: CoDel
+    publisher: "Internet Engineering Task Force"
+    author:
+    - family: Nichols
+      given: K.
+    - family: Jacobson
+      given: V.
+    - family: McGregor
+      given: A.
+    - family: Iyengar
+      given: J.
+    link-citations: true
+    title: "Controlled Delay Active Queue Management"
+    container-title: RFC8289
+    published:
+      year: 2018
+      month: 1
+    URL: https://datatracker.ietf.org/doc/html/rfc8289
+
+  - id: fq_codel
+    publisher: "Internet Engineering Task Force"
+    author:
+    - family: Hoeiland-Joergensen
+      given: T.
+    - family: McKenney
+      given: P.
+    - family: Taht
+      given: D.
+    - family: Gettys
+      given: J.
+    link-citations: true
+    title: "The Flow Queue CoDel Packet Scheduler and Active Queue Management Algorithm"
+    container-title: RFC8290
+    published:
+      year: 2018
+      month: 1
+    URL: https://datatracker.ietf.org/doc/html/rfc8290
+
+
