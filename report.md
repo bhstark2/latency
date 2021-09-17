@@ -329,12 +329,12 @@ FIFOs that can be adjusted to a more appropriate size can improve the latency pe
 
 #### Active Queue Management
 
-Some network equipment has egress buffers that support a technology called *Active Queue Management* (AQM) that monitors the queue depth (or delay), and then sends congestion signals (either by dropping packets or implementing *Explicit Congestion Notification* as described later in this document) to try to sustain full egress link utilization while maintaining lower queuing delay than would exist in a FIFO.
+Some network equipment has egress buffers that support a technology called *Active Queue Management* (AQM) that monitors the queue depth (or delay), and then sends congestion signals (either by dropping packets or implementing *Explicit Congestion Notification* as described later in this document) to try to sustain full egress link utilization while maintaining lower queuing delay than would exist in a FIFO.  There have been many different AQM algorithms developed over the years, but some the most common ones in use today are CoDel [@CoDel]  (usually as part of fq_codel, described below) and PIE [@PIE]. 
 
-* FIFOs
-	* baseline case, most widely deployed in network gear, discuss buffer sizing, relation to congestion control, buffer bloat
-* AQMs: CoDel, PIE, DOCSIS-PIE, Cobalt, etc.
-	* very brief explanation of what AQM is, mention of algorithms commonly in use in networks today, impact on latency/loss tradeoff
+#### Flow Queuing AQMs
+
+Some equipment implements multiple egress queues (often 1024) with each flow that is actively using the egress interface assigned to a separate queue, and a scheduler that ensures that each flow gets an equal fraction of the egress link bandwidth. This *flow-queuing* mechanism is generally also implemented with an AQM algorithm acting on each queue. The most common of such implementations is the fq_codel algorithm [@fq_codel]
+
 * Flow queuing: fq\_codel, fq\_pie, CAKE
 	* very brief explanation of FQ,where is it deployed, expected result
 
