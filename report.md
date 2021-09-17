@@ -197,7 +197,7 @@ The following table summarizes some of these differences.
 | Ethernet          | 0.0182 ms         | NA                | NA                | node-specific     | NA                |
 |                   | (unshielded       |                   |                   |                   |                   | 
 |                   | twisted pair)     |                   |                   |                   |                   |  
-|-------------------+-------------------+-------------------+-------------------+-------------------+-------------------|
++-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+
 
 There are also some additional nodal delays that happen at multiple or all nodes along a packet's path and are not specific to any physical-layer technology.
 
