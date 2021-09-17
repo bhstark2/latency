@@ -306,27 +306,21 @@ In general, networking equipment needs to have the ability to buffer (queue) bur
 * it handles the incast problem, where packets from multiple ingress interfaces in the device are destined to the same egress interface.
 
 ### Impact that senders & network protocols have on path latency (Koen)
-* General thoughts
-	* bottleneck rate determins burst/task delay
-	* Queue size bursts produces delay on other flows
-	* Stable/standing Queue size produces delay on all flows
-	* “bursty” applications: where to absorb the burst delay: in the network, or in the sender application/stack
-* Congestion Control (Classic TCP, BBR, TCP Prague, Delay-Based, Real-Time, LEDBAT)
-	* CC adapts sending rate to bottleneck rate
-		* common agreement of fair rate in shared bottleneck
-		* Enforced by NW or agreed among senders
-		* Input signal for congestion control (drop/delay/ACK-rate/explicit)
-		* responsiveness of adapting the rate
-		* impact of RTT on fair rate
-		* Other rates (faster or slower)
-		* handling/avoiding bursty traffic
-	* CC determins the queue size in the bottleneck...
-		* common agreement of queue target
-		* Steered by NW/AQM or Sender/CC
-		* Other sizes (longer or shorter) 
-	* rate pacing and/or window limited
-	* HW Offload impact/steering
-	* Real-Time?
+
+outline for this section:
+
+* Applications share a bottleneck link, and thus impact each other (latency, loss, sharing of capacity)  
+* Senders generally implement “Congestion Control” algorithms to try to manage this impact  
+	* CC allows senders to adapt to the bottleneck link rate  
+	* CC algorithms are designed to result in "reasonable" fairness between flows  
+* It’s a complex, distributed, dynamic system, and has worked surprisingly well (the tragedy of the commons rarely occurs), but it isn’t perfect and *is* evolving  
+	* Part of the history of the evolution is that network gear evolved deep buffers to optimize throughput of the predominant CC algo at the time  
+	* Part of the ongoing evolution is the introduction of new CC algos, new queuing mechanisms (stop short of ECN and L4S, since that is covered later).  
+* Common protocols that use congestion control:  
+	* TCP (congestion control algorithm(s) provided by the operating system)  
+	* QUIC (congestion control algorithm provided by the application)   
+	* UDP/RTP (real-time congestion control algorithm provided by the application)  
+
 
 
 ### Queuing implementations (Dave Taht, Greg)
