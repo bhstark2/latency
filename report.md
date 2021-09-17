@@ -190,8 +190,16 @@ The more significant differences between access and home network technologies co
 
 The following table summarizes some of these differences.
 
-Table still to be created.
-
+Physical / Link Technology | Propagation Delay (round-trip per mile) | Time-based Interleaving Delay | Media Acquisition Delay | Buffering Delay | Network Architecture Delays
+----------------|----------------|----------------|----------------|----------------|----------------
+Ethernet | 0.0182 ms (unshielded twisted pair) | NA | NA | node-specific | NA
+Wi-Fi | 0.0108 ms (air) | NA |  | node-specific | NA for home network Wi-Fi
+Powerline Carrier (PLC) | *?* | NA for G.hn; node-specific for HomePlug | *TBD* | node-specific | NA
+DOCSIS | 0.0125 ms (coax) | NA | 2 - 8 ms | 0 - 200 ms (for queuing mechanisms specified by architecture) | NA
+DSL / G.fast | 0.0182 ms (unshielded twisted pair) | if enabled, configured to 2 - 20 ms; NA if not enabled | NA | node-specific | NA
+PON | 0.0160 ms (optical fiber) | NA | NA | node-specific | NA
+LTE / 5G | 0.0108 ms (air) | NA | NA | (queuing mechanisms specified by architecture) | 5G is about half LTE delay; LTE less than 3G delay; 5G architecture adds ~20 ms
+Satellite |  |  |  |  |  
 
 
 There are also some additional nodal delays that happen at multiple or all nodes along a packet's path and are not specific to any physical-layer technology.
