@@ -601,35 +601,29 @@ An example of this phenomenom can be seen in a PC Gamer article at https://www.p
 
 
 
-## Web browsing (Peter)
+## Web Browsing (Peter)
 
-Here is some information relevant to (perceived) latency of web browsing.
+Web sites and web browsers have become ever more sophisticated since Tim Berners-Lee invented the World Wide Web in 1990 as a way to publish and read simple textual pages. Over time, sites have added numerous kinds of web resources, such as images, scripts (small pieces of computer code such as JavaScript), videos, and more — some of which can be very large compared to the text and underlying HTML markup of the page. These days, a page consists of multiple resources that are often fetched from different servers. Indeed, most of the heavily visited websites on the Internet are no longer collections of static pages but dynamic and often personalized web applications.
 
-A few years ago, Google started a project called Web Vitals, which
-defines a number of measures:
+Inevitably, this increased complexity can lead to higher latency in loading any given page. Such delays can have many causes, such as:
 
-https://web.dev/learn-web-vitals/
+* A web browser must fetch all the resources that make up a page, and to do so must first resolve each of the relevant domains via the Domain Name System and only then request and receive resources from each of the domains
+* Large resources such as images, scripts, and videos take longer to download and present to the user
+* Targeted advertisements can invoke real-time bidding systems before this content can be loaded
+* The web application might need to talk with multiple backend systems (such as databases, authentication systems, and personalization engines) in order to construct what it will deliver to a user
+* The current traffic load on a site can introduce latency within the web application, including backend systems as well as frontend systems such as load balancers and SSL/TLS endpoints
+* The order of loading page content matters: if a web browser naively waited for all resources to be available before beginning to "paint" the page on a user's screen, in many situations latency would be intolerable
 
-The Firefox team tends to rely most heavily on a measure called
-First Contentful Paint, which in our experience is slightly more
-representative of perceived latency than Largest Contentful Paint:
+To measure perceived latency during web browsing activities, the industry has defined a number of metrics such as Largest Contentful Paint [https://web.dev/lcp/], which measures "the render time of the largest image or text block visible within the viewport, relative to when the page first started loading," and First Contentful Paint [https://web.dev/fcp/], which measures "the time from when the page starts loading to when any part of the page's content is rendered on the screen."
 
-https://web.dev/fcp/
+In order to reduce delays in the loading of pages, web applications and web browsers perform their own optimizations and work together through industry standardization efforts and initiatives such as the Web Vitals project [https://web.dev/learn-web-vitals/].
+at the W3C [https://w3.org/] 
 
-https://developer.mozilla.org/en-US/docs/Glossary/First_contentful_paint
+Web application optimizations include intelligently structuring web pages and their many resources, compressing larger resources, serving smaller images, serving different content based on device types and network conditions, creating mobile-friendly sites for smartphones, and dynamically loading more of the application over time instead of attempting to load everything immediately.
 
-FCP is sometimes also called First Visual Change:
+Web browser optimmizations include tuning and shortening the "pipeline" of painting pixels to screen, increasing the efficiency of script processing (typically JavaScript), blocking the rendering of slow-loading content, reducing the amount of processing capacity devoted to background processes, and handling different kinds of computing tasks on different threads within the browser.
 
-https://www.sitespeed.io/documentation/sitespeed.io/metrics/#visual-metrics
-
-There are many, many factors involved in latency and responsiveness. To
-give you a flavor, here is a recent blog post from the Firefox team:
-
-https://blog.mozilla.org/performance/2021/07/13/bringing-you-a-snappier-firefox/
-
-Naturally these things vary across browsers, so if we write a few
-paragraphs about these topics we'll want to make sure they apply across
-the board.
+Industry standards also have a key role to play. Because the web is delivered over low-level transport protocols, improvements in TCP, UDP, SSL/TLS, and more recent versions of HTTP (all standardized at the IETF [https://ietf.org] have reduced the latency involved in loading web applications. Web standards developed at the W3C [https://w3.org/] also consider performance to be a key factor when defining new features for web technologies.
 
 
 
