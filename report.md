@@ -348,6 +348,10 @@ Some network equipment has egress buffers that support a technology called *Acti
 
 Some equipment implements multiple egress queues (often 1024) with each flow that is actively using the egress interface assigned to a separate queue, and a scheduler that ensures that each flow gets an equal fraction of the egress link bandwidth. This *flow-queuing* mechanism is generally also implemented with an AQM algorithm acting on each queue. The most common of such implementations is the fq_codel algorithm [@fq_codel].
 
+#### Coupling queues with AQMs
+
+When the number of queues available is limited, or individual flows cannot be identified, different application types can be tagged and grouped together based on latency requirements and send in a limited set of queues (2 or more). Instead of letting the scheduler decide how to divide the bandwidth over the queues, the congestion control can be used to control the rate of individual flows over the different queues, similar as if they would run in a single FIFO queue. This way, there is no need to know how many flows are running in which queue. All flows get an equal congestion feedback and will adapt to the fair rate. By defining a scheduling priority over the different queues, the highest priority queues will be served with the least latency, while all flows are rate controlled by the AQM of the biggest (typically lowest priority) queue. The DualPI2 algorithm is making use of this mechanism [@DualPI2].
+
 ## Latency contributions from endpoints (client & server) (1pg) (Dave Taht, +coauthor)
 * Socket buffering & Offloads
 * Head of line blocking & retransmissions
