@@ -660,14 +660,20 @@ Virtual reality environments require extensive compute resources in order to ren
 
 # Recommendations
 
-* Recommendations for networks and applications	(author?)
-* OS developers
-* CPE manufacturers 
-* etc
-
-
-To really understand end-user QoE, we need to look at working latency rather than idle latency.  
-When using jitter metrics, it is important to be clear which definition is being used, and to consider whether that defintion is meaningful given the application context.  
+* The Internet ecosystem should start to measure and report on working latency, as this is often as critical to end user QoE as bandwidth capacity (speed).
+* Any developer of a working latency test should:
+	- Transparently disclose their measurement methodology;
+	- NOT report mean or median results;
+	- Report on 98th or 99th percentile (or higher) results;
+	- Report on the variability of working latency (jitter);
+	- Visually represent cumulative results in a cumulative distribution function (CDF) chart, in addition to any other methods.
+* Broadband Internet Access Service providers and developers of home network equipment (e.g., routers, access points, modems) should:
+	- Work to deploy mechanisms to improve working latency performance, such as Active Queue Management (AQM);
+	- Investigate future methods for delivering very low latency services.
+* Application developers and operating system developers should:	
+	- Investigate future methods for delivering very low latency services, which may depend upon applications marking their traffic in new ways, among other changes;
+	- Consider presenting working latency metrics to end users in an easy-to-understand manner;
+	- Adapt application or operating system behavior in response to reductions in working latency (i.e. reduce pre-caching if network responsiveness improves sufficiently).
 
 # Appendix A: Layered Network Model {-}
 
