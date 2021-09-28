@@ -301,28 +301,31 @@ In general, networking equipment needs to have the ability to buffer (queue) bur
 * it handles the incast problem, where packets from multiple ingress interfaces in the device are destined to the same egress interface.
 
 ### Impact that senders & network protocols have on path latency (Koen)
-* General thoughts
-	* bottleneck rate determins burst/task delay
-	* Queue size bursts produces delay on other flows
-	* Stable/standing Queue size produces delay on all flows
-	* “bursty” applications: where to absorb the burst delay: in the network, or in the sender application/stack
-* Congestion Control (Classic TCP, BBR, TCP Prague, Delay-Based, Real-Time, LEDBAT)
-	* CC adapts sending rate to bottleneck rate
-		* common agreement of fair rate in shared bottleneck
-		* Enforced by NW or agreed among senders
-		* Input signal for congestion control (drop/delay/ACK-rate/explicit)
-		* responsiveness of adapting the rate
-		* impact of RTT on fair rate
-		* Other rates (faster or slower)
-		* handling/avoiding bursty traffic
-	* CC determins the queue size in the bottleneck...
-		* common agreement of queue target
-		* Steered by NW/AQM or Sender/CC
-		* Other sizes (longer or shorter) 
-	* rate pacing and/or window limited
-	* HW Offload impact/steering
-	* Real-Time?
 
+The data rate and patterns that applications send can have a high impact on the latency that the user experiences. 
+Applications usually share a bottleneck link, and thus in many cases also other applications will be impacted due to latency, loss, and the reduced share of the capacity. 
+
+Latency is due to non-adequate alignment between the data rate available in the network and the data rate that is send by applications. 
+Latency is optimally low when both are exactly aligned. If the sending rate is too low, it takes longer to complete the task. If it is too high,
+the task data is buffered and must wait in the network, potentially also creating similar latency for other applications sharing the link bottleneck.
+
+Senders implement a “Congestion Control” algorithm to manage adaptation to the available link rate. 
+They are designed to result in “reasonable” fairness between flows if they share the bottleneck. 
+
+It’s a complex distributed dynamic system, and has worked surprisingly well, but it isn’t perfect and is still evolving. 
+Unfortunately, the predominant design of congestion controls in the past, worked better the deeper the queues. 
+When queues are controlled to lower latencies, not all link capacity will be used and flows with a longer base RTT will get a smaller share. 
+If low latency is aspired, congestion controls need to remove these low latency penalties. Part of the ongoing evolution is the introduction 
+of new congestion controls that are smoother and less RTT dependent, together with and supported by new queuing mechanisms.
+
+Perfect alignment of sender and network rate is a challenge if the available rate can fluctuate rapidly. By the time the available rate is 
+communicated to the sender, the available capacity might already have changed, due to other flows joining and leaving, changing link/channel conditions 
+or other rapid flow scheduling changes. For this reason, a compromise is typically needed between leaving enough link capacity unused to avoid short latency spikes, 
+or by allowing deeper buffer variations to keep the link capacity utilized. Since more than enough capacity is typically available today, more emphasis 
+should be placed on keeping latency spikes small and infrequent instead of keeping the link fully utilized.
+
+Common protocols that use congestion control are TCP where the congestion control algorithms are build-in the operating system and 
+UDP where the congestion control algorithm needs to be provided by the application. Typically for UDP, congestion control algorithms will be part of the application protocols that are defined on top of UDP, such as QUIC for web traffic and RTP for real-time streaming.
 
 ### Queuing implementations (Dave Taht, Greg)
 
