@@ -155,13 +155,13 @@ However, latency also varies, and significantly so, based on underlying network 
 
 ## Latency and Speed
 
-Latency and speed are two different characteristics of a path between a sender and a receiver, and they are largely orthogonal, but not completely so - they do influence one another.  As we'll describe later in this paper, some existing network protocols are unable to transfer data at high speed when there is significant latency present.  So, high latency can reduce the apparent speed from the user's perspective.  Additionally, increasing the speed of the path can reduce latency in some cases.  One case where this can happen is with latency degradation due to *load* on the path.  For example, a single video stream at 5 Mbps might cause queuing delays 50% of the time on a 10 Mbps connection, but only 5% of the time on a 100 Mbps connection.  To be clear, this is a case of reducing the frequency with which a latency degradation occurs, not the severity of it. This phenomenon, queuing delay, is important and is discussed in some detail in this report.       
+Latency and speed are two different characteristics of a path between a sender and a receiver, and they are largely orthogonal, but not completely so - they do influence one another.  As we'll describe later in this paper, some existing network protocols are unable to transfer data at high speed when there is significant latency present.  So, high latency can reduce the apparent speed from the user's perspective.  Additionally, increasing the speed of the path can reduce latency in some cases.  One case where this can happen is with latency degradation due to *load* on the path.  For example, a single video stream at 5 Mbps might cause queuing delays 50% of the time on a 10 Mbps connection, but only 5% of the time on a 100 Mbps connection.  To be clear, this is a case of reducing the frequency with which a latency degradation occurs, not the severity of it. Another case where increasing speed can impact latency is when the queue/buffer is statically sized, resulting in a larger buffering delay on lower speed connections.  This phenomenon, queuing delay, is important and is discussed in some detail in this report.         
 
-# Sources/Contributors to Latency (8pgs)
+# Sources/Contributors to Latency
 
 Physical characteristics of the path taken by an Internet packet, protocols at all layers, and network element functions at all points of the Internet contribute to latency. For a brief overview of the layered network model, see [Appendix A: Layered Network Model]. The following sub-sections provide more detail on contributions to latency at the various layers of the Internet.
 
-## Link and physical technologies in place along the path (3pgs)
+## Link and physical technologies in place along the path
 
 Physical and link-layer technologies in the path can contribute to latency due to the distance the signals travel (length of the physical medium) relative to the speed at which signals are transmitted on the physical medium (propagation delay), the time it takes for equipment to encode and decode the physical and link-layer technologies, characteristics of how bits of information are encoded on the physical medium, and switching and queuing delays caused by nodes needing to combine and send inbound traffic on outbound links.
 
@@ -198,7 +198,7 @@ There are also some additional nodal delays that happen at multiple or all nodes
   - *Nodal processing delay* is the time it takes to process the packet header, check for bit errors, determine the destination host, etc. Providers of core networks will often minimize this by using technologies like MPLS that have very simple packet headers.
 
 
-### Ethernet, (Greg)
+### Ethernet  
 
 Ethernet links, whether the familiar 1 Gbps LAN cables used to connect devices in home networks and offices, or the 10G, 100G, 200G, 400G optical fiber versions used in datacenters and to connect sites over long distances, form a baseline against which most other network link technologies can be compared.  Historically, the Ethernet standard (IEEE 802) set the maximum size of a packet to be 1500 bytes (to which it adds 18+ bytes of framing).  This *Maximum Transmission Unit* size has been adopted by many other link technologies as well, and thus has become the de facto MTU for the internet.
 
@@ -215,7 +215,7 @@ Potential transmission delays in WiFi can have a range measured in seconds, whil
 
 Newer standards for Wi-Fi attempt to improve multiplexing behaviors while remaining compatible with older Wi-Fi standards, but co-existing on the same spectrum is difficult. Standardization on more and different spectrum is aiding improvements to Wi-Fi behaviors.
 
-### Powerline Carrier (PLC) (Barbara)
+### Powerline Carrier (PLC)  
 
 Several physical-layer technologies have been defined for use on powerlines. While powerline has been explored for broadband access, it is not widely used as an acces technology in the United States. The dominant PLC technologies for use in a LAN are HomePlug and G.hn (standardized by ITU-T). Latency due to speed of transmission and distance are negligible on the short LAN loops where PLC is used.
 
@@ -261,7 +261,7 @@ G.fast is another copper-based technology (over twisted pair or coax) that can b
 
 Passive Optical Networking (PON) runs over optical fiber (add FN to https://www.cisco.com/c/en/us/products/switches/what-is-passive-optical-networking.html).  The propagation delay in optical fiber is about 0.70 times the speed of light in a vacuum, which is quite small. In a PON network, optical fiber cables run from an Optical Line Terminal (OLT) in an ISP network into a neighborhood, at which point the network splits into distinct fiber optical cable connections to the Optical Network Terminals (ONTs) installed in individual homes (typically up to 32, 64, or 128 homes). The last mile link between the passive split and the homes is a shared medium.
 
-### LTE/5G, (Barbara)
+### LTE/5G  
 
 Wireless technologies defined by 3GPP have many latency components. The latency caused by the wireless physical medium (the air link between transmitting and receiving antennas) is the least of these. More significant are delays caused by signaling (messages required to set up a LTE session), by processing delays (how long it takes for LTE equipment to process signaling and messages including the time it takes to get the messages to where they need to be processed), and by contention with other traffic. A significant portion of backhaul is done using fiber, which minimizes latency over other backhaul technologies such as microwave or other wireless technologies. When fiber is used as the backhaul, its contribution to latency is largely due to propagation and serialization delay.
 
@@ -277,7 +277,7 @@ Median latency of the top three US mobile network providers in 2021 was calculat
 
 	* media access, scheduling, etc.
 	
-### Core network links (Shamim)
+### Core network links  
 Internet connectivity regardless of fix and mobile network interconnects with internet peering and exchange points with the help of telco & ISP owned fiber network that loops around central offices (CO) or headends (HE) that feed the end users connected to their respective ISPs and Mobile Network.
 The Internet edge infrastructure typically sits at or near internet peering/exchange points as a gateway to all internet application before it reaches the centralized data centers over intercity optical backbone network. 
 
@@ -293,38 +293,41 @@ With consolidation of ISP network and predictable intercity and submarine links 
 
 
 
-## Buffering delays (3pgs)
+## Buffering delays  
 
 In general, networking equipment needs to have the ability to buffer (queue) bursts of traffic that arrive at a rate that exceeds the rate of the output (egress) interface. This buffering capability serves a number of purposes:  
 * when the egress interface is the bottleneck, it allows the existing congestion control algorithms to fully utilize that interface,  
 * it allows applications to send (relatively short) bursts of packets without having to be concerned about the egress interface rates along the path, and  
 * it handles the incast problem, where packets from multiple ingress interfaces in the device are destined to the same egress interface.
 
-### Impact that senders & network protocols have on path latency (Koen)
-* General thoughts
-	* bottleneck rate determins burst/task delay
-	* Queue size bursts produces delay on other flows
-	* Stable/standing Queue size produces delay on all flows
-	* “bursty” applications: where to absorb the burst delay: in the network, or in the sender application/stack
-* Congestion Control (Classic TCP, BBR, TCP Prague, Delay-Based, Real-Time, LEDBAT)
-	* CC adapts sending rate to bottleneck rate
-		* common agreement of fair rate in shared bottleneck
-		* Enforced by NW or agreed among senders
-		* Input signal for congestion control (drop/delay/ACK-rate/explicit)
-		* responsiveness of adapting the rate
-		* impact of RTT on fair rate
-		* Other rates (faster or slower)
-		* handling/avoiding bursty traffic
-	* CC determins the queue size in the bottleneck...
-		* common agreement of queue target
-		* Steered by NW/AQM or Sender/CC
-		* Other sizes (longer or shorter) 
-	* rate pacing and/or window limited
-	* HW Offload impact/steering
-	* Real-Time?
+### Impact that senders & network protocols have on path latency  
 
+The data rate and patterns that applications send can have a high impact on the latency that the user experiences. 
+Applications usually share a bottleneck link, and thus in many cases also other applications will be impacted due to latency, loss, and the reduced share of the capacity. 
 
-### Queuing implementations (Dave Taht, Greg)
+Latency is due to non-adequate alignment between the data rate available in the network and the data rate that is send by applications. 
+Latency is optimally low when both are exactly aligned. If the sending rate is too low, it takes longer to complete the task. If it is too high,
+the task data is buffered and must wait in the network, potentially also creating similar latency for other applications sharing the link bottleneck.
+
+Senders implement a “Congestion Control” algorithm to manage adaptation to the available link rate. 
+They are designed to result in “reasonable” fairness between flows if they share the bottleneck. 
+
+It’s a complex distributed dynamic system, and has worked surprisingly well, but it isn’t perfect and is still evolving. 
+Unfortunately, the predominant design of congestion controls in the past, worked better the deeper the queues. 
+When queues are controlled to lower latencies, not all link capacity will be used and flows with a longer base RTT will get a smaller share. 
+If low latency is aspired, congestion controls need to remove these low latency penalties. Part of the ongoing evolution is the introduction 
+of new congestion controls that are smoother and less RTT dependent, together with and supported by new queuing mechanisms.
+
+Perfect alignment of sender and network rate is a challenge if the available rate can fluctuate rapidly. By the time the available rate is 
+communicated to the sender, the available capacity might already have changed, due to other flows joining and leaving, changing link/channel conditions 
+or other rapid flow scheduling changes. For this reason, a compromise is typically needed between leaving enough link capacity unused to avoid short latency spikes, 
+or by allowing deeper buffer variations to keep the link capacity utilized. Since more than enough capacity is typically available today, more emphasis 
+should be placed on keeping latency spikes small and infrequent instead of keeping the link fully utilized.
+
+Common protocols that use congestion control are TCP where the congestion control algorithms are build-in the operating system and 
+UDP where the congestion control algorithm needs to be provided by the application. Typically for UDP, congestion control algorithms will be part of the application protocols that are defined on top of UDP, such as QUIC for web traffic and RTP for real-time streaming.
+
+### Queuing implementations  
 
 The details of the buffer implementation can have a significant impact on the latency introduced by a piece of networking equipment, and thus on the end-to-end latency for all flows that utilize that piece of equipment.  The impact is felt most often when the egress interface has a lower data rate than the ingress interface (or ingress interfaces in aggregate), and particularly when the egress interface is the bottleneck  for one or more flows currently sharing it.  In those situations, packets will regularly queue up in the buffer, and thus cause delays.
 
@@ -350,11 +353,15 @@ Some equipment implements multiple egress queues (often 1024) with each flow tha
 
 When the number of queues available is limited, or individual flows cannot be identified, different application types can be tagged and grouped together based on latency requirements and send in a limited set of queues (2 or more). Instead of letting the scheduler decide how to divide the bandwidth over the queues, the congestion control can be used to control the rate of individual flows over the different queues, similar as if they would run in a single FIFO queue. This way, there is no need to know how many flows are running in which queue. All flows get an equal congestion feedback and will adapt to the fair rate. By defining a scheduling priority over the different queues, the highest priority queues will be served with the least latency, while all flows are rate controlled by the AQM of the biggest (typically lowest priority) queue. The DualPI2 algorithm is making use of this mechanism [@DualPI2].
 
-## Latency contributions from endpoints (client & server) (1pg) (Dave Taht, +coauthor)
+## Latency contributions from endpoints (client & server) (1pg) (Peter)
 * Socket buffering & Offloads
 * Head of line blocking & retransmissions
 * Server resource contention
 * VMs/Containers 
+
+Highly dependent on endpoint hardware and software.  Age of implementations (e.g. older versions of Windows) plays a role. Server virtualization can help scale server resources quickly. Backend database lookups, etc. 
+
+Buffering in video/audio capture (device & OS) can be significant (& growing?).
 
 ## VPNs and Proxied Paths
 
@@ -378,9 +385,9 @@ In 2021, Apple announced a new privacy feature that would be available to subscr
 
 Based upon the publicly available information, iCloud Private Relay will have a similar impact on latency to other VPNs. The selection of Cloudflare, Fastly and Akamai as partners to host the exit nodes (equivalent to VPN servers, where traffic exits to the internet) means that there will be many more VPN termination locations than most services. This will likely help reduce the latency penalty, but it certainly will not remove it. If appropriate client context is supplied when resolving DNS queries, it may resolve the issue of CDNs being unable to steer traffic to the most optimal server for the user.
 
-# Current and Future Technologies to improve latency performance (3pgs) (Shamim)
+# Current and Future Technologies to improve latency performance  
 
-## Migration to the network edge (CDNs, MEC) (Shamim)
+## Migration to the network edge (CDNs, MEC)  
 Internet edge network is constantly evolving to suite the optimal user experience needs. For example a video streaming is throughput sensitive and maintaining optimal buffer on the end device or access point is desirable where as a real time video call may require lower throughput but extremely sensitive to higher buffer and packet loss. 
 
 Cloud gaming and edge compute on the other hand may require very low latency, predictable throughput and packet loss. Internet traffic has traditionally been highly asymmetric and served really well for download heavy content delivery however the dawn of cloud compute and storage has proven that uplink from user to cloud traffic needs immediate attention. More and more internet applications depend on internet edge for cloud user experience requiring lower latency, predictable throughput and packet loss in the uplink path. More and more applications implementing multi path using broadband and 5G network, for example to reach the local internet edge to mitigate latency, throughput and loss. Multi path implementation is an optimal use of access network resource however would require carrier neutral host for edge compute and proxy that enables users to select more than one ISP before it hits local internet edge. Consumer and small businesses can immensely benefit from neutral host network edge compute aka NEC. On the other hand internet experience is better with on premise compute for large enterprise, malls or arenas using multi-access edge compute, aka MEC. 
@@ -389,7 +396,7 @@ To recap- Edge compute requires higher level of SLO from access network. Multi-p
 
 ## Local caching (DNS, etc.) (Cullen, Shamim)
 
-## Traditional Quality of Service differentiation (Greg)
+## Traditional Quality of Service differentiation  
 
 One mechanism used in some networks to manage latency performance is the differentiation of traffic using traditional Quality of Service (QoS) techniques.  Most networking gear, from inexpensive home routers to access network equipment to high performance switches used in carrier networks and datacenters, supports features that can treat packets differently via some configurable criteria.  [@BITAGdifferentiation] provides a detailed treatment of this subject, but for the purposes of this paper the topic can be summarized briefly.  
 
@@ -399,7 +406,7 @@ QoS differentiation is commonly used within enterprise networks and to different
 
 Along the edge of the internet, extensive options for QoS are often available, including but not limited to, rate shaping, per-device or per-application (de)prioritization, and parental controls.
 
-## Explicit Congestion Notification (Greg)
+## Explicit Congestion Notification  
 
 Historically (and still commonly today) the Internet has used packet discard (drop) as a means of signaling congestion to endpoints, and endpoints, in turn, have used the detection of packet drops as a way to sense congestion and thus modulate the rate at which they send traffic into the network.  Endpoints additionally need to recover from the loss of data by the network, either by concealing the lost data (e.g. in the case of a real-time voice call), recovering the lost data (e.g. using Application-Layer Forward Error Correction), or retransmitting the data (e.g. in the case of TCP).  Thus packet discard is both a congestion signal and an impairment for the endpoint application, and as a result the network needs to be judicious in its use.
 
@@ -410,7 +417,7 @@ Alas, adoption of ECN has been relatively low.  While many endpoint protocols su
 In its current definition, explicit congestion signals are sent as judiciously as packet drops are, the result being that the network needs to tolerate a relatively high level of congestion. Five years ago, it was recognized that the definition of ECN missed an opportunity.  Since the congestion signal is no longer an impairment, the need to be judicious about its use goes away, and the network could provide much more fine-grained feedback about congestion to endpoints.  Additionally, it was observed that one of the four values that can be encoded in the ECN field had gone unused and could be used to enable the definition of a new version of ECN.  This is the subject of the next section.
 
 
-## QB/NQB distinction & Low-Latency, Low-Loss, Scalable throughput architecture (Greg)
+## QB/NQB distinction & Low-Latency, Low-Loss, Scalable throughput architecture  
 
 The IETF has recently defined a technology [@L4S] that enables applications to adjust their sending rates to make full use of the bottleneck link in a fair manner without causing the latency and latency variation that existing applications do.  This technology, referred to as "Low Latency, Low Loss, Scalable Throughput" (L4S) is an evolution of the Explicit Congestion Notification technology discussed in the previous section.  It utilizes the as-yet-unused value (referred to as ECT1) in the Explicit Congestion Notification field in the IP packet header to allow senders to identify themselves as supporting L4S. Then, an L4S-capable bottleneck link can use the existing *Congestion Experienced* value to send immediate signals whenever a queue begins to form.  This signal, when fed back to the sender via acknowlegement packets, enables the sender to adjust its sending rate in order to keep the bottleneck link busy without building a queue.  L4S is incrementally deployable, since senders will always need to handle other congestion signals (like packet drops) that arise from bottlenecks that don't support L4S.  In addition, the L4S architecture requires an L4S bottleneck to isolate the L4S-capable traffic from the non-L4S-capable traffic (referred to as *classic* traffic) via separate queues, so that the queuing delay caused by the classic traffic doesn't impact the L4S traffic.  
 
@@ -419,9 +426,9 @@ Along the same timeline as the development of the L4S specifications in IETF, it
 Networks that support both of these technologies can enable applications to share a bottleneck link and provide a net benefit in latency and loss performance for the applications that aren't causing those degradations, without negatively impacting the performance of the remaining applications.
 
 
-# Metrics and methods for characterizing latency performance (5pgs) 
+# Metrics and methods for characterizing latency performance   
 
-## Latency for a path in a live network is variable — a statistical distribution (Greg)
+## Latency for a path in a live network is variable — a statistical distribution  
 
 Characterizing the latency performance of a network path from one machine to another generally involves sending one or more packets along the path, and calculating the time that it takes for those packets to arrive at their destination.  When measuring one-way latencies, this requires both endpoints to have synchronized clocks.  The sender inserts a timestamp into the packet that it transmits, and when the packet arrives at the receiver, the receiver checks its local clock and compares it to the timestamp value in the packet.  
 
@@ -437,14 +444,14 @@ Since latency variation affects different applications differently, there have b
 
 Another approach to characterizing a set of packet latency samples is to use order statistics, e.g. minimum, 25th percentile ("P25"), median (P50), P90, P99, maximum.  This approach can be particularly useful when used with isochronous applications like voice communication and multiplayer online games, since these applications commonly employ a "jitter buffer" that converts latency variation into fixed latency and residual packet loss (described further in <xref>).  So, as an example, a jitter buffer that results in 1% residual packet loss would mean that the application is operating with a fixed latency equal to the 99th percentile, and thus the measured P99 latency would be a strong indicator of the quality of the connection for this application.  Since many such applications are likely to target low values of residual loss (e.g. 0.1% to 5%), latency percentiles in the range of P95 to P99.9 may be the most useful in predicting quality of experience.
 
-When possible, a more complete view of the latency statistics of a path can be had by plotting the full statistical distribution from the measurements.  One of the most useful representations is in the form of a Complementary Cumulative Distribution graph, plotted on a log scale, with the axis labeled to represent packet latency percentiles.  An example is shown below (TODO, generate higher quality image).
+When possible, a more complete view of the latency statistics of a path can be had by plotting the full statistical distribution from the measurements.  One of the most useful representations is in the form of a Complementary Cumulative Distribution graph, plotted on a log scale, with the axis labeled to represent packet latency percentiles.  An example is shown below.
 
 ![Complementary CDF of Packet Latency](images/ccdf.png)
 
 Another metric that has been proposed recently, and that derives from latency, is "responsiveness" [https://www.ietf.org/id/draft-cpaasch-ippm-responsiveness-00.html].  This metric consists of more than just packet latency measurements, but rather is based on higher-layer protocol latency measurements including DNS, TCP handshaking and HTTP.  These measurements are averaged, and then the result is inverted and expressed in units of "Round-trips per Minute" (RPM).  This metric has some intuitive value for iterative web traffic workloads, where a user can imagine a network with low responsiveness setting an upper bound on how many web resources can be fetched in a certain amount of time.   That said, it is specific to web workloads, and appears to focus on the average result of a small number of measurements, as opposed to trying to represent information about the range of performance that the user might experience.
 
 
-## Measuring latency (Sam)
+## Measuring latency  
 
 There are many different protocols that can be used to measure latency. For each of those protocols there are often multiple tools that provide measurement capabilities. The list below is by no means exhaustive, but covers some of the most common techniques in use today.
 
@@ -530,14 +537,14 @@ Production performance measurements represent working latency, which includes th
 
 QoE per reporting group is the change of measured latency relative to the baseline for that group. The change can be converted into a score that can be tracked over time. A *non-compliant* threshold is a score, which if exceeded, represents non-satisfactory latency performance. A reporting system should be designed to find and highlight incidents at fine granularity, an area well served by advanced algorithms that translate small events into useful observations.
 
+# How do latency and latency variation impact user experience? (incl. mention of latency mitigation techniques)  
 
-# How do latency and latency variation impact user experience? (incl. mention of latency mitigation techniques) (5pgs)
 
    * Mean Opinion Score
         * problem with measuring just recorded media quality not overall
         UX or QoE
         
-## VoIP and Video Conferencing (Cullen, Dave Taht)
+## VoIP and Video Conferencing  
 
 Voice and video conferencing systems are one of the Internet’s most used features. They are used for meetings between workers — both inside and across companies, for education and teaching, and to connect friends and families. In the US alone, there are over **TODO** minutes of meetings per month.  All of these systems are highly sensitive to latency.
 
@@ -574,7 +581,7 @@ Another way that VoIP applications can compensate for packet loss is by requesti
 For Internet voice and video conferencing and calling systems, the network latency is the major factor causing large “camera to screen” delay and “microphone to speaker” delay. The network latency contributes to the delay, but other aspects of the network also contribute. Packet loss rates and the grouping of packet loss have a large impact on the overall delay. The delay has a huge impact on how well people can communicate.
 
 
-## Multiplayer online games (Alex)
+## Multiplayer online games  
 
 `This section needs tightening`
 
@@ -605,7 +612,7 @@ Game developers are acutely aware of latency and how it can occur at all layers 
 [3] https://technology.riotgames.com/news/peeking-valorants-netcode
 
 
-## Cloud gaming (Alex)
+## Cloud gaming  
 
 The past few years has seen the emergence of 'cloud gaming' platforms, such as Google's Stadia or nVidia's GeForce Now. These move the graphics intensive work to the server side and then effectively transmit the video of the gameplay back to the client side. This allows the game to run on far lower specification devices, without the need for powerful GPUs client side. The developers of these platforms say that increases in Internet access bandwidth and decreases in latency make this approach possible.
 
@@ -618,9 +625,7 @@ All of the issues discussed in the above multiplayer online gaming section are t
 An example of this phenomenom can be seen in a PC Gamer article at https://www.pcgamer.com/uk/heres-how-stadias-input-lag-compares-to-native-pc-gaming/
 
 
-
-
-## Web Browsing (Peter)
+## Web Browsing  
 
 Web sites and web browsers have become ever more sophisticated since Tim Berners-Lee invented the World Wide Web in 1990 as a way to publish and read simple textual pages. Over time, sites have added numerous kinds of web resources, such as images, scripts (small pieces of computer code such as JavaScript), videos, and more — some of which can be very large compared to the text and underlying HTML markup of the page. These days, a page consists of multiple resources that are often fetched from different servers. Indeed, most of the heavily visited websites on the Internet are no longer collections of static pages but dynamic and often personalized web applications.
 
@@ -650,11 +655,11 @@ Industry standards also have a key role to play. Because the web is delivered ov
 
 As noted above, consistently reducing working latency will improve all existing user applications. But looking to the future, it seems likely that the emergence of very low latency services may enable entirely new classes of applications to be created. One way to think about this is to consider that today we assume accessing resources on the Internet has some delay compared to local content or applications on a device. But what if a network-based resource was as responsive as a locally-installed resource? As well, applications that today are infeasible without highly specialized private Internet connectivity might become viable over consumer-grade best efforts Internet access. What follows are some applications that may be viable, though it is likely that unexpected and surprising new applications will be released by creative developers that we are unable to envision or list in the brief examples below. 
 
-### Connected cars (Barbara)
+### Connected cars  
 	
-Major connected car applications that have low latency requirements are self-driving / autonomous cars and crash avoidence mechanisms. None of these rely on networked solutions to work at this time. Instead, they currently rely on local sensor information. For networked mechanisms to be useful for these applications, latency will need to be about 1 ms. This will only be achievable if the connectivity is directly between vehicles or if packets between a vehicle and something in its vicinity traverse just a single, nearby hop.  
+Major connected car applications that are said to have low latency requirements are self-driving / autonomous cars and crash avoidence mechanisms. None of these rely on networked solutions to work at this time. Instead, they currently rely on local sensor information. For networked mechanisms to be useful, the software needs to be able to react as fast or faster than a human driver. The time it takes for an automotive system to react after an event occurs (which includes network latency and the time required for computation performed by any systems involved) should be less than 100 ms [https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-39.pdf]. Some people in this field believe the latencies of LTE networks (averaging around 40 ms) may be too large as the network component to this overall reaction time [https://www.te.com/content/dam/te-com/documents/automotive/global/TE-TP-Autonomous-Driving-0218-FINAL-EN.pdf]. There is a strong push for support of 5G with edge computing (processing packets as close to the vehicle as possible with no requirement for processing inside a centralized core network) for these automotive use cases.  
 	
-### Cloud VR (Greg)
+### Cloud VR  
 
 Virtual reality environments require extensive compute resources in order to render high quality scenes with sufficient frame rate. These requirements have motivated the exploration of cloud-rendering solutions, where the cost of the compute resource can be shared across a number of users. A key consideration in moving the majority of the rendering functionality to the cloud is the latency between a movement of the user's head, and appropriately updated images being presented to them in their head-mounted-display.  This *motion-to-photon* latency can be no more than about 20 ms otherwise it can cause nausea, with some targeting less than 8 ms for the ideal experience [@CloudVR]. For full remote rendering, much of this latency budget is consumed by the motion-capture and image rendering processes, leaving perhaps 1-2 ms of network RTT between the head mounted display and the rendering engine. 
 
