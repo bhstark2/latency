@@ -273,9 +273,13 @@ One study that compared LTE to 5G in a specific deployment showed 5G had half as
 
 Median latency of the top three US mobile network providers in 2021 was calculated by Speedtest to be 33ms (across combined LTE and 5G networks) [https://www.speedtest.net/global-index/united-states].
 
-### Satellite (DaveT)
+### Satellite
 
-	* media access, scheduling, etc.
+The most common form of satellite internet access today is via satellites in GEO (geosychronous orbit). These typically have well in excess of 600ms of latency inherent in lightspeed delay. A new breed of satellite providers (starlink, oneweb) are putting constellations into LEO (low earth orbit), at ranges fom 500km to 6000km up, with the corresponding reduction in inherent latency.
+
+Like wifi, these LEO systems are presently half duplex. Upload/download speeds of 20Mbit/300Mbit have been observed in early testing, and unloaded latencies under 40ms. 
+LEO systems actually have the potential to offer less latency on longer paths than terrestrial networks, both from the speed of light in vacuum vs the
+1/3 reduction from fiber, and from the more direct line network paths can take compared to cables on Earth.
 	
 ### Core network and backbone links  
 Broadband internet networks, regardless of whether they are fixed or mobile, interconnect with internet peering and exchange points via telco & ISP owned metro and regional *core* networks. These core networks generally consist of medium to long haul fiber links that connect the region's central offices (CO) or headends (HE), which feed the end users, to the peering and interconnection points of presence.
