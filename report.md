@@ -347,7 +347,7 @@ Some network equipment has egress buffers that support a technology called *Acti
 
 #### Flow Queuing AQMs
 
-Some equipment implements multiple egress queues (often 1024) with each flow that is actively using the egress interface assigned to a separate queue, and a scheduler that ensures that each flow gets an equal fraction of the egress link bandwidth. This *flow-queuing* mechanism is generally also implemented with an AQM algorithm acting on each queue. The most common of such implementations is the fq_codel algorithm [@fq_codel].
+Some equipment implements multiple egress queues (often 1024) with each flow that is actively using the egress interface assigned to a separate queue, and a scheduler that ensures that each flow gets an equal fraction of the egress link bandwidth, but the sparsest flows get a tiny boost until they reach an equal fraction. This *flow-queuing* mechanism is generally also implemented with an AQM algorithm acting on each queue. The most common of such implementations is the fq_codel algorithm [@fq_codel], other impmentations use the same scheduler with another AQM, suchas cobalt[@cake] or PIE[@fq_pie].
 
 #### Coupling queues with AQMs
 
