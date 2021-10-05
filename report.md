@@ -359,6 +359,9 @@ When the number of queues available is limited, or individual flows cannot be id
 
 ## Latency Contributions from Endpoints
 
+Additional latency sources exist within the application (such as cryptography setup), in the network stack, socket buffers, device drivers, hardware offloads, and
+within the network hardware itself.
+
 Although this report focuses on latency caused by communication over network links, it's important to recognize that both client devices and cloud servers can contribute as well. On the client side, a user's specific hardware and software (e.g., an older mobile phone running an out-of-date operating system) could cause perceived delays when interacting with modern applications that are optimized for a more powerful computing platform; significant buffering in video capture and encoding is one example. On the server side, the architecture of cloud applications can have a large impact on how slow they feel to end users; such effects are especially visible under heavy load (both expected, as can happen during a major sporting event or high-profile website launch, and unexpected, as can be caused by a denial of service attack) but can occur under normal circumstances, too (e.g., if a backend database goes offline).
 
 ## VPNs and Proxied Paths
