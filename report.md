@@ -172,9 +172,8 @@ Each hop along the path introduces latency due to a number of factors:
 
 Latency Factor | Description
 ---------------|------------
-switching/forwarding | the time it takes to process the packet header, check for bit errors, decide whether to forward the packet (and, if so, to which interface) or to discard it, and any other manipulation of the packet that takes place in the device. This is typically minimal, and providers of core networks will often minimize this by using technologies like MPLS that have very simple packet headers.
-propagation delay | the time it takes for a bit of information to travel across the link.  This is driven by the propagation velocity of the medium and the length of the link.  It is immaterial for home network and access network links, but can become significant for long-haul backbone links. More detail is provided in Appendix B.
-
+switching/forwarding | the time it takes 
+propagation delay | the time it takes for 
 
 *Note, the term "buffering" is also commonly used to refer to the time that a streaming media application (e.g. a streaming video player) appears to wait while it builds up an amount of data in its playout buffer, before it begins playing the media.  This is an entirely different phenomenon, and is not what we refer to as buffering in this report.*
 
