@@ -172,7 +172,7 @@ Each hop along the path introduces latency due to a number of factors:
 
 Latency Factor | Description
 ---------------|------------
-switching/forwarding | the time it takes 
+switching/forwarding | the time it takes to process the packet header, check for bit errors, decide whether to forward the packet (and, if so, to which interface) or to discard it, and any other manipulation of the packet that takes place in the device. This is typically minimal, and providers of core networks will often minimize this by using technologies like MPLS that have very simple packet headers.
 propagation delay | the time it takes for 
 serialization/encoding | the amount of time that it takes to 
 media acquisition delay| the delay incurred by arbitrating access by 
