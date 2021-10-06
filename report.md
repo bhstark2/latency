@@ -159,13 +159,31 @@ Latency and speed are two different characteristics of a path between a sender a
 
 # Sources/Contributors to Latency
 
-Physical characteristics of the path taken by an Internet packet, protocols at all layers, and network element functions at all points of the Internet contribute to latency. For a brief overview of the layered network model, see [Appendix A: Layered Network Model]. The following sub-sections provide more detail on contributions to latency at the various layers of the Internet.
+As discussed above, latency is a property of the end-to-end journey that a packet takes from its source to its destination.  As a result, the latency that any individual packet experiences is influenced by all of the processes that are involved in handling that packet, from the instant that the sending application generates it, until it is successfully received by the receiving application.  This includes processes in the sender itself, as packets are handled by the operating system and the network interface; the properties and *state* of each network element and link that is involved in forwarding the packet; and the processes in the receiver that are involved in delivering the packet from the network interface, to the operating system, and then to the application. All of these aspects accumulate to result in the overall end-to-end latency that the packet experiences.
 
-## Link and physical technologies in place along the path
+This section provides an overview of these processes and properties with a particular focus on the factors that have a material effect on the end-to-end latency.  We start with some of the properties of the network hops themselves, then discuss the phenomenon of buffering delay (which is driven by the sender behavior as well as the properties of the network), we move on to cover aspects of path selection and core network topologies, then mention additional latency factors that are introduced by the endpoints (sender and receiver).
 
-Physical and link-layer technologies in the path can contribute to latency due to the distance the signals travel (length of the physical medium) relative to the speed at which signals are transmitted on the physical medium (propagation delay), the time it takes for equipment to encode and decode the physical and link-layer technologies, characteristics of how bits of information are encoded on the physical medium, and switching and queuing delays caused by nodes needing to combine and send inbound traffic on outbound links.
+## Link technologies in place along the path
 
-*Propagation delay* is determined by the characteristics of the physical medium. The commonly used media of air, fiber and copper have different characteristics, and copper media varies according to thickness (gauge) and shielding used around the copper. The propagation delay of various commonly used media are given in the table below:
+The link technologies in the path contribute latency due to the distance the signals travel (length of the physical medium) relative to the speed at which signals are transmitted on the physical medium (propagation delay), the time it takes for equipment to encode and decode the physical and link-layer technologies, characteristics of how bits of information are encoded on the physical medium, and switching and queuing delays caused by nodes needing to combine and send inbound traffic on outbound links.
+
+Each hop along the path introduces latency due to a number of factors:
+
+Latency Factor | Description
+-------------|------
+switching/forwarding | the time it takes to process the packet header, check for bit errors, decide whether to forward the packet (and, if so, to which interface) or to discard it, and any other manipulation of the packet that takes place in the device. This is typically minimal, and providers of core networks will often minimize this by using technologies like MPLS that have very simple packet headers.
+propagation delay | the time it takes for a bit of information to travel across the link.  This is driven by the propagation velocity of the medium and the length of the link.  It is immaterial for home network and access network links, but can become significant for long-haul backbone links. 
+serialization/encoding | the amount of time that it takes to transmit the entire packet on the link, from the first bit until the last bit.  This includes factors such as time-based interleaving utilized by some link technologies.   
+media acquisition delay| the delay incurred by arbitrating access by multiple devices to a shared medium. This is seen in no-new-wire home networking (powerline, coax, phoneline) technologies, some wireless technologies, and DOCSIS.
+buffering delay | also referred to as queuing delay, this is the time packets wait in a buffer or a queue in the network element while other traffic is being transmitted. The buffering delay is variable, depending on instantaneous traffic load, and can range from 0 to the maximum supported (or configured) in the node. Unique buffering characteristics of some link technologies are discussed below, and buffering delay in general is discussed in Section 3.2.  This can commonly be the largest source of delay variation. 
+miscellaneous, link specific | some link technologies can introduce additional delays. Some of these are discussed below. 
+
+*Note, the term "buffering" is also commonly used to refer to the time that a streaming media application (e.g. a streaming video player) appears to wait while it builds up an amount of data in its playout buffer, before it begins playing the media.  This is an entirely different phenomenon, and is not what we refer to as buffering in this report.*
+
+**************************************
+**Move this to an appendix?**
+
+**Propagation delay** is determined by the characteristics of the physical medium. The propagation delay of various commonly used media are given in the table below:
 
 Medium  | Round-Trip Delay per Mile
 -------|--------------------------
@@ -176,27 +194,19 @@ Unshielded Twisted Pair | 0.0182 ms
 
 [@fiberlatency] [need additional references]
 
-The majority of terrestrial networks use fiber optic links for distances longer than a few miles, with microwave links being the second most common [reference?].  For long distance links, the propagation delay difference between these two can be significant (approx. 1.6 ms for fiber vs 1.1 ms for microwave, round-trip, for a 100 mile link). 
-
 Access networks generally only use their distinctive medium (air, coaxial cable or unshielded twisted pair) for the last few hundred feet, making the propagation delay differences between these technologies immaterial.
 
-The more significant differences between access and home network technologies come from other factors such as time-based interleaving on a physical-layer technology, media acquisition delays, buffering or queueing delays for nodal behaviors proscribed by the technology, and messaging and packet handling required by a network architectures whose use is tightly coupled with the technology.
+The majority of terrestrial networks use fiber optic links for distances longer than a few miles, with microwave links being the second most common [reference?].  For long distance links, the propagation delay difference between these two can be significant (approx. 1.6 ms for fiber vs 1.1 ms for microwave, round-trip, for a 100 mile link). 
 
-  - *Time-based interleaving* is a technique used by some physical-layer encodings (especially DSL) to deal with the effects of noise bursts. While interleaving is generally enabled together with Cyclic Redundancy Check (CRC) and Forward Error Correction (FEC), it is not the same as CRC or FEC and there is no dependency between interleaving and CRC or FEC. For a good description of time-based interleaving, see [https://kitz.co.uk/adsl/interleaving.htm]. When enabled, interleaving can commonly add anywhere from 2 to 20 ms of latency. Whether or not to enable interleaving and how much delay is allowed for interleaving in a DSL deployment is determined by the ISP. Some ISPs have the ability to configure them on a per-subscriber basis.
-  - *Media acquisition delay* is the delay incurred by multiple devices scheduling traffic over a shared medium. This is seen in no-new-wire home networking (powerline, coax, phoneline) technologies, some wireless technologies, and DOCSIS.
-  - *Buffering delay* or *queuing delay* is the time packets wait in a buffer or a queue while other traffic is being transmitted. The buffering delay is variable, depending on instantaneous traffic load, and can range from 0 to the maximum configured in the node. Most physical layer technologies do not place requirements around buffering or queuing algorithms. When the technology is tightly couple with an architecture, there may be requirements on buffering and queuing imposed by the architecture.
-  - *Network architecture delays* can be incurred when signaling messages are required to be processed prior to a host being allowed to send application traffic packets or when the network requires traffic to pass through certain nodes for additional inspection and processing. These delays are not generally associated with physical or link technologies other than those defined by 3GPP, where the LTE and 5G Radio Access Network (RAN) technologies are tighlty couple to the associated 3GPP network architecture.  
+************************************** 
 
-The following table summarizes some of these differences.
+There can be significant latency differences between access and home network technologies come from these factors.  The following table summarizes some of these differences.
 
 ![Physical and Link Technologies Latency Summary](images/L2-latency-summary.PNG)
 
-There are also some additional nodal delays that happen at multiple or all nodes along a packet's path and are not specific to any physical-layer technology.
 
-  - *Serialization delay* is the amount of time it takes to transmit all of the bits of a link-layer frame. This is calculated as the length of the frame (bits) divided by the speed of the outbound link (bits per second).
-  - *Switching delay* is the amount of time that an Ethernet packet spends traversing a node. Many of the physical-layer technologies use Ethernet link-layer framing. The switching delay can be substantially less than a microsecond in "cut-through" switches, or can add an amount equal to the serialization delay in "store-and-forward" switches.
-  - *Nodal processing delay* is the time it takes to process the packet header, check for bit errors, determine the destination host, etc. Providers of core networks will often minimize this by using technologies like MPLS that have very simple packet headers.
 
+The next subsections discuss some nuances of the various link technologies that impact latency performance.
 
 ### Ethernet  
 
@@ -211,7 +221,7 @@ In addition, an Ethernet *network* (i.e. multiple Ethernet links connected via s
 While appearing to the network as if it was an ethernet based device, Wi-Fi is very different in that it not "switched" as is modern day ethernet. Rather, it is more like
 early versions of ethernet where only a single transmitter at a time is allowed, with more sophisiticated arbitrage of the basic transmission opportunity (TXOP) than original ethernet.
 
-Potential transmission delays in WiFi can have a range measured in seconds, while competing with other devices and access points on the same channel, coping with transmission errors and subsequent retries, and transmission rates can vary also from below 1Mbit to 1Gbit as a function of these problems and of (especially) the distance to the reciever.
+Potential transmission delays in WiFi can have a range measured in seconds, while competing with other devices and access points on the same channel, coping with transmission errors and subsequent retries, and transmission rates can vary also from below 1Mbit to 1Gbit as a function of these problems and of (especially) the distance to the receiver. Additionally, many Wi-Fi interfaces periodically shut down temporarily to scan for other available channels, resulting in periodic latency spikes while packets queue up until the link is available again.
 
 Newer standards for Wi-Fi attempt to improve multiplexing behaviors while remaining compatible with older Wi-Fi standards, but co-existing on the same spectrum is difficult. Standardization on more and different spectrum is aiding improvements to Wi-Fi behaviors.
 
@@ -252,10 +262,9 @@ Low Latency DOCSIS 3.1 | ~1 ms | ~1 ms | ~1 ms
 
 ADSL, ADSL2+, VDSL, VDSL2, and G.fast are "last mile" broadband access technology standards defined by ITU-T. All of these are primarily defined to run over twisted-pair copper wires, although G.fast can also run over coax (which is useful in some multi-dwelling unit deployments). The older Asymmetric Digital Subscriber Line (ADSL) technology was generally used on loop lengths of 1 mile or less. The newer ADSL2+, Very high-speed DSL (VDSL) and VDSL2 technologies are generally used on shorter loops in a fiber to the node (FTTN) configuration (with copper to a node and fiber from the node to the central office). Since copper is a very efficient transmission medium, the time for a signal to travel these distances is very small and does not contribute significantly to latency. Encoding and decoding DSL signals does add some small latency. But this delay is also very small.
 
-Some ADSL2+ and VDSL deployments used a time-based interleaving technique to be more resilient against noise on the line. Noise can result in lost bits of data. With interleaving, it is often possible for the ADSL2+ or VDSL receiver to recover these lost bits. If lost bits are not recovered, the loss can result in either missing information (e.g., clipped sound in an audio transmission) or cause the data to be retransmitted (which causes delay). But time-based interleaving adds delay to accomplish this resiliency. Common interleaving delays range from 2 - 10 ms, when it is enabled. Many deployments do not enable interleaving because of the latency it adds.
+Some ADSL2+ and VDSL deployments used a time-based interleaving technique (see [https://kitz.co.uk/adsl/interleaving.htm]) to be more resilient against noise on the line. Noise can result in lost bits of data. With interleaving, it is often possible for the ADSL2+ or VDSL receiver to recover these lost bits. If lost bits are not recovered, the loss can result in either missing information (e.g., clipped sound in an audio transmission) or cause the data to be retransmitted (which causes delay). But time-based interleaving adds delay to accomplish this resiliency. Common interleaving delays range from 2 - 20 ms, when it is enabled. Whether or not to enable interleaving and how much delay is allowed for interleaving in a DSL deployment is determined by the ISP. Some ISPs have the ability to configure them on a per-subscriber basis. Many deployments do not enable interleaving because of the latency it adds.
 
 G.fast is another copper-based technology (over twisted pair or coax) that can be used on very short loops (up to around 500 ft). Interleaving is not used with G.fast and the loop length and encoding mechanisms add very small latency.
-
 
 ### PON
 
@@ -264,6 +273,8 @@ Passive Optical Networking (PON) runs over optical fiber (add FN to https://www.
 ### LTE/5G  
 
 Wireless technologies defined by 3GPP have many latency components. The latency caused by the wireless physical medium (the air link between transmitting and receiving antennas) is the least of these. More significant are delays caused by signaling (messages required to set up a LTE session), by processing delays (how long it takes for LTE equipment to process signaling and messages including the time it takes to get the messages to where they need to be processed), and by contention with other traffic. A significant portion of backhaul is done using fiber, which minimizes latency over other backhaul technologies such as microwave or other wireless technologies. When fiber is used as the backhaul, its contribution to latency is largely due to propagation and serialization delay.
+
+*Network architecture delays* can be incurred when signaling messages are required to be processed prior to a host being allowed to send application traffic packets or when the network requires traffic to pass through certain nodes for additional inspection and processing. These delays are not generally associated with physical or link technologies other than those defined by 3GPP, where the LTE and 5G Radio Access Network (RAN) technologies are tightly coupled to the associated 3GPP network architecture. 
 
 A goal of LTE design was to have lower latency than 3G. This was primarily accomplished through improvements to the signaling architecture.
 
@@ -280,22 +291,6 @@ The most common form of satellite internet access today is via satellites in GEO
 Like wifi, these LEO systems are presently half duplex. Upload/download speeds of 20Mbit/300Mbit have been observed in early testing, and unloaded latencies under 40ms. 
 LEO systems actually have the potential to offer less latency on longer paths than terrestrial networks, both from the speed of light in vacuum vs the
 1/3 reduction from fiber, and from the more direct line network paths can take compared to cables on Earth.
-	
-### Core network and backbone links  
-Broadband internet networks, regardless of whether they are fixed or mobile, interconnect with internet peering and exchange points via telco & ISP owned metro and regional *core* networks. These core networks generally consist of medium to long haul fiber links that connect the region's central offices (CO) or headends (HE), which feed the end users, to the peering and interconnection points of presence.
-The Internet edge infrastructure typically sits at or near the internet peering/exchange points, and can serve internet application traffic locally within the region, rather than requiring traffic to use intercity optical backbone network links to reach centralized data centers. 
-
-[note, the above text doesn't seem to match the figure.  "Edge infrastructure sits before intercity backbone" I think the text is more correct.  Can we update the figure?]
-
-![End to End Network](images/CN_figure.png)
-
-The contribution of latency in a well managed core network is primarily due to fiber distance in the metro area. With the speed of light in fiber equating to aproximately 1 ms of RTT for every 100 km of fiber, this is typically a fairly small contributor to end-to-end latency.  
-
-Although the fiber latency contribution at the metro or regional level is less pronounced than ISPs access network, it starts to play significant role in cases that involve communication with a user in a different metro area, in cases where content is not hosted locally, or if suboptimal routing directs traffic to a far away server instead of a closer alternative.  In these cases, the round-trip latency can be influenced not just by the geographic distance but also by the fact that fiber networks aren't line of sight.  For long-distance backbone paths, this "path-stretch" can vary considerably but on average increases the distance by a factor of about 1.7.  This results in approximately 27 ms per 1000 miles of geographic distance (1.7 ms per 100 km) for long-distance paths.
-
-Geolocation data is used to help make decisions on directing clients to the appropriate internet edge and backbone. However, this information is far from being precise.  It is not out of ordinary that a user in NY is directed to Dallas or London if the geo database contains incorrect information about the user's location. There are efforts underway to map IP prefixes with correct geolocation information (via IETF RFC 8805, HTML5 and eDNS client subnet) that are designed to address this routing issue, however it requires a concerted effort from ISPs, MNOs, Content and App providers to succeed.  
-
-With consolidation of ISP networks and predictable intercity and submarine links the peering and transit network that interconnects all ISPs and Data Centers together has reached a high level of maturity. The deeper edge and content delivery network with fine grained peering and capacity management has improved the predictability of internet performance at the interconnect exchange points. Modern peering and interconnect decision-making has undergone a gradual shift from volume-based internet exchange to latency-based interconnect refinement. A step in a positive direction!
 
 ## Buffering delays  
 
@@ -357,20 +352,33 @@ Some equipment implements multiple egress queues (often 1024) with each flow tha
 
 When the number of queues available is limited, or individual flows cannot be identified, different application types can be tagged and grouped together based on latency requirements and send in a limited set of queues (2 or more). Instead of letting the scheduler decide how to divide the bandwidth over the queues, the congestion control can be used to control the rate of individual flows over the different queues, similar as if they would run in a single FIFO queue. This way, there is no need to know how many flows are running in which queue. All flows get an equal congestion feedback and will adapt to the fair rate. By defining a scheduling priority over the different queues, the highest priority queues will be served with the least latency, while all flows are rate controlled by the AQM of the biggest (typically lowest priority) queue. The DualPI2 algorithm is making use of this mechanism [@DualPI2].
 
-## Latency Contributions from Endpoints
 
-Additional latency sources exist within the application (such as cryptography setup), in the network stack, socket buffers, device drivers, hardware offloads, and
-within the network hardware itself.
+## Path selection aspects 
 
-Although this report focuses on latency caused by communication over network links, it's important to recognize that both client devices and cloud servers can contribute as well. On the client side, a user's specific hardware and software (e.g., an older mobile phone running an out-of-date operating system) could cause perceived delays when interacting with modern applications that are optimized for a more powerful computing platform; significant buffering in video capture and encoding is one example. On the server side, the architecture of cloud applications can have a large impact on how slow they feel to end users; such effects are especially visible under heavy load (both expected, as can happen during a major sporting event or high-profile website launch, and unexpected, as can be caused by a denial of service attack) but can occur under normal circumstances, too (e.g., if a backend database goes offline).
+### Core networks and backbone links
 
-## VPNs and Proxied Paths
+Broadband internet networks, regardless of whether they are fixed or mobile, interconnect with internet peering and exchange points via telco & ISP owned metro and regional *core* networks. These core networks generally consist of medium to long haul fiber links that connect the region's central offices (CO) or headends (HE), which feed the end users, to the peering and interconnection points of presence.
+The Internet edge infrastructure typically sits at or near the internet peering/exchange points, and can serve internet application traffic locally within the region, rather than requiring traffic to use intercity optical backbone network links to reach centralized data centers. 
+
+[note, the above text doesn't seem to match the figure.  "Edge infrastructure sits before intercity backbone" I think the text is more correct.  Can we update the figure?]
+
+![End to End Network](images/CN_figure.png)
+
+The contribution of latency in a well managed core network is primarily due to fiber distance in the metro area. With the speed of light in fiber equating to aproximately 1 ms of RTT for every 100 km of fiber, this is typically a fairly small contributor to end-to-end latency.  
+
+Although the fiber latency contribution at the metro or regional level is less pronounced than ISPs access network, it starts to play significant role in cases that involve communication with a user in a different metro area, in cases where content is not hosted locally, or if suboptimal routing directs traffic to a far away server instead of a closer alternative.  In these cases, the round-trip latency can be influenced not just by the geographic distance but also by the fact that fiber networks aren't line of sight.  For long-distance backbone paths, this "path-stretch" can vary considerably but on average increases the distance by a factor of about 1.7.  This results in approximately 27 ms per 1000 miles of geographic distance (1.7 ms per 100 km) for long-distance paths.
+
+Geolocation data is used to help make decisions on directing clients to the appropriate internet edge and backbone. However, this information is far from being precise.  It is not out of ordinary that a user in NY is directed to Dallas or London if the geo database contains incorrect information about the user's location. There are efforts underway to map IP prefixes with correct geolocation information (via IETF RFC 8805, HTML5 and eDNS client subnet) that are designed to address this routing issue, however it requires a concerted effort from ISPs, MNOs, Content and App providers to succeed.  
+
+With consolidation of ISP networks and predictable intercity and submarine links the peering and transit network that interconnects all ISPs and Data Centers together has reached a high level of maturity. The deeper edge and content delivery network with fine grained peering and capacity management has improved the predictability of internet performance at the interconnect exchange points. Modern peering and interconnect decision-making has undergone a gradual shift from volume-based internet exchange to latency-based interconnect refinement. A step in a positive direction!
+
+### VPNs and Proxied Paths
 
 Virtual Private Networks (VPNs) have become popular in recent years. Advertisements for consumer VPN services usually claim to increase the security of an end user's traffic, to hide or spoof a user's location (e.g., to avoid geo-filters for video streaming content), and or otherwise protect user privacy. This paper will refrain from commenting on the veracity of such claims and instead focus on their effects on latency (add FNs to https://ssd.eff.org/en/module/choosing-vpn-thats-right-you and https://cdt.org/vpns/ and https://www.eff.org/deeplinks/2019/11/virtually-private-network-nordvpns-breach-and-limitations-vpns).
 
 VPNs work by creating an encrypted tunnel between a client device (such as a laptop or phone) and a VPN server. All traffic that the client device would normally send directly to the Internet is instead redirected through the VPN tunnel. Networks traversed by the traffic between the VPN client and server would not be able to inspect the traffic, as it is encrypted. Traffic then leaves the VPN server and reaches the destination server on the Internet. This means that that the user's source IP address appears to be that of the VPN service, which provides the stated location spoofing capabilities. All traffic through the tunnel is typically encrypted, which provides the claimed security improvements.
 
-### VPNs and Latency
+#### VPNs and Latency
 
 In terms of latency, there is almost always a latency penalty when utilizing a VPN. The most obvious latency penalty is the increased length of the path between the user's device and the destination on the Internet. Without the VPN, the user's traffic passes over the ISP's access network, to a peering location, and then reaches the wider Internet. More specifically, for most content that is based in a Content Delivery Network (CDN), the CDN and ISP network will intelligently route the user to the closest destination server with the shortest path. But with the VPN, the user's traffic passes over the ISP's access network, to a peering location, then over one or more intermediate networks until it reaches the VPN server, and then to the destination on the Internet - also potentially via one or more intermediate networks. The location of the VPN server therefore becomes very important to latency. If the VPN server is very close to the ISP's peering location and the destination server on the Internet, then the latency penalty may be modest. If not (as is more typically the case), then the latency penalty could be much more significant.
 
@@ -385,6 +393,13 @@ Finally, the VPN server itself may introduce additional latency, particularly if
 In 2021, Apple announced a new privacy feature that would be available to subscribers of its premium service. This feature, called iCloud Private Relay, is similar to the VPN services discussed above but with a few differences. The key difference is that traffic is distributed across multiple tunnels and exits onto the Internet across multiple servers in a nearby location. This has the stated benefit of providing enhanced privacy, by removing the ability for someone eavesdropping at a single VPN server to have visibility of a user's complete traffic.
 
 Based upon the publicly available information, iCloud Private Relay will have a similar impact on latency to other VPNs. The selection of Cloudflare, Fastly and Akamai as partners to host the exit nodes (equivalent to VPN servers, where traffic exits to the internet) means that there will be many more VPN termination locations than most services. This will likely help reduce the latency penalty, but it certainly will not remove it. If appropriate client context is supplied when resolving DNS queries, it may resolve the issue of CDNs being unable to steer traffic to the most optimal server for the user.
+
+## Latency Contributions from Endpoints
+
+Additional latency sources exist within the application (such as cryptography setup), in the network stack, socket buffers, device drivers, hardware offloads, and
+within the network hardware itself.
+
+Although this report focuses on latency caused by communication over network links, it's important to recognize that both client devices and cloud servers can contribute as well. On the client side, a user's specific hardware and software (e.g., an older mobile phone running an out-of-date operating system) could cause perceived delays when interacting with modern applications that are optimized for a more powerful computing platform; significant buffering in video capture and encoding is one example. On the server side, the architecture of cloud applications can have a large impact on how slow they feel to end users; such effects are especially visible under heavy load (both expected, as can happen during a major sporting event or high-profile website launch, and unexpected, as can be caused by a denial of service attack) but can occur under normal circumstances, too (e.g., if a backend database goes offline).
 
 # Current and Future Technologies to improve latency performance  
 
