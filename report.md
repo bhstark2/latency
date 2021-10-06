@@ -172,7 +172,7 @@ Each hop along the path introduces latency due to a number of factors:
 Latency Factor | Description
 -------------|------
 switching/forwarding | the time it takes to process the packet header, check for bit errors, decide whether to forward the packet (and, if so, to which interface) or to discard it, and any other manipulation of the packet that takes place in the device. This is typically minimal, and providers of core networks will often minimize this by using technologies like MPLS that have very simple packet headers.
-propagation delay | the time it takes for a bit of information to travel across the link.  This is driven by the propagation velocity of the medium and the length of the link.  It is immaterial for home network and access network links, but can become significant for long-haul backbone links. 
+propagation delay | the time it takes for a bit of information to travel across the link.  This is driven by the propagation velocity of the medium and the length of the link.  It is immaterial for home network and access network links, but can become significant for long-haul backbone links. More detail is provided in Appendix B.
 serialization/encoding | the amount of time that it takes to transmit the entire packet on the link, from the first bit until the last bit.  This includes factors such as time-based interleaving utilized by some link technologies.   
 media acquisition delay| the delay incurred by arbitrating access by multiple devices to a shared medium. This is seen in no-new-wire home networking (powerline, coax, phoneline) technologies, some wireless technologies, and DOCSIS.
 buffering delay | also referred to as queuing delay, this is the time packets wait in a buffer or a queue in the network element while other traffic is being transmitted. The buffering delay is variable, depending on instantaneous traffic load, and can range from 0 to the maximum supported (or configured) in the node. Unique buffering characteristics of some link technologies are discussed below, and buffering delay in general is discussed in Section 3.2.  This can commonly be the largest source of delay variation. 
@@ -180,25 +180,6 @@ miscellaneous, link specific | some link technologies can introduce additional d
 
 *Note, the term "buffering" is also commonly used to refer to the time that a streaming media application (e.g. a streaming video player) appears to wait while it builds up an amount of data in its playout buffer, before it begins playing the media.  This is an entirely different phenomenon, and is not what we refer to as buffering in this report.*
 
-**************************************
-**Move this to an appendix?**
-
-**Propagation delay** is determined by the characteristics of the physical medium. The propagation delay of various commonly used media are given in the table below:
-
-Medium  | Round-Trip Delay per Mile
--------|--------------------------
-Air (i.e. wireless) | 0.0108 ms
-Coaxial Cable | 0.0125 ms
-Optical Fiber | 0.0160 ms
-Unshielded Twisted Pair | 0.0182 ms 
-
-[@fiberlatency] [need additional references]
-
-Access networks generally only use their distinctive medium (air, coaxial cable or unshielded twisted pair) for the last few hundred feet, making the propagation delay differences between these technologies immaterial.
-
-The majority of terrestrial networks use fiber optic links for distances longer than a few miles, with microwave links being the second most common [reference?].  For long distance links, the propagation delay difference between these two can be significant (approx. 1.6 ms for fiber vs 1.1 ms for microwave, round-trip, for a 100 mile link). 
-
-************************************** 
 
 There can be significant latency differences between access and home network technologies come from these factors.  The following table summarizes some of these differences.
 
@@ -731,6 +712,23 @@ In some network architectures, multiple protocols may operate between the physic
 **Layer 4 – Transport Layer**. At the transport layer, the Internet transport protocol (typically TCP or UDP) delivers a flow of packets across the network with characteristics determined by the protocol used. TCP provides end-to-end flow identification, packet sequencing, error recovery, and flow control for reliable data transfer. UDP provides flow identification and error correction. QUIC is a new transport protocol (https://www.rfc-editor.org/rfc/rfc9000.html) that provides applications with flow-controlled streams for structured communication, low-latency connection establishment, and network path migration.
 	
 **Layer 5 – Application Layer**. The application layer represents all the functions that are performed by the application endpoints (e.g. client and server) to manage application-to-application level communication, such as controlling the transfer of a large file. One example is the hypertext transfer protocol (HTTP), the protocol for the transmission of web pages. Other examples include the file transfer protocol (FTP), the Dynamic Host Configuration Protocol (DHCP), the Domain Name System (DNS) protocol, and the email protocols POP, IMAP and SMTP. Sometimes application protocols are defined to be transported inside the payload of other application protocols, such as HTTP.
+
+# Appendix B: Propagation Delays of Commonly-Used Networking Media
+
+**Propagation delay** is determined by the characteristics of the physical medium. The propagation delay of various commonly used media are given in the table below:
+
+Medium  | Round-Trip Delay per Mile
+-------|--------------------------
+Air (i.e. wireless) | 0.0108 ms
+Coaxial Cable | 0.0125 ms
+Optical Fiber | 0.0160 ms
+Unshielded Twisted Pair | 0.0182 ms 
+
+[@fiberlatency] [need additional references]
+
+Access networks generally only use their distinctive medium (air, coaxial cable or unshielded twisted pair) for the last few hundred feet, making the propagation delay differences between these technologies immaterial.
+
+The majority of terrestrial networks use fiber optic links for distances longer than a few miles, with microwave links being the second most common [reference?].  For long distance links, the propagation delay difference between these two can be significant (approx. 1.6 ms for fiber vs 1.1 ms for microwave, round-trip, for a 100 mile link). 
 
 
 \pagebreak
