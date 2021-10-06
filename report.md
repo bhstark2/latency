@@ -174,6 +174,13 @@ Latency Factor | Description
 ---------------|------------
 switching/forwarding | the time it takes 
 propagation delay | the time it takes for 
+serialization/encoding | the amount of time that it takes to 
+media acquisition delay| the delay incurred by arbitrating access by 
+buffering delay | also referred to as queuing delay, this is the  
+miscellaneous, link specific | some link technologies can 
+
+
+
 
 *Note, the term "buffering" is also commonly used to refer to the time that a streaming media application (e.g. a streaming video player) appears to wait while it builds up an amount of data in its playout buffer, before it begins playing the media.  This is an entirely different phenomenon, and is not what we refer to as buffering in this report.*
 
