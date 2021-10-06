@@ -395,7 +395,7 @@ Cloud gaming and edge compute on the other hand may require very low latency, pr
 
 To recap- Edge compute requires higher level of SLO from access network. Multi-path implementation on application unleashes the potential of access network connectivity options and elegantly solves capacity and performance concerns. Neutral host compute with access to more than one ISP brings a new potential to accelerate low latency services. 
 
-## Local caching (DNS, etc.) (Cullen, Shamim)
+## Local caching (DNS, etc.)
 
 One technique to reduce latency is to deploy local caches in the network. Caches are devices in the network that can keep track of the information being requested over the network, and provide a copy of it quickly to other devices that request the same information. For example, an enterprise may have many users in a building that all request the same information. The first request for the information will have the normal latency over the internet to get the information. A local cache in the building can then save a copy of that information which can be used to very quickly provide the information to any future users that request the same information. A very common thing to cache is the responses from DNS queries. This can significantly improve performance in some situations. It is also possible to have applications specific caches that know how to deal with streaming or real time voice and video media. There are many downsides to caches including: they tend to be specific for each application protocol that uses the cache, they require deploying additional hardware and devices to run the cache, they tend to be able to view the data they cache which is often a security problem.
 
@@ -527,7 +527,7 @@ Latency measurements that are carried out in the presence of little or no cross-
 
 It is also useful to carry out latency measurements in the presence of heavy cross-traffic. Carrying out latency measurements under such conditions is known as a 'latency under load' test. This helps to reveal how latency behaves when the network is heavily utilised, which is precisley when users are using it. Some measurement systems will generate artificial cross-traffic (perhaps in the form of a throughput test) in order to ensure the link is heavily utilised to a predictable and repeatable degree. Measurement systems that do not measure cross-traffic cannot reliably know whether they are measuring idle latency, latency under load, or something in between.
 
-## Ongoing QoE Evaluation Best Practices (Peter Sevcik)
+## Ongoing QoE Evaluation Best Practices
 
 Evaluating network user QoE for latency should begin by defining an appropriate service level objective (SLO). The objective(s) can be based on known application requirements, or on measured application performance resulting from latency changes in a lab environment. Absent a well-defined, lab-based SLO, network service providers can apply the following indirect SLO definition method.
 
