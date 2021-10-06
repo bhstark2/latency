@@ -710,7 +710,7 @@ In some network architectures, multiple protocols may operate between the physic
 	
 **Layer 5 – Application Layer**. The application layer represents all the functions that are performed by the application endpoints (e.g. client and server) to manage application-to-application level communication, such as controlling the transfer of a large file. One example is the hypertext transfer protocol (HTTP), the protocol for the transmission of web pages. Other examples include the file transfer protocol (FTP), the Dynamic Host Configuration Protocol (DHCP), the Domain Name System (DNS) protocol, and the email protocols POP, IMAP and SMTP. Sometimes application protocols are defined to be transported inside the payload of other application protocols, such as HTTP.
 
-# Appendix B: Propagation Delays of Commonly-Used Networking Media
+# Appendix B: Propagation Delays of Commonly-Used Networking Media {-}
 
 **Propagation delay** is determined by the characteristics of the physical medium. The propagation delay of various commonly used media are given in the table below:
 
