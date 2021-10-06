@@ -225,7 +225,7 @@ serialization/encoding | 0.4 - 3.5 ms
 media acquisition | 2 - 8 ms
 queuing | 0 - 200 ms
 
-DOCSIS 3.1 equipment has multiple features to manage latency (some of which are available in DOCSIS 3.0 equipment as well), including Active Queue Management (AQM), and a new feature called *Low Latency DOCSIS* which includes support for the *Low-Latency Low-Loss Scalable Throughput* (L4S) architecture and isolation of Non-Queue-Building (NQB) traffic. AQM, L4S and NQB are discussed later in this document.  
+DOCSIS 3.1 equipment has multiple features to manage queuing latency (some of which are available in DOCSIS 3.0 equipment as well), including Active Queue Management (AQM), and a new feature called *Low Latency DOCSIS* which includes support for the *Low-Latency Low-Loss Scalable Throughput* (L4S) architecture and isolation of Non-Queue-Building (NQB) traffic. AQM, L4S and NQB are discussed later in this document.  
 
 The expected latency performance of these latency management features (as given in Table 1 of [@LLD] in order-of-magnitude numbers) is: 
 
