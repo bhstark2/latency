@@ -718,10 +718,13 @@ Medium  | Round-Trip Delay per Mile
 -------|--------------------------
 Air (i.e. wireless) | 0.0108 ms
 Coaxial Cable | 0.0125 ms
+Hybrid Fiber-Coax (HFC) | 0.0157 ms
 Optical Fiber | 0.0160 ms
 Unshielded Twisted Pair | 0.0182 ms 
 
 [@fiberlatency] [need additional references]
+
+*Note: the HFC propagation delay assumes that 90% of the path distance is fiber and 10% is coax.*
 
 Access networks generally only use their distinctive medium (air, coaxial cable or unshielded twisted pair) for the last few hundred feet, making the propagation delay differences between these technologies immaterial.
 
