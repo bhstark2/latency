@@ -264,11 +264,13 @@ Median latency of the top three US mobile network providers in 2021 was calculat
 
 ### Satellite
 
-The most common form of satellite internet access today is via satellites in GEO (geosychronous orbit). These typically have well in excess of 600ms of latency inherent in lightspeed delay. A new breed of satellite providers (starlink, oneweb) are putting constellations into LEO (low earth orbit), at ranges fom 500km to 6000km up, with the corresponding reduction in inherent latency.
+The most common form of satellite internet access today is via satellites in GEO (geosychronous orbit) at an altitide of approximately 36,000 km. These typically have well in excess of 600 ms of latency simply from the propagation delay (two round trips to the satellite and back). A new breed of satellite providers (Starlink, OneWeb) are putting constellations into LEO (low earth orbit), at ranges from 300km to 1200km up, with the corresponding reduction in inherent latency.  
+[http://systemarchitect.mit.edu/docs/delportillo19a.pdf]  
+[https://docs.fcc.gov/public/attachments/DOC-354775A1.pdf]  
+[https://docs.fcc.gov/public/attachments/FCC-21-48A1.pdf]  
 
 Like wifi, these LEO systems are presently half duplex. Upload/download speeds of 20Mbit/300Mbit have been observed in early testing, and unloaded latencies under 40ms. 
-LEO systems actually have the potential to offer less latency on longer paths than terrestrial networks, both from the speed of light in vacuum vs the
-1/3 reduction from fiber, and from the more direct line network paths can take compared to cables on Earth.
+LEO systems with satellite-to-satellite communication (*inter-satellite links*) actually have the potential to offer less latency on intercontinental paths than terrestrial networks, both from the difference in propagation delay between fiber and the vacuum of space, and from the more direct line network paths can take compared to cables on Earth.
 
 ## Buffering delays  
 
