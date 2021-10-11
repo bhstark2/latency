@@ -751,7 +751,7 @@ Payload refers to packets that carry content which the browser will execute, ren
 
 The figures below show the trends for these two key demand parameters since 1995 for the most popular 20 to 50 websites at the time.
 
-![Typical Webpage Growth over Time](images/webturns.PNG)
+![Typical Webpage Growth over Time](images/webturns.png)
 
 In the last 26 years, payload has grown about 70-fold and bandwidth growth has dramatically outpaced payload to meet that demand. During the same period, turns have grown about 15-fold, and latency has not seen a commensurate decrease. Most of the fundamental latency decrease has been in last mile technologies discussed in this report. However, these are actually small changes to overall latency between browser and a server on the general internet. Some use cases, such as Wi-Fi, added to the overall latency.
 
