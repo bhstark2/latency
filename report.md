@@ -181,9 +181,17 @@ Each hop along the path introduces latency due to a number of factors:
 
 There can be significant latency differences between access and home network technologies come from these factors.  The following table summarizes some of these differences.
 
-![Physical and Link Technologies Latency Summary](images/L2-latency-summary.PNG)
+   Technology  | Interleaving | Media Acquisition | Network Architecture
+---------------|--------------------|-------------------|---------------------
+Ethernet       | NA                 | NA                | NA
+Wi-Fi          | NA                 | 0.03 - 45 ms  | NA for non 3GPP Wi-Fi
+G.hn           | NA                 | varies per # of nodes | NA
+DOCSIS         | NA                 | 2 - 8 ms | NA
+DSL / G.fast   | 2-20ms if enabled[^bhs1] | NA | NA
+PON            | NA                 | NA | NA
+LTE / 5G       | NA                 | NA for licensed spectrum | varies widely
 
-
+[^bhs1]: ISP controls whether or not interleaving is enabled and how much interleaving delay, if enabled.
 
 The next subsections discuss some nuances of the various link technologies that impact latency performance.
 
