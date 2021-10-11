@@ -673,6 +673,8 @@ Virtual reality environments require extensive compute resources in order to ren
 * If some packets are not dropped at a bottleneck link, a queue of packets will form. When the queue becomes too large then user applications suffer delay (high latency).
 * Idle latency, while an interesting measurement, reflects the inherent attributes of access network or network media, as well as path distance.
 * Working latency is a better measurement of the end user application quality of experience (QoE) than idle latency.
+* Home networks and end user devices can contribute significantly to latency. 
+* The described working latency measurement methods are focused primarily around measuring latency in an end-to-end connection or an access network combined with LAN segments and not around determining which nodes contribute most to latency. There are no industry standardized measurement methods for testing the working latency performance of specific devices or network elements.
 * The key network attribute for end user QoE is not solely bandwidth capacity but bandwidth and working latency performance.
 * Poor and/or highly variable working latency performance negatively affects the QoE of many applications, from web browsing to video streaming, video conferencing gaming, and more. 
 * Unlike for speed tests, working latency does not follow a normal distribution but is instead often multi-modal. As a result, the mean and median are not informative. Rather, the 98th or 99th percentile of working latency performance is more useful in predicting quality of experience. (FN to https://www.iab.org/wp-content/IAB-uploads/2021/09/single-delay-metric.pdf).
@@ -681,13 +683,14 @@ Virtual reality environments require extensive compute resources in order to ren
 
 # Recommendations
 
-* The Internet ecosystem should start to measure and report on working latency, as this is often as critical to end user QoE as bandwidth capacity (speed).
+* The Internet ecosystem should start to measure and report on working latency, as this is often as critical to end user QoE as bandwidth capacity (speed). A key step to accomplishing this would be to agree on the measurement methods and methodology to use for this testing.
 * Any developer of a working latency test should:
 	- Transparently disclose their measurement methodology;
 	- NOT report mean or median results;
 	- Report on 98th or 99th percentile (or higher) results;
 	- Report on the variability of working latency (jitter);
 	- Visually represent cumulative results in a cumulative distribution function (CDF) chart, in addition to any other methods.
+* The Internet ecosystem should define methods for measuring working latency performance of home network equipment so suppliers of such equipment are able to benchmark performance. 
 * Broadband Internet Access Service providers and developers of home network equipment (e.g., routers, access points, modems) should:
 	- Work to deploy mechanisms to improve working latency performance, such as Active Queue Management (AQM);
 	- Investigate future methods for delivering very low latency services.
@@ -736,22 +739,5 @@ The majority of terrestrial networks use fiber optic links for distances longer 
 
 
 \pagebreak
-# Heading Level 1
-
-aldkfja;dklfja;dklfja;ldkfja
-
-Example of reference to an id in the references.yaml file [@aca1]
-
-Example footnote marker [^1]
-	
-Example xref to a section in this doc (by placing the unique heading title inside square brackets): [Causes of Latency] 
-
-Example footnote text 
-
-[^1]: Put the text for footnote here
-
-
-## Heading Level 2
-### Heading Level 3
 	
 # References
