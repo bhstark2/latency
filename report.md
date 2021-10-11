@@ -299,12 +299,9 @@ Unfortunately, the predominant congestion control algorithm today, "Cubic" (whic
 
 Google's "Bottleneck Bandwidth and RTT" (BBR) algorithm attempts to remedy this situation by detecting the increase in *latency* caused by congestion, and then backing off to a sending rate that minimizes this additional delay.  But since BBR flows commonly share the network with Cubic flows, the result can sometimes be unpredictable [https://www3.cs.stonybrook.edu/~arunab/papers/imc19_bbr.pdf].
 
-Part of the ongoing evolution of congestion control in the internet is the introduction 
-of new congestion controls that are smoother and less RTT dependent, together with and supported by new queuing mechanisms. 
+Part of the ongoing evolution of congestion control in the internet is the introduction of new congestion controls that are smoother and less RTT dependent, together with and supported by new queuing mechanisms. 
 
-Perfect alignment of sender and network rate may never be possible, since the available rate can fluctuate rapidly. By the time a sender is able to adjust its sending rate, the available capacity might already have changed due to other flows joining and leaving, or due to changing link/channel conditions. For this reason, a compromise is typically needed between leaving enough link capacity unused to avoid short latency spikes (when the available capacity dips), or by allowing deeper buffer variations to keep the link capacity utilized. Since more than enough capacity is typically available today, more emphasis 
-should be placed on keeping latency spikes small and infrequent instead of keeping the link fully utilized.
-
+Perfect alignment of sender and network rate may never be possible, since the available rate can fluctuate rapidly. By the time a sender is able to adjust its sending rate, the available capacity might already have changed due to other flows joining and leaving, or due to changing link/channel conditions. For this reason, a compromise is typically needed between leaving enough link capacity unused to avoid short latency spikes (when the available capacity dips), or by allowing deeper buffer variations to keep the link capacity utilized. Since more than enough capacity is typically available today, more emphasis should be placed on keeping latency spikes small and infrequent instead of keeping the link fully utilized.
 
 ### Queuing implementations  
 
