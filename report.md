@@ -633,7 +633,7 @@ An example of this phenomenom can be seen in a PC Gamer article at https://www.p
 
 ## Web Browsing  
 
-Web sites and web browsers have become ever more sophisticated since Tim Berners-Lee invented the World Wide Web in 1990 as a way to publish and read simple textual pages. Over time, sites have added numerous kinds of web resources, such as images, scripts (small pieces of computer code such as JavaScript), videos, and more — some of which can be very large compared to the text and underlying HTML markup of the page. These days, a page consists of multiple resources that are often fetched from different servers. Indeed, most of the heavily visited websites on the Internet are no longer collections of static pages but dynamic and often personalized web applications.
+Web sites and web browsers have become ever more sophisticated since Tim Berners-Lee invented the World Wide Web in 1990 as a way to publish and read simple textual pages. Over time, sites have added numerous kinds of web resources, such as images, scripts (small pieces of computer code such as JavaScript), videos, and more — some of which can be very large compared to the text and underlying HTML markup of the page. These days, a page consists of multiple resources that are often fetched from different servers. Indeed, most of the heavily visited websites on the Internet are no longer collections of static pages but dynamic and often personalized web applications. Further detail on the growth of typical webpages over time is provided in [Appendix C: Typical Webpage Demand Growth].
 
 Inevitably, this increased complexity can lead to higher latency in loading any given page. Such delays can have many causes, such as:
 
@@ -739,6 +739,25 @@ Unshielded Twisted Pair | 0.0182 ms
 Access networks generally only use their distinctive medium (air, coaxial cable or unshielded twisted pair) for the last few hundred feet, making the propagation delay differences between these technologies immaterial. This is reflected explicitly in the HFC entry.
 
 The majority of terrestrial networks use fiber optic links for distances longer than a few miles, with microwave links being the second most common [reference?].  For long distance links, the propagation delay difference between these two can be significant (approx. 1.6 ms for fiber vs 1.1 ms for microwave, round-trip, for a 100 mile link). 
+
+
+# Appendix C: Typical Webpage Demand Growth {-}
+
+All applications evolve over time. Using the typical web page as an example of a popular application, we can quantify applications' changing demands on network latency and bandwidth. All browser-based interactions involve two important characteristics—turns and payload. 
+
+Turns are non-content carrying packet exchanges between the browser and servers, which are essential for services like DNS, SSL authentication, redirection, connection establishment, etc. These exchanges involve a round-trip time (RTT), and are gatekeepers to content displayed on the screen. Page load time is proportional to the number of turns times latency. The greater the turn count, the longer the lag users will experience. Higher turn counts require lower latency to deliver the same user experience lag time.
+
+Payload refers to packets that carry content which the browser will execute, render, or display to the user. Page load time is proportional to payload divided by the down bandwidth of the slowest link between server and browser. More payload requires higher bandwidth to deliver the same user experience lag time.
+
+The figures below show the trends for these two key demand parameters since 1995 for the most popular 20 to 50 websites at the time.
+
+![Typical Webpage Growth over Time](images/webturns.png)
+
+In the last 26 years, payload has grown about 70-fold and bandwidth growth has dramatically outpaced payload to meet that demand. During the same period, turns have grown about 15-fold, and latency has not seen a commensurate decrease. Most of the fundamental latency decrease has been in last mile technologies discussed in this report. However, these are actually small changes to overall latency between browser and a server on the general internet. Some use cases, such as Wi-Fi, added to the overall latency.
+
+The user experience is not as adversely impacted as these curves suggest due to edge system enhancements such as compression, CDNs, browser caching, multi-threading, etc. Although these technologies can compensate for high turn counts, they cannot always overcome high latency conditions—and many use cases cannot take advantage of the edge enhancements.
+
+
 
 
 \pagebreak
