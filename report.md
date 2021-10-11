@@ -283,13 +283,9 @@ The topic of congestion control and its interaction with bottleneck link buffers
 
 ### Impact that senders & network protocols have on path latency  
 
-The manner with which an application sends its traffic can have a large impact on the latency that it experiences, as well as on the latency that other applications experience.
+The manner with which an application sends its traffic can have a large impact on the latency that it experiences.  In addition, it is commonly the case that links along the path are shared by multiple applications all sending traffic at the same time. Thus, each application has the potential to affect the latency, loss and capacity available to the others that are sharing segments of its path. This is particularly true at the bottleneck link. 
 
-It is commonly the case that links along the path are shared by multiple applications all sending traffic at the same time. Thus, each application has the potential to affect the latency, loss and capacity available to the others that are sharing segments of its path. This is particularly true at the bottleneck link. 
-
-Whenever traffic is arriving at a link at a rate that exceeds the link rate, the excess packets cause a queue to form (and grow) in the link buffer. Conversely, whenever the rate of traffic arrivals is less than the egress link rate, the queue will drain.    
-
-If a sender sends its traffic to quickly, such that they are arriving at the bottleneck link faster than they can be forwarded onward, they will cause the queue in the bottleneck link buffer to grow, resulting in increasing latency for all applications that are sharing that buffer.  This buffering latency will continue to increase until the link begins discarding packets.  The buffering latency will only decrease when the rate of packet arrivals is less than the rate at which packets depart. 
+Whenever traffic is arriving at a link at a rate that exceeds the link rate, the excess packets cause a queue to form (and grow) in the link buffer. Conversely, whenever the rate of traffic arrivals is less than the egress link rate, the queue will drain. If a sender sends its traffic to quickly, such that they are arriving at the bottleneck link faster than they can be forwarded onward, they will cause the queue in the bottleneck link buffer to grow, resulting in increasing latency for all applications that are sharing that buffer.  This buffering latency will continue to increase until the link begins discarding packets.  The buffering latency will only decrease when the rate of packet arrivals is less than the rate at which packets depart. 
 
 Considering that the path that an application's packets take traverses multiple links, with each link potentially having a different capacity as well as a different (and constantly shifting) mix of other applications sharing it, it may be hard to imagine how the sender knows at what data rate it should send its traffic. The answer is that it doesn't, at least not directly. 
 
