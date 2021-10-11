@@ -276,36 +276,33 @@ LEO systems with satellite-to-satellite communication (*inter-satellite links*) 
 ## Buffering delays  
 
 In general, networking equipment needs to have the ability to buffer (queue) bursts of traffic that arrive at a rate that exceeds the rate of the output (egress) interface. This buffering capability serves a number of purposes:  
-* when the egress interface is the bottleneck, it allows the existing congestion control algorithms to fully utilize that interface,  
-* it allows applications to send (relatively short) bursts of packets without having to be concerned about the egress interface rates along the path, and  
-* it handles the incast problem, where packets from multiple ingress interfaces in the device are destined to the same egress interface.
+* it allows applications to send (relatively short) bursts of packets without having to be concerned about the egress interface rates along the path,   
+* it handles the incast problem, where packets from multiple ingress interfaces in the device are destined to the same egress interface at the same time, and
+* when the egress interface is the bottleneck, it allows the existing *congestion control* algorithms to fully utilize that interface.
+
+The topic of congestion control and its interaction with bottleneck link buffers is an important one, which we'll explore below.
 
 ### Impact that senders & network protocols have on path latency  
 
-The data rate and patterns that applications send can have a high impact on the latency that the user experiences. 
-Applications usually share a bottleneck link, and thus in many cases also other applications will be impacted due to latency, loss, and the reduced share of the capacity. 
+The manner with which an application sends its traffic can have a large impact on the latency that it experiences.  In addition, it is commonly the case that links along the path are shared by multiple applications all sending traffic at the same time. Thus, each application has the potential to affect the latency, loss and capacity available to the others that are sharing segments of its path. This is particularly true at the bottleneck link. 
 
-Latency is due to non-adequate alignment between the data rate available in the network and the data rate that is send by applications. 
-Latency is optimally low when both are exactly aligned. If the sending rate is too low, it takes longer to complete the task. If it is too high,
-the task data is buffered and must wait in the network, potentially also creating similar latency for other applications sharing the link bottleneck.
+Whenever traffic is arriving at a link at a rate that exceeds the link rate, the excess packets cause a queue to form (and grow) in the link buffer. Conversely, whenever the rate of traffic arrivals is less than the egress link rate, the queue will drain. If a sender sends its packets to quickly, such that they are arriving at the bottleneck link faster than they can be forwarded onward, they will cause the queue in the bottleneck link buffer to grow, resulting in increasing latency for all applications that are sharing that buffer.  This buffering latency will continue to increase until the link begins discarding packets.  The buffering latency will only decrease when the rate of packet arrivals is less than the rate at which packets depart. 
 
-Senders implement a “Congestion Control” algorithm to manage adaptation to the available link rate. 
-They are designed to result in “reasonable” fairness between flows if they share the bottleneck. 
+Considering that the path that an application's packets take traverses multiple links, with each link potentially having a different capacity as well as a different (and constantly shifting) mix of other applications sharing it, it may be hard to imagine how the sender knows at what data rate it should send its traffic. The answer is that it doesn't, at least not directly. 
 
-It’s a complex distributed dynamic system, and has worked surprisingly well, but it isn’t perfect and is still evolving. 
-Unfortunately, the predominant design of congestion controls in the past, worked better the deeper the queues. 
-When queues are controlled to lower latencies, not all link capacity will be used and flows with a longer base RTT will get a smaller share. 
-If low latency is aspired, congestion controls need to remove these low latency penalties. Part of the ongoing evolution is the introduction 
-of new congestion controls that are smoother and less RTT dependent, together with and supported by new queuing mechanisms.
+Senders need to implement mechanisms to detect when they are sending data too quickly, and then react by slowing their sending rate.  These mechanisms are referred to as "Congestion Control" algorithms.  Senders that wish to send data as quickly as possible (i.e. *capacity-seeking* senders) need to effectively *probe* for available capacity by increasing their sending rate and then backing off when they sense congestion.  Since the amount of available capacity along the path changes as other flows come and go, these capacity-seeking senders generally increase their sending rate, sense congestion, back off, then increase their sending rate again in a never-ending loop. 
 
-Perfect alignment of sender and network rate is a challenge if the available rate can fluctuate rapidly. By the time the available rate is 
-communicated to the sender, the available capacity might already have changed, due to other flows joining and leaving, changing link/channel conditions 
-or other rapid flow scheduling changes. For this reason, a compromise is typically needed between leaving enough link capacity unused to avoid short latency spikes, 
-or by allowing deeper buffer variations to keep the link capacity utilized. Since more than enough capacity is typically available today, more emphasis 
-should be placed on keeping latency spikes small and infrequent instead of keeping the link fully utilized.
+Common protocols that use congestion control are TCP where the congestion control algorithms are built-in to the operating system and UDP where the congestion control algorithm needs to be provided by the application. Typically for UDP, congestion control algorithms will be part of the application protocols that are implemented on top of UDP, such as QUIC for web traffic and RTP for real-time streaming.
 
-Common protocols that use congestion control are TCP where the congestion control algorithms are build-in the operating system and 
-UDP where the congestion control algorithm needs to be provided by the application. Typically for UDP, congestion control algorithms will be part of the application protocols that are defined on top of UDP, such as QUIC for web traffic and RTP for real-time streaming.
+Congestion control algorithms have been designed such that when all of the capacity-seeking senders that share a particular bottleneck link implement the same (or very similar) congestion control algorithm, the result is that they tend to share the link capacity in a reasonably fair manner, automatically re-balancing themselves as new flows join and as flows complete.  It’s a complex, distributed, dynamic system, and has worked surprisingly well, but it isn’t perfect and is still evolving. 
+
+Unfortunately, the predominant congestion control algorithm today, "Cubic" (which traces its roots to the "Reno" TCP algorithm designed by Van Jacobsen in 1986), works best when the bottleneck link has a deep buffer, and it generally keeps that buffer full, resulting in significant latency. When the bottleneck link doesn't provide a deep buffer, flows with a longer base RTT will get a smaller share of capacity, and the set of flows may not be able to keep the link fully utilized. 
+
+Google's "Bottleneck Bandwidth and RTT" (BBR) algorithm attempts to remedy this situation by detecting the increase in *latency* caused by congestion, and then backing off to a sending rate that minimizes this additional delay.  But since BBR flows commonly share the network with Cubic flows, the result can sometimes be unpredictable [https://www3.cs.stonybrook.edu/~arunab/papers/imc19_bbr.pdf].
+
+Part of the ongoing evolution of congestion control in the internet is the introduction of new congestion controls that are smoother and less RTT dependent, together with and supported by new queuing mechanisms. 
+
+Perfect alignment of sender and network rate may never be possible, since the available rate can fluctuate rapidly. By the time a sender is able to adjust its sending rate, the available capacity might already have changed due to other flows joining and leaving, or due to changing link/channel conditions. For this reason, a compromise is typically needed between leaving enough link capacity unused to avoid short latency spikes (when the available capacity dips), or by allowing deeper buffer variations to keep the link capacity utilized. Since more than enough capacity is typically available today, more emphasis should be placed on keeping latency spikes small and infrequent instead of keeping the link fully utilized.
 
 ### Queuing implementations  
 
