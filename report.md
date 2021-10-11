@@ -335,6 +335,8 @@ When the number of queues available is limited, or individual flows cannot be id
 
 ## Path selection aspects 
 
+Outside of the home network and access network, the remainder of the path that an application's traffic takes depends on where the other endpoint is (sometimes there is a choice), on the connectivity options between the user's ISP and the other networks that can carry the traffic, and on the routing decisions made by the ISPs between the two endpoints.
+
 ### Core networks and backbone links
 
 Broadband internet networks, regardless of whether they are fixed or mobile, interconnect with internet peering and exchange points via telco & ISP owned metro and regional *core* networks. These core networks generally consist of medium to long haul fiber links that connect the region's central offices (CO) or headends (HE), which feed the end users, to the peering and interconnection points of presence.
