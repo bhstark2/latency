@@ -241,7 +241,7 @@ is best deployed.
 
 # Definitions
 
-## Throughput vs. Speed
+## Throughput vs. "Speed"
 
 It's important that we first make a point concerning the difference
 between what network engineers describe as the "throughput",
@@ -279,10 +279,10 @@ perspective. Additionally, increasing the throughput of the path (e.g.,
 from 10 Mbps to 1 Gbps) can reduce latency in some cases. One case where
 this can happen is with latency degradation due to *load* on the path.
 For example, a single video stream at 5 Mbps might cause queuing delays
-50% of the time on a 25 Mbps connection, but only 5% of the time on a
-100 Mbps connection. To be clear, this is a case of reducing the
+50% of the time on a 10 Mbps connection, but only 0.5% of the time on a
+1 Gbps connection. To be clear, this is a case of reducing the
 frequency with which a latency degradation occurs, not the severity of
-it. In both example cases - a 25 Mbps connection and a 100 Mbps
+it. In both example cases - a 10 Mbps connection and a 1 Gbps
 connection - latency could be severely disruptive, just less often so
 with the higher throughput connection. Another case where increasing
 throughput can impact latency is when the queue/buffer is statically
