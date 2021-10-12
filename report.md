@@ -485,12 +485,12 @@ Ethernet          | -
 Wi-Fi             | media access can be >45ms, scanning introduces latency spikes
 G.hn              | latency varies per # of nodes 
 DOCSIS            | media access: 2 - 8 ms, recent versions reduce buffering delay
-DSL / G.fast      | interleaving adds 2-20ms if enabled[^bhs1]
+DSL / G.fast      | interleaving adds 2 - 20 ms if enabled[^bhs1]
 xPON              | media access delay is system dependent   
 LTE / 5G          | LTE incurs session setup delays
 
 
-[^bhs1]: ISP controls whether or not interleaving is enabled and how much interleaving delay, if enabled.
+[^bhs1]: The ISP controls whether or not interleaving is enabled and how much interleaving delay, if enabled.
 
 The next subsections discuss some nuances of the various link technologies that impact latency performance.
 
