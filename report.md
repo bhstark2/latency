@@ -205,10 +205,11 @@ water flow. Or the person holding the funnel may tell the person pouring
 water to slow down (akin to congestion notification). Whether as a
 result of noticing water spilling over the top of the funnel or
 receiving a signal from the person holding the funnel to slow down, the
-person then begins to reduce the volume of their pour. As the incoming
-flow of water moderates, and the volume between input and output
-equalizes, the water level in the funnel (buffer) can then begin to
-drain.
+person then begins to reduce the rate of their pour. If the incoming
+flow of water slows down such that the flow rate between input and output
+equalizes, the water level in the funnel (buffer) then stabilizes. 
+If the input flow rate becomes less than the output flow rate, then 
+the water level (buffer) begins to decline.
 
 There will always be a constrained link on an Internet path, due to its
 packet-based design which means in part that it does not create
