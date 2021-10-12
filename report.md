@@ -479,15 +479,15 @@ There can be significant latency differences between access and home
 network technologies due to these factors. The following table
 summarizes some of these differences.
 
-   Technology     |   Notes
-------------------|-----------------------------------------
-Ethernet          | -
-Wi-Fi             | media access can be >45ms, scanning introduces latency spikes
-G.hn              | latency varies per # of nodes 
-DOCSIS            | media access: 2 - 8 ms, recent versions reduce buffering delay
-DSL / G.fast      | interleaving adds 2 - 20 ms if enabled[^bhs1]
-xPON              | media access delay is system dependent   
-LTE / 5G          | LTE incurs session setup delays
+  Technology  |   Notes
+--------------|-----------------------------------------
+Ethernet      | -
+Wi-Fi         | media access can be >45ms, scanning introduces latency spikes
+G.hn          | latency varies per # of nodes 
+DOCSIS        | media access: 2 - 8 ms, recent versions reduce buffering delay
+DSL/G.fast    | interleaving adds 2 - 20 ms if enabled[^bhs1]
+xPON          | media access delay is system dependent   
+LTE/5G        | LTE incurs session setup delays
 
 
 [^bhs1]: The ISP controls whether or not interleaving is enabled and how much interleaving delay, if enabled.
