@@ -428,26 +428,35 @@ header, check for bit errors, decide whether to forward the packet (and,
 if so, to which interface) or to discard it, and any other manipulation
 of the packet that takes place in the device. This delay is typically
 minimal, and providers of core networks will often further minimize this
-by using technologies like MPLS that have very simple packet headers.
+by using technologies like MPLS that have very simple packet headers.  
 
 - **propagation delay:** the time it takes for a bit of information to
 travel across the link. This is driven by the propagation velocity of
 the medium and the length of the link. It is immaterial for home network
 and access network links, but can become significant for long-haul
 backbone links. More detail is provided in
-[Appendix B: Propagation Delays of Commonly-Used Networking Media].
+[Appendix B: Propagation Delays of Commonly-Used Networking Media].  
 
 - **serialization/encoding:** the amount of time that it takes for the
 transmitter to finish sending the entire packet on the link, from the
 first bit until the last bit. Aside from features such as time-based
-interleaving utilized by some link technologies, this is negligible.
+interleaving utilized by some link technologies, this is negligible.  
 
 - **media access delay:** the delay incurred due to arbitrating access
  of multiple devices to a shared medium. This is seen in some home
  networking technologies (e.g., powerline, coax, phoneline), some
- wireless technologies, DOCSIS, and some PON implementations. Media
+ wireless technologies, DOCSIS, and some PON implementations. 
+ In addition, some link
+ technologies support the retransmission of packets lost due to noise
+ and interference. This feature enables a lossy link (e.g., a wireless
+ link) to achieve acceptable packet loss rates, but results in
+ additional latency to complete the loss detection and retransmission
+ process.
+ Media
  access delays can range from less than a millisecond to tens or even
- hundreds of milliseconds. **buffering delay:** also referred to as
+ hundreds of milliseconds.  
+
+- **buffering delay:** also referred to as
  queuing delay, this is the time packets wait in a buffer or a queue in
  the network element while other traffic is being transmitted. The
  buffering delay is variable, depending on instantaneous traffic load,
@@ -460,32 +469,26 @@ interleaving utilized by some link technologies, this is negligible.
  streaming video player) appears to wait while it builds up an amount
  of data in its playout buffer, before it begins playing the media.
  This is an entirely different phenomenon, and is not what we refer to
- as buffering in this report.* **retransmission delays:** some link
- technologies support the retransmission of packets lost due to noise
- and interference. This feature enables a lossy link (e.g., a wireless
- link) to achieve acceptable packet loss rates, but results in
- additional latency to complete the loss detection and retransmission
-e- process.
+ as buffering in this report.*    
 
 - **miscellaneous, link specific:** some link technologies can introduce
 additional delays that can be significant. Some of these are discussed
-below.
-
-
+below.  
 
 There can be significant latency differences between access and home
 network technologies due to these factors. The following table
 summarizes some of these differences.
 
-   Technology     | Interleaving       | Media Acquisition | Network Architecture
-------------------|--------------------|-------------------|---------------------
-Switched Ethernet | NA                 | NA                | NA
-Wi-Fi             | NA                 | 0.03 - 45 ms      | NA for non-3GPP Wi-Fi
-G.hn              | NA                 | varies per # of nodes | NA
-DOCSIS            | NA                 | 2 - 8 ms          | NA
-DSL / G.fast      | 2-20ms if enabled[^bhs1] | NA          | NA
-PON               | NA                 | NA                | NA
-LTE / 5G          | NA                 | NA for licensed spectrum | varies widely
+   Technology     |  Media Acquisition | Link Specific Notes
+------------------|--------------------|---------------------
+Switched Ethernet | 0                  | -
+Wi-Fi             | 0.03 - more than 45 ms | WiFi scanning introduces periodic latency spikes
+G.hn              | varies per # of nodes | -
+DOCSIS            | 2 - 8 ms           | recent versions reduce buffering delay
+DSL / G.fast      | 0                  | Interleaving adds 2-20ms if enabled[^bhs1]
+xPON              | system dependent   | -
+LTE / 5G          | 0 for licensed spectrum | LTE incurs session setup delays
+
 
 [^bhs1]: ISP controls whether or not interleaving is enabled and how much interleaving delay, if enabled.
 
