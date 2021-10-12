@@ -704,7 +704,7 @@ Virtual reality environments require extensive compute resources in order to ren
 	- Investigate future methods for delivering very low latency services.
 * Application developers and operating system developers should:	
 	- Investigate future methods for delivering very low latency services, which may depend upon applications marking their traffic in new ways, among other changes;
-	- Consider presenting working latency metrics to                     s in an easy-to-understand manner;
+	- Consider presenting working latency metrics to end users in an easy-to-understand manner;
 	- Adapt application or operating system behavior in response to reductions in working latency (e.g., reduce pre-caching if network responsiveness improves sufficiently).
 
 # Appendix A: Layered Network Model {-}
