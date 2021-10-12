@@ -481,8 +481,8 @@ summarizes some of these differences.
 
    Technology     |   Notes
 ------------------|-----------------------------------------
-Switched Ethernet | -
-Wi-Fi             | media access can exceed 45ms, scanning introduces periodic latency spikes
+Ethernet          | -
+Wi-Fi             | media access can be >45ms, scanning introduces periodic latency spikes
 G.hn              | latency varies per # of nodes 
 DOCSIS            | media access: 2 - 8 ms, recent versions reduce buffering delay
 DSL / G.fast      | interleaving adds 2-20ms if enabled[^bhs1]
