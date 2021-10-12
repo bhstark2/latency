@@ -312,17 +312,20 @@ some content.
 Latency has been an accepted performance metric of interest since the
 inception of modern data communications based on digital technology.
 Stated formally, network latency represents the time that it takes for
-data packets to travel from one network host to another network host.
+a data packet to travel from one network host to another network host.
 Since data packets cannot instantaneously be sent from the source to its
 destination, the network latency metric provides a measure of the total
 delay experienced by the packet as it is transmitted through many
 different network nodes along an end-to-end path in order to arrive at
-its intended destination. For residential ISPs, this metric can often be
+its intended destination. For ISPs, this metric can often be
 further focused to separately measure downstream latency and upstream
 latency to gauge network delays encountered in sending data in the
 downstream direction through the network to the end user, or in the
 upstream direction from the end user into the core network,
-respectively.
+respectively.  For network operators more generally, understanding the 
+latency performance of the network generally involves measuring the latency 
+across multiple network segments (e.g. the home network, the access network,
+the metro core, etc.).
 
 The network latency encountered in nominal or light usage conditions is
 known as the idle latency of the network. The latency between a laptop
@@ -360,17 +363,8 @@ result of a mix of different kinds of traffic on the network (e.g., bulk
 downloads and online game play). When adding in real traffic of any type
 and volume, we can then see how the network reacts under real-world
 conditions and understand the so-called "working latency" of the path,
-also sometimes knows as latency under load (LUL).
+also sometimes known as latency under load (LUL).
 
-Thus, to effectively measure what end users really experience, it is
-essential to measure working latency rather than idle latency. Indeed,
-the problem with idle latency measurements is that they fail to reliably
-measure network performance when working traffic loads are present on
-the network, which can result in misleading characterizations of the
-network delays present on the network when it is operating under normal
-load conditions. Working latency measurements taken when network traffic
-is present provides a more realistic measure of network delays
-experienced by users.
 
 # Sources/Contributors to Latency
 
