@@ -482,7 +482,7 @@ summarizes some of these differences.
    Technology     |  Media Acquisition | Link Specific Notes
 ------------------|--------------------|---------------------
 Switched Ethernet | 0                  | -
-Wi-Fi             | 0.03 - more than 45 ms | WiFi scanning introduces periodic latency spikes
+Wi-Fi             | 0.03 - >45 ms | scanning introduces periodic latency spikes
 G.hn              | varies per # of nodes | -
 DOCSIS            | 2 - 8 ms           | recent versions reduce buffering delay
 DSL / G.fast      | 0                  | Interleaving adds 2-20ms if enabled[^bhs1]
