@@ -12,19 +12,19 @@ Today when people think of end-user Internet performance, it is typically solely
 
 But over the last decade, the industry, including protocol developers [refs], researchers [refs], operating system developers [refs], application providers [refs], Internet Service Providers (ISPs) [refs], and standards development organizations [ref to recent IAB workshop report and IETF TSV WG materials] have slowly begun to recognize that another key factor significantly affecting QoE is “latency”, which is critical to any application involving user interaction, from web browsing to video streaming and everything in between. As this is a recent development, it has meant that latency is not well understood in the policy or regulatory spheres or by the average consumer — or even by many in the industry. One of the reasons for this has been that there has historically been a test of idle (best-case) latency, but that test has very little to do with end-user QoE.
 
-## Definition of Latency
+## Examining Latency
 
-While latency may sound technical or complicated, what it represents is quite simple: latency is simply *delay* — the time between asking for something on the Internet and receiving it. The less delay that a network or application has, the more “responsive” a service will feel to an end user. The more delay (or lag), the worse it will feel, and every user is familiar with user interface cues that reflect this — such as a spinning wheel to communicate waiting or buffering. Having low delay is centrally important to any application involving a user interacting with a device or application, and will become ever more so as new cloud-based applications, augmented reality, virtual reality, and other new application classes emerge. Critically, however, reducing delay (latency hereafter) will *meaningfully improve all existing user applications*.
+While latency may sound technical or complicated, what it represents is quite simple: latency is simply *delay* — such as the time between for example asking for something on the Internet and receiving it. This delay can be considered on a one-way basis (upsteam or downstream) or a round-trip basis (both directions). The less delay that a network or application has, the more “responsive” a service will feel to an end user. The more delay (or lag), the worse it will feel, and every user is familiar with user interface cues that reflect this — such as a spinning wheel to communicate waiting or buffering. Having low delay is centrally important to any application involving a user interacting with a device or application, and will become ever more so as new cloud-based applications, augmented reality, virtual reality, and other new application classes emerge. Critically, however, reducing delay (latency hereafter) will *meaningfully improve all existing user applications*.
 
 In addition, it is also important to have a *consistently responsive* service where delay stays consistently low no matter how heavily utilized a user’s Internet connection may be and no matter what mix of applications are being used. Another way of saying this is that delay should not vary by much; the less variability the better. If this is not so, as is often the case on the Internet today, then delay can vary wildly from very good to very bad. To an end user that variability ends up being very confusing — one moment their network and applications appear to perform well and the next moment they do not. They often just accept “that’s how the Internet works” and while there was a bit of a hiccup one moment everything seems okay now, so they ignore this oddly variable performance. Network engineers use the term “jitter” when describing the variability of latency, which we will use and explain later in the report.
 
-The main test of latency today, the results of which are listed in reports such as the FCC’s Measuring Broadband America (MBA) report [see Section D of the 10th FCC MBA report at https://www.fcc.gov/reports-research/reports/measuring-broadband-america/measuring-fixed-broadband-tenth-report], are really what is becoming better understood as a test of *idle latency*. Such an idle-latency test is typically performed by sending a single ping[^1] packet from a home to a destination server on the Internet and reflects the round trip time (RTT) for the packet to travel to the server and back. However, these tests are typically performed with no other meaningful traffic utilizing the end user’s Internet connection at the exact moment of the idle-latency test.
+The main test of latency today, the results of which are listed in reports such as the FCC’s Measuring Broadband America (MBA) report [see Section D of the 10th FCC MBA report at https://www.fcc.gov/reports-research/reports/measuring-broadband-america/measuring-fixed-broadband-tenth-report], are really what is becoming better understood as a test of *idle latency*. Such an idle-latency test is typically performed by sending a single ping[^1] packet from a home to a destination server on the Internet and reflects the round trip time (RTT) for the packet to travel to the server and back. However, these tests are typically performed with no other meaningful traffic utilizing the end user’s Internet connection at the exact moment of the idle-latency test. As a result, it does not reflect the end user's real-world latency performance when they use their Internet connection. 
 
 [^1]: ping is discussed further in [Ping (ICMP)] 
 
-Idle latency tends to reflect the nothing more that the inherent attributes of different access network technologies, such as minor differences in the way that packets are handled in a fiber to the home (FTTH), hybrid fiber-coax (HFC), Digital Subscriber Line (DSL), Wi-Fi, satellite, or other access network type. While at the extremes in comparing for example FTTH and satellite, the differences in idle latency may be somewhat significant, by and large the gap between different wired connections is insignificant and does not have a significant impact on end-user QoE. In contrast, differences in *working latency* can be significant and that measure is more directly representative of real-world performance. Idle latency can therefore be considered a mildly interesting reflection of access network technology and network topology but when it comes to how end users experience the Internet it is nothing more than a measurement of a connection when it is not being actively used and is therefore essentially meaningless to end-user QoE. *To really understand end-user QoE, we need to look at working latency rather than idle latency.*
+Idle latency tends to reflect the nothing more that the inherent attributes of different access network technologies, such as minor differences in the way that packets are handled in a fiber to the home (FTTH), hybrid fiber-coax (HFC), Digital Subscriber Line (DSL), Wi-Fi, satellite, or other access network type. Idle latency will of course measure an end-to-end path, so if that path is very long it may also reflect simply distance (e.g. within two points of a city vs. across an ocean), but very long distance idle latency tests are not typical. Coming back to access network, while at the extremes in comparing for example FTTH and satellite, the differences in idle latency may be somewhat significant, by and large the gap between different wired connections is modest and does not have a significant impact on end-user QoE. In contrast, differences in *working latency* can be significant and that measure is more directly representative of real-world performance. Idle latency can therefore be considered a mildly interesting reflection of access network technology and network topology but when it comes to how end users experience the Internet it is nothing more than a measurement of a connection when it is not being actively used and is therefore essentially meaningless to end-user QoE. *To really understand end-user QoE, we need to look at working latency rather than idle latency.*
 
-When a longer test of latency is run at the same moment that the Internet connection is being utilized, this is a test of working latency. Working latency is therefore a better reflection of the real-world performance of an end user’s Internet connection. The difference between idle latency and working latency can be significant — on the order of hundreds of milliseconds to several seconds. That difference is the difference between a player losing an online game, between a good and bad video conference experience, between slow start of video streaming playback and instant playback, etc. The differences between working latency from one network to another and one user to another at the current time are significant and bear as directly on end-user QoE as connection speed.
+When a longer duration test of latency is run at the same moment that the Internet connection is being utilized, this is a test of working latency. Working latency is therefore a better reflection of the real-world performance of an end user’s Internet connection. The difference between idle latency and working latency can be significant — on the order of hundreds of milliseconds to several seconds. That is the difference between a player losing an online game, between a good and bad video conference experience, between slow start of video streaming playback and instant playback, etc. The differences between working latency from one network to another and one user to another at the current time are significant and bear as directly on end-user QoE as connection speed.
 
 A test of working latency typically involves running a speed test (a large file transfer) to heavily utilize a connection while in parallel running a series of ping tests to a destination server. This will show the packet delay when a connection is in use, reflecting real-world performance. To best measure what performance a user might expect, working latency tests will generally represent both the median[^2] of these measurements as well as the maximum and so therefore average (mean) and minimums are generally not useful or reflect expected realistic end-user QoE. That is because the minimum is likely close to or the same as idle latency and the average is not very useful if latency is highly variable across a wide spectrum of hundreds or thousands of milliseconds. So when we look at working latency, we will focus on the median and maximum measurements.
 
@@ -40,128 +40,45 @@ A good way to envision a buffer is to envision pouring water into a funnel that 
 
 There will always be a constrained link on an Internet path, due to its packet-based design which means in part that it does not create end-to-end circuits with dedicated capacity. As a result, the presence of a bottleneck link and a buffer is not good or bad — it is merely a fact of the design of the Internet. As well, the fact that some packets are lost at this bottleneck is also completely normal and indeed is essential, as this is a key part of the control signal or feedback loop to a sender to moderate how fast they are sending packets. Without trying to send at an increasingly higher rate, a sender would otherwise never be able to discover and fully utilize the maximum capacity of an end-to-end path, nor adjust to take advantage of new capacity as it becomes available. Thus, what’s critical is not that a queue exists or that packet loss will occur — it is how that buffer or queue performs and how quickly it can react to and communicate changing conditions.
 
-Network engineers refer to how a buffer performs as “queue behavior”. The predominant and most basic way to manage the behavior of a queue today is First-In First-Out (FIFO), which is easy to understand [ref to FIFO queue management]. But newer forms of queue management, such as various types of Active Queue Management (AQM) (discussed further in Section XX), have started to emerge in recent years that can dramatically improve the responsiveness of these network queues and therefore dramatically lower working latency.  
+Network engineers refer to how a buffer performs as “queue behavior”. The predominant and most basic way to manage the behavior of a queue today is First-In First-Out (FIFO), which is easy to understand [ref to FIFO queue management]. But newer forms of queue management, such as various types of Active Queue Management (AQM) (discussed further in [Active Queue Management]), have started to emerge in recent years that can dramatically improve the responsiveness of these network queues and therefore dramatically lower working latency.  
 
 This paper will further explore all of these topics, from a deeper dive into latency measurement to the newest forms of AQM and where that AQM is best deployed. 
 
 # Definitions 
-## Speed or Throughput
 
-What many end users think of as the “speed” of their Internet connection
-is what Internet engineers refer to using terms like
-“bandwidth”, “capacity”, and “throughput”.
-When we describe a link capacity as
-1 megabit per second, or
-1 gigabit per second, or 
-1 terabit per second, 
-that refers to the *amount* of data passing through a given point (such as a home's Internet connection) per second,
-not how *quickly* that data travels to its final destination.
-Thus, numbers expressed as "bits per second" are a measure of capacity, not speed -- and notice that the term is “band-width”, not “band-speed”.
+## Throughput vs. Speed
 
-Imagine for example filling a bucket with a garden hose.
-If the bucket is taking too long to fill, we can get a fatter hose - like a fire hose.
-The bucket now fills more quickly with the fire hose compared to the garden hose,
-not because the water is moving through the fire hose at a faster speed,
-but because there is a greater volume of water moving through the fire hose.
-Because the fire hose is wider than the garden hose, even if the individual water molecules are
-traveling down the pipe at the same speed, there are more of them,
-so the bucket fills faster.
+It's important that we first make a point concerning the difference between what network engineers describe as the "throughput", "bandwidth", or "capacity" of a network connection and what the layperson thinks about as the "speed" of a connection. When we describe a link capacity as 100 megabits per second, or 10 gigabits per second, or 1 terabit per second, that refers to the *amount* of data passing through a given point (such as a home's Internet connection) per second, not how *quickly* that data travels to its final destination. Thus, numbers expressed as "bits per second" are best understood as a measure of throughput, bandwidth, or capacity, and not speed (and this is why one correct term is band-width and not band-speed).
 
-To use another analogy,
-increasing bandwidth is like adding more lanes to a highway —
-it makes the highway wider, so it can carry more cars,
-but it doesn’t change the speed limit at which the cars may travel.
-Counting cars-per-minute passing a certain point on a highway
-tells you about the capacity (or width) of the highway,
-but it tells you nothing about the speed of the individual cars.
-Analogies are often imperfect, and this analogy,
-comparing network traffic to road traffic, also has to be interpreted carefully.
-Unlike cars on a road, which have human drivers who slow down in heavy traffic,
-photons traveling through glass fiber
-(or electrical signals traveling through wire)
-move at a constant speed.
-Photons do not slow down because there are other photons ahead of them in the fiber.
+(JL NOTE: Is this analogy useful or can it be deleted or modified?) To illustrate this with a simple analogy, imagine increasing the bandwidth is like adding more lanes to a highway — it makes the highway wider, so it can carry more cars, but it doesn’t change the speed limit at which the cars may travel. Counting cars-per-minute passing a certain point on a highway tells you about the capacity (or width) of the highway, but it tells you nothing about the speed of the individual cars. Similarly, on this road there may be a motorcycle and a tractor trailer truck traveling at the same speed in traffic, and so while the truck has higher cargo *capacity* than the motorcycle, it won’t get you to your destination any *faster* than the motorcycle.
 
-So, if photons and electrical signals travel at a constant speed and never
-slow down, how do computer networks experience congestion that slows down
-the responsiveness of the network and degrades user experience?
+## Latency vs. Throughput
+
+Latency and throughput are two distinct characteristics of a path between a sender and a receiver, and they are largely unrelated to one another, but not completely so - they can influence one another.  As we'll describe later, some existing network protocols are unable to achieve high throughput when there is significant latency present.  So, high latency can reduce the apparent throughput from the user's perspective.  Additionally, increasing the throughput of the path (e.g., from 10 Mbps to 1 Gbps) can reduce latency in some cases.  One case where this can happen is with latency degradation due to *load* on the path.  For example, a single video stream at 5 Mbps might cause queuing delays 50% of the time on a 25 Mbps connection, but only 5% of the time on a 100 Mbps connection.  To be clear, this is a case of reducing the frequency with which a latency degradation occurs, not the severity of it. In both example cases -  a 25 Mbps connection and a 100 Mbps connection - latency could be severely disruptive, just less often so with the higher throughput connection. Another case where increasing throughput can impact latency is when the queue/buffer is statically sized (e.g., as a number of bits or bytes), resulting in a larger buffering delay on lower throughput connections.  This phenomenon, queuing delay, is important and is discussed in some detail in this report.      
 
 ## Latency
 
-Delays in computer networks do not occur in the cables;
-they occur in the packet switching equipment that connects the cables.
-When a data packet arrives in a piece of switching equipment,
-and the cable on which the packet is supposed to depart is already busy,
-the data packet has to wait its turn.
-If there are many other packets similarly waiting,
-the data packet may have to wait a significant amount of time (and either be held for that wait time in a buffer or discarded as packet loss).
+Network latency is a core characteristic of any network path, including end user broadband connections to the Internet, paths between two servers in a Content Delivery Network, paths between two enterprise network locations, and so on. This paper more narrowly focus on latency as it pertains to end users, however, and so we will focus in on latency as it relates to a broadband service, because this has a significant impact on how well applications generally work over the Internet. There are certainly a wide variety of other latency variables that significantly affect end user QoE but many of those have already been broadly addressed and optimized by network engineers. One example here might be the role that Content Delivery Networks (CDNs) play in performing "content localization", whereby users are directed to server destinations that are closed to where they are located - which means they have a shorter end-to-end path and thus lower latency to access some content.
 
-Another term commonly used by Internet engineers is “latency”.
-The word “latent” means “hidden”,
-and latency is the “hidden” component of delay.
+Latency has been an accepted performance metric of interest since the inception of modern data communications based on digital technology. Stated formally, network latency represents the time that it takes for data packets to travel from one network host to another network host. Since data packets cannot instantaneously be sent from the source to its destination, the network latency metric provides a measure of the total delay experienced by the packet as it is transmitted through many different network nodes along an end-to-end path in order to arrive at its intended destination. For residential ISPs, this metric can often be further focused to separately measure downstream latency and upstream latency to gauge network delays encountered in sending data in the downstream direction through the network to the end user, or in the upstream direction from the end user into the core network, respectively. 
 
-If we send 50 kilobytes of data using an old dial-up modem,
-we expect that to take a few seconds.
-If we send 500 kilobytes of data,
-we would expect that to take ten times longer.
-And if we send 500 megabytes,
-we would expect that to take 1000 times longer than 500 kilobytes.
+The network latency encountered in nominal or light usage conditions is known as the idle latency of the network. The latency between a laptop and the next hop of a packet on the LAN will typically be quite short. As you add successive network hops from the laptop to the home gateway, then the ISP network, and all the way to the destination server, the latency will increase as each new link in the chain is added. But, because each link may introduce a different amount of latency, a large number of links in and of itself doesn't necessarily mean high latency. This is because some links can be quite short, such as a fiber link between a switch and a server in a data center, while other links can be long, such as an east-west fiber link across the U.S. And physical media such as fiber is limited by the physics of the speed of light. This means that, generally speaking, latency increases as distance increases: the time to send a packet across town will be less than the time to send a packet across the country. 
 
-(Note from JL: suggest editing this paragraph down for legth - may be a bit too much detail for a lay reader)
-If we plot this data on a chart, we’d expect to see a straight line,
-where the more data is sent the longer it takes.
-But if we take that same straight line and extrapolate it back in
-the other direction, towards a hypothetical “zero sized” message,
-we find that the point where our straight line crosses the time
-axis is not zero.
-Even for a hypothetical zero-sized message,
-the time it takes to deliver it is non-zero.
-The time to deliver a message is made up of an overt component,
-related to the size of the message
-divided by the transmission rate of the medium,
-and a hidden component, which doesn’t vary with message size.
-As the transmission rates of home Internet connections
-have grown, from
-kilobits per second to
-megabits per second and even
-gigabits per second,
-the overt component of delay — the size-related component —
-has become negligible for all but the largest data transfers.
-But the hidden component of delay — the size-invariant latency —
-has remained mostly unchanged since the Internet’s birth in the 1980s.
+Latency also varies by different types of physical media or type of network (e.g., type of ISP access network technology). For example, looking at the physical media, inside a datacenter for example, a gigabit fiber connection will typically have lower latency than a copper-based 10 Mbps Ethernet connection. In addition, the latency properties of ISP access network technologies will also cause latency to vary — this subject is discussed futher in the next section.  As a result, idle latency tests of an end-to-end path will simply reflect (1) distance and (2) underlying network technologies. This is the baseline latency that is the starting point for understanding real world end-user performance (QoE).
 
-This is how we have arrived at an Internet today where
-the quality of the end-user experience is now determined almost entirely by the latency
-— the hidden size-invariant component of delay —
-and hardly at all by the commonly measured
-bandwidth, capacity, or throughput of the connection.
+Critically however for this paper, latency also varies - and significantly so - based on underlying network conditions. That means that latency may increase as traffic volume increases or as the capacity of a connection fills up. It can also mean that latency varies as a result of a mix of different kinds of traffic on the network (e.g., bulk downloads and online game play). When adding in real traffic of any type and volume, we can then see how the network reacts under real-world conditions and understand the so-called "working latency" of the path, also sometimes knows as latency under load (LUL). 
 
-If you want to drive from New York to San Francisco,
-a moving truck will not get you to San Francisco
-faster than a four-door family car.
-Certainly, if you are moving to San Francisco and have a lot of possessions to
-transport then a moving truck has a higher cargo *capacity* than
-the four-door family car, but it won’t get you there *faster*.
-
-Network latency is a core characteristic of broadband service that is receiving increasing attention as it has a significant impact on how well applications work over the Internet. Latency has been an accepted performance metric of interest since the inception of modern data communications based on digital technology. Stated formally, network latency represents the time that it takes for data packets to travel from one network host to another network host. Since data packets cannot instantaneously be sent from the source to its destination, the network latency metric provides a measure of the total delay experienced by the packet as it is transmitted through many different network nodes in order to arrive at its intended destination. For residential ISPs, this metric can often be further focused to reflect downstream latency and upstream latency to measure network delays encountered in sending data in the downstream direction through the network to the end user, or in the upstream direction from the end user into the core network, respectively. 
-
-The network latency encountered in nominal or light usage conditions is known as the idle latency of the network. The latency between a laptop and the next hop of a packet on the LAN will typically be quite short. As you add successive network hops from the laptop to the home gateway, then the ISP network, and all the way to the destination server, the latency will increase as each new link in the chain is added. But, because each link may introduce a different amount of latency, a large number of links in and of itself doesn't necessarily mean high latency.
-
-This is because some links can be quite short, such as a fiber link between a switch and a server in a data center, while other links can be long, such as an east-west fiber link across the U.S. And physical media such as fiber is limited by the physics of the speed of light. This means that, generally speaking, latency increases as distance increases: the time to send a packet across town will be less than the time to send a packet across the country. 
-
-Latency also varies by different types of physical media or type of network (e.g., type of ISP access network technology). For example, looking at the physical media, a gigabit fiber connection will typically have lower latency than a copper-based 10Mb/s Ethernet connection. In addition, the latency properties of ISP access network technologies will also cause latency to vary — this subject is discussed futher in the next section.  As a result, idle-latency tests of an end-to-end path will simply reflect (1) distance and (2) underlying network technologies. This is the baseline latency that is the starting point for understanding real world end-user performance.
-
-However, latency also varies, and significantly so, based on underlying network conditions. That means that latency may increase as traffic volume increases or as the capacity of a connection fills up. It can also mean that latency varies as a result of a mix of different kinds of traffic on the network (e.g., bulk downloads and online game play). When adding in real traffic of any type and volume, we can then see how the network reacts under real-world conditions and understand the so-called working latency of the path. Thus, the problem with idle-latency measurements is that they fail to reliably measure network performance when working traffic loads are present on the network, which can result in misleading characterizations of the network delays present on the network when it is operating under normal load conditions. Latency measurements taken when significant network traffic is present provides a more realistic measure of network delays is known as network latency under load (LUL).
-
-## Latency and Speed
-
-Latency and speed are two different characteristics of a path between a sender and a receiver, and they are largely orthogonal, but not completely so - they can influence one another.  As we'll describe later in this paper, some existing network protocols are unable to transfer data at high speed when there is significant latency present.  So, high latency can reduce the apparent speed from the user's perspective.  Additionally, increasing the speed of the path can reduce latency in some cases.  One case where this can happen is with latency degradation due to *load* on the path.  For example, a single video stream at 5 Mbps might cause queuing delays 50% of the time on a 10 Mbps connection, but only 5% of the time on a 100 Mbps connection.  To be clear, this is a case of reducing the frequency with which a latency degradation occurs, not the severity of it. Another case where increasing speed can impact latency is when the queue/buffer is statically sized, resulting in a larger buffering delay on lower speed connections.  This phenomenon, queuing delay, is important and is discussed in some detail in this report.         
+Thus, to effectively measure what end users really experience, it is essential to measure working latency rather than idle latency. Indeed, the problem with idle latency measurements is that they fail to reliably measure network performance when working traffic loads are present on the network, which can result in misleading characterizations of the network delays present on the network when it is operating under normal load conditions. Working latency measurements taken when network traffic is present provides a more realistic measure of network delays experienced by users.
 
 # Sources/Contributors to Latency
 
 As discussed above, latency is a property of the end-to-end journey that a packet takes from its source to its destination.  As a result, the latency that any individual packet experiences is influenced by all of the processes that are involved in handling that packet, from the instant that the sending application generates it, until it is successfully received by the receiving application.  This includes processes in the sender itself, as packets are handled by the operating system and the network interface; the properties and *state* of each network element and link that is involved in forwarding the packet; and the processes in the receiver that are involved in delivering the packet from the network interface, to the operating system, and then to the application. All of these aspects accumulate to result in the overall end-to-end latency that the packet experiences.
 
 This section provides an overview of these processes and properties with a particular focus on the factors that have a material effect on the end-to-end latency.  We start with some of the properties of the network hops themselves, then discuss the phenomenon of buffering delay (which is driven by the sender behavior as well as the properties of the network), we move on to cover aspects of path selection and core network topologies, then mention additional latency factors that are introduced by the endpoints (sender and receiver).
+
+But as noted above, it is easy to misunderstand the source of latency. If you imagine a user with a 1 Gbps symmetric broadband connection that is communicating with a server that is relatively close by, it is certainly possible that the end-to-end path is entirely fiber-based and yet latency can still be an issue. Unlike cars on a road, which have human drivers that slow down when they encounter heavy traffic, photons traveling through glass fiber move at a constant speed (the speed of light). Photons do not slow down because there are other photons ahead of them in the fiber. So, if photons travel at a constant speed and never slow down, how do computer networks experience congestion that slows down the responsiveness of the network and degrades user experience?
+
+The answer is that delays in computer networks do not occur in the cables; they occur in the packet switching equipment that connects the cables (i.e., routers, access points, network cards, operating systems). When a data packet arrives in a piece of switching equipment, and the cable on which the packet is supposed to depart is already busy, the data packet has to wait its turn. If there are many other packets similarly waiting, the data packet may have to wait a significant amount of time (and either be held for that wait time in a buffer or discarded as packet loss).
 
 ## Link technologies in place along the path
 
