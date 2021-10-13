@@ -27,7 +27,7 @@ enable in the future.
 # Introduction 
 
 Today when people think of end-user Internet performance,
-it is typically solely in terms of "speed", which is usually equated with the throughput (capacity) of a 
+it is typically solely in terms of the throughput (capacity) of a 
 home's Internet connection. Recent debate in the U.S. about improving
 performance has as a result centered around the potential benefits of
 moving to symmetric gigabit connections
@@ -240,29 +240,34 @@ is best deployed.
 
 ## Throughput vs. "Speed"
 
-It's important that we first make a point concerning the difference
-between what network engineers describe as the "throughput",
-"bandwidth", or "capacity" of a network connection and what the
-layperson thinks about as the "speed" of a connection. When we describe
+Some people use the term "speed" when referring to capacity or latency or a combination of these two.
+While that term is more often associated with capacity (e.g. a 
+"speed test" that reports the achieved throughput of a file transfer), 
+it can mean different things in different contexts.  
+Since this term has no precise definition in the context of either 
+capacity or latency, we will not use that term in this report.
+We do use "speed" in this paper to refer to the distance bits travel on 
+a physical medium over time (i.e. the propagation velocity of signals in the medium).
+
+When we describe
 a link capacity as 100 megabits per second, or 10 gigabits per second,
 or 1 terabit per second, that refers to the *amount* of data passing
 through a given point (such as a home's Internet connection) per second,
-not how *quickly* that data travels to its final destination. Thus,
-numbers expressed as "bits per second" are best understood as a measure
-of throughput, bandwidth, or capacity, and not speed (and this is why
-one correct term is band-width and not band-speed).
+and for this we will use the terms "throughput", "bandwidth", "bit rate", or "capacity" interchangeably.
 
-(JL NOTE: Is this analogy useful or can it be deleted or modified?) To
-illustrate this with a simple analogy, imagine increasing the bandwidth
+To illustrate this with a simple analogy, imagine increasing the bandwidth
 is like adding more lanes to a highway — it makes the highway wider, so
 it can carry more cars, but it doesn’t change the speed limit at which
 the cars may travel. Counting cars-per-minute passing a certain point on
 a highway tells you about the capacity (or width) of the highway, but it
-tells you nothing about the speed of the individual cars. Similarly, on
-this road there may be a motorcycle and a tractor trailer truck
-traveling at the same speed in traffic, and so while the truck has
-higher cargo *capacity* than the motorcycle, it won’t get you to your
-destination any *faster* than the motorcycle.
+tells you nothing about the speed of the individual cars.  
+For a task that requires shuttling back and forth many times between two 
+locations, it is the speed of travel that most determines the amount of time
+that the task consumes, rather than the number of lanes on the highway.
+Conversely, if the task is to move a large amount of goods from one 
+location to another as quickly as possible, more lanes could mean that 
+more vehicles could be used simultaneously, and thus complete the task more quickly. 
+
 
 ## Latency vs. Throughput
 
