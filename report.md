@@ -2044,7 +2044,7 @@ not seeing that take effect on screen until a short time later. This
 leads to a significantly higher 'controller-to-photon' delay than with a
 local-only game.
 
-An example of this phenomenom can be seen in a PC Gamer article at
+An example of this phenomenon can be seen in a PC Gamer article at
 https://www.pcgamer.com/uk/heres-how-stadias-input-lag-compares-to-native-pc-gaming/
 
 
