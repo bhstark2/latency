@@ -1814,8 +1814,8 @@ several things that contribute to this latency:
 * Capture buffer: the audio needs to be recorded by the hardware
 of the computer and passed as a chunk of information to the program.
 
-* Noise supression: Removal of background noise and/or removal of local
-  echo created by audoi being played out.
+* Noise suppression: Removal of background noise and/or removal of local
+  echo created by audio being played out.
 
 * Encodings: audio and video are grouped and compressed so that it can
 be sent over the network, but this requires waiting for an appropriate
@@ -1825,8 +1825,8 @@ delay.
 * Network: the time for the media to be transferred over the
 Internet.
 
-*	Media server: time for cloud servers that distribute and
-    process media to forward it and sometimes encode, decode, and remix
+*	Media Forwarding: time for cloud servers that distribute and
+    process media to forward it and, in some cases, encode, decode, and remix
     it.
      
 * Jitter buffers: some media will be delivered faster than others and
@@ -1841,30 +1841,30 @@ of packets lost by the networks.
 
 * Decoding: Uncompress media 
 
-* Packet Loss Concelement: Create information to fill in any missing
+* Packet Loss Concealment: Create information to fill in any missing
   gaps in the media due to lost packets. If theses technique look ahead
   to interpolate between packets that were not lost, they add latency. 
 
-* Playout: queue the media to be played by the hardware of the
+* Play-out: queue the media to be played by the hardware of the
 computer.
 
 
-The following table show aprozimate latency ranges that are typical in
-normal usage of web convferncing sytems. 
+The following table show approximate latency ranges that are typical in
+normal usage of web conferencing systems. 
 
-| Process                  |  Descrption                                  |  Latency (ms)   |
+| Process                  |  Description                                  |  Latency (ms)   |
 |:---------------|:--------------------------|------------------:|
 |  Capture                 |   recording from sensor to application    | 5 to 50  |
-|  Noise supression  |   remove background noise and echo    | 0 to 10  |
+|  Noise suppression  |   remove background noise and echo    | 0 to 10  |
 |  Encodings             |   compressing media    | 5 to 30  |
-|  Network                |   transmition over network    | 20 to 800  |
-|  Media server         |   media processing to mix and distrbute media    | 10 to 100  |
+|  Network                |   transmission over network    | 20 to 800  |
+|  Media Forwarding |   media processing to mix and distrbute media    | 10 to 100  |
 |  Jitter buffers         |   compensate for latency variation   | 5 to 100  |
 |  Forward error correction   |  wait for extra data to fix lost packets  |  0 to 100      |
-|  Retransmission     |   request and receive retransmition of lost packets    |    0 to 2000   |
+|  Retransmission     |   request and receive retransmission of lost packets    |    0 to 2000   |
 |  Decoding              |    decompress the media   |    1 to 20   |
-|  Packet Loss Concelement     |   conceal  any lost packets  |  0 to 30 |
-|  Playout                 |   stream media out to speaker or display    |  10 to 50   |
+|  Packet Loss Concealment     |   conceal  any lost packets  |  0 to 30 |
+|  Play-out                 |   stream media out to speaker or display    |  10 to 50   |
 
 
 
@@ -1893,7 +1893,7 @@ than 5 milliseconds.
 ### Forward Error Correction
 
 Many VoIP applications use a range of techniques to recover from losing
-packets, that involve sending some of the packets twice or sending extra
+packets that involve sending some of the packets twice, or sending extra
 information about groups of packets that allow an application to
 reconstruct the information from a lost packet. Packets are often lost
 in small groups. To recover the lost packets, the information to recover
