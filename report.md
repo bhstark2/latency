@@ -1810,18 +1810,20 @@ Low glass-to-glass delay for audio and video, are critical for a good user exper
 voice or video conference. There are
 several things that contribute to this latency:
 
-* Capture buffer latency: the audio needs to be recorded by the hardware
+* Capture buffer: the audio needs to be recorded by the hardware
 of the computer and passed as a chunk of information to the program.
+
+* Noise supression: TODO include echo cancelation
 
 * Encodings: audio and video are grouped and compressed so that it can
 be sent over the network, but this requires waiting for an appropriate
 amount of data to group together. This is referred to as the encoding
 delay.
 
-* Network latency: the time for the media to be transferred over the
+* Network: the time for the media to be transferred over the
 Internet.
 
-*	Media server latency: time for cloud servers that distribute and
+*	Media server: time for cloud servers that distribute and
     process media to forward it and sometimes encode, decode, and remix
     it.
      
@@ -1835,8 +1837,32 @@ information to replace lost packets.
 * Retransmission: time to allow the request and receipt of another copy
 of packets lost by the networks.
 
-* Playout buffers: queue the media to be played by the hardware of the
+* Decoding:
+
+* Packet Loss Concelement:
+
+* Playout: queue the media to be played by the hardware of the
 computer.
+
+
+
+| Process |  Descrption                          | Typical Latency (ms) |
+----------------------------------------------------
+|  Capture                 |   TODO    | 5 to 50  |
+|  Noise supression  |    TODO   | 0 to 10  |
+|  Encodings             |    TODO
+TODO | 5 to 30  |
+|  Network                |       | 20 to 800  |
+|  Media server         |       | 10 to 100  |
+|  Jitter buffers         |       | 5 to 100  |
+|  Forward error correction     |  0 to 100      |
+|  Retransmission     |  |    0 to 2 x Network   |
+|  Decoding              |  |    1 to 20   |
+|  Packet Loss Concelement     |       |  0 to 30 |
+|  Playout                 |   |  10 to 50   |
+
+TODO
+
 
 ### Jitter
 
