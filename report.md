@@ -124,7 +124,7 @@ distance between the client and the measurement server.  Aside
 from outliers like satellite broadband and certain Digital Subscriber 
 Line (DSL) connections, access network technologies generally only have minor
 differences in the way that packets are handled that do not have a significant impact on end-user
-QoE. In contrast, differences in *working latency* -- also sometimes know as latency under load (LUL) -- can be significant
+QoE. In contrast, differences in *working latency* -- also sometimes known as latency under load (LUL) -- can be significant
 and that measure is more directly representative of real-world
 performance. Idle latency can therefore be considered a mildly
 interesting reflection of access network technology and network topology
@@ -173,14 +173,18 @@ throughput (high speed), low delay (low latency), and consistent delay
 
 But what causes poor working latency? The best way to understand that is
 to first envision the end-to-end path from a user to a destination
-server. `can this be a figure instead:` __A user has a device such as a
+server. As illustrated in this figure, a user has a device (6) such as a
 laptop or mobile device, which connects to their Local Area Network
 (LAN, often connected via Wi-Fi), to some Customer Premises Equipment
-(CPE) like a home router or cable modem gateway, to an Internet Service
-Provider (ISP) network and across that network, then across one or more
-interconnection points between to networks to a destination network, to
+(CPE) like a home router or cable modem gateway (5), to an Internet Service
+Provider (ISP) network (4) and across that network (3), then across one or more
+interconnection points (2) between networks to a destination network, to
 network devices in a destination data center (e.g., router, load
-balancer, switch), and eventually to a destination server.__ Along this
+balancer, switch), and eventually to a destination server (1). 
+
+![End-to-end Path](images/network.png)
+
+Along this
 end-to-end path, the link with the least capacity in the upstream and
 downstream direction (which may be different for each direction) is the
 most constrained link, and is typically referred to the “bottleneck
