@@ -1780,7 +1780,7 @@ features. They are used for meetings between workers — both inside and
 across companies, for education and teaching, and to connect friends and
 families. All of these systems are highly sensitive to latency.
 
-The "glass to glass" delay is measured from the time the light for the
+The glass-to-glass delay is measured from the time the light for the
 video hits the glass of the senders camera until the same images is
 displayed on the glass of the monitor or TV of the receiver of the
 video.
@@ -1806,7 +1806,7 @@ person that responds quickly. This raises the question about whether or
 not this has any unconscious bias impact on teachers who have students
 on both low latency and high latency network connections.
 
-Low "glass to glass" delay for audio and video, are critical for a good user experience on a
+Low glass-to-glass delay for audio and video, are critical for a good user experience on a
 voice or video conference. There are
 several things that contribute to this latency:
 
@@ -1855,7 +1855,7 @@ caused by the network. The amount of jitter is just as important as the
 latency to the overall experience that the user has. A network with an
 average latency of 50 milliseconds where less than 10% of the packets
 have a jitter higher than 40 milliseconds, will usually have more of a
-“glass to glass” delay than a network with an average latency of
+glass-to-glass delay than a network with an average latency of
 60 milliseconds where less than 10% of the packets have a jitter higher
 than 5 milliseconds.
 
@@ -1871,7 +1871,7 @@ them cannot be lost, so it needs to be transmitted far enough from the
 original packets so that it is less likely to land in the same loss
 group. This inherently means that the forward error correct adds in more
 delay than the size of commonly observed loss groups. Networks that lose
-packets in groups, tend to have a longer “glass to glass” delay
+packets in groups, tend to have a longer glass-to-glass delay
 than networks that are very random in which packets they lose, and do
 not have correlated losses.
 
@@ -1892,12 +1892,12 @@ times the normal delay to cross the network. If this technique is being
 used, all the packets that are not lost also need to have their time to
 be played out, so they can be played with the correct timing for the
 packets that were retransmitted. The key thing to note here is that a 10
-ms increase in network latency can cause a 30 ms increase in “glass to glass” delay.
+ms increase in network latency can cause a 30 ms increase in glass-to-glass delay.
 
 ### Quality of Experience
 
 For Internet voice and video conferencing and calling systems, the
-network latency is often the major factor causing large “glass to glass”
+network latency is often the major factor causing large glass-to-glass
 delay. The network latency contributes
 to the delay, but other aspects of the network also contribute. Packet
 loss rates and the grouping of packet loss have a large impact on the
