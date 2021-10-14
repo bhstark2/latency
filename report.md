@@ -1936,9 +1936,9 @@ state back to all of the players at regular intervals (e.g. 30x - 128x per secon
 Each client then adjusts its internal state to match the server state. 
 
 Due to network latency from client to server, the "authoritative" state held by the server 
-represents player actions that occured slightly in the past as opposed to the current time.  
+represents player actions that occured slightly in the past as opposed to the current time. 
 Similarly, due to network latency from the server to each client, the updates arriving 
-at each client represent the state of the world as it was slightly in the past.  
+at each client represent the state of the world as it was slightly in the past. 
 To address this, both the server and each client typically extrapolate to 
 predict present state based on slightly old information.
 
@@ -1964,7 +1964,7 @@ then return to cover before even being seen by the low latency player. [3]
 
 In order to provide a compelling experience, game developers try to reduce 
 these issues as much as they can, first by taking latency into account in matchmaking, 
-grouping players into games based (in part) on their latency to the server.  
+grouping players into games based (in part) on their latency to the server. 
 Then within the game, doing things like taking into account what a client's 
 view of the world was when it fired a shot, rather than registering hits 
 only based on the current state of the server. 
