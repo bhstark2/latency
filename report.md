@@ -586,9 +586,13 @@ modems, followed by fiber optic cable from the CMTS to the Internet.
 
 A DOCSIS link is a shared medium.  In the upstream direction, multiple cable modems request access to a particular transmission channel, and access is scheduled by the CMTS.  In the downstream direction, all transmissions are scheduled and made by the CMTS.  As described in Section 1 of [@LLD] there are five sources of latency in DOCSIS 3.1 networks (and similarly DOCSIS 3.0).  These are:  
 
-Delay Source | Range -------------|------ switching/forwarding | < 0.04
-ms propagation | 0.02 - 0.6 ms serialization/encoding | 0.4 - 3.5 ms
-media acquisition | 2 - 8 ms queuing | 0 - 200 ms
+Delay Source | Range 
+-------------|------ 
+switching/forwarding | < 0.04 ms 
+propagation | 0.02 - 0.6 ms 
+serialization/encoding | 0.4 - 3.5 ms 
+media acquisition | 2 - 8 ms 
+queuing | 0 - 200 ms 
 
 DOCSIS 3.1 equipment has multiple features to manage queuing latency (some of which are available in DOCSIS 3.0 equipment as well), including Active Queue Management (AQM), and a new feature called *Low Latency DOCSIS* which includes support for the *Low-Latency Low-Loss Scalable Throughput* (L4S) architecture and isolation of Non-Queue-Building (NQB) traffic. AQM, L4S and NQB are discussed later in this document.  
 
