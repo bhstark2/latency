@@ -1908,7 +1908,9 @@ Multiplayer online games are particularly sensitive to latency. This is
 especially true for fast-paced games, such as first person shooters
 (FPS), fighting games, or sports games. Even in the early days of such games in the late
 1990s, gamers were acutely aware of the impact of latency on their
-experience.
+experience.  Today many games have the ability to report your 'ping' time 
+on the screen during gameplay, and even - for all players - on a 
+scoreboard after the game.
 
 Excessive latency, commonly referred to as ‘lag’ or ‘ping’ by gamers,
 can cause a variety of issues during gameplay. One of the most common is
@@ -1919,12 +1921,6 @@ players can shoot around corners, i.e., your player is shot even though,
 from your point of view, the shooter was around a corner at the time. A
 third is the ‘peekers advantage’, whereby someone peeking around a
 corner can see their opponent before their opponent sees them.
-
-There are many causes of latency in games. Of course, the network is a
-key one and receives a lot of focus within games (many games have the
-ability to report your 'ping' on the screen during gameplay). There are
-others though. In particular, the input device (controller, keyboard, mouse)
-can introduce lag, as can the display. 
 
 Modern FPS games operate using a client-server model.[1] Each client device maintains
 a local simulation of the state of the world, updated as that player moves through
