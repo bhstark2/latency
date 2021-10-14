@@ -1773,18 +1773,22 @@ translate small events into useful observations.
         * problem with measuring just recorded media quality not overall
         UX or QoE
         
-## VoIP and Video Conferencing  
+## Voice and Video Conferencing 
 
 Voice and video conferencing systems are one of the Internet’s most used
 features. They are used for meetings between workers — both inside and
 across companies, for education and teaching, and to connect friends and
-families. In the US alone, there are over **TODO** minutes of meetings
-per month. All of these systems are highly sensitive to latency.
+families. All of these systems are highly sensitive to latency.
 
-`This paragraph needs tightening:` The "microphone to speaker" delay is
-measured from the time the audio is recorded at the microphone of the
+The "glass to glass" delay is measured from the time the light for the
+video hits the glass of the senders camera until the same images is
+displayed on the glass of the monitor or TV of the receiver of the
+video.
+For audio, it is time from when audio is recorded at the microphone of the
 participant, until the time that same sound plays out on the speaker of
-the other participants. When the delay is low, the call or meeting can
+the other participants.
+
+When the delay is low, the call or meeting can
 seem like a normal conversation. As the delay gets longer, it becomes
 harder to have a conversation. Two users will both try and speak at the
 same time and end up talking over each other. This is because the delay
@@ -1792,17 +1796,18 @@ means that each user cannot tell that the other user was already
 speaking. Many people have experienced the effect where two people speak
 at the same time, then they both stop and tell the other to go, then
 they both go at the same time again. This does not happen on low latency
-meetings but is common on higher latency meetings. When the latency is
-too high, one side will say something, then experience an unnatural
+meetings but is common on higher latency meetings.
+
+When the latency is
+very high, one side will say something, then experience an unnatural
 silence when the other side does not respond. When a remote person is
 slow to respond, humans sometimes assume they are not as smart as a
 person that responds quickly. This raises the question about whether or
 not this has any unconscious bias impact on teachers who have students
 on both low latency and high latency network connections.
 
-Low "microphone to speaker" delay for audio, and related “camera to
-screen” delay for video, are critical for a good user experience on a
-VoIP (Voice over Internet Protocol) call or video conference. There are
+Low "glass to glass" delay for audio and video, are critical for a good user experience on a
+voice or video conference. There are
 several things that contribute to this latency:
 
 * Capture buffer latency: the audio needs to be recorded by the hardware
@@ -1816,7 +1821,10 @@ delay.
 * Network latency: the time for the media to be transferred over the
 Internet.
 
-*	Media server latency: time for cloud servers that distribute and process media to forward it and sometimes encode, decode, and remix it.  
+*	Media server latency: time for cloud servers that distribute and
+    process media to forward it and sometimes encode, decode, and remix
+    it.
+     
 * Jitter buffers: some media will be delivered faster than others and
 the receiver has a buffer to save things that arrived early and play
 them at the appropriate time.
@@ -1847,7 +1855,7 @@ caused by the network. The amount of jitter is just as important as the
 latency to the overall experience that the user has. A network with an
 average latency of 50 milliseconds where less than 10% of the packets
 have a jitter higher than 40 milliseconds, will usually have more of a
-“speaker to microphone” delay than a network with an average latency of
+“glass to glass” delay than a network with an average latency of
 60 milliseconds where less than 10% of the packets have a jitter higher
 than 5 milliseconds.
 
@@ -1863,7 +1871,7 @@ them cannot be lost, so it needs to be transmitted far enough from the
 original packets so that it is less likely to land in the same loss
 group. This inherently means that the forward error correct adds in more
 delay than the size of commonly observed loss groups. Networks that lose
-packets in groups, tend to have a longer “microphone to speaker” delay
+packets in groups, tend to have a longer “glass to glass” delay
 than networks that are very random in which packets they lose, and do
 not have correlated losses.
 
@@ -1884,14 +1892,13 @@ times the normal delay to cross the network. If this technique is being
 used, all the packets that are not lost also need to have their time to
 be played out, so they can be played with the correct timing for the
 packets that were retransmitted. The key thing to note here is that a 10
-ms increase in network latency can cause a 30 ms increase in “microphone
-to speaker” delay.
+ms increase in network latency can cause a 30 ms increase in “glass to glass” delay.
 
 ### Quality of Experience
 
 For Internet voice and video conferencing and calling systems, the
-network latency is the major factor causing large “camera to screen”
-delay and “microphone to speaker” delay. The network latency contributes
+network latency is often the major factor causing large “glass to glass”
+delay. The network latency contributes
 to the delay, but other aspects of the network also contribute. Packet
 loss rates and the grouping of packet loss have a large impact on the
 overall delay. The delay has a huge impact on how well people can
