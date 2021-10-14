@@ -1534,7 +1534,7 @@ echo packets to measure round-trip latency and packet loss. Example
 output from pinging ietf.org can be found below:
 
 ```
-[sam@localhost ~]$ ping ietf.org
+$ ping ietf.org
 PING ietf.org (4.31.198.44) 56(84) bytes of data.
 64 bytes from mail.ietf.org (4.31.198.44): icmp_seq=1 ttl=53 time=167 ms
 64 bytes from mail.ietf.org (4.31.198.44): icmp_seq=2 ttl=53 time=170 ms
