@@ -1806,14 +1806,16 @@ person that responds quickly. This raises the question about whether or
 not this has any unconscious bias impact on teachers who have students
 on both low latency and high latency network connections.
 
-Low glass-to-glass delay for audio and video, are critical for a good user experience on a
+Low glass-to-glass delay for audio and video
+is critical for a good user experience on a
 voice or video conference. There are
 several things that contribute to this latency:
 
 * Capture buffer: the audio needs to be recorded by the hardware
 of the computer and passed as a chunk of information to the program.
 
-* Noise supression: TODO include echo cancelation
+* Noise supression: Removal of background noise and/or removal of local
+  echo created by audoi being played out.
 
 * Encodings: audio and video are grouped and compressed so that it can
 be sent over the network, but this requires waiting for an appropriate
@@ -1837,31 +1839,33 @@ information to replace lost packets.
 * Retransmission: time to allow the request and receipt of another copy
 of packets lost by the networks.
 
-* Decoding:
+* Decoding: Uncompress media 
 
-* Packet Loss Concelement:
+* Packet Loss Concelement: Create information to fill in any missing
+  gaps in the media due to lost packets. If theses technique look ahead
+  to interpolate between packets that were not lost, they add latency. 
 
 * Playout: queue the media to be played by the hardware of the
 computer.
 
 
+The following table show aprozimate latency ranges that are typical in
+normal usage of web convferncing sytems. 
 
-| Process |  Descrption                          | Typical Latency (ms) |
-----------------------------------------------------
-|  Capture                 |   TODO    | 5 to 50  |
-|  Noise supression  |    TODO   | 0 to 10  |
-|  Encodings             |    TODO
-TODO | 5 to 30  |
-|  Network                |       | 20 to 800  |
-|  Media server         |       | 10 to 100  |
-|  Jitter buffers         |       | 5 to 100  |
-|  Forward error correction     |  0 to 100      |
-|  Retransmission     |  |    0 to 2 x Network   |
-|  Decoding              |  |    1 to 20   |
-|  Packet Loss Concelement     |       |  0 to 30 |
-|  Playout                 |   |  10 to 50   |
+| Process                  |  Descrption                                  |  Latency (ms)   |
+|:---------------|:--------------------------|------------------:|
+|  Capture                 |   recording from sensor to application    | 5 to 50  |
+|  Noise supression  |   remove background noise and echo    | 0 to 10  |
+|  Encodings             |   compressing media    | 5 to 30  |
+|  Network                |   transmition over network    | 20 to 800  |
+|  Media server         |   media processing to mix and distrbute media    | 10 to 100  |
+|  Jitter buffers         |   compensate for latency variation   | 5 to 100  |
+|  Forward error correction   |  wait for extra data to fix lost packets  |  0 to 100      |
+|  Retransmission     |   request and receive retransmition of lost packets    |    0 to 2000   |
+|  Decoding              |    decompress the media   |    1 to 20   |
+|  Packet Loss Concelement     |   conceal  any lost packets  |  0 to 30 |
+|  Playout                 |   stream media out to speaker or display    |  10 to 50   |
 
-TODO
 
 
 ### Jitter
