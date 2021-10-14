@@ -1580,12 +1580,6 @@ the sender's and receiver's clocks are precisely synchronized. Relying
 on NTP[^3] alone is usually not sufficient here, as the precision is not
 high enough for low latency connections.
 
-IRTT is a UDP-based measurement tool that measures RTT, one-way delays,
-and other packet metrics using lightweight isochronous bidirectional
-flows with a maximum precison and interval of 3ms. It is available as
-open source for any platform that supports the go language, and
-pre-packaged for most Linux distributions.
-
 [^3] Network Time Protocol, a commonly utilized protocol to
 automatically set the time in a network-connected machine.
 
@@ -1603,6 +1597,12 @@ latency from network latency.
 STAMP (simple two-way active measurement protocol) simplifies TWAMP by
 removing some little-used features, while still maintaining backwards
 compatibility with the existing TWAMP protocol.
+
+IRTT is a UDP-based measurement tool that measures RTT, one-way delays,
+and other packet metrics using lightweight isochronous bidirectional
+flows with a maximum precision and interval of 3ms. It is available as
+open source for any platform that supports the go language, and
+pre-packaged for most Linux distributions.
 
 SamKnows, a UK-based provider of network measurement services, have
 deployed a proprietary UDP-based latency measurement protocol. This
