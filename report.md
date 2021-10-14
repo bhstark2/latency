@@ -1910,12 +1910,6 @@ especially true for fast-paced games, such as first person shooters
 1990s, gamers were acutely aware of the impact of latency on their
 experience.
 
-For the avoidance of doubt, we are concerned only with gameplay here,
-which is highly latency sensitive. Modern games will also download game
-updates, content for future parts of the game (videos, animations, maps,
-etc), which are bulk downloads and generally not immediately visible to
-the user, so are less latency sensitive.
-
 Excessive latency, commonly referred to as ‘lag’ or ‘ping’ by gamers,
 can cause a variety of issues during gameplay. One of the most common is
 'rubber banding', which is the appearance that a character has moved to
