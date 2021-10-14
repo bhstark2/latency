@@ -2008,11 +2008,10 @@ game. See [1].
 [2] https://win.gg/news/4379/explaining-tick-rates-in-fps-games-difference-between-64-and-128-tick
 [3] https://technology.riotgames.com/news/peeking-valorants-netcode
 
-
 ## Cloud gaming 
 
 The past few years has seen the emergence of 'cloud gaming' platforms,
-such as Google's Stadia or nVidia's GeForce Now. These move the graphics
+such as Google's Stadia or NVIDIA's GeForce Now. These move the graphics
 intensive work to the server side and then effectively transmit the
 video of the gameplay back to the client side. This allows the game to
 run on far lower specification devices, without the need for powerful
