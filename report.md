@@ -1968,9 +1968,17 @@ higher latencies.  Conversely, the high latency player could step out
 from behind cover and fire a shot at a stationary low latency player, 
 then return to cover before even being seen by the low latency player. [3]
 
-In order to provide a compelling experience, game developers try to reduce these issues as much as they can, first by taking latency into account in matchmaking, grouping players into games based (in part) on their latency to the server.  
-Then within the game, doing things like taking into account what a client's view of the world was when it fired a shot, rather than registering hits only based on the current state of the server. But there are limits to the effectiveness of these "lag compensation" techniques, and each comes with tradeoffs that affect the quality of the gameplay in other ways. As a result, some game developers have taken the step of building their own networks and interconnecting with major ISPs, in order to reduce network latency in the first place [4]. 
-
+In order to provide a compelling experience, game developers try to reduce 
+these issues as much as they can, first by taking latency into account in matchmaking, 
+grouping players into games based (in part) on their latency to the server.  
+Then within the game, doing things like taking into account what a client's 
+view of the world was when it fired a shot, rather than registering hits 
+only based on the current state of the server. 
+But there are limits to the effectiveness of these "lag compensation" techniques, and 
+each comes with tradeoffs that affect the quality of the gameplay in other ways. 
+As a result, some game developers have taken the step of building their own 
+networks and interconnecting with major ISPs, in order to reduce network 
+latency in the first place [4]. 
 
 [1] https://www.gafferongames.com/post/what_every_programmer_needs_to_know_about_game_networking/
 [2] https://win.gg/news/4379/explaining-tick-rates-in-fps-games-difference-between-64-and-128-tick
