@@ -56,9 +56,10 @@ everything in between. As this is a recent development, it has meant
 that latency is not well understood in the policy or regulatory spheres
 or by the average consumer — or even by many in the industry. One of the
 reasons for this has been that the way in which network latency has 
-historically been measured, and the metrics used to describe latency 
-performance were flawed, and have very little to do with
-end-user QoE.
+historically been characterized is flawed.  The measurement methodology
+and the metrics typically used to describe latency performance have had very 
+little to do with end-user QoE. 
+
 
 ## Examining Latency
 
