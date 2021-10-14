@@ -1849,23 +1849,6 @@ of packets lost by the networks.
 computer.
 
 
-The following table show approximate latency ranges that are typical in
-normal usage of web conferencing systems. 
-
-| Process                  |  Description                                  |  Latency (ms)   |
-|:---------------|:--------------------------|------------------:|
-|  Capture                 |   recording from sensor to application    | 5 to 50  |
-|  Noise suppression  |   remove background noise and echo    | 0 to 10  |
-|  Encodings             |   compressing media    | 5 to 30  |
-|  Network                |   transmission over network    | 20 to 800  |
-|  Media Forwarding |   media processing to mix and distrbute media    | 10 to 100  |
-|  Jitter buffers         |   compensate for latency variation   | 5 to 100  |
-|  Forward error correction   |  wait for extra data to fix lost packets  |  0 to 100      |
-|  Retransmission     |   request and receive retransmission of lost packets    |    0 to 2000   |
-|  Decoding              |    decompress the media   |    1 to 20   |
-|  Packet Loss Concealment     |   conceal  any lost packets  |  0 to 30 |
-|  Play-out                 |   stream media out to speaker or display    |  10 to 50   |
-
 
 
 ### Jitter
@@ -1888,6 +1871,9 @@ have a jitter higher than 40 milliseconds, will usually have more of a
 glass-to-glass delay than a network with an average latency of
 60 milliseconds where less than 10% of the packets have a jitter higher
 than 5 milliseconds.
+
+Any jitter, or variation in latency, will result in an increased
+glass-to-glass delay. 
 
 
 ### Forward Error Correction
