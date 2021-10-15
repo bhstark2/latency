@@ -1914,19 +1914,13 @@ communicate.
 
 ## Multiplayer online games  
 
-`This section needs tightening`
-
 Multiplayer online games are particularly sensitive to latency. This is
 especially true for fast-paced games, such as first person shooters
-(FPS) or sports games. Even in the early days of such games in the late
+(FPS), fighting games, or sports games. Even in the early days of such games in the late
 1990s, gamers were acutely aware of the impact of latency on their
-experience.
-
-For the avoidance of doubt, we are concerned only with gameplay here,
-which is highly latency sensitive. Modern games will also download game
-updates, content for future parts of the game (videos, animations, maps,
-etc), which are bulk downloads and generally not immediately visible to
-the user, so are less latency sensitive.
+experience.  Today many games have the ability to report your 'ping' time 
+on the screen during gameplay, and even - for all players - on a 
+scoreboard after the game.
 
 Excessive latency, commonly referred to as ‘lag’ or ‘ping’ by gamers,
 can cause a variety of issues during gameplay. One of the most common is
@@ -1938,85 +1932,58 @@ from your point of view, the shooter was around a corner at the time. A
 third is the ‘peekers advantage’, whereby someone peeking around a
 corner can see their opponent before their opponent sees them.
 
-There are many causes of latency in games. Of course, the network is a
-key one and receives a lot of focus within games (many games have the
-ability to report your 'ping' on the screen during gameplay). There are
-many others though. The screen in use can play a factor, which is why
-many modern TVs now offer a 'game mode' and why monitors are being
-advertised with low response times and high refresh rates. Input
-devices, such as game controllers or keyboards/mice can have an impact
-too. For the purposes of this section we will focus largely on the
-network though.
+Modern FPS games operate using a client-server model.[1] Each client device maintains
+a local simulation of the state of the world, updated as that player moves through
+and manipulates the world.  Each client also sends state updates to the server so 
+that the actions taken by the player can be shared with the other clients/players.
+The server usually maintains the authoritative state of the world, updated based 
+upon the inputs received from all the players, and transmits this authoritative 
+state back to all of the players at regular intervals (e.g. 30x - 128x per second)[2]. 
+Each client then adjusts its internal state to match the server state. 
 
-Modern FPS games operate using a client-server model. The server
-maintains the authoritative state of the world for all players. The
-server updates its internal state at a fixed interval, based upon the
-inputs received from all players. This update process is known as the
-games 'tick rate' and is typically 64Hz (once every 16.6ms) for a FPS,
-but the very latest ones are moving to 128Hz [2]. Once the server has
-updated its internal state, it transmits updates to all of the players.
-This update rate is slower than the frame rate, which means that
-interpolation must be used in order for smooth animation to occur.
+Due to network latency from client to server, the "authoritative" state held by the server 
+represents player actions that occured slightly in the past as opposed to the current time. 
+Similarly, due to network latency from the server to each client, the updates arriving 
+at each client represent the state of the world as it was slightly in the past. 
+To address this, both the server and each client typically extrapolate to 
+predict present state based on slightly old information.
 
-All of this communication is typically over UDP, but with their own
-minimal reliability mechanism layered on top. For example, this may take
-the form of including a sequence and acknowledgement number in each
-packet, but instead of retransmitting lost segments, the sender will
-just transmit all unacknowledged data in subsequent packets.
+Futhermore, to combat network jitter, the server and each client generally 
+implement a jitter buffer that smooths out (but further delays) the state update 
+arrivals, and finally, packet loss can result in additional opportunities for state 
+to drift between the clients and the server.
 
-Of course, different players will have different latency to the server,
-and these can change during the course of gameplay too. Without any
+Each client device will thus have real-time information about the state of its 
+player (though it may occasionally get corrected due to updates from the server), 
+but will only have a delayed (and possibly incorrectly predicted) view of 
+where the other players are.  
+
+Of course, different players will have different latency to the server. 
+Without any
 mitigations for this, a player with a high latency could shoot another
 and think they scored a direct hit, but the other player with a low
 latency may have already moved out of the way from the server's
-perspective, so a hit was not recorded. This is unfair on players with
-higher latencies, so as a result game developers have developed lag
-compensation techniques to counteract this.
+perspective, so a hit was not recorded. This is unfair to players with
+higher latencies.  Conversely, the high latency player could step out 
+from behind cover and fire a shot at a stationary low latency player, 
+then return to cover before even being seen by the low latency player. [3]
 
-A common method of lag compensation involves the server keeping a short
-history of snapshots of its state of the world. Then, when a player
-shoots at another player, the shooting player transmits its version of
-the state of the world back to the server along with its state update
-("I fired a shot"). The server can now, if necessary, rewind its global
-state back to the shooting player's version and 'see' exactly what the
-shooting player saw, including whether the shot was on target from the
-shooter's perspective. If so, then an adjustment is made to the global
-state and an update is transmitted to all players to say that the target
-was in fact shot after all.
+In order to provide a compelling experience, game developers try to reduce 
+these issues as much as they can, first by taking latency into account in matchmaking, 
+grouping players into games based (in part) on their latency to the server. 
+Then within the game, doing things like taking into account what a client's 
+view of the world was when it fired a shot, rather than registering hits 
+only based on the current state of the server. 
+But there are limits to the effectiveness of these "lag compensation" techniques, and 
+each comes with tradeoffs that affect the quality of the gameplay in other ways. 
+As a result, some game developers have taken the step of building their own 
+networks and interconnecting with major ISPs, in order to reduce network 
+latency in the first place [4]. 
 
-This process has some subtleties to it. Firstly, it introduces the
-problem with the appearance that some players can shoot around corners.
-Game developers tend to take the opinion that this is a better outcome
-than lagged players being horribly disadvantaged. Secondly, a history of
-state snapshots needs to be maintained so that this rewinding can occur.
-This requires additional memory and processing, and care needs to be
-taken to not set the limits too high, otherwise one highly lagged player
-can lead to a poor performance for every player. Lastly, the client side
-will apply its own movement updates entirely locally and not wait for
-feedback from the server; this ensures that if a player presses the
-forward key then the movement is registered immediately. Of course, this
-is only applied for some actions by the client (like movement) and not
-others (like shooting an opponent).
-
-Lastly, some games try to predict the likely future movement of users.
-This, when coupled with bufferbloat, can lead to the ‘peekers advantage’
-effect. This arises because the peeking player’s client side has
-predicted they will look around a corner, shown them the opposing
-player, and meanwhile the movement updates are stuck in an outbound
-queue, meaning that the opposing player will not see their presence for
-some time to come. Riot games reported this as delivering a 141ms
-advantage in some cases, and have reduced deployed workarounds to
-counteract this [3].
-
-Game developers are acutely aware of latency and how it can occur at all
-layers in the stack. Slides from the Games Developer Conference in 2016
-show Activision, a large games publisher, using high speed cameras to
-measure motion-to-phone latency in order to debug a lag issue in a new
-game. See [1].
-
-[1] https://ubm-twvideo01.s3.amazonaws.com/o1/vault/gdc2016/Presentations/Goyette_Benjamin_Fighting_Latency_COD.pdf
+[1] https://www.gafferongames.com/post/what_every_programmer_needs_to_know_about_game_networking/
 [2] https://win.gg/news/4379/explaining-tick-rates-in-fps-games-difference-between-64-and-128-tick
 [3] https://technology.riotgames.com/news/peeking-valorants-netcode
+[4] https://technology.riotgames.com/news/leveling-networking-multi-game-future
 
 ## Cloud gaming 
 
