@@ -1766,7 +1766,7 @@ reporting system should be designed to find and highlight incidents at
 fine granularity, an area well served by advanced algorithms that
 translate small events into useful observations.
 
-# Latency and atency variation impact to user experience
+# Latency and latency variation impact to user experience
 
 For Internet voice and video conferencing and calling systems, the 
 network latency is often the major factor causing large glass-to-glass 
