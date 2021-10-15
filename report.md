@@ -1766,13 +1766,17 @@ reporting system should be designed to find and highlight incidents at
 fine granularity, an area well served by advanced algorithms that
 translate small events into useful observations.
 
-# How do latency and latency variation impact user experience?  
+# Latency and atency variation impact to user experience
 
+For Internet voice and video conferencing and calling systems, the 
+network latency is often the major factor causing large glass-to-glass 
+delay. The network latency contributes 
+to the delay, but other aspects of the network also contribute. Packet 
+loss rates and the grouping of packet loss have a large impact on the 
+overall delay. Jitter, or variation in delay, directly adds to the 
+latency. The delay has a huge impact on how well people can 
+communicate. 
 
-   * Mean Opinion Score
-        * problem with measuring just recorded media quality not overall
-        UX or QoE
-        
 ## Voice and Video Conferencing 
 
 Voice and video conferencing systems are one of the Internet’s most used
@@ -1850,7 +1854,7 @@ computer.
 
 
 The following table show approximate latency ranges that are typical in
-normal usage of web conferencing systems. 
+web conferencing systems.
 
 | Process                  |  Description                               |  Latency (ms)   |
 |:---------------|:---------------------------|----------:|
@@ -1861,7 +1865,7 @@ normal usage of web conferencing systems.
 |  Media Forwarding |   media processing to mix and distrbute media    | 10 to 100  |
 |  Jitter buffers         |   compensate for latency variation   | 5 to 100  |
 |  Error correction    |   wait for extra data to fix lost packets  |  0 to 100      |
-|  Retransmission     |   request and receive retransmissions     |    0 to 1500   |
+|  Retransmission     |   request and receive retransmissions     |    0 to 1600   |
 |  Decoding              |   decompress the media   |    1 to 20   |
 |  Concealment        |   conceal  gaps in media from any lost packets  |  0 to 30 |
 |  Play-out               |   stream media out to speaker or display    |  10 to 50   |
@@ -1925,16 +1929,6 @@ used, all the packets that are not lost also need to have their time to
 be played out, so they can be played with the correct timing for the
 packets that were retransmitted. The key thing to note here is that a 10
 ms increase in network latency can cause a 30 ms increase in glass-to-glass delay.
-
-### Quality of Experience
-
-For Internet voice and video conferencing and calling systems, the
-network latency is often the major factor causing large glass-to-glass
-delay. The network latency contributes
-to the delay, but other aspects of the network also contribute. Packet
-loss rates and the grouping of packet loss have a large impact on the
-overall delay. The delay has a huge impact on how well people can
-communicate.
 
 
 ## Multiplayer online games  
