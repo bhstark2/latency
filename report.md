@@ -1980,10 +1980,10 @@ As a result, some game developers have taken the step of building their own
 networks and interconnecting with major ISPs, in order to reduce network 
 latency in the first place [4]. 
 
-[1] https://www.gafferongames.com/post/what_every_programmer_needs_to_know_about_game_networking/
-[2] https://win.gg/news/4379/explaining-tick-rates-in-fps-games-difference-between-64-and-128-tick
-[3] https://technology.riotgames.com/news/peeking-valorants-netcode
-[4] https://technology.riotgames.com/news/leveling-networking-multi-game-future
+[1] https://www.gafferongames.com/post/what_every_programmer_needs_to_know_about_game_networking/  
+[2] https://win.gg/news/4379/explaining-tick-rates-in-fps-games-difference-between-64-and-128-tick  
+[3] https://technology.riotgames.com/news/peeking-valorants-netcode  
+[4] https://technology.riotgames.com/news/leveling-networking-multi-game-future  
 
 ## Cloud gaming 
 
