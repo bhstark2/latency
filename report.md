@@ -1495,7 +1495,7 @@ multiplayer online games, since these applications commonly employ a
 residual packet loss (described further in
 [VoIP and Video Conferencing]). So, as an example, a jitter buffer that
 results in 1% residual packet loss would mean that the application is
-operating with a fixed latency equal to the 99th percentile, and thus
+operating with a fixed latency equal to the 99th percentile packet latency, and thus
 the measured P99 latency would be a strong indicator of the quality of
 the connection for this application. Since many such applications are
 likely to target low values of residual loss (e.g., 0.1% to 5%), latency
@@ -1590,12 +1590,6 @@ the sender's and receiver's clocks are precisely synchronized. Relying
 on NTP[^3] alone is usually not sufficient here, as the precision is not
 high enough for low latency connections.
 
-IRTT is a UDP-based measurement tool that measures RTT, one-way delays,
-and other packet metrics using lightweight isochronous bidirectional
-flows with a maximum precison and interval of 3ms. It is available as
-open source for any platform that supports the go language, and
-pre-packaged for most Linux distributions.
-
 [^3] Network Time Protocol, a commonly utilized protocol to
 automatically set the time in a network-connected machine.
 
@@ -1611,8 +1605,14 @@ favoured over ICMP because it supports separating out host-processing
 latency from network latency.
 
 STAMP (simple two-way active measurement protocol) simplifies TWAMP by
-removing some little-used features, whilst still maintaining backwards
+removing some little-used features, while still maintaining backwards
 compatibility with the existing TWAMP protocol.
+
+IRTT is a UDP-based measurement tool that measures RTT, one-way delays,
+and other packet metrics using lightweight isochronous bidirectional
+flows with a maximum precision and interval of 3ms. It is available as
+open source for any platform that supports the go language, and
+pre-packaged for most Linux distributions.
 
 SamKnows, a UK-based provider of network measurement services, have
 deployed a proprietary UDP-based latency measurement protocol. This
@@ -1708,7 +1708,7 @@ It is also useful to carry out latency measurements in the presence of
 heavy cross-traffic. Carrying out latency measurements under such
 conditions is known as a 'latency under load' test. This helps to reveal
 how latency behaves when the network is heavily utilised, which is
-precisley when users are using it. Some measurement systems will
+precisely when users are using it. Some measurement systems will
 generate artificial cross-traffic (perhaps in the form of a throughput
 test) in order to ensure the link is heavily utilised to a predictable
 and repeatable degree. Measurement systems that do not measure
