@@ -1766,7 +1766,7 @@ reporting system should be designed to find and highlight incidents at
 fine granularity, an area well served by advanced algorithms that
 translate small events into useful observations.
 
-# Latency and latency variation impact to user experience
+# Latency and Latency Variation Impact to User Experience
 
 For Internet voice and video conferencing and calling systems, the 
 network latency is often the major factor causing large glass-to-glass 
@@ -1785,14 +1785,14 @@ across companies, for education and teaching, and to connect friends and
 families. All of these systems are highly sensitive to latency.
 
 The glass-to-glass delay is measured from the time the light for the
-video hits the glass of the senders camera until the same images is
+video hits the glass of the senders camera until the same images are
 displayed on the glass of the monitor or TV of the receiver of the
 video.
 For audio, it is time from when audio is recorded at the microphone of the
 participant, until the time that same sound plays out on the speaker of
 the other participants.
 
-When the delay is low, the call or meeting can
+When the glass-to-glass delay is low, the call or meeting can
 seem like a normal conversation. As the delay gets longer, it becomes
 harder to have a conversation. Two users will both try and speak at the
 same time and end up talking over each other. This is because the delay
@@ -1805,7 +1805,7 @@ meetings but is common on higher latency meetings.
 When the latency is
 very high, one side will say something, then experience an unnatural
 silence when the other side does not respond. When a remote person is
-slow to respond, humans sometimes assume they are not as smart as a
+slow to respond, humans can sometimes assume that they are not as smart as a
 person that responds quickly. This raises the question about whether or
 not this has any unconscious bias impact on teachers who have students
 on both low latency and high latency network connections.
@@ -1818,7 +1818,7 @@ several things that contribute to this latency:
 * Capture buffer: the audio needs to be recorded by the hardware
 of the computer and passed as a chunk of information to the program.
 
-* Noise suppression: Removal of background noise and/or removal of local
+* Noise suppression: removal of background noise and/or removal of local
   echo created by audio being played out.
 
 * Encodings: audio and video are grouped and compressed so that it can
@@ -1829,7 +1829,7 @@ delay.
 * Network: the time for the media to be transferred over the
 Internet.
 
-*	Media Forwarding: time for cloud servers that distribute and
+*	Media forwarding: time for cloud servers that distribute and
     process media to forward it and, in some cases, encode, decode, and remix
     it.
      
@@ -1845,15 +1845,15 @@ of packets lost by the networks.
 
 * Decoding: Uncompress media 
 
-* Packet Loss Concealment: Create information to fill in any missing
-  gaps in the media due to lost packets. If theses technique look ahead
+* Packet loss concealment: Create information to fill in any missing
+  gaps in the media due to lost packets. If theses techniques look ahead
   to interpolate between packets that were not lost, they add latency. 
 
 * Play-out: queue the media to be played by the hardware of the
 computer.
 
 
-The following table show approximate latency ranges that are typical in
+The following table shows the approximate latency ranges that are typical in
 web conferencing systems.
 
 | Process                  |  Description                               |  Latency (ms)   |
@@ -1862,7 +1862,7 @@ web conferencing systems.
 |  Noise suppression  |   remove background noise and echo    | 0 to 10  |
 |  Encodings             |   compress media    | 5 to 30  |
 |  Network                |   transmission over network    | 20 to 800  |
-|  Media Forwarding |   media processing to mix and distrbute media    | 10 to 100  |
+|  Media forwarding |   media processing to mix and distrbute media    | 10 to 100  |
 |  Jitter buffers         |   compensate for latency variation   | 5 to 100  |
 |  Error correction    |   wait for extra data to fix lost packets  |  0 to 100      |
 |  Retransmission     |   request and receive retransmissions     |    0 to 1600   |
@@ -1907,7 +1907,7 @@ them cannot be lost, so it needs to be transmitted far enough from the
 original packets so that it is less likely to land in the same loss
 group. This inherently means that the forward error correct adds in more
 delay than the size of commonly observed loss groups. Networks that lose
-packets in groups, tend to have a longer glass-to-glass delay
+packets in groups tend to have a longer glass-to-glass delay
 than networks that are very random in which packets they lose, and do
 not have correlated losses.
 
