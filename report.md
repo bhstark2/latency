@@ -3,7 +3,7 @@
 **Executive Summary**
 
 Placeholder text: When people think of Internet performance it is
-typically solely in terms of speed. But when considering the end-user
+typically solely in terms of throughput. But when considering the end-user
 quality of experience (QoE), latency is usually a key factor.
 Unfortunately, latency is not well understood in the policy or
 regulatory spheres or by the average consumer. This paper will explain
@@ -32,14 +32,14 @@ home's Internet connection. Recent debate in the U.S. about improving
 performance has as a result centered around the potential benefits of
 moving to symmetric gigabit connections
 [https://www.eff.org/deeplinks/2021/07/future-symmetrical-high-speed-internet-speeds]
-or dramatic increases in upstream speeds
+or dramatic increases in upstream capacity
 [https://arstechnica.com/tech-policy/2021/03/100mbps-uploads-and-downloads-should-be-us-broadband-standard-senators-say/]
 as a tool to solve performance problems, particularly with interactive
 applications such as video conferencing that have seen recent mass
 adoption as a result of the COVID-19 pandemic
 [https://www.bitag.org/documents/bitag_report.pdf]. This primary focus
-on speed has been consistent with the Internet industry's approach for
-more than twenty-five years that simply increasing speed was the best
+on throughput has been consistent with the Internet industry's approach for
+more than twenty-five years that simply increasing capacity was the best
 way to improve performance (or "Quality of Experience") for the end user.
 
 But over the last decade, the industry, including protocol developers
@@ -146,9 +146,9 @@ bad video conference experience, between slow start of video streaming
 playback and instant playback, etc. The differences between working
 latency from one network to another and one user to another at the
 current time are significant and bear as directly on end-user QoE as
-connection speed.
+connection throughput.
 
-A test of working latency typically involves running a speed test (a
+A test of working latency typically involves running a throughput test (a
 large file transfer) to fully utilize a connection while in parallel
 running a series of ping tests to a destination server. This will show
 the packet delay when a connection is in use, reflecting real-world
@@ -167,7 +167,7 @@ is centrally important to that QoE. If both the idle latency and the 99th
 percentile working latency are kept low, a user will
 perceive a service as being consistently responsive to their application
 needs and experiences. *The best Internet connection will have high
-throughput (high speed), low delay (low latency), and consistent delay
+throughput (high data rate), low delay (low latency), and consistent delay
 (low jitter).*
 
 ## Causes of Latency
@@ -248,7 +248,7 @@ is best deployed.
 Some people use the term "speed" when referring to capacity or latency or a combination of these two.
 While that term is more often associated with capacity (e.g. a 
 "speed test" that reports the achieved throughput of a file transfer), 
-it can mean different things in different contexts.  
+it can mean different things in different contexts.
 Since this term has no precise definition in the context of either 
 capacity or latency, we will not use that term in this report.
 We do use "speed" in this paper to refer to the distance bits travel on 
@@ -518,7 +518,7 @@ de facto MTU for the Internet.
 
 The latency introduced by an Ethernet link has two components that can
 be directly calculated from the frame size and the characteristics of
-the link (speed, distance and medium). For example, a 1518 byte frame
+the link (bit rate, distance and medium). For example, a 1518 byte frame
 (12144 bits) sent via a 1 Gbps interface over a 100-foot copper twisted
 pair (e.g., Cat6) cable will experience 0.0121 ms (12144 bits / 1e9 bps)
 of *serialization delay* (the amount of time it takes to transmit all of
@@ -713,7 +713,7 @@ packets as opposed to 5G packets
 [see section 4.4. of http://xyzhang.ucsd.edu/papers/DXu_SIGCOMM20_5Gmeasure.pdf].
 
 Median latency of the top three US mobile network providers in 2021 was
-calculated by Speedtest to be 33ms (across combined LTE and 5G networks)
+calculated by Speedtest.net to be 33ms (across combined LTE and 5G networks)
 [https://www.speedtest.net/global-index/united-states].
 
 ### Satellite
@@ -730,7 +730,7 @@ constellations into LEO (low earth orbit), at ranges from 300km to
 [https://docs.fcc.gov/public/attachments/FCC-21-48A1.pdf]  
 
 Like Wi-Fi, these LEO systems are presently half duplex. Upload/download
-speeds of 20Mbit/300Mbit have been observed in early testing, and idle
+throughput of 20Mbit/300Mbit have been observed in early testing, and idle
 latencies under 40ms. LEO systems with satellite-to-satellite
 communication (*inter-satellite links*) actually have the potential to
 offer less latency on intercontinental paths than terrestrial networks,
@@ -2214,7 +2214,7 @@ likely to enable the creation of new classes of applications.
 
 * The Internet ecosystem should start to measure and report on working
 latency, as this is often as critical to end-user QoE as bandwidth
-capacity (speed). A key step to accomplishing this would be to agree on
+capacity (throughput). A key step to accomplishing this would be to agree on
 the measurement methods and methodology to use for this testing.
 
 * Any developer of a working latency test should:
