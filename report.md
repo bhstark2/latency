@@ -1782,50 +1782,42 @@ translate small events into useful observations.
 
 # Latency and Latency Variation Impact to User Experience
 
-For Internet voice and video conferencing and calling systems, the 
-network latency is often the major factor causing large glass-to-glass 
-delay. The network latency contributes 
-to the delay, but other aspects of the network also contribute. Packet 
-loss rates and the grouping of packet loss have a large impact on the 
-overall delay. Jitter, or variation in delay, directly adds to the 
-latency. The delay has a huge impact on how well people can 
-communicate. 
 
 ## Voice and Video Conferencing 
 
 Voice and video conferencing systems are one of the Internet’s most used
 features. They are used for meetings between workers — both inside and
 across companies, for education and teaching, and to connect friends and
-families. All of these systems are highly sensitive to latency.
+families. As the COVID-19 pandemic took hold, these systems became critical 
+infrastructure for many aspects of the US economy (see [BITAG_pandemic]).
+All of these systems are highly sensitive to latency.
 
-The glass-to-glass delay is measured from the time the light for the
-video hits the glass of the senders camera until the same images are
-displayed on the glass of the monitor or TV of the receiver of the
+
+Engineers of these systems refer to *glass-to-glass delay* as being a key
+figure of merit in the performance of a conferencing system. 
+For the video component, the glass-to-glass delay is measured from the time light 
+hits the glass of the sender's camera until the corresponding image is
+displayed on the glass of the monitor of the receiver of the
 video.
 For audio, it is time from when audio is recorded at the microphone of the
 participant, until the time that same sound plays out on the speaker of
-the other participants.
+the other participant.
 
 When the glass-to-glass delay is low, the call or meeting can
 seem like a normal conversation. As the delay gets longer, it becomes
-harder to have a conversation. Two users will both try and speak at the
-same time and end up talking over each other. This is because the delay
-means that each user cannot tell that the other user was already
-speaking. Many people have experienced the effect where two people speak
+harder to have a conversation, with speakers often talking over one another
+and struggling to maintain dialog.
+Many people have experienced the effect where two people speak
 at the same time, then they both stop and tell the other to go, then
-they both go at the same time again. This does not happen on low latency
+they both talk at the same time again. This does not happen on low latency
 meetings but is common on higher latency meetings.
 
-When the latency is
-very high, one side will say something, then experience an unnatural
-silence when the other side does not respond. When a remote person is
-slow to respond, humans can sometimes assume that they are not as smart as a
-person that responds quickly. This raises the question about whether or
-not this has any unconscious bias impact on teachers who have students
-on both low latency and high latency network connections.
+Additionally, in conversation when a person is slow to respond, it can be 
+subconsciously perceived as a sign of low intelligence. This raises a question 
+about the social impact that a high latency connection can have. 
 
 Low glass-to-glass delay for audio and video
-is critical for a good user experience on a
+is thus critical for a good user experience on a
 voice or video conference. There are
 several things that contribute to this latency:
 
@@ -1836,19 +1828,19 @@ of the computer and passed as a chunk of information to the program.
   echo created by audio being played out.
 
 * Encodings: audio and video are grouped and compressed so that it can
-be sent over the network, but this requires waiting for an appropriate
+be sent over the network as packets, but this requires waiting for an appropriate
 amount of data to group together. This is referred to as the encoding
 delay.
 
-* Network: the time for the media to be transferred over the
+* Network: the time for the media packets to be transferred over the
 Internet.
 
 *	Media forwarding: time for cloud servers that distribute and
     process media to forward it and, in some cases, encode, decode, and remix
     it.
      
-* Jitter buffers: some media will be delivered faster than others and
-the receiver has a buffer to save things that arrived early and play
+* Jitter buffers: some media packets will be delivered faster than others and
+the receiver has a buffer to hold packets that arrived early in order to play
 them at the appropriate time.
 
 * Forward error correction: time to allow for receiving extra
@@ -1861,11 +1853,17 @@ of packets lost by the networks.
 
 * Packet loss concealment: Create information to fill in any missing
   gaps in the media due to lost packets. If theses techniques look ahead
-  to interpolate between packets that were not lost, they add latency. 
+  to interpolate from later arriving packets, they add latency. 
 
 * Play-out: queue the media to be played by the hardware of the
 computer.
 
+For Internet voice and video conferencing and calling systems, the 
+network latency is often the major factor causing large glass-to-glass 
+delay, particularly if retransmissions are needed to combat packet loss. Packet 
+loss rates and the grouping of packet loss can thus have a large impact on the 
+overall delay as well. Jitter, or variation in delay, directly adds to the 
+latency. 
 
 The following table shows the approximate latency ranges that are typical in
 web conferencing systems.
@@ -1883,34 +1881,29 @@ web conferencing systems.
 |  Decoding              |   decompress the media   |    1 to 20   |
 |  Concealment        |   conceal  gaps in media from any lost packets  |  0 to 30 |
 |  Play-out               |   stream media out to speaker or display    |  10 to 50   |
-
+|  **Total**         |  | **56 to 2980** |
 
 ### Jitter
 
 When voice and video media packets are sent across the network, they
-will not all have the same latency, some will arrive faster than others.
+will not all have the same latency, some will arrive in less time than others.
 However, the media needs to be played out at a constant rate that
-matches the rate at which it was recorded. VoIP applications buffer a
-small amount of media to smooth over these variances in arrival times,
-which is referred to as jitter. If 95% of the packets take over 30
-milliseconds to arrive, it does not matter if the average latency is 20
-milliseconds because the VoIP applications will delay all the packets so
-that they take the same amount of time as the slower 30 millisecond
-packets. The result of this, is that for VoIP applications, average
-latency plus the amount of jitter is what determines how much delay is
-caused by the network. The amount of jitter is just as important as the
-latency to the overall experience that the user has. A network with an
-average latency of 50 milliseconds where less than 10% of the packets
-have a jitter higher than 40 milliseconds, will usually have more of a
-glass-to-glass delay than a network with an average latency of
-60 milliseconds where less than 10% of the packets have a jitter higher
-than 5 milliseconds.
+matches the rate at which it was recorded. In order to achieve this, VoIP applications 
+implement a *jitter buffer* that accepts the media packets as they 
+arrive, and delivers them at a constant rate to the decoder.
+In other words, a jitter buffer delays the early arriving packets in order to match the 
+delay of the later arriving packets, resulting in a consistent overall delay.
+Jitter buffers typically have a limit to how much delay variation they can 
+accommodate, and will discard packets that have a delay that exceeds this limit. 
+Thus, the jitter buffer converts variable network latency into fixed latency 
+and residual loss for the application.
+Jitter buffers are designed to minimize residual loss, perhaps aiming for 5% 
+or less, which results in a fixed latency equivalent to at least the 95th 
+percentile of the network packet latencies.
+So, for a VoIP application, *average* network latency does not matter at all,
+what matters is the 95th or perhaps 99th percentile packet latency.
 
-Any jitter, or variation in latency, will result in an increased
-glass-to-glass delay. 
-
-
-### Forward Error Correction
+### Forward Error Correction and Error Concealment
 
 Many VoIP applications use a range of techniques to recover from losing
 packets that involve sending some of the packets twice, or sending extra
@@ -1926,16 +1919,16 @@ than networks that are very random in which packets they lose, and do
 not have correlated losses.
 
 For very short segments of lost media, audio, or video, it is often
-possible to "fake" the media by looking at the media immediately before
-and after it. This can deal with short losses but also adds a delay to
-look at the media after the parts that were lost.
+possible to conceal the loss by interpolating via the media segments immediately before
+and after the loss. This can deal with short losses but can also add delay if it 
+requires using media segments after the parts that were lost.
 
-### Retransmission
+### Retransmissions
 
 Another way that VoIP applications can compensate for packet loss is by
 requesting the retransmission of the lost packet. The receiver needs to
 wait for an amount of time equivalent to the normal network latency plus
-the jitter time before the packet is requested. Then the request to
+the jitter time before the packet is deemed lost and a retransmission requested. Then the request to
 retransmit the lost packet must cross the network to the sender and the
 sender can resend the lost data to the receiver. This takes around three
 times the normal delay to cross the network. If this technique is being
@@ -1943,6 +1936,8 @@ used, all the packets that are not lost also need to have their time to
 be played out, so they can be played with the correct timing for the
 packets that were retransmitted. The key thing to note here is that a 10
 ms increase in network latency can cause a 30 ms increase in glass-to-glass delay.
+As a result, this technique is generally only used when packet loss is extreme
+and can't be dealt with via forward error correction and/or error concealment. 
 
 
 ## Multiplayer online games  
