@@ -937,9 +937,9 @@ manner, automatically re-balancing themselves as new flows join and as
 flows complete. It’s a complex, distributed, dynamic system, and has
 worked surprisingly well, but it isn’t perfect and is still evolving.
 
-Unfortunatraely, the predominant congestion control algorithm today,
+Unfortunately, the predominant congestion control algorithm today,
 "Cubic" (which traces its roots to the "Reno" TCP algorithm designed by
-Van Jacobsen in 1986), works best when the bottleneck link has a deep
+Van Jacobson in 1986), works best when the bottleneck link has a deep
 buffer, and it generally keeps that buffer full, resulting in
 significant latency. When the bottleneck link doesn't provide a deep
 buffer, flows with a longer base RTT will get a smaller share of
