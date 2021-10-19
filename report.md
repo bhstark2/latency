@@ -2,6 +2,104 @@
 
 **Executive Summary**
 
+When people think about getting a faster network connection, they
+generally want to perform their day-to-day computing activities
+faster: viewing a web page, obtaining a weather forecast, checking
+stock prices, getting driving directions, checking for new email,
+finding a movie to watch on streaming video, and so on.
+
+The peak throughput of a network connection is a relatively
+easy concept to understand, and relatively easy to measure.
+It is natural to assume that a network connection with higher
+throughput will perform day-to-day computing activities faster.
+This assumption is very widespread.
+Many of the web sites today that measure network
+throughput are colloquially called “speed test” sites,
+because we have conflated the two terms.
+We naturally assume that higher network throughput will equate to a
+faster computing experience.
+To some extent this is true, but not entirely.
+
+In the early days of dial-up modems, increasing throughput from 2400
+bits per second to 9600 bits per second certainly would increase the
+speed of virtually all user-visible operations.
+As a result, many users came to view the terms “throughput” and
+“speed” as interchangeable. More throughput over the network
+meant faster network operations on the computer.
+
+But as network throughput continues to increase, the link between
+throughput and speed of user-visible operations becomes more tenuous.
+If you double the throughput of your network connection,
+without changing anything else, it would be natural to assume that
+network operations should take half as much time. But they don’t.
+They take longer than that. As we continue to double and redouble
+network throughput, we find each time that network operations fail
+to complete twice as fast as before, as we might have hoped.
+Eventually we reach a point where further increases in network
+throughput result in no measurable difference at all in the time it
+takes to perform most common network operations.
+It seems there is some minimum time that network operations take,
+that refuses to go away no matter how high we make the throughput.
+Where does that hidden delay come from?
+
+The time it takes to perform a user-initiated network operation is
+the time it takes to send a message across the network and receive a
+reply in return. This total time is made up of five main components:
+
+(a) Transmission time
+(b) Propagation time
+(c) Queueing delay
+(d) Processing time
+(e) Other overheads, like Wi-Fi channel acquisition delay, Ethernet preamble, etc.
+
+When transmission rates (throughput) are low compared to the amount
+of data being sent, as was the case with dial-up modems, (a) can be
+significant. As throughput increases, this time becomes negligible
+for all but the largest transfers.
+
+Propagation time is largely dictated by the speed of light, which
+isn’t going to change, so (b) is largely dictated by the distance
+travelled, and is unlikely to change very much.
+The only way to improve this is to shorten the distance,
+which is one of the reasons Internet companies locate their
+data centers geographically close to their customers.
+
+As CPU speeds increase, processing time shrinks.
+Currently, over all but the shortest of Internet paths,
+processing time is negligible compared to the speed-of-light delay.
+
+Other overheads depend on the network technologies being used, but,
+like processing time, for most Internet traffic
+they are generally small compared to the overall speed-of-light delay.
+In cases where this is not true, there is certainly scope for improvement.
+
+This leaves queueing delay as the single largest component of delay
+experienced by most network operations today. Unlike the speed of
+light, queueing delay is something we do know how to improve.
+
+In this document we show how the size-related component of delay
+used to be the dominant factor in determining the speed of network
+operations, but as network throughput has increased this component
+of delay has become less and less significant compared to the others.
+Is is the other components of delay, (b), (c), (d), and (e)
+that now largely determine the overall speed of network operations.
+Of these size-invariant sources of delay, these ‘hidden’ or ‘latent’
+sources of delay, excessive queueing delay (bufferbloat) is by far
+the largest that many Internet users experience on a regular basis.
+
+If we wish to continue improving the quality of experience for
+people using the Internet,
+to make current applications work better and
+to make new applications possible,
+the solution will not be simply to continue increasing throughput;
+the solution will have to include lowering latency —
+the size-invariant hidden sources of delay
+that limit the maximum speed of network operations.
+
+---
+
+Previous text remains below:
+
 Placeholder text: When people think of Internet performance it is
 typically solely in terms of throughput. But when considering the end-user
 quality of experience (QoE), latency is usually a key factor.
