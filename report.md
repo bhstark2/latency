@@ -2196,59 +2196,37 @@ web technologies.
 
 
 
-## Future applications
+## The role of latency on future applications
 
 As noted above, consistently reducing working latency will improve all
-existing user applications. But looking to the future, it seems likely
-that the emergence of very low latency services may enable entirely new
+existing user applications. Looking to the future, it seems likely
+that the emergence of very- or ultra-low latency services may enable entirely new
 classes of applications to be created. One way to think about this is to
 consider that today we assume accessing resources on the Internet has
-some delay compared to local content or applications on a device. But
-what if a network-based resource was as responsive as a
-locally-installed resource? As well, applications that today are
+some delay compared to accessing local content or applications on a device. But
+what if a network-based resource was as responsive or available with similar latency as a
+locally-installed resource? As well, low-latency applications that today are
 infeasible without highly specialized private Internet connectivity
 might become viable over consumer-grade best efforts Internet access.
-What follows are some applications that may be viable, though it is
-likely that unexpected and surprising new applications will be released
-by creative developers that we are unable to envision or list in the
-brief examples below.
 
-### Connected cars  
-	
-Major connected car applications that are said to require low latency
-are self-driving / autonomous cars and crash avoidence mechanisms. None
-of these rely on networked solutions to work at this time. Instead, they
-currently rely on local sensor information. For networked mechanisms to
-be useful, the software needs to be able to react as fast or faster than
-a human driver. The time it takes for an automotive system to react
-after an event occurs (which includes network latency and the time
-required for computation performed by any systems involved) should be
-less than 100 ms
-[https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-39.pdf].
-Some people in this field believe the latencies of LTE networks
-(averaging around 40 ms) may be too large as the network component to
-this overall reaction time
-[https://www.te.com/content/dam/te-com/documents/automotive/global/TE-TP-Autonomous-Driving-0218-FINAL-EN.pdf].
-There is a strong push for support of 5G with edge computing (processing
-packets as close to the vehicle as possible with no requirement for
-processing inside a centralized core network) for these automotive use
-cases.
-	
-### Cloud VR 
+Reduced latency is therefore likely to spur unexpected and surprising new innovative
+applications to be released by creative developers. For example, connected car applications
+for self-driving / autonomous cars or crash avoidence mechanisms requires an automotive system to react
+in less than 100 ms [https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-39.pdf]. 
+There is a similar strong push to develop ultra-reliable low-latency applications as low as 1 ms in 5G infrastructure 
+to support use cases focused on human-centric communications in health, safety, office, and entertainment, 
+or machine-centric communications ifor driverless cars, enhanced mobile cloud services, real-time traffic 
+control optimization, emergency and disaster response, smart grid, e-health or efficient industrial communications. 
+[https://www.itu.int/dms_pub/itu-r/opb/rep/R-REP-M.2410-2017-PDF-E.pdf]. Finally, virtual 
+reality environments require extensive cloud-based rendering systems with minimal latency to synchronize users' head movements
+with appropriately updated images being presented in head-mounted-displays. For full remote rendering, much of this latency budget 
+is consumed by the motion-capture and image rendering processes, leaving perhaps 
+only 1-2 ms of network RTT between the head mounted display and the rendering engine.
 
-Virtual reality environments require extensive compute resources in
-order to render high quality scenes with sufficient frame rate. These
-requirements have motivated the exploration of cloud-rendering
-solutions, where the cost of the compute resource can be shared across a
-number of users. A key consideration in moving the majority of the
-rendering functionality to the cloud is the latency between a movement
-of the user's head, and appropriately updated images being presented to
-them in their head-mounted-display. This *motion-to-photon* latency can
-be no more than about 20 ms otherwise it can cause nausea, with some
-targeting less than 8 ms for the ideal experience [@CloudVR]. For full
-remote rendering, much of this latency budget is consumed by the
-motion-capture and image rendering processes, leaving perhaps 1-2 ms of
-network RTT between the head mounted display and the rendering engine.
+While it is not possible to accurately catalog or predict what low-latency applications
+ultimately may be viable ultimately and popular, it is likely that unexpected and surprising new 
+applications will be released in the future by creative developers capitalizing upon increasingly lower
+latency over Internet networks.
 
 # Conclusions/observations/findings
 
