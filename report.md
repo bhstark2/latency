@@ -2319,14 +2319,17 @@ Internet Protocol (IPv4 or IPv6) at this layer supports end-to-end
 addressing, as well as classification and marking. Routers perform
 scheduling, shaping, and policing as well as routing at this layer.
 	
-**Layer 4 – Transport Layer**. At the transport layer, the Internet
-transport protocol (typically TCP or UDP) delivers a flow of packets
+**Layer 4 – Transport Layer**. At the transport layer, an Internet
+transport protocol (typically TCP, SCTP, QUIC, or similar)
+delivers a flow of packets
 across the network with characteristics determined by the protocol used.
-TCP provides end-to-end flow identification, packet sequencing, error
-recovery, and flow control for reliable data transfer. UDP provides flow
-identification and error correction. QUIC is a new transport protocol
+Transport protocols provide end-to-end flow identification, packet sequencing, error
+recovery, flow control, and — most importantly — congestion control,
+for reliable data transfer without overwhelming the network.
+QUIC is a new transport protocol
 (https://www.rfc-editor.org/rfc/rfc9000.html) that provides applications
-with flow-controlled streams for structured communication, low-latency
+with flow-controlled congestion-controlled streams
+for structured communication, low-latency
 connection establishment, and network path migration.
 	
 **Layer 5 – Application Layer**. The application layer represents all
