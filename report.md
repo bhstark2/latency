@@ -312,11 +312,14 @@ If the input flow rate becomes less than the output flow rate, then
 the water level (buffer) begins to decline.
 
 There will always be a constrained link on an Internet path, due to its
-packet-based design which means in part that it does not create
-end-to-end circuits with dedicated capacity. As a result, the presence
+packet-based design which means that it does not create
+end-to-end circuits where every hop is artificially limited to some nominal rate.
+As a result, the presence
 of a bottleneck link and a buffer is not good or bad — it is merely a
-fact of the design of the Internet. As well, the fact that some packets
-are lost at this bottleneck is also completely normal and indeed is
+fact of design of any network free from artificially imposed limits.
+As well, the fact that some packets
+are either congestion-marked or discarded at this bottleneck
+is also completely normal and indeed is
 essential, as this is a key part of the control signal or feedback loop
 to a sender to moderate how fast they are sending packets. Without
 trying to send at an increasingly higher rate, a sender would otherwise
@@ -2233,9 +2236,10 @@ latency over Internet networks.
 
 # Conclusions/observations/findings
 
-* Due to the packet-switched design of the Internet, which does not have
-dedicated circuits, there will always be a constrained link (aka
-bottleneck link) on any end-to-end Internet path.
+* Due to the packet-switched design of the Internet, which does not
+artificially limit all hops to the same low throughput,
+there will always be some link (aka bottleneck link) that
+has the lowest throughput on any end-to-end Internet path.
 
 * The fact that some packets are dropped at a bottleneck link is also
 completely normal and indeed is essential, as this is a key part of the
