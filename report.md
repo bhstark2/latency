@@ -289,10 +289,11 @@ end-to-end path, the link with the least capacity in the upstream and
 downstream direction (which may be different for each direction) is the
 most constrained link, and is typically referred to the “bottleneck
 link”. This bottleneck link — and there is always a bottleneck link on
-any path — requires a buffer of some sort to moderate the high flow of
-packets coming into a link with the lower flow of packets that the next
-link in the path can accept. Thus, the buffer, or queue, in that
-bottleneck link can contribute significantly to latency.
+any path — requires a buffer of some sort
+to accommodate the situation where, for a brief time,
+packets are arriving faster than they can depart.
+The time packets spend waiting in that buffer, or queue,
+is often the dominant component of the overall latency.
 
 A good way to envision a buffer is to envision pouring water into a
 funnel that has a wide top (lots of bandwidth capacity) and a narrow
@@ -300,12 +301,19 @@ bottom (lower bandwidth capacity). As a large volume of water enters the
 funnel, at some point the incoming water flow is greater than can be
 drained at the bottom and the water level begins to rise — so a buffer
 of water forms and the water line in the funnel begins to rise. When
-water rises over the top of the funnel and spills out (akin to packet
-loss), this may be a signal for someone to slow the rate of incoming
-water flow. Or the person holding the funnel may tell the person pouring
-water to slow down (akin to congestion notification). Whether as a
+water rises over the top of the funnel it spills out (akin to packet
+loss); this should be a signal for someone to slow the rate of incoming
+water flow.
+This water spillage (or packet loss)
+is an implicit notification of congestion.
+Or the person holding the funnel may
+notice the rising water level and tell the person pouring
+water to slow down before the water overflows and spills.
+This communication between funnel holder and water source
+is an explicit notification of congestion.
+Whether as a
 result of noticing water spilling over the top of the funnel or
-receiving a signal from the person holding the funnel to slow down, the
+receiving an explicit signal from the person holding the funnel to slow down, the
 person then begins to reduce the rate of their pour. If the incoming
 flow of water slows down such that the flow rate between input and output
 equalizes, the water level in the funnel (buffer) then stabilizes. 
