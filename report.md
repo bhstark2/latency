@@ -335,7 +335,7 @@ trying to send at an increasingly higher rate, a sender would otherwise
 never be able to discover and fully utilize the maximum capacity of an
 end-to-end path, nor adjust to take advantage of new capacity as it
 becomes available. Thus, what’s critical is not that a queue exists or
-that packet loss will occur — it is how that buffer or queue performs
+that packet marking or loss will occur — it is how that buffer or queue performs
 and how quickly it can react to and communicate changing conditions.
 
 Network engineers refer to how a buffer performs as “queue behavior”.
@@ -2276,12 +2276,12 @@ artificially limit all hops to the same low throughput,
 there will always be some link (aka bottleneck link) that
 has the lowest throughput on any end-to-end Internet path.
 
-* The fact that some packets are dropped at a bottleneck link is also
+* The fact that some packets are marked or dropped at a bottleneck link is also
 completely normal and indeed is essential, as this is a key part of the
 control signal or feedback loop to a sender to moderate how fast they
 are sending packets.
 
-* If some packets are not dropped at a bottleneck link, a queue of
+* If some packets are not marked or dropped at a bottleneck link, a queue of
 packets will form. When the queue becomes too large then user
 applications suffer delay (high latency).
 
