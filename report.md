@@ -247,8 +247,9 @@ current time are significant and bear as directly on end-user QoE as
 connection throughput.
 
 A test of working latency typically involves running a throughput test (a
-large file transfer) to fully utilize a connection while in parallel
-running a series of ping tests to a destination server. This will show
+large file transfer) to fully utilize a connection while simultaneously
+measuring the application-layer round-trip time experienced by that connection.
+This will show
 the packet delay when a connection is in use, reflecting real-world
 performance. To best measure what performance a user might expect,
 working latency tests don't simply report the average latency experienced,
@@ -1616,17 +1617,18 @@ Another metric that has been proposed recently, and that derives from
 latency, is "responsiveness"
 [https://www.ietf.org/id/draft-cpaasch-ippm-responsiveness-00.html].
 This metric consists of more than just packet latency measurements, but
-rather is based on higher-layer protocol latency measurements including
-DNS, TCP handshaking and HTTP. These measurements are averaged, and then
+instead is based on end-to-end application-layer latency measurements.
+This test is designed to measure not just network delays, but also
+delays in end systems — clients and servers — under working conditions.
+Normally end systems delays should be minimal,
+but often they are not, often due to queueing in servers.
+These total delay measurements are averaged, and then
 the result is inverted and expressed in units of "Round-trips per
 Minute" (RPM). This metric has some intuitive value for iterative web
 traffic workloads, where a user can imagine a network with low
 responsiveness setting an upper bound on how many web resources can be
-fetched in a certain amount of time. That said, it is specific to web
-workloads, and appears to focus on the average result of a small number
-of measurements, as opposed to trying to represent information about the
-range of performance that the user might experience.
-
+fetched in a certain amount of time. That said, it is applicable to any
+workloads where clients are requesting data from servers over a network.
 
 ## Measuring latency  
 
@@ -1748,7 +1750,8 @@ being introduced by one of the host's TCP stacks.
 Network conditions can have a significant impact upon latency. A
 completely idle network can have a very low and consistent measured
 latency (using any of the tools and protocols above). Conversely, if the
-network is heavily in use, then latency can increase significantly and
+network is in use by even a single capacity-seeking flow
+then latency can increase significantly and
 become very erratic. Therefore it is important with latency measurements
 to understand the conditions in which you are measuring.
 
@@ -1771,15 +1774,17 @@ no cross-traffic are said to be measuring 'idle latency'. This is useful
 to work out the baseline latency of a network path.
 
 It is also useful to carry out latency measurements in the presence of
-heavy cross-traffic. Carrying out latency measurements under such
-conditions is known as a 'latency under load' test. This helps to reveal
-how latency behaves when the network is heavily utilised, which is
+cross-traffic. Carrying out latency measurements under such
+conditions is known as a 'latency under load' or 'working latency' test.
+This helps to reveal how latency behaves when the network is
+being used by one or more capacity-seeking flows, which is
 precisely when users are using it. Some measurement systems will
 generate artificial cross-traffic (perhaps in the form of a throughput
-test) in order to ensure the link is heavily utilised to a predictable
-and repeatable degree. Measurement systems that do not measure
+test) in order to ensure the link is fully utilised,
+as it would be when there is a single other capacity-seeking flow.
+Measurement systems that do not measure (or create their own)
 cross-traffic cannot reliably know whether they are measuring idle
-latency, latency under load, or something in between.
+latency or working latency.
 
 ## Ongoing QoE Evaluation Best Practices
 
