@@ -2,6 +2,104 @@
 
 **Executive Summary**
 
+When people think about getting a faster network connection, they
+generally want to perform their day-to-day computing activities
+faster: viewing a web page, obtaining a weather forecast, checking
+stock prices, getting driving directions, checking for new email,
+finding a movie to watch on streaming video, and so on.
+
+The peak throughput of a network connection is a relatively
+easy concept to understand, and relatively easy to measure.
+It is natural to assume that a network connection with higher
+throughput will perform day-to-day computing activities faster.
+This assumption is very widespread.
+Many of the web sites today that measure network
+throughput are colloquially called “speed test” sites,
+because we have conflated the two terms.
+We naturally assume that higher network throughput will equate to a
+faster computing experience.
+To some extent this is true, but not entirely.
+
+In the early days of dial-up modems, increasing throughput from 2400
+bits per second to 9600 bits per second certainly would increase the
+speed of virtually all user-visible operations.
+As a result, many users came to view the terms “throughput” and
+“speed” as interchangeable. More throughput over the network
+meant faster network operations on the computer.
+
+But as network throughput continues to increase, the link between
+throughput and speed of user-visible operations becomes more tenuous.
+If you double the throughput of your network connection,
+without changing anything else, it would be natural to assume that
+network operations should take half as much time. But they don’t.
+They take longer than that. As we continue to double and redouble
+network throughput, we find each time that network operations fail
+to complete twice as fast as before, as we might have hoped.
+Eventually we reach a point where further increases in network
+throughput result in no measurable difference at all in the time it
+takes to perform most common network operations.
+It seems there is some minimum time that network operations take,
+that refuses to go away no matter how high we make the throughput.
+Where does that hidden delay come from?
+
+The time it takes to perform a user-initiated network operation is
+the time it takes to send a message across the network and receive a
+reply in return. This total time is made up of five main components:
+
+(a) Transmission time
+(b) Propagation time
+(c) Queueing delay
+(d) Processing time
+(e) Other overheads, like Wi-Fi channel acquisition delay, Ethernet preamble, etc.
+
+When transmission rates (throughput) are low compared to the amount
+of data being sent, as was the case with dial-up modems, (a) can be
+significant. As throughput increases, this time becomes negligible
+for all but the largest transfers.
+
+Propagation time is largely dictated by the speed of light, which
+isn’t going to change, so (b) is largely dictated by the distance
+travelled, and is unlikely to change very much.
+The only way to improve this is to shorten the distance,
+which is one of the reasons Internet companies locate their
+data centers geographically close to their customers.
+
+As CPU speeds increase, processing time shrinks.
+Currently, over all but the shortest of Internet paths,
+processing time is negligible compared to the speed-of-light delay.
+
+Other overheads depend on the network technologies being used, but,
+like processing time, for most Internet traffic
+they are generally small compared to the overall speed-of-light delay.
+In cases where this is not true, there is certainly scope for improvement.
+
+This leaves queueing delay as the single largest component of delay
+experienced by most network operations today. Unlike the speed of
+light, queueing delay is something we do know how to improve.
+
+In this document we show how the size-related component of delay
+used to be the dominant factor in determining the speed of network
+operations, but as network throughput has increased this component
+of delay has become less and less significant compared to the others.
+Is is the other components of delay, (b), (c), (d), and (e)
+that now largely determine the overall speed of network operations.
+Of these size-invariant sources of delay, these ‘hidden’ or ‘latent’
+sources of delay, excessive queueing delay (bufferbloat) is by far
+the largest that many Internet users experience on a regular basis.
+
+If we wish to continue improving the quality of experience for
+people using the Internet,
+to make current applications work better and
+to make new applications possible,
+the solution will not be simply to continue increasing throughput;
+the solution will have to include lowering latency —
+the size-invariant hidden sources of delay
+that limit the maximum speed of network operations.
+
+---
+
+Previous text remains below:
+
 Placeholder text: When people think of Internet performance it is
 typically solely in terms of throughput. But when considering the end-user
 quality of experience (QoE), latency is usually a key factor.
@@ -1575,44 +1673,9 @@ such things is desirable in latency measurement, because to do otherwise
 would introduce external factors into our measurement (such as
 artificial delays before retransmitting a lost packet) that cannot be
 reliably separated from the network latency. There's a large variety of
-tools that use UDP as their basis for latency measurements.
-
-The IETF has standardized multiple UDP-based latency measurement
-protocols over the years. OWAMP (one-way active measurement protocol)
-provides for one-way latency measurements between sender and receiver.
-This means that the latency between the sender and the receiver in the
-forward direction is measured and reported separately to the latency
-between the sender and receiver in the reverse direction. This provides
-valuable information that is lost in two-way (round-trip) latency
-measurements — it can show if latency in one direction is larger than
-the other. An impediment to adoption of OWAMP is the requirement that
-the sender's and receiver's clocks are precisely synchronized. Relying
-on NTP[^3] alone is usually not sufficient here, as the precision is not
-high enough for low latency connections.
-
-[^3] Network Time Protocol, a commonly utilized protocol to
-automatically set the time in a network-connected machine.
-
-TWAMP (two-way active measurement protocol) extends OWAMP to also
-support two-way (round-trip) latency measurements. When being used only
-for round-trip measurements, the requirement for the clocks on the
-sender and receiver to be synchronised can be removed. This is because
-the measurement is only conducted at the sender — the receiver
-effectively just has to reflect the packet back to the sender. TWAMP is
-often deployed inside large routers from companies like Juniper and
-Cisco for the purposes of service level agreement verification. It is
-favoured over ICMP because it supports separating out host-processing
-latency from network latency.
-
-STAMP (simple two-way active measurement protocol) simplifies TWAMP by
-removing some little-used features, while still maintaining backwards
-compatibility with the existing TWAMP protocol.
-
-IRTT is a UDP-based measurement tool that measures RTT, one-way delays,
-and other packet metrics using lightweight isochronous bidirectional
-flows with a maximum precision and interval of 3ms. It is available as
-open source for any platform that supports the go language, and
-pre-packaged for most Linux distributions.
+tools that use UDP as their basis for latency measurements,
+some of which are standardized by the IETF or are available as open 
+source implementations (see [Appendix D: UDP Latency Measurement Methods]).
 
 SamKnows, a UK-based provider of network measurement services, have
 deployed a proprietary UDP-based latency measurement protocol. This
@@ -2134,59 +2197,39 @@ web technologies.
 
 
 
-## Future applications
+## The role of latency on future applications
 
 As noted above, consistently reducing working latency will improve all
-existing user applications. But looking to the future, it seems likely
-that the emergence of very low latency services may enable entirely new
+existing user applications. Looking to the future, it seems likely
+that the emergence of very- or ultra-low latency services may enable entirely new
 classes of applications to be created. One way to think about this is to
 consider that today we assume accessing resources on the Internet has
-some delay compared to local content or applications on a device. But
-what if a network-based resource was as responsive as a
-locally-installed resource? As well, applications that today are
+some delay compared to accessing local content or applications on a device. But
+what if a network-based resource was as responsive or available with similar latency as a
+locally-installed resource? As well, low-latency applications that today are
 infeasible without highly specialized private Internet connectivity
 might become viable over consumer-grade best efforts Internet access.
-What follows are some applications that may be viable, though it is
-likely that unexpected and surprising new applications will be released
-by creative developers that we are unable to envision or list in the
-brief examples below.
 
-### Connected cars  
-	
-Major connected car applications that are said to require low latency
-are self-driving / autonomous cars and crash avoidence mechanisms. None
-of these rely on networked solutions to work at this time. Instead, they
-currently rely on local sensor information. For networked mechanisms to
-be useful, the software needs to be able to react as fast or faster than
-a human driver. The time it takes for an automotive system to react
-after an event occurs (which includes network latency and the time
-required for computation performed by any systems involved) should be
-less than 100 ms
-[https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-39.pdf].
-Some people in this field believe the latencies of LTE networks
-(averaging around 40 ms) may be too large as the network component to
-this overall reaction time
-[https://www.te.com/content/dam/te-com/documents/automotive/global/TE-TP-Autonomous-Driving-0218-FINAL-EN.pdf].
-There is a strong push for support of 5G with edge computing (processing
-packets as close to the vehicle as possible with no requirement for
-processing inside a centralized core network) for these automotive use
-cases.
-	
-### Cloud VR 
 
-Virtual reality environments require extensive compute resources in
-order to render high quality scenes with sufficient frame rate. These
-requirements have motivated the exploration of cloud-rendering
-solutions, where the cost of the compute resource can be shared across a
-number of users. A key consideration in moving the majority of the
-rendering functionality to the cloud is the latency between a movement
-of the user's head, and appropriately updated images being presented to
-them in their head-mounted display. This *motion-to-photon* latency can
-be no more than about 20 ms otherwise it can cause nausea, with some
-targeting less than 8 ms for the ideal experience [@CloudVR]. For full
-remote rendering, much of this latency budget is consumed by the
-motion-capture and image rendering processes, leaving perhaps 1-2 ms of
-network RTT between the head-mounted display and the rendering engine.
+Reduced latency is therefore likely to spur unexpected and surprising new innovative
+applications to be released by creative developers. For example, connected car applications
+for self-driving / autonomous cars or crash avoidence mechanisms requires an automotive system to react
+in less than 100 ms [https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-39.pdf]. 
+There is a similar strong push to develop ultra-reliable low-latency applications as low as 1 ms in 5G infrastructure 
+to support use cases focused on human-centric communications in health, safety, office, and entertainment, 
+or machine-centric communications ifor driverless cars, enhanced mobile cloud services, real-time traffic 
+control optimization, emergency and disaster response, smart grid, e-health or efficient industrial communications. 
+[https://www.itu.int/dms_pub/itu-r/opb/rep/R-REP-M.2410-2017-PDF-E.pdf]. Finally, virtual 
+reality environments require extensive cloud-based rendering systems with minimal latency to synchronize users' head movements
+with appropriately updated images being presented in head-mounted-displays. For full remote rendering, much of this latency budget 
+is consumed by the motion-capture and image rendering processes, leaving perhaps 
+only 1-2 ms of network RTT between the head-mounted display and the rendering engine.
+
+While it is not possible to accurately catalog or predict what low-latency applications
+ultimately may be viable ultimately and popular, it is likely that unexpected and surprising new 
+applications will be released in the future by creative developers capitalizing upon increasingly lower
+latency over Internet networks.
+
 
 # Conclusions/observations/findings
 
@@ -2414,6 +2457,45 @@ caching, multi-threading, etc. Although these technologies can
 compensate for high turn counts, they cannot always overcome high
 latency conditions—and many use cases cannot take advantage of the edge
 enhancements.
+
+# Appendix D: UDP Latency Measurement Methods {-}
+
+The IETF has standardized multiple UDP-based latency measurement
+protocols over the years. OWAMP (one-way active measurement protocol)
+provides for one-way latency measurements between sender and receiver.
+This means that the latency between the sender and the receiver in the
+forward direction is measured and reported separately to the latency
+between the sender and receiver in the reverse direction. This provides
+valuable information that is lost in two-way (round-trip) latency
+measurements — it can show if latency in one direction is larger than
+the other. An impediment to adoption of OWAMP is the requirement that
+the sender's and receiver's clocks are precisely synchronized. Relying
+on NTP[^3] alone is usually not sufficient here, as the precision is not
+high enough for low latency connections.
+
+[^3] Network Time Protocol, a commonly utilized protocol to
+automatically set the time in a network-connected machine.
+
+TWAMP (two-way active measurement protocol) extends OWAMP to also
+support two-way (round-trip) latency measurements. When being used only
+for round-trip measurements, the requirement for the clocks on the
+sender and receiver to be synchronised can be removed. This is because
+the measurement is only conducted at the sender — the receiver
+effectively just has to reflect the packet back to the sender. TWAMP is
+often deployed inside large routers from companies like Juniper and
+Cisco for the purposes of service level agreement verification. It is
+favoured over ICMP because it supports separating out host-processing
+latency from network latency.
+
+STAMP (simple two-way active measurement protocol) simplifies TWAMP by
+removing some little-used features, while still maintaining backwards
+compatibility with the existing TWAMP protocol.
+
+IRTT is a UDP-based measurement tool that measures RTT, one-way delays,
+and other packet metrics using lightweight isochronous bidirectional
+flows with a maximum precision and interval of 3ms. It is available as
+open source for any platform that supports the go language, and
+pre-packaged for most Linux distributions.
 
 
 \pagebreak
