@@ -285,13 +285,31 @@ high latency can reduce the apparent throughput from the user's
 perspective. Additionally, increasing the throughput of the path (e.g.,
 from 10 Mbps to 1 Gbps) can reduce latency in some cases. One case where
 this can happen is with latency degradation due to *load* on the path.
-For example, a single video stream at 5 Mbps might cause queuing delays
-50% of the time on a 10 Mbps connection, but only 0.5% of the time on a
-1 Gbps connection. To be clear, this is a case of reducing the
+For example, video streaming typically sends chunks of video data
+from server to client, with each chunk sent as fast as the network
+can deliver it. This results in a square-wave on/off cycle,
+where the bottleneck alternates between being 100% busy
+(while a chunk is being transferred) and idle (between chunks).
+When sending a single 5 Mb/s video stream over a 10 Mb/s connection,
+much of today’s networking hardware exhibits high queuing delays,
+and poor user-experience for other traffic, for
+50% of the total time that the streaming video is being played.
+Sending the same 5 Mb/s video stream over a 100 Mb/s connection
+results in poor user-experience for only
+5% of the total time that the streaming video is being played.
+And sending the same 5 Mb/s video stream over a 1 Gb/s connection
+results in poor user-experience for only
+0.5% of the total time that the streaming video is being played.
+To be clear, this is a case of reducing the
 frequency with which a latency degradation occurs, not the severity of
-it. In both example cases - a 10 Mbps connection and a 1 Gbps
-connection - latency could be severely disruptive, just less often so
-with the higher throughput connection. Another case where increasing
+degradation when it happens.
+At both extremes given - a 10 Mb/s connection and a 1 Gb/s
+connection - latency could be severely disruptive, just less frequently
+with the higher throughput connection.
+One might reasonably assume that when the network capacity
+is 200 times more than required to stream a video,
+streaming a video shouldn’t result in poor user-experience at all.
+Another case where increasing
 throughput can impact latency is when the queue/buffer is statically
 sized (e.g., as a number of bits or bytes), resulting in a larger
 buffering delay on lower throughput connections. This phenomenon,
@@ -479,7 +497,11 @@ interleaving utilized by some link technologies, this is negligible.
  streaming video player) appears to wait while it builds up an amount
  of data in its playout buffer, before it begins playing the media.
  This is an entirely different phenomenon, and is not what we refer to
- as buffering in this report.*    
+ as buffering in this report.
+ These two kinds of buffering are, however, related —
+ the reason streaming media applications require large playback
+ buffers is in part due to the occasional and unpredictable large
+ data delivery delays caused by overly large buffers in the network.*
 
 - **miscellaneous, link specific:** some link technologies can introduce
 additional delays that can be significant. Some of these are discussed
