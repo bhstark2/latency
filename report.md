@@ -230,7 +230,7 @@ and how quickly it can react to and communicate changing conditions.
 
 Network engineers refer to how a buffer performs as “queue behavior”.
 The predominant and most basic way to manage the behavior of a queue
-today is First-In First-Out (FIFO), which is easy to understand
+today is Tail-Drop First-In First-Out (FIFO), which is easy to understand
 [ref to FIFO queue management]. But newer forms of queue management,
 such as various types of Active Queue Management (AQM) (discussed
 further in [Active Queue Management]), have started to emerge in recent
@@ -858,10 +858,10 @@ aggregate), and particularly when the egress interface is the bottleneck
 for one or more flows currently sharing it. In those situations, packets
 will regularly queue up in the buffer, and thus cause delays.
 
-#### First-In, First-Out (FIFO) Queues
+#### Tail-Drop First-In First-Out (FIFO) Queues
 
 The simplest (and most common) buffer implementation is a single
-first-in, first-out (FIFO) queue. As packets arrive, they line up in
+tail-drop first-in, first-out (FIFO) queue. As packets arrive, they line up in
 this queue in arrival order, and they then depart on the egress
 interface in that same order. If traffic arrives at a rate that exceeds
 the egress rate, the queue depth will grow, and if the arrival rate is
@@ -890,9 +890,9 @@ the link was being fully utilized. This was referred to as *bufferbloat*
 [@Bufferbloat].
 
 In equipment that can support a variety of link rates (such as DSL
-modems, cable modems, and Wi-Fi gear) statically sized FIFO buffers
+modems, cable modems, and Wi-Fi gear) statically sized Tail-Drop FIFO buffers
 introduce even more buffering delay when the link is operating at a
-slower rate. FIFOs that can be adjusted to a more appropriate size for
+slower rate. Tail-Drop FIFOs that can be adjusted to a more appropriate size for
 the link operating rate can improve the latency performance (in
 particular when the link is under load), but making the buffer too small
 will impact the throughput of congestion controlled traffic.
@@ -904,7 +904,7 @@ called *Active Queue Management* (AQM) that monitors the queue depth (or
 delay), and then sends congestion signals (either by dropping packets or
 implementing *Explicit Congestion Notification* as described later in
 this document) to try to sustain full egress link utilization while
-maintaining lower queuing delay than would exist in a FIFO. There have
+maintaining lower queuing delay than would exist in a Tail-Drop FIFO. There have
 been many different AQM algorithms developed over the years, but some
 the most common ones in use today are CoDel [@CoDel] (usually as part of
 fq_codel, described below) and PIE [@PIE].
