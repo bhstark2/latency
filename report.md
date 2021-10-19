@@ -135,7 +135,7 @@ used and is therefore essentially meaningless to end-user QoE. *To
 really understand end-user QoE, we need to look at working latency
 rather than idle latency.*
 
-When a longer duration test of latency is run at the same moment that
+When a longer-duration test of latency is run at the same moment that
 the Internet connection is being utilized, this is a test of working
 latency. Working latency is therefore a better reflection of the
 real-world performance of an end user’s Internet connection. The
@@ -283,7 +283,7 @@ we'll describe later, some existing network protocols are unable to
 achieve high throughput when there is significant latency present. So,
 high latency can reduce the apparent throughput from the user's
 perspective. Additionally, increasing the throughput of the path (e.g.,
-from 10 Mbps to 1 Gbps) can reduce latency in some cases. One case where
+from 10 Mb/s to 1 Gb/s) can reduce latency in some cases. One case where
 this can happen is with latency degradation due to *load* on the path.
 For example, a single video stream at 5 Mbps might cause queuing delays
 50% of the time on a 10 Mbps connection, but only 0.5% of the time on a
@@ -354,7 +354,7 @@ Latency also varies by different types of physical media or type of
 network (e.g., type of ISP access network technology). For example,
 looking at the physical media, inside a datacenter for example, a
 gigabit fiber connection will typically have lower latency than a
-copper-based 10 Mbps Ethernet connection. In addition, the latency
+copper-based 10 Mb/s Ethernet connection. In addition, the latency
 properties of ISP access network technologies will also cause latency to
 vary — this subject is discussed futher in the next section. As a
 result, idle latency tests of an end-to-end path will simply reflect (1)
@@ -398,7 +398,7 @@ topologies, then mention additional latency factors that are introduced
 by the endpoints (sender and receiver).
 
 But as noted above, it is easy to misunderstand the source of latency.
-If you imagine a user with a 1 Gbps symmetric broadband connection that
+If you imagine a user with a 1 Gb/s symmetric broadband connection that
 is communicating with a server that is relatively close by, it is
 certainly possible that the end-to-end path is entirely fiber-based and
 yet latency can still be an issue. Unlike cars on a road, which have
@@ -424,9 +424,9 @@ as packet loss).
 
 The link technologies in the path contribute latency due to the distance
 the signals travel (length of the physical medium) relative to the speed
-at which signals are transmitted on the physical medium (propagation
+at which signals travel on the physical medium (propagation
 delay), the time it takes for equipment to encode and decode the
-physical and link-layer technologies, characteristics of how bits of
+physical and link-layer signals, characteristics of how bits of
 information are encoded on the physical medium, and switching and
 queuing delays caused by nodes needing to combine and send inbound
 traffic on outbound links.
@@ -506,7 +506,7 @@ The next subsections discuss some nuances of the various link technologies that 
 
 ### Ethernet 
 
-Ethernet links, whether the familiar 1 Gbps LAN cables used to connect
+Ethernet links, whether the familiar 1 Gb/s LAN cables used to connect
 devices in home networks and offices, or the 10G, 100G, 200G, 400G
 optical fiber versions used in datacenters and to connect sites over
 long distances, form a baseline against which most other network link
@@ -516,15 +516,15 @@ technologies can be compared. Historically, the Ethernet standard (IEEE
 adopted by many other link technologies as well, and thus has become the
 de facto MTU for the Internet.
 
-The latency introduced by an Ethernet link has two components that can
+The delay introduced by an Ethernet link has two components that can
 be directly calculated from the frame size and the characteristics of
 the link (bit rate, distance and medium). For example, a 1518 byte frame
-(12144 bits) sent via a 1 Gbps interface over a 100-foot copper twisted
-pair (e.g., Cat6) cable will experience 0.0121 ms (12144 bits / 1e9 bps)
-of *serialization delay* (the amount of time it takes to transmit all of
+(12144 bits) sent via a 1 Gb/s interface over a 100-foot copper twisted
+pair (e.g., Cat6) cable will experience 0.0121 ms (12144 bits / 1e9 b/s)
+of size-related *serialization delay* (the amount of time it takes to transmit all of
 the bits of the frame), plus 0.00017 ms (100 ft / (0.59 * 1,000,000
-ft/millisecond)) of *propagation delay* (the time it takes for each bit
-to make it from the transmitter to the receiver), for a total latency of
+ft/millisecond)) of size-invariant *propagation delay* (the time it takes for each bit
+to make it from the transmitter to the receiver), for a total delay of
 about 0.0123 ms.
 
 In addition, an Ethernet *network* (i.e., multiple Ethernet links
@@ -534,7 +534,7 @@ and *buffering delay*. The switching delay can be negligible in
 "cut-through" switches, or can add an amount equal to the serialization
 delay in "store-and-forward" switches. The buffering delay is variable,
 depending on instantaneous traffic load, and can range from 0 to the
-maximum supported by the switch. Many switches used in datacenters are
+maximum allowed by the switch. Many switches used in datacenters are
 "shallow-buffered" such that the maximum buffering delay is on the order
 of hundredths of milliseconds, though deep-buffered switches exist as
 well, supporting maximum buffering delays in the 10s of milliseconds.
@@ -590,7 +590,7 @@ standards for hybrid fiber-coaxial (HFC) networks (ADD FN:
 https://www.cablelabs.com/specifications). Most DOCSIS networks today
 are comprised of primarily DOCSIS 3.0 and 3.1 cable modems and DOCSIS
 3.1 Cable Modem Termination Systems (CMTS). Most HFC networks use
-coaxial copper cable for the last few hundred feet, and fiber optic
+coaxial copper cable for the first few hundred feet, and fiber optic
 cable for the remainder of the distance between the CMTS and cable
 modems, followed by fiber optic cable from the CMTS to the Internet.
 
@@ -712,7 +712,7 @@ be directly related to the number of hops (and distance) traveled by LTE
 packets as opposed to 5G packets
 [see section 4.4. of http://xyzhang.ucsd.edu/papers/DXu_SIGCOMM20_5Gmeasure.pdf].
 
-Median latency of the top three US mobile network providers in 2021 was
+Median idle latency of the top three US mobile network providers in 2021 was
 calculated by Speedtest.net to be 33ms (across combined LTE and 5G networks)
 [https://www.speedtest.net/global-index/united-states].
 
@@ -741,7 +741,7 @@ compared to cables on Earth.
 ## Buffering delays  
 
 In general, networking equipment needs to have the ability to buffer
-(queue) bursts of traffic that arrive at a rate that exceeds the rate of
+(queue) short bursts of traffic that arrive at a rate that exceeds the rate of
 the output (egress) interface. This buffering capability serves a number
 of purposes:
 
@@ -871,7 +871,7 @@ FIFO buffers typically have a set size that is determined by the
 manufacturer (and in some cases is configurable). If the ingress rate of
 traffic exceeds the egress rate long enough, or if a sufficiently large
 burst of traffic arrives, the buffer will fill up completely, and the
-excess packets in the burst will be dropped. This phenomenon (packet
+excess arriving packets will be dropped. This phenomenon (packet
 drop due to buffer exhaustion) is the predominant signal of congestion
 in the Internet today, and is what most existing congestion controllers
 respond to.
@@ -895,7 +895,7 @@ introduce even more buffering delay when the link is operating at a
 slower rate. FIFOs that can be adjusted to a more appropriate size for
 the link operating rate can improve the latency performance (in
 particular when the link is under load), but making the buffer too small
-will impact the throughput of congestion controlled traffic.
+will impact the throughput of congestion-controlled traffic.
 
 #### Active Queue Management
 
@@ -1909,8 +1909,9 @@ Many VoIP applications use a range of techniques to recover from losing
 packets that involve sending some of the packets twice, or sending extra
 information about groups of packets that allow an application to
 reconstruct the information from a lost packet. Packets are often lost
-in small groups. To recover the lost packets, the information to recover
-them cannot be lost, so it needs to be transmitted far enough from the
+in small groups. Lost packets cannot be recovered if the
+information to recover them is also lost, so the recovery
+information needs to be transmitted far enough from the
 original packets so that it is less likely to land in the same loss
 group. This inherently means that the forward error correct adds in more
 delay than the size of commonly observed loss groups. Networks that lose
@@ -2016,8 +2017,8 @@ latency in the first place [4].
 ## Cloud gaming 
 
 The past few years has seen the emergence of 'cloud gaming' platforms,
-such as Google's Stadia or NVIDIA's GeForce Now. These move the graphics
-intensive work to the server side and then effectively transmit the
+such as Google's Stadia or NVIDIA's GeForce Now. These move the
+graphics-intensive work to the server side and then effectively transmit the
 video of the gameplay back to the client side. This allows the game to
 run on far lower specification devices, without the need for powerful
 GPUs client side. The developers of these platforms say that increases
@@ -2027,8 +2028,8 @@ possible.
 This, of course, means that cloud gaming platforms are now more
 bandwidth intensive than traditional games, as they have to transmit
 high resolution video at a high frame rate to the client side. GeForce
-Now, for example, states that it "requires at least 15Mbps for 720p at
-60fps and 25 Mbps for 1080p at 60fps".
+Now, for example, states that it "requires at least 15Mb/s for 720p at
+60fps and 25 Mb/s for 1080p at 60fps".
 
 There is also anecdotal evidence that suggests that high or erratic
 latency may also be used by cloud gaming platforms as a signal to reduce
@@ -2180,12 +2181,12 @@ solutions, where the cost of the compute resource can be shared across a
 number of users. A key consideration in moving the majority of the
 rendering functionality to the cloud is the latency between a movement
 of the user's head, and appropriately updated images being presented to
-them in their head-mounted-display. This *motion-to-photon* latency can
+them in their head-mounted display. This *motion-to-photon* latency can
 be no more than about 20 ms otherwise it can cause nausea, with some
 targeting less than 8 ms for the ideal experience [@CloudVR]. For full
 remote rendering, much of this latency budget is consumed by the
 motion-capture and image rendering processes, leaving perhaps 1-2 ms of
-network RTT between the head mounted display and the rendering engine.
+network RTT between the head-mounted display and the rendering engine.
 
 # Conclusions/observations/findings
 
@@ -2300,7 +2301,7 @@ and mechanical level – converted to electrical impulses, light waves, or
 radio signals.
 	
 **Layer 2 – Data Link Layer**. The data link layer encompasses the
-technologies and protocols used to send traffic across a sub-network, or
+technologies and protocols used to send traffic across a
 “link.” At the lowest level, link-layer protocols manage access to the
 physical media and encode traffic into frames such as Ethernet frames,
 Frame Relay frames, or ATM cells. These protocols are sometimes designed
