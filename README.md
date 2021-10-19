@@ -7,7 +7,9 @@ When people think of Internet performance it is typically solely in terms of spe
 
 # Notes
 
-Doc can be built with
+The latest PDF and MSWord versions of the draft can be found in https://github.com/bitag-twg-org/latency-explained/actions by selecting the first item in the list that is tagged "main", then clicking on "output" at the bottom of that page. 
+
+If you have pandoc installed on your machine, the doc can be built locally with:
 
 ```
 pandoc --defaults=components/defaults.yaml --citeproc --bibliography=references.yaml --resource-path=.:components --output=output/report.pdf report.md
