@@ -46,11 +46,11 @@ The time it takes to perform a user-initiated network operation is
 the time it takes to send a message across the network and receive a
 reply in return. This total time is made up of five main components:
 
-(a) Transmission time
-(b) Propagation time
-(c) Queueing delay
-(d) Processing time
-(e) Other overheads, like Wi-Fi channel acquisition delay, Ethernet preamble, etc.
+(a) Transmission time  
+(b) Propagation time  
+(c) Queueing delay  
+(d) Processing time  
+(e) Other overheads, like Wi-Fi channel acquisition delay, Ethernet preamble, etc.  
 
 When transmission rates (throughput) are low compared to the amount
 of data being sent, as was the case with dial-up modems, (a) can be
