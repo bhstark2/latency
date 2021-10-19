@@ -1568,8 +1568,8 @@ arrives at the receiver, the receiver checks its local clock and
 compares it to the timestamp value in the packet.
 
 It is more common to measure the round-trip time (RTT), since this can
-be done even in the absence of synchronized clocks, and for most
-applications the round-trip time is more important anyway. In this case
+be done even in the absence of synchronized clocks, and for many
+applications the round-trip time is the only thing that matters anyway. In this case
 the sender typically sends a packet to the receiver, the receiver sends
 a response packet back to the sender, and the sender then calculates the
 time elapsed between transmission and reception.
