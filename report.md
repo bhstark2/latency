@@ -1673,44 +1673,9 @@ such things is desirable in latency measurement, because to do otherwise
 would introduce external factors into our measurement (such as
 artificial delays before retransmitting a lost packet) that cannot be
 reliably separated from the network latency. There's a large variety of
-tools that use UDP as their basis for latency measurements.
-
-The IETF has standardized multiple UDP-based latency measurement
-protocols over the years. OWAMP (one-way active measurement protocol)
-provides for one-way latency measurements between sender and receiver.
-This means that the latency between the sender and the receiver in the
-forward direction is measured and reported separately to the latency
-between the sender and receiver in the reverse direction. This provides
-valuable information that is lost in two-way (round-trip) latency
-measurements — it can show if latency in one direction is larger than
-the other. An impediment to adoption of OWAMP is the requirement that
-the sender's and receiver's clocks are precisely synchronized. Relying
-on NTP[^3] alone is usually not sufficient here, as the precision is not
-high enough for low latency connections.
-
-[^3] Network Time Protocol, a commonly utilized protocol to
-automatically set the time in a network-connected machine.
-
-TWAMP (two-way active measurement protocol) extends OWAMP to also
-support two-way (round-trip) latency measurements. When being used only
-for round-trip measurements, the requirement for the clocks on the
-sender and receiver to be synchronised can be removed. This is because
-the measurement is only conducted at the sender — the receiver
-effectively just has to reflect the packet back to the sender. TWAMP is
-often deployed inside large routers from companies like Juniper and
-Cisco for the purposes of service level agreement verification. It is
-favoured over ICMP because it supports separating out host-processing
-latency from network latency.
-
-STAMP (simple two-way active measurement protocol) simplifies TWAMP by
-removing some little-used features, while still maintaining backwards
-compatibility with the existing TWAMP protocol.
-
-IRTT is a UDP-based measurement tool that measures RTT, one-way delays,
-and other packet metrics using lightweight isochronous bidirectional
-flows with a maximum precision and interval of 3ms. It is available as
-open source for any platform that supports the go language, and
-pre-packaged for most Linux distributions.
+tools that use UDP as their basis for latency measurements,
+some of which are standardized by the IETF or are available as open 
+source implementations (see [Appendix D: UDP Latency Measurement Methods]).
 
 SamKnows, a UK-based provider of network measurement services, have
 deployed a proprietary UDP-based latency measurement protocol. This
@@ -2511,6 +2476,45 @@ caching, multi-threading, etc. Although these technologies can
 compensate for high turn counts, they cannot always overcome high
 latency conditions—and many use cases cannot take advantage of the edge
 enhancements.
+
+# Appendix D: UDP Latency Measurement Methods {-}
+
+The IETF has standardized multiple UDP-based latency measurement
+protocols over the years. OWAMP (one-way active measurement protocol)
+provides for one-way latency measurements between sender and receiver.
+This means that the latency between the sender and the receiver in the
+forward direction is measured and reported separately to the latency
+between the sender and receiver in the reverse direction. This provides
+valuable information that is lost in two-way (round-trip) latency
+measurements — it can show if latency in one direction is larger than
+the other. An impediment to adoption of OWAMP is the requirement that
+the sender's and receiver's clocks are precisely synchronized. Relying
+on NTP[^3] alone is usually not sufficient here, as the precision is not
+high enough for low latency connections.
+
+[^3] Network Time Protocol, a commonly utilized protocol to
+automatically set the time in a network-connected machine.
+
+TWAMP (two-way active measurement protocol) extends OWAMP to also
+support two-way (round-trip) latency measurements. When being used only
+for round-trip measurements, the requirement for the clocks on the
+sender and receiver to be synchronised can be removed. This is because
+the measurement is only conducted at the sender — the receiver
+effectively just has to reflect the packet back to the sender. TWAMP is
+often deployed inside large routers from companies like Juniper and
+Cisco for the purposes of service level agreement verification. It is
+favoured over ICMP because it supports separating out host-processing
+latency from network latency.
+
+STAMP (simple two-way active measurement protocol) simplifies TWAMP by
+removing some little-used features, while still maintaining backwards
+compatibility with the existing TWAMP protocol.
+
+IRTT is a UDP-based measurement tool that measures RTT, one-way delays,
+and other packet metrics using lightweight isochronous bidirectional
+flows with a maximum precision and interval of 3ms. It is available as
+open source for any platform that supports the go language, and
+pre-packaged for most Linux distributions.
 
 
 \pagebreak
