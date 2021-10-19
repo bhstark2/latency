@@ -57,31 +57,33 @@ of data being sent, as was the case with dial-up modems, (a) can be
 significant. As throughput increases, this time becomes negligible
 for all but the largest transfers.
 
-Propagation time is largely dictated by the speed of light, which
-isn’t going to change, so (b) is largely dictated by the distance
-travelled, and is unlikely to change very much.
+Propagation time (b) is dictated by the speed of light (which
+isn’t going to change) and by the distance
+travelled.
 The only way to improve this is to shorten the distance,
 which is one of the reasons Internet companies locate their
-data centers geographically close to their customers.
+data centers and CDN servers geographically close to their customers.
 
-As CPU speeds increase, processing time shrinks.
-Currently, over all but the shortest of Internet paths,
-processing time is negligible compared to the speed-of-light delay.
+As CPU speeds increase, processing time (d) shrinks.
+Currently, over all but the shortest of network paths (e.g. inside a data center),
+processing time is negligible compared to other delays.
 
-Other overheads depend on the network technologies being used, but,
+Other overheads (e) depend on the network technologies being used, but,
 like processing time, for most Internet traffic
 they are generally small compared to the overall speed-of-light delay.
 In cases where this is not true, there is certainly scope for improvement.
 
-This leaves queueing delay as the single largest component of delay
+This leaves queueing delay (c) as the single largest component of delay
 experienced by most network operations today. Unlike the speed of
 light, queueing delay is something we do know how to improve.
 
 In this document we show how the size-related component of delay
-used to be the dominant factor in determining the speed of network
-operations, but as network throughput has increased this component
-of delay has become less and less significant compared to the others.
-Is is the other components of delay, (b), (c), (d), and (e)
+(i.e. transmission time) and the geographic component (propagation time)
+used to be the dominant factors in determining the speed of network
+operations, but as network throughput has increased, and decentralized servers
+have been deployed, these components
+of delay have become less and less significant compared to the others.
+Is is mainly queueing delay (c) and other overheads (e)
 that now largely determine the overall speed of network operations.
 Of these size-invariant sources of delay, these ‘hidden’ or ‘latent’
 sources of delay, excessive queueing delay (bufferbloat) is by far
@@ -96,28 +98,16 @@ the solution will have to include lowering latency —
 the size-invariant hidden sources of delay
 that limit the maximum speed of network operations.
 
----
+This paper will explain and explore latency, including idle latency, latency under load, components of latency performance, how some of those components vary by access
+technology and/or protocol, and how latency can affect the user QoE for certain types of applications such as video conferencing & remote learning, gaming and more.
+Additionally, this paper will examine measurement methods and metrics for 
+characterizing latency performance, including recommending a shift in the 
+primary way network latency is measured and reported.
+Finally, the paper will look to the current state of the art
+and the future to explain the importance of Active Queue Management and other low
+latency networking innovations in improving broadband latency performance — 
+and the new types of applications that this may enable in the future.
 
-Previous text remains below:
-
-Placeholder text: When people think of Internet performance it is
-typically solely in terms of throughput. But when considering the end-user
-quality of experience (QoE), latency is usually a key factor.
-Unfortunately, latency is not well understood in the policy or
-regulatory spheres or by the average consumer. This paper will explain
-and explore latency, including idle latency, latency under load,
-components of latency performance, how latency varies by access
-technology and/or protocol, and how latency can affect the user QoE for
-certain types of applications such as video conferencing, remote
-learning, gaming and more. As well, while the FCC MBA program reports on
-latency it takes no position on what is good or bad latency — a question
-this paper will explore. Additionally, this paper will examine metrics
-for characterizing latency performance, including various summary
-statistics for latency and latency variation (often referred to as
-"jitter"). Finally, the paper will look to the current state of the art
-and the future to explain Active Queue Management (AQM) and other low
-latency services — and the new types of applications that this may
-enable in the future.
 
 \pagebreak
 
