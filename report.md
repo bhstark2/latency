@@ -801,10 +801,12 @@ significant are delays caused by signaling (messages required to set up
 a LTE session), by processing delays (how long it takes for LTE
 equipment to process signaling and messages including the time it takes
 to get the messages to where they need to be processed), by contention
-with other traffic, and by retransmission of lost packets. A significant
-portion of backhaul is done using fiber, which minimizes latency over
-other backhaul technologies such as microwave or other wireless
-technologies. When fiber is used as the backhaul, its contribution to
+with other traffic, and by retransmission of lost packets. 
+A significant portion of backhaul is done using fiber.
+In some cases other backhaul technologies such as microwave are used.
+Microwave can provide lower propagation delay and does not require
+running cables but is more susceptible to noise.
+When fiber is used as the backhaul, its contribution to
 latency is largely due to propagation and serialization delay.
 
 *Network architecture delays* can be incurred when signaling messages
