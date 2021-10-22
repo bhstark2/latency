@@ -1835,7 +1835,7 @@ traverse. For meaningful results, pairs should crisscross the network in
 logical and consistent network distance groupings. A collection of test
 pairs encompasses a latency-based network performance telemetry system.
 Latency measurements can be reported by whichever statistical summary
-method best suits the use case being monitored.
+method best suits the use case being monitored, as discussed in [Latency for a path in a live network is variable — a statistical distribution].
 
 A statistical summary approach called Apdex [https://www.apdex.org/] is
 an open standard well suited for reporting latency data. It groups
