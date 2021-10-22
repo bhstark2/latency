@@ -701,7 +701,16 @@ coaxial copper cable for the first few hundred feet, and fiber optic
 cable for the remainder of the distance between the CMTS and cable
 modems, followed by fiber optic cable from the CMTS to the Internet.
 
-A DOCSIS link is a shared medium.  In the upstream direction, multiple cable modems request access to a particular transmission channel, and access is scheduled by the CMTS.  In the downstream direction, all transmissions are scheduled and made by the CMTS.  As described in Section 1 of [@LLD] there are five sources of latency in DOCSIS 3.1 networks (and similarly DOCSIS 3.0).  These are:  
+A DOCSIS link is a shared medium.  In the upstream direction, multiple 
+cable modems request access to a particular transmission channel, and 
+access is scheduled by the CMTS.  In the downstream direction, all 
+transmissions are scheduled and made by the CMTS.  
+
+DOCSIS 3.0 equipment has a feature called *Buffer Control* which allows the 
+network operator to appropriately size the tail-drop FIFO buffer in the CM and CMTS.
+When properly configured, this can reduce Working Latency to roughly 100ms in each direction.
+
+As described in Section 1 of [@LLD] there are five sources of latency in DOCSIS 3.1 networks.  These are:  
 
 Delay Source | Typical Range 
 -------------|----------- 
@@ -711,11 +720,13 @@ serialization/encoding | 0.4 - 3.5 ms
 media acquisition | 2 - 8 ms 
 queuing | 0 - 200 ms 
 
-DOCSIS 3.1 equipment has multiple features to manage queuing latency, including:  
-
-- **Buffer Control** which allows the network operator to appropriately size the tail-drop FIFO buffer in the CM and CMTS, and can reduce Working Latency to roughly 100ms;  
-- **Active Queue Management (AQM)** is described later in this document, its use can significantly improve Working Latency;   
-- **Low Latency DOCSIS** includes support for the *Low-Latency Low-Loss Scalable Throughput* (L4S) architecture and isolation of Non-Queue-Building (NQB) traffic, and can dramatically improve Working Latency for compatible applications. L4S and NQB are discussed later in this document.  
+DOCSIS 3.1 equipment has additional features to manage queuing latency, including:  
+- **Active Queue Management (AQM)** is described later in this document, its use
+can significantly improve Working Latency;   
+- **Low Latency DOCSIS** includes support for the *Low-Latency Low-Loss Scalable
+Throughput* (L4S) architecture and isolation of Non-Queue-Building (NQB) traffic,
+and can dramatically improve Working Latency for compatible applications. L4S and
+NQB are discussed later in this document as well.  
 
 ### Digital Subscriber Line (DSL) and G.fast
 
