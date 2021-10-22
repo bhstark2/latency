@@ -706,11 +706,12 @@ cable modems request access to a particular transmission channel, and
 access is scheduled by the CMTS.  In the downstream direction, all 
 transmissions are scheduled and made by the CMTS.  
 
-DOCSIS 3.0 equipment has a feature called *Buffer Control* which allows the 
+DOCSIS 3.0 equipment has a feature called **Buffer Control** which allows the 
 network operator to appropriately size the tail-drop FIFO buffer in the CM and CMTS.
 When properly configured, this can reduce Working Latency to roughly 100ms in each direction.
 
 DOCSIS 3.1 equipment has additional features to manage queuing latency, including:  
+
 - **Active Queue Management (AQM)** is described later in this document, its use
 can significantly improve Working Latency;   
 - **Low Latency DOCSIS** includes support for the *Low-Latency Low-Loss Scalable
