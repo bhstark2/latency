@@ -1824,8 +1824,8 @@ growing exponentially since the advent of the web browser. Given this
 trend, minimizing latency is essential to ensuring satisfactory network
 user QoE.
 
-It is recommended that network service providers measure latency using a
-simple RTT ping method (ICMP or UDP). These measurements are best made
+It is recommended that network service providers measure latency using 
+one of the methods discussed in [Measuring latency]. These measurements are best made
 often and with random start times for statistically sound sampling. They
 should also be generated across many client-target pairs, where targets
 represent general user-destination locations. Pairs spanning only the
