@@ -151,8 +151,7 @@ little to do with end-user QoE.
 
 ## Examining Latency
 
-While latency may sound technical or complicated, what it represents is
-quite simple: latency is simply *delay* 
+Latency is simply *delay* 
 (and we'll use the two terms interchangeably in this report).  Latency 
 can be considered at the application level 
 — such as the time between a user clicking a link in a browser, and 
