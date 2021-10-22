@@ -1616,9 +1616,13 @@ can be had by plotting the full statistical distribution from the
 measurements. One of the most useful representations is in the form of a
 Complementary Cumulative Distribution graph, plotted on a log scale,
 with the axis labeled to represent packet latency percentiles. An
-example is shown below.
+example of this graphing format is show below.
+This visualization highlights the packet latency in the range of most interest 
+(P90 - P99.9) as compared to a traditional CDF graph that puts the focus
+on the median latency and completely obscures P99 and above.
 
-![Complementary CDF of Packet Latency](images/ccdf.png)
+
+![Example Complementary CDF of Packet Latency](images/ccdf.png)
 
 Another metric that has been proposed recently, and that derives from
 latency, is "responsiveness"
