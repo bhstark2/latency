@@ -599,7 +599,7 @@ summarizes some of these differences.
   Technology  |   Notes
 --------------|-----------------------------------------
 Ethernet      | -
-Wi-Fi         | media access can be >45ms, scanning introduces latency spikes
+Wi-Fi         | media access can be up to 1 s, scanning creates latency spikes
 G.hn          | latency varies per # of nodes 
 DOCSIS        | media access: 2 - 8 ms, recent versions reduce buffering delay
 DSL/G.fast    | interleaving adds 2 - 20 ms if enabled[^bhs1]
