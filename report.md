@@ -748,9 +748,9 @@ The older Asymmetric Digital Subscriber Line (ADSL) technology was
 generally used on loop lengths of 1 mile or less. The newer ADSL2+, Very
 high-speed DSL (VDSL) and VDSL2 technologies are generally used on
 shorter loops in a fiber to the node (FTTN) configuration (with copper
-to a node and fiber from the node to the central office). Since copper
-is a very efficient transmission medium, the time for a signal to travel
-these distances is very small and does not contribute significantly to
+to a node and fiber from the node to the central office). Due to these
+short distances, the time for a signal to travel
+these distances (the propagation delay) is very small and does not contribute significantly to
 latency. Encoding and decoding DSL signals does add some small latency.
 But this delay is also very small.
 
