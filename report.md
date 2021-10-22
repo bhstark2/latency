@@ -714,22 +714,20 @@ DOCSIS 3.1 equipment has additional features to manage queuing latency, includin
 
 - **Active Queue Management (AQM)** is described later in this document, its use
 can significantly improve Working Latency;   
-- **Low Latency DOCSIS** includes support for the *Low-Latency Low-Loss Scalable
+- **Low Latency DOCSIS (LLD)** includes support for the *Low-Latency Low-Loss Scalable
 Throughput* (L4S) architecture and isolation of Non-Queue-Building (NQB) traffic,
 and can dramatically improve Working Latency for compatible applications. L4S and
 NQB are discussed later in this document as well.  
 
-As described in Section 1 of [@LLD] there are five sources of latency in DOCSIS 3.1 networks prior to the introduction of the Low Latency DOCSIS feature.  These are:  
+As described in Section 1 of [@LLD] there are five sources of latency in DOCSIS 3.1 networks.  These are:  
 
-Delay Source | Typical Range 
--------------|----------- 
-switching/forwarding | < 0.04 ms 
-propagation | 0.02 - 0.6 ms 
-serialization/encoding | 0.4 - 3.5 ms 
-media acquisition | 2 - 8 ms 
-queuing | 0 - 200 ms 
-
-The Low Latency DOCSIS feature reduces queuing delay to about 1ms. 
+Delay Source | Typical Range without LLD | Typical Range with LLD  
+-------------|-----------|------------  
+switching/forwarding | < 0.04 ms | < 0.04 ms  
+propagation | 0.02 - 0.6 ms | 0.02 - 0.6 ms  
+serialization/encoding | 0.4 - 3.5 ms | 0.4 - 3.5 ms  
+media acquisition | 2 - 8 ms | 0.5 - 4 ms  
+queuing | 0 - 200 ms | 0 - 1 ms  
 
 ### Digital Subscriber Line (DSL) and G.fast
 
