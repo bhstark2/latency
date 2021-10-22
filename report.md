@@ -151,11 +151,10 @@ little to do with end-user QoE.
 
 ## Examining Latency
 
+
 Stated formally, network latency represents the time that it takes for
 a data packet to travel from one network host to another network host.
-While latency may sound technical or complicated, what it represents is
-quite simple: latency is simply *delay* 
-(and we'll use the two terms interchangeably in this report).  Latency 
+Latency is simply *delay* (and we'll use the two terms interchangeably in this report).  Latency 
 can be considered at the application level 
 — such as the time between a user clicking a link in a browser, and 
 for the resulting page to be displayed, or it can be considered at 
@@ -734,9 +733,9 @@ The older Asymmetric Digital Subscriber Line (ADSL) technology was
 generally used on loop lengths of 1 mile or less. The newer ADSL2+, Very
 high-speed DSL (VDSL) and VDSL2 technologies are generally used on
 shorter loops in a fiber to the node (FTTN) configuration (with copper
-to a node and fiber from the node to the central office). Since copper
-is a very efficient transmission medium, the time for a signal to travel
-these distances is very small and does not contribute significantly to
+to a node and fiber from the node to the central office). Due to these
+short distances, the time for a signal to travel
+these distances (the propagation delay) is very small and does not contribute significantly to
 latency. Encoding and decoding DSL signals does add some small latency.
 But this delay is also very small.
 
@@ -787,10 +786,12 @@ significant are delays caused by signaling (messages required to set up
 a LTE session), by processing delays (how long it takes for LTE
 equipment to process signaling and messages including the time it takes
 to get the messages to where they need to be processed), by contention
-with other traffic, and by retransmission of lost packets. A significant
-portion of backhaul is done using fiber, which minimizes latency over
-other backhaul technologies such as microwave or other wireless
-technologies. When fiber is used as the backhaul, its contribution to
+with other traffic, and by retransmission of lost packets. 
+A significant portion of backhaul is done using fiber.
+In some cases other backhaul technologies such as microwave are used.
+Microwave can provide lower propagation delay and does not require
+running cables but is more susceptible to noise.
+When fiber is used as the backhaul, its contribution to
 latency is largely due to propagation and serialization delay.
 
 *Network architecture delays* can be incurred when signaling messages
