@@ -2306,15 +2306,10 @@ capacity (throughput). A key step to accomplishing this would be to agree on
 the measurement methods and methodology to use for this testing.
 
 * Any developer of a working latency test should:
-
-- Transparently disclose their measurement methodology;
-
-	- NOT report mean or median results;
-    
-	- Report on 98th or 99th percentile (or higher) results;
-    
+	- Transparently disclose their measurement methodology;
+	- Highlight 98th or 99th percentile (or higher) packet latency as the most salient metric;
+	- DO NOT present mean or median packet latency as being reflective of real-world user experience (or simply don't report them);
 	- Report on the variability of working latency (jitter);
-    
 	- Visually represent cumulative results in a cumulative distribution
 function (CDF) chart, in addition to any other methods.
     
