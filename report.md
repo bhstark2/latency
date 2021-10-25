@@ -300,6 +300,7 @@ balancer, switch), and eventually to a destination server (1).
 
 ![End-to-end Path](images/network.png)
 
+
 The latency between a laptop
 and the next hop of a packet on the LAN will typically be quite short.
 As you add successive network hops from the laptop to the home gateway,
@@ -336,7 +337,29 @@ downloads and online game play). When adding in real traffic of any type
 and volume, we can then see how the network reacts under real-world
 conditions and understand the so-called working latency of the path.
 
-Along an
+Even if you imagine a user with a 1 Gb/s symmetric broadband connection that
+is communicating with a server that is relatively close by, it is
+certainly possible that the end-to-end path is entirely fiber-based and
+yet latency can still be an issue. Unlike cars on a road, which have
+human drivers that slow down when they encounter heavy traffic, photons
+traveling through glass fiber move at a constant speed (the speed of
+light). Photons do not slow down because there are other photons ahead
+of them in the fiber. So, if photons travel at a constant speed and
+never slow down, how do computer networks experience congestion that
+slows down the responsiveness of the network and degrades user
+experience?
+
+The answer is that congestion-related delays in computer networks do not occur in the
+cables; they occur in the packet switching equipment that connects the
+cables (i.e., routers, access points, network cards, operating systems).
+When a data packet arrives in a piece of switching equipment, and the
+cable on which the packet is supposed to depart is already busy, the
+data packet has to wait its turn. If there are many other packets
+similarly waiting, the data packet may have to wait a significant amount
+of time (and either be held for that wait time in a buffer or discarded
+as packet loss).
+
+Along the
 end-to-end path, the link with the least capacity in the upstream and
 downstream direction (which may be different for each direction) is the
 most constrained link, and is typically referred to the “bottleneck
@@ -499,29 +522,6 @@ is driven by the sender behavior as well as the properties of the
 network), we move on to cover aspects of path selection and core network
 topologies, then mention additional latency factors that are introduced
 by the endpoints (sender and receiver).
-
-But as noted above, it is easy to misunderstand the source of latency.
-If you imagine a user with a 1 Gb/s symmetric broadband connection that
-is communicating with a server that is relatively close by, it is
-certainly possible that the end-to-end path is entirely fiber-based and
-yet latency can still be an issue. Unlike cars on a road, which have
-human drivers that slow down when they encounter heavy traffic, photons
-traveling through glass fiber move at a constant speed (the speed of
-light). Photons do not slow down because there are other photons ahead
-of them in the fiber. So, if photons travel at a constant speed and
-never slow down, how do computer networks experience congestion that
-slows down the responsiveness of the network and degrades user
-experience?
-
-The answer is that delays in computer networks do not occur in the
-cables; they occur in the packet switching equipment that connects the
-cables (i.e., routers, access points, network cards, operating systems).
-When a data packet arrives in a piece of switching equipment, and the
-cable on which the packet is supposed to depart is already busy, the
-data packet has to wait its turn. If there are many other packets
-similarly waiting, the data packet may have to wait a significant amount
-of time (and either be held for that wait time in a buffer or discarded
-as packet loss).
 
 ## Link technologies in place along the path
 
