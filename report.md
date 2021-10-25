@@ -1961,15 +1961,15 @@ web conferencing systems.
 |  Capture                 |   record from sensor to application           | 5 to 50  |
 |  Noise suppression  |   remove background noise and echo    | 0 to 10  |
 |  Encodings             |   compress media    | 5 to 30  |
-|  Network                |   transmission over network    | 20 to 800  |
+|  Network                |   transmission over network    | 20 to > 800  |
 |  Media forwarding |   media processing to mix and distrbute media    | 10 to 100  |
 |  Jitter buffers         |   compensate for latency variation   | 5 to 100  |
 |  Error correction    |   wait for extra data to fix lost packets  |  0 to 100      |
-|  Retransmission     |   request and receive retransmissions     |    0 to 1600   |
+|  Retransmission     |   request and receive retransmissions     |    0 to > 1600   |
 |  Decoding              |   decompress the media   |    1 to 20   |
 |  Concealment        |   conceal  gaps in media from any lost packets  |  0 to 30 |
 |  Play-out               |   stream media out to speaker or display    |  10 to 50   |
-|  **Total**         |  | **56 to 2980** |
+|  **Total**         |  | ** 50 to  > 3000 ** |
 
 ### Jitter
 
