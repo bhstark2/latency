@@ -2437,45 +2437,47 @@ fiber vs 1.1 ms for microwave, round-trip, for a 100 mile link).
 
 # Appendix C: Typical Webpage Demand Growth {-}
 
-All applications evolve over time. Using the typical web page as an
-example of a popular application, we can quantify applications' changing
-demands on network latency and bandwidth. All browser-based interactions
-involve two important characteristics—turns and payload.
+Using the typical web page as an example of a popular application, we
+can quantify applications’ changing demands on network latency and
+bandwidth. All browser-based interactions have two important
+characteristics: number of requests and page size.
 
-Turns are non-content carrying packet exchanges between the browser and
-servers, which are essential for services like DNS, TLS authentication,
-redirection, connection establishment, etc. These exchanges involve a
-round-trip time (RTT), and are gatekeepers to content displayed on the
-screen. Page load time is proportional to the number of turns times
-latency. The greater the turn count, the longer the lag users will
-experience. Higher turn counts require lower latency to deliver the same
-user experience lag time.
+The web browser is a request-response type of application.
+[see https://en.wikipedia.org/wiki/Request-response]   Each
+request-response exchange consumes a browser-server round-trip time
+(RTT). Page load time is proportional to the number of requests times
+latency. The greater the number of requests, the longer the lag users
+will experience. Higher request counts require lower latency to deliver
+the same user experience.
 
-Payload refers to packets that carry content which the browser will
-execute, render, or display to the user. Page load time is proportional
-to payload divided by the down bandwidth of the slowest link between
-server and browser. More payload requires higher bandwidth to deliver
-the same user experience lag time.
+Web page size refers to packets that carry content which the browser
+executes, renders, or displays to the user. Note that TCP ACK packets
+specific to content delivery are not counted as request-response
+exchanges described above. Page load time is proportional to page size
+divided by the down bandwidth of the slowest link between server and
+browser. Larger page size requires higher bandwidth to deliver the same
+user experience.
 
-The figures below show the trends for these two key demand parameters
-since 1995 for the most popular 20 to 50 websites at the time.
+The figures below show the values of these two key demand parameters for
+the 20 to 50 websites most popular at the time, as independently
+measured by NetForecast since 1995.
 
 ![Typical Webpage Growth over Time](images/webturns.png)
 
-In the last 26 years, payload has grown about 70-fold and bandwidth
-growth has dramatically outpaced payload to meet that demand. During the
-same period, turns have grown about 15-fold, and latency has not seen a
-commensurate decrease. Most of the fundamental latency decrease has been
-in last mile technologies discussed in this report. However, these are
-actually small changes to overall latency between browser and a server
-on the general Internet. Some use cases, such as Wi-Fi, added to the
+In the last 26 years, page size has grown about 70-fold, and bandwidth
+supply has dramatically outpaced page size demand. During the
+same period, requests have grown about 15-fold, and latency has not undergone a
+commensurate improvement. Most latency improvements have been the result
+of last-mile technologies discussed in this report. These changes have
+done little to lower overall latency between browser and a server
+on the general Internet. In fact, some use cases, such as local Wi-Fi, have increased
 overall latency.
 
-The user experience is not as adversely impacted as these curves suggest
-due to edge system enhancements such as compression, CDNs, browser
-caching, multi-threading, etc. Although these technologies can
-compensate for high turn counts, they cannot always overcome high
-latency conditions—and many use cases cannot take advantage of the edge
+The user experience has not been as adversely impacted as the rising requests curve suggests 
+due to edge system enhancements such as multi-threading, browser 
+caching, CDNs, etc. Although these technologies can 
+compensate for high request counts, they cannot always mitigate high 
+latency conditions—thus many use cases cannot benefit from the edge 
 enhancements.
 
 # Appendix D: UDP Latency Measurement Methods {-}
