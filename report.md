@@ -2001,11 +2001,15 @@ in small groups. Lost packets cannot be recovered if the
 information to recover them is also lost, so the recovery
 information needs to be transmitted far enough from the
 original packets so that it is less likely to land in the same loss
-group. This inherently means that the forward error correct adds in more
-delay than the size of commonly observed loss groups. Networks that lose
-packets in groups tend to have a longer glass-to-glass delay
-than networks that are very random in which packets they lose, and do
-not have correlated losses.
+group.
+Some cloud applications keep statistics on the the burst lost
+characteristics they see to form a predictive model of the burst loss
+for given networks and broad geographical areas. The applications then
+adjust the forward error correction spacing of packets for a given user
+to be larger than the predicted burst loss time so that the error
+correction packets are not lost along with the original packet. This
+will causes longer latency for applications that do this in networks
+that often have burst losses.
 
 For very short segments of lost media, audio, or video, it is often
 possible to conceal the loss by interpolating via the media segments immediately before
