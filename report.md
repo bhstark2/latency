@@ -142,7 +142,7 @@ Quality of Experience (QoE). Latency performance is critical to any application
 involving user interaction, from web browsing to video streaming and
 everything in between. As this is a recent development, it has meant
 that latency is not well understood in the policy or regulatory spheres
-or by the average consumer — or even by many in the industry. One of the
+or by the average user — or even by many in the industry. One of the
 reasons for this has been that the way in which network latency has 
 historically been characterized is flawed.  The measurement methodology
 and the metrics typically used to describe latency performance have had very 
@@ -177,7 +177,7 @@ impact on how well applications generally work over the Internet.
 The less delay that a network or
 application has, the more “responsive” a service will feel to an end
 user. The more delay (or lag), the worse it will feel. Having low delay is centrally
-important to any application involving a user interacting with a device
+important to any application involving users interacting with each other, a device
 or application, and will become ever more so as new cloud-based
 applications, augmented reality, virtual reality, and other new
 application classes emerge. Critically, however, reducing delay 
