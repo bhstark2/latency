@@ -1398,14 +1398,13 @@ request the same information. A very common thing to cache is the
 responses from DNS queries. This can significantly improve performance
 in some situations.
 
-It is also possible to have cache like behavior or video conference
-calls using an applications specific media server at a local site that
-receives one copy of the media from remote participants, then
-distributes that media to all of the local participants at the local
-site. These local media caches can also be used to retransmit any lost
-packets to participants at the local site and to transcode the video so
-they can quickly provided any requested key frames that are using for
-decoding the compressed video.
+It is also possible to have cache like behavior for video conference
+calls using a media server at a local site that receives one copy of the
+media from remote participants, then distributes that media to all of
+the local participants at the local site. These local media caches can
+also be used to retransmit any lost packets to participants at the local
+site and to transcode the video so they can quickly provided any
+requested key frames that are using for decoding the compressed video.
 
 There are many downsides to caches including: they tend to be
 specific for each application protocol that uses the cache, they require
