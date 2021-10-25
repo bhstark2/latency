@@ -1396,9 +1396,18 @@ in the building can then save a copy of that information which can be
 used to very quickly provide the information to any future users that
 request the same information. A very common thing to cache is the
 responses from DNS queries. This can significantly improve performance
-in some situations. It is also possible to have application-specific
-caches that know how to deal with streaming or real time voice and video
-media. There are many downsides to caches including: they tend to be
+in some situations.
+
+It is also possible to have cache like behavior or video conference
+calls using an applications specific media server at a local site that
+receives one copy of the media from remote participants, then
+distributes that media to all of the local participants at the local
+site. These local media caches can also be used to retransmit any lost
+packets to participants at the local site and to transcode the video so
+they can quickly provided any requested key frames that are using for
+decoding the compressed video.
+
+There are many downsides to caches including: they tend to be
 specific for each application protocol that uses the cache, they require
 deploying additional hardware and devices to run the cache, they tend to
 be able to view the data they cache which is often a security problem.
