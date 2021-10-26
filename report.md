@@ -65,7 +65,7 @@ which is one of the reasons Internet companies locate their
 data centers and CDN servers geographically close to their customers.
 
 As CPU speeds increase, processing time (d) shrinks.
-Currently, over all but the shortest of network paths (e.g. inside a data center),
+Currently, over all but the shortest of network paths (e.g., inside a data center),
 processing time is negligible compared to other delays.
 
 Other overheads (e) depend on the network technologies being used, but,
@@ -78,12 +78,12 @@ experienced by most network operations today. Unlike the speed of
 light, queueing delay is something we do know how to improve.
 
 In this document we show how the size-related component of delay
-(i.e. transmission time) and the geographic component (propagation time)
+(i.e., transmission time) and the geographic component (propagation time)
 used to be the dominant factors in determining the speed of network
 operations, but as network throughput has increased, and decentralized servers
 have been deployed, these components
 of delay have become less and less significant compared to the others.
-Is is mainly queueing delay (c) and other overheads (e)
+It is mainly queueing delay (c) and other overheads (e)
 that now largely determine the overall speed of network operations.
 Of these size-invariant sources of delay, these ‘hidden’ or ‘latent’
 sources of delay, excessive queueing delay (bufferbloat) is by far
@@ -211,7 +211,7 @@ downstream direction through the network to the end user, or in the
 upstream direction from the end user into the core network,
 respectively.  For network operators more generally, understanding the 
 latency performance of the network generally involves measuring the latency 
-across multiple network segments (e.g. the home network, the access network,
+across multiple network segments (e.g., the home network, the access network,
 the metro core, etc.).
 
 Latency has been an accepted performance metric of interest since the
@@ -351,7 +351,7 @@ experience?
 
 The answer is that congestion-related delays in computer networks do not occur in the
 cables; they occur in the packet switching equipment that connects the
-cables (i.e., routers, access points, network cards, operating systems).
+cables (e.g., routers, access points, network cards, operating systems).
 When a data packet arrives in a piece of switching equipment, and the
 cable on which the packet is supposed to depart is already busy, the
 data packet has to wait its turn. If there are many other packets
@@ -471,13 +471,13 @@ report.
 ## Throughput vs. "Speed"
 
 Some people use the term "speed" when referring to capacity or latency or a combination of these two.
-While that term is more often associated with capacity (e.g. a 
+While that term is more often associated with capacity (e.g., a
 "speed test" that reports the achieved throughput of a file transfer), 
 it can mean different things in different contexts.
 Since this term has no precise definition in the context of either 
 capacity or latency, we will not use that term in this report.
 We do use "speed" in this paper to refer to the distance bits travel on 
-a physical medium over time (i.e. the propagation velocity of signals in the medium).
+a physical medium over time (i.e., the propagation velocity of signals in the medium).
 
 When we describe
 a link capacity as 100 megabits per second, or 10 gigabits per second,
@@ -1140,7 +1140,7 @@ device. While that assumption is valid a majority of the time, it is
 frequently the case that the IP address to geolocation mapping
 information is wildly inaccurate. In those cases, the geolocation
 database inaccurately associates that the IP address to a different
-state/province, (i.e.: Washington DC instead of San Francisco, CA), or a
+state/province, (e.g., Washington DC instead of San Francisco, CA), or a
 different country or a different continent. Ultimately, when the GSLB
 makes an incorrect rendezvous reply to the DNS recursive resolver and
 client, this has negative implications on client to server latency.
@@ -1150,7 +1150,7 @@ information is inaccurate; and, b) the IP address of the client's device
 is unavailable to the GSLB.
 
 There exist several commercially available IP to geolocation databases,
-(i.e.: Akamai EdgeScape, MaxMind, etc.), and an unknown quantity of
+(e.g., Akamai EdgeScape, MaxMind, etc.), and an unknown quantity of
 proprietary IP to geolocation databases built & maintained by CDNs and
 Content Providers. Further, it was a manual task for Internet Service
 Providers, in some cases working in conjunction with Content Providers,
@@ -1165,7 +1165,7 @@ Another challenge is that the client device's IP address is unavailable
 to the GSLB. In some cases, the client device may use a DNS recursive
 resolver that is not geographically (or, topologically) nearby. This may
 occur as a result of an ISP's DNS recursive resolvers, used by its
-customers, or public DNS recursive resolver services, (e.g.: Google,
+customers, or public DNS recursive resolver services, (e.g., Google,
 Cloudflare, etc.), are not geographically distributed in close proximity
 to client's devices or when a user manually overrides the DNS recursive
 resolver IP addresses in their client. The IETF has published RFC 7871,
@@ -1332,12 +1332,12 @@ types of IoT devices that need to offload compute-intensive inference,
 or detection, of objects to servers. Servers process this data, in
 real-time, and when necessary; provide coordination or real-time
 responses back to IoT or other types of devices. An analogy can be drawn
-to the human senses, e.g.: sight, hearing or touch, that utilize our
+to the human senses, e.g., sight, hearing or touch, that utilize our
 brain to quickly detect and respond to external stimulus appropriately.
 
 In NEC deployments, the servers may be owned an operated by: a) the ISP
 that also owns and operates the Access and/or Middle Mile networks, or
-b) a third-party company, e.g.: AWS, Microsoft, Google, emerging
+b) a third-party company, e.g., AWS, Microsoft, Google, emerging
 Startups etc. In both cases, compute at NEC locations is, typically,
 rented to Application Service Providers to host their applications or
 services. When the NEC is operated by a third-party, it is also
@@ -2055,7 +2055,7 @@ and manipulates the world.  Each client also sends state updates to the server s
 that the actions taken by the player can be shared with the other clients/players.
 The server usually maintains the authoritative state of the world, updated based 
 upon the inputs received from all the players, and transmits this authoritative 
-state back to all of the players at regular intervals (e.g. 30x - 128x per second)[2]. 
+state back to all of the players at regular intervals (e.g., 30x - 128x per second)[2].
 Each client then adjusts its internal state to match the server state. 
 
 Due to network latency from client to server, the "authoritative" state held by the server 
