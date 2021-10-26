@@ -1523,8 +1523,7 @@ which are latency and loss sensitive) are subjected to the latency,
 latency variation and loss caused by other senders that do cause these
 degradations. This category of traffic is referred to
 as *Non-Queue-Building* (NQB) traffic. Good examples of NQB applications
-are Voice over IP applications (including the audio stream of video
-conferencing applications), multiplayer online games and DNS lookups.
+are multiplayer online games, DNS lookups, and low data rate Voice over IP applications.
 The IETF is developing [@NQB] a standardized way for such applications
 to identify themselves to the network, and requirements for isolating
 the two classes from one another such that both can share the bottleneck
