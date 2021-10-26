@@ -889,7 +889,7 @@ Whenever traffic is arriving at a link at a rate that exceeds the link
 rate, the excess packets cause a queue to form (and grow) in the link
 buffer. Conversely, whenever the rate of traffic arrivals is less than
 the egress link rate, the queue will drain. If a sender sends its
-packets to quickly, such that they are arriving at the bottleneck link
+packets too quickly, such that they are arriving at the bottleneck link
 faster than they can be forwarded onward, they will cause the queue in
 the bottleneck link buffer to grow, resulting in increasing latency for
 all applications that are sharing that buffer. This buffering latency
