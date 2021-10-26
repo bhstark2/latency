@@ -2330,9 +2330,8 @@ equipment are able to benchmark performance.
 * Broadband Internet Access Service providers and developers of home
 network equipment (e.g., routers, access points, modems) should:
 
-	- Work to deploy mechanisms to improve working latency performance,
-	- such as Active Queue Management (AQM); Investigate future methods
-	- for delivering very low latency services.
+	- Work to deploy mechanisms to improve working latency performance, such as Active Queue Management (AQM); 
+	- Investigate future methods for delivering very low latency services.
     
 * Application developers and operating system developers should: -
 Investigate future methods for delivering very low latency services,
