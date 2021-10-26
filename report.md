@@ -915,12 +915,14 @@ changes as other flows come and go, these capacity-seeking senders
 generally increase their sending rate, sense congestion, back off, then
 increase their sending rate again in a never-ending loop.
 
-Common protocols that use congestion control are TCP where the
-congestion control algorithms are built-in to the operating system and
-UDP where the congestion control algorithm needs to be provided by the
-application. Typically for UDP, congestion control algorithms will be
-part of the application protocols that are implemented on top of UDP,
-such as QUIC for web traffic and RTP for real-time streaming.
+Most application traffic flows utilize congestion control,
+either using an algorithm implemented by the operating system,
+or one built into the application itself.
+While some are capacity-seeking, and wish to send
+at the highest rate that the path can support, others are
+*application-limited* in that they have a maximum rate that the
+application wishes to send data, but can reduce that rate when
+capacity is insufficient.
 
 Congestion control algorithms have been designed such that when all of
 the capacity-seeking senders that share a particular bottleneck link
