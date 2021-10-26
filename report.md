@@ -1996,20 +1996,10 @@ what matters is the 95th or perhaps 99th percentile packet latency.
 Many VoIP applications use a range of techniques to recover from losing
 packets that involve sending some of the packets twice, or sending extra
 information about groups of packets that allow an application to
-reconstruct the information from a lost packet. Packets are often lost
-in small groups. Lost packets cannot be recovered if the
-information to recover them is also lost, so the recovery
-information needs to be transmitted far enough from the
-original packets so that it is less likely to land in the same loss
-group.
-Some cloud applications keep statistics on the the burst lost
-characteristics they see to form a predictive model of the burst loss
-for given networks and broad geographical areas. The applications then
-adjust the forward error correction spacing of packets for a given user
-to be larger than the predicted burst loss time so that the error
-correction packets are not lost along with the original packet. This
-will causes longer latency for applications that do this in networks
-that often have burst losses.
+reconstruct the information from a lost packet. Some applications
+adjust the spacing of this error correction information based on 
+observations of the loss pattern, which can result in longer latency
+to provide the correction function on networks that have frequent burst losses.
 
 For very short segments of lost media, audio, or video, it is often
 possible to conceal the loss by interpolating via the media segments immediately before
