@@ -653,7 +653,7 @@ well, supporting maximum buffering delays in the 10s of milliseconds.
 While appearing to the network as if it were an Ethernet-based device,
 Wi-Fi is very different in that it not "switched" as is modern-day
 Ethernet. Rather, it is more like early versions of Ethernet where only
-a single transmitter at a time is allowed, with more sophisiticated
+a single transmitter at a time is allowed, with more sophisticated
 arbitrage of the basic transmission opportunity (TXOP) than original
 Ethernet.
 
@@ -836,7 +836,7 @@ calculated by Speedtest.net to be 33ms (across combined LTE and 5G networks)
 ### Satellite
 
 The most common form of satellite Internet access today is via
-satellites in GEO (geosychronous orbit) at an altitide of approximately
+satellites in GEO (geosynchronous orbit) at an altitude of approximately
 36,000 km. These typically have well in excess of 600 ms of latency
 simply from the propagation delay (two round trips to the satellite and
 back). A new breed of satellite providers (Starlink, OneWeb) are putting
@@ -1037,7 +1037,7 @@ fraction of the egress link bandwidth, but the sparsest flows get a tiny
 boost until they reach an equal fraction. This *flow-queuing* mechanism
 is generally also implemented with an AQM algorithm acting on each
 queue. The most common of such implementations is the fq_codel algorithm
-[@fq_codel], other impmentations use the same scheduler with another
+[@fq_codel], other implementations use the same scheduler with another
 AQM, such as cobalt [@cake] or PIE [@fq_pie].
 
 #### Coupling queues with AQMs
@@ -1250,7 +1250,7 @@ user's location and ISP. When operating over a VPN, the user's true IP
 is hidden, so the CDN does not have the information necessary to steer
 the user towards the optimal CDN server. This means that a user on a VPN
 will likely experience increased latency to CDNs, because the optimized
-path to the CDN cannot be utilised.
+path to the CDN cannot be utilized.
 
 Finally, the VPN server itself may introduce additional latency,
 particularly if the VPN server is over-utilized.
@@ -1514,7 +1514,7 @@ ECT1) in the Explicit Congestion Notification field in the IP packet
 header to allow senders to identify themselves as supporting L4S. Then,
 an L4S-capable bottleneck link can use the existing *Congestion
 Experienced* value to send immediate signals whenever a queue begins to
-form. This signal, when fed back to the sender via acknowlegement
+form. This signal, when fed back to the sender via acknowledgement
 packets, enables the sender to adjust its sending rate in order to keep
 the bottleneck link busy without building a queue. L4S is incrementally
 deployable, since senders will always need to handle other congestion
@@ -1577,7 +1577,7 @@ measurements statistically. It is also frequently the case that the
 statistics of latency will vary over time as the load on the network
 changes, the path itself changes, etc.
 
-Historically, the most common descriptive statisic that is reported (and
+Historically, the most common descriptive statistic that is reported (and
 often labeled simply as "latency") is the average latency of the
 ensemble of measurements. Other descriptive statistics that are
 sometimes reported are the standard deviation of the samples, the
@@ -1610,7 +1610,7 @@ the industry. Calculating each of these metrics on a particular set of
 latency measurements can result in "jitter" values that differ by a
 factor of 100 or more. So, when using jitter metrics, it is important to
 be clear which definition is being used, and to consider whether that
-defintion is meaningful given the application context.
+definition is meaningful given the application context.
 
 Another approach to characterizing a set of packet latency samples is to
 use order statistics, e.g., minimum, 25th percentile ("P25"), median
@@ -1724,7 +1724,7 @@ discussed further below.
 
 TCP can also be used to measure latency. It is a less common choice for
 network measurement applications. TCP's reliability mechanisms
-effctively sacrifice latency for the sake of reliability. This
+effectively sacrifice latency for the sake of reliability. This
 introduces some ambiguity in the measurement results --- we cannot know
 whether the latency being reported is due to the network path or some
 feature of TCP (e.g., retransmission of lost segments).
@@ -1808,7 +1808,7 @@ This helps to reveal how latency behaves when the network is
 being used by one or more capacity-seeking flows, which is
 precisely when users are using it. Some measurement systems will
 generate artificial cross-traffic (perhaps in the form of a throughput
-test) in order to ensure the link is fully utilised,
+test) in order to ensure the link is fully utilized,
 as it would be when there is a single other capacity-seeking flow.
 Measurement systems that do not measure (or create their own)
 cross-traffic cannot reliably know whether they are measuring idle
@@ -2061,7 +2061,7 @@ state back to all of the players at regular intervals (e.g., 30--128 times per s
 Each client then adjusts its internal state to match the server state. 
 
 Due to network latency from client to server, the "authoritative" state held by the server 
-represents player actions that occured slightly in the past as opposed to the current time. 
+represents player actions that occurred slightly in the past as opposed to the current time.
 Similarly, due to network latency from the server to each client, the updates arriving 
 at each client represent the state of the world as it was slightly in the past. 
 To address this, both the server and each client typically extrapolate to 
@@ -2207,7 +2207,7 @@ network conditions, creating mobile-friendly sites for smartphones, and
 dynamically loading more of the application over time instead of
 attempting to load everything immediately.
 
-Web browser optimmizations include tuning and shortening the "pipeline"
+Web browser optimizations include tuning and shortening the "pipeline"
 of painting pixels to screen, increasing the efficiency of script
 processing (typically JavaScript), blocking the rendering of
 slow-loading content, reducing the amount of processing capacity devoted
@@ -2240,11 +2240,11 @@ might become viable over consumer-grade best efforts Internet access.
 
 Reduced latency is therefore likely to spur unexpected and surprising new innovative
 applications to be released by creative developers. For example, connected car applications
-for self-driving / autonomous cars or crash avoidence mechanisms requires an automotive system to react
+for self-driving / autonomous cars or crash avoidance mechanisms requires an automotive system to react
 in less than 100 ms [https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-39.pdf]. 
 There is a similar strong push to develop ultra-reliable low-latency applications as low as 1 ms in 5G infrastructure 
 to support use cases focused on human-centric communications in health, safety, office, and entertainment, 
-or machine-centric communications ifor driverless cars, enhanced mobile cloud services, real-time traffic 
+or machine-centric communications for driverless cars, enhanced mobile cloud services, real-time traffic
 control optimization, emergency and disaster response, smart grid, e-health or efficient industrial communications. 
 [https://www.itu.int/dms_pub/itu-r/opb/rep/R-REP-M.2410-2017-PDF-E.pdf]. Finally, virtual 
 reality environments require extensive cloud-based rendering systems with minimal latency to synchronize users' head movements
@@ -2507,12 +2507,12 @@ automatically set the time in a network-connected machine.
 TWAMP (two-way active measurement protocol) extends OWAMP to also
 support two-way (round-trip) latency measurements. When being used only
 for round-trip measurements, the requirement for the clocks on the
-sender and receiver to be synchronised can be removed. This is because
+sender and receiver to be synchronized can be removed. This is because
 the measurement is only conducted at the sender --- the receiver
 effectively just has to reflect the packet back to the sender. TWAMP is
 often deployed inside large routers from companies like Juniper and
 Cisco for the purposes of service level agreement verification. It is
-favoured over ICMP because it supports separating out host-processing
+favored over ICMP because it supports separating out host-processing
 latency from network latency.
 
 STAMP (simple two-way active measurement protocol) simplifies TWAMP by
