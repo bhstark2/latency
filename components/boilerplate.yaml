@@ -13,6 +13,6 @@ titlegraphic: components/logo.png
 toc-title: Table of Contents
 fontsize: 10pt
 # fontfamily: Cambria
-
+link-citations: true
 
 ---
